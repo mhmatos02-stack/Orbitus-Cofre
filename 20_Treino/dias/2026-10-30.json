@@ -1,0 +1,177 @@
+{
+ "date": "2026-10-30",
+ "extras": [],
+ "habits": {
+  "jantar16": true
+ },
+ "meals": {
+  "cafe": {
+   "c": 1,
+   "items": [
+    {
+     "f": "pao_int",
+     "q": 2
+    },
+    {
+     "f": "frango",
+     "q": 60
+    },
+    {
+     "k": 120,
+     "n": "Mussarela (2 fatias, cerca de 40 g)",
+     "p": 9
+    },
+    {
+     "f": "maca",
+     "q": 1
+    }
+   ],
+   "txt": "1 maçã verde"
+  },
+  "almoco": {
+   "c": 1,
+   "items": [
+    {
+     "n": "2 filés de frango, 100g de brócolis, 100g de cenoura, 20g de",
+     "k": 250,
+     "p": 30
+    }
+   ]
+  },
+  "lanche": {
+   "c": 1,
+   "items": [
+    {
+     "f": "iogurte",
+     "q": 2
+    },
+    {
+     "f": "whey",
+     "q": 1
+    }
+   ],
+   "txt": "100g de Iogurte natural, 1/2 scoop de whey protein"
+  }
+ },
+ "sleep": null,
+ "steps": null,
+ "updated": 1793395185412,
+ "waist": null,
+ "water": 10,
+ "weight": null,
+ "workout": {
+  "done": true,
+  "letter": null,
+  "remo": false,
+  "sets": {
+   "goblet": [
+    {
+     "done": true,
+     "kg": 28,
+     "reps": 12
+    },
+    {
+     "kg": 28,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "done": true,
+     "kg": 28,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 28,
+     "reps": 10
+    }
+   ],
+   "afundo_rev": [
+    {
+     "done": true,
+     "reps": 6,
+     "kg": 14
+    },
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 14
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 14
+    }
+   ],
+   "stiff_uni": [
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 20
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 20
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 20
+    }
+   ],
+   "elev_quadril": [
+    {
+     "kg": 16,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "kg": 16,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 15,
+     "kg": 16
+    }
+   ],
+   "prancha": [
+    {
+     "kg": null,
+     "reps": 60,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 60,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 60,
+     "done": true
+    }
+   ],
+   "panturrilha": [
+    {
+     "done": true,
+     "kg": 20,
+     "reps": 20
+    },
+    {
+     "done": true,
+     "kg": 20,
+     "reps": 20
+    },
+    {
+     "kg": 22,
+     "reps": 20,
+     "done": true
+    }
+   ]
+  },
+  "warm": true
+ }
+}

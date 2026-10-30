@@ -1,0 +1,139 @@
+{
+ "date": "2026-10-27",
+ "extras": [],
+ "habits": {
+  "creatina": true,
+  "jantar16": true
+ },
+ "meals": {
+  "almoco": true,
+  "cafe": true,
+  "jantar": true
+ },
+ "sleep": null,
+ "steps": 1541,
+ "updated": 1793187471534,
+ "waist": null,
+ "water": 12,
+ "weight": null,
+ "workout": {
+  "done": true,
+  "letter": null,
+  "remo": false,
+  "sets": {
+   "bulgaro": [
+    {
+     "done": true,
+     "kg": 12,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 12,
+     "reps": 6
+    },
+    {
+     "done": true,
+     "kg": 12,
+     "reps": 5
+    }
+   ],
+   "elev_quadril": [
+    {
+     "done": true,
+     "kg": 16,
+     "reps": 12
+    },
+    {
+     "done": true,
+     "kg": 16,
+     "reps": 15
+    },
+    {
+     "done": true,
+     "kg": 16,
+     "reps": 10
+    }
+   ],
+   "goblet": [
+    {
+     "done": true,
+     "kg": 28,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 28,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 28,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 28,
+     "reps": 10
+    }
+   ],
+   "panturrilha": [
+    {
+     "done": true,
+     "kg": 20,
+     "reps": 20
+    },
+    {
+     "done": true,
+     "kg": 20,
+     "reps": 20
+    },
+    {
+     "done": true,
+     "kg": 20,
+     "reps": 20
+    }
+   ],
+   "prancha": [
+    {
+     "done": true,
+     "kg": null,
+     "reps": 60
+    },
+    {
+     "done": true,
+     "kg": null,
+     "reps": 60
+    },
+    {
+     "done": true,
+     "kg": null,
+     "reps": 60
+    }
+   ],
+   "stiff": [
+    {
+     "done": true,
+     "kg": 20,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 20,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 20,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 20,
+     "reps": 10
+    }
+   ]
+  },
+  "warm": true
+ }
+}

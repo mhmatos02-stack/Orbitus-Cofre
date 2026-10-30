@@ -1,0 +1,65 @@
+/* Orbitus — painel. Ativo só em notas com cssclasses: orbitus-home */
+.orbitus-home {
+  --orb-bg: #0b0d14; --orb-card: rgba(255,255,255,.04); --orb-line: rgba(255,255,255,.08);
+  --orb-txt: #e8eaf2; --orb-mut: #8a90a6; --orb-acc: #7c9cff; --orb-acc2: #c38bff;
+  --orb-ok: #3ddc97; --orb-warn: #ffc857; --orb-bad: #ff5d73;
+}
+.theme-light .orbitus-home {
+  --orb-bg: #f6f7fb; --orb-card: #ffffff; --orb-line: rgba(10,20,60,.08);
+  --orb-txt: #151a2d; --orb-mut: #5f667d; --orb-acc: #4361ee; --orb-acc2: #9b5de5;
+  --orb-ok: #12a26b; --orb-warn: #c98a00; --orb-bad: #e0304b;
+}
+.orbitus-home.markdown-preview-view, .orbitus-home .markdown-preview-sizer { max-width: 1100px; margin: 0 auto; }
+.orbitus-home .inline-title, .orbitus-home .frontmatter-container { display: none; }
+
+/* Hero */
+.orb-hero { position: relative; overflow: hidden; border-radius: 22px; padding: 44px 36px 36px;
+  background: var(--orb-bg); border: 1px solid var(--orb-line); margin-bottom: 18px; }
+.orb-aurora { position: absolute; inset: -40%; filter: blur(60px); opacity: .55;
+  background: conic-gradient(from 0deg, var(--orb-acc), transparent 30%, var(--orb-acc2), transparent 70%, var(--orb-acc));
+  animation: orb-spin 28s linear infinite; }
+.orb-hero-txt { position: relative; }
+.orb-kicker { font: 600 .72em/1 var(--font-monospace); letter-spacing: .18em; color: var(--orb-mut); text-transform: uppercase; }
+.orb-hero h1 { margin: 12px 0 6px; font-size: 2.6em; font-weight: 700; letter-spacing: -.02em; color: var(--orb-txt);
+  animation: orb-up .7s cubic-bezier(.2,.8,.2,1) both; }
+.orb-hero p { margin: 0; color: var(--orb-mut); font-size: 1.05em; animation: orb-up .7s .12s cubic-bezier(.2,.8,.2,1) both; }
+
+/* Cards */
+.orb-card { display: block; background: var(--orb-card); border: 1px solid var(--orb-line); border-radius: 16px;
+  padding: 18px 20px; backdrop-filter: blur(8px); text-decoration: none !important; color: var(--orb-txt) !important;
+  animation: orb-up .6s calc(.15s + var(--i,0) * .07s) cubic-bezier(.2,.8,.2,1) both;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+a.orb-card:hover { transform: translateY(-3px); border-color: var(--orb-acc); box-shadow: 0 12px 32px -12px var(--orb-acc); }
+.orb-label { font: 600 .7em/1 var(--font-monospace); letter-spacing: .16em; text-transform: uppercase; color: var(--orb-mut); margin-bottom: 12px; }
+
+.orb-wait { border-left: 3px solid var(--orb-warn); margin-bottom: 18px; }
+.orb-wait-item { display: flex; gap: 12px; align-items: flex-start; padding: 6px 0; line-height: 1.45; }
+.orb-wait-item span { font-size: 1.3em; }
+
+.orb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-bottom: 8px; }
+.orb-sys-top { display: flex; align-items: center; gap: 10px; }
+.orb-sys-name { font-weight: 650; font-size: 1.05em; }
+.orb-sys-meta { color: var(--orb-mut); font-size: .82em; margin: 6px 0 8px 20px; }
+.orb-sys-warn, .orb-sys-fail { font-size: .85em; color: var(--orb-bad); margin: 3px 0 0 20px; }
+.orb-sys-next { color: var(--orb-mut); font-size: .85em; margin: 10px 0 0 20px; line-height: 1.45; }
+
+/* Ponto de saúde: verde respira devagar, amarelo e vermelho pulsam */
+.orb-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; position: relative; }
+.orb-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: orb-ping 2.4s ease-out infinite; }
+.orb-dot.s3 { background: var(--orb-ok); } .orb-dot.s3::after { animation-duration: 4s; }
+.orb-dot.s1 { background: var(--orb-warn); }
+.orb-dot.s0 { background: var(--orb-bad); } .orb-dot.s0::after { animation-duration: 1.2s; }
+.orb-dot.s2 { background: var(--orb-mut); } .orb-dot.s2::after { display: none; }
+
+/* Títulos de seção e listas do Tasks */
+.orbitus-home h2 { font-size: .78em; font-family: var(--font-monospace); letter-spacing: .16em; text-transform: uppercase;
+  color: var(--orb-mut); border: none; margin: 30px 0 10px; }
+.orbitus-home .plugin-tasks-query-result, .orbitus-home .markdown-embed {
+  background: var(--orb-card); border: 1px solid var(--orb-line); border-radius: 16px; padding: 10px 18px; }
+.orbitus-home .task-list-item { padding: 5px 0; border-bottom: 1px solid var(--orb-line); }
+.orbitus-home .task-list-item:last-child { border-bottom: none; }
+
+@keyframes orb-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes orb-spin { to { transform: rotate(360deg); } }
+@keyframes orb-ping { 0% { transform: scale(1); opacity: .7; } 80%,100% { transform: scale(2.6); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .orbitus-home * { animation: none !important; transition: none !important; } }

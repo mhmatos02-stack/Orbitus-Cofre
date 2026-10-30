@@ -1,0 +1,135 @@
+{
+ "_doc": "Retrato da agenda do Google (mhmatos02@gmail.com) de 26/10 a 30/11. Usado só enquanto ~/.orbitus/agenda.txt não tiver o link ICS.",
+ "atualizado": "2026-10-30",
+ "eventos": {
+  "2026-10-26": [
+   [
+    "dia todo",
+    "PETR4: aparar o excesso acima de 10% (decidir na Mesa)",
+    "r"
+   ]
+  ],
+  "2026-10-30": [
+   [
+    "10:00",
+    "Plano C2: vender toda a BSOX39 (último dia de outubro)",
+    "b"
+   ]
+  ],
+  "2026-11-01": [
+   [
+    "09:00",
+    "Relatório Mensal - Rodar relatório e atualizar planilha",
+    "b"
+   ],
+   [
+    "10:00",
+    "Revisar Oportunidades - Checar semáforos e gatilhos",
+    "b"
+   ],
+   [
+    "11:00",
+    "Revisar Dividendos Recebíveis",
+    "b"
+   ],
+   [
+    "12:00",
+    "Check Semáforos - Comprar / Manter / Vender",
+    "b"
+   ]
+  ],
+  "2026-11-02": [
+   [
+    "09:00",
+    "Vendas comuns de novembro: liberar? (BBAS3 + metade RURA11)",
+    "b"
+   ]
+  ],
+  "2026-11-03": [
+   [
+    "dia todo",
+    "Extratos do mês → pasta Entrada (conta, fatura, Tesouro, B3)",
+    "r"
+   ],
+   [
+    "dia todo",
+    "BBAS3: vender ~780 ações (isenção de novembro inteira)",
+    "r"
+   ],
+   [
+    "10:00",
+    "Plano C2: vender BBAS3 (1.000) e metade do RURA11 (~780) — até 06/11",
+    "b"
+   ]
+  ],
+  "2026-11-05": [
+   [
+    "09:00",
+    "Plano 2026–2028: escolher o caminho (depois do Copom)",
+    "b"
+   ],
+   [
+    "10:00",
+    "Plano C2: 1ª parcela de Tesouro IPCA+ (depois do Copom) — até 13/11",
+    "b"
+   ]
+  ],
+  "2026-11-08": [
+   [
+    "dia todo",
+    "Baixar o extrato de Movimentação da B3 e salvar no sistema",
+    "r"
+   ]
+  ],
+  "2026-11-09": [
+   [
+    "10:00",
+    "Plano C2: WRLD11 (1ª parcela) e HGLG11",
+    "b"
+   ]
+  ],
+  "2026-11-16": [
+   [
+    "dia todo",
+    "Decidir Goals v3: trilha de aporte (contrato termina em dezembro)",
+    "r"
+   ],
+   [
+    "10:00",
+    "Plano C2: vender CMIG4 lote 1 (1.500) — até 19/11",
+    "b"
+   ]
+  ],
+  "2026-11-20": [
+   [
+    "dia todo",
+    "Fechar saldo de prejuízos para o DARF de outubro",
+    "r"
+   ],
+   [
+    "dia todo",
+    "Conferir vendas de ação do mês contra a isenção de R$ 20 mil",
+    "r"
+   ]
+  ],
+  "2026-11-23": [
+   [
+    "10:00",
+    "Plano C2: vender CMIG4 lote 2 (1.500) — até 27/11",
+    "b"
+   ]
+  ],
+  "2026-11-30": [
+   [
+    "dia todo",
+    "Data-com ITSA4 (JCP) — não vender antes se quiser o provento",
+    "r"
+   ],
+   [
+    "dia todo",
+    "Vence DARF 6015 de outubro (ganho em ações)",
+    "r"
+   ]
+  ]
+ }
+}

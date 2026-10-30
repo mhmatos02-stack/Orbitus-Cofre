@@ -1,0 +1,7 @@
+{
+ "_doc": "Onde o Marcio vai treinar. O Orbitus troca o treino do dia para a versão de academia quando o local é 'academia'. O Personal da Mesa da Saúde mantém este arquivo.",
+ "locais": [
+  {"de": "2026-10-31", "ate": "2026-11-01", "local": "academia", "nome": "Hotel do fim de semana (academia completa)"},
+  {"de": "2026-12-12", "ate": "2026-12-26", "local": "academia", "nome": "Iberostar Praia do Forte (academia completa)"}
+ ]
+}

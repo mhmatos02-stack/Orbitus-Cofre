@@ -1,0 +1,163 @@
+{
+ "date": "2026-10-29",
+ "extras": [
+  {
+   "k": 150,
+   "n": "Doce planejado",
+   "p": 2,
+   "t": "doce"
+  },
+  {
+   "k": 150,
+   "n": "Doce planejado",
+   "p": 2,
+   "t": "doce"
+  }
+ ],
+ "habits": {
+  "creatina": true,
+  "jantar16": true
+ },
+ "meals": {
+  "almoco": {
+   "c": 1,
+   "items": [
+    {
+     "f": "frango",
+     "q": 120
+    },
+    {
+     "f": "arroz",
+     "q": 100
+    },
+    {
+     "k": 18,
+     "n": "Molho teriyaki (1 colher de sopa)",
+     "p": 1
+    },
+    {
+     "k": 20,
+     "n": "Cenoura ralada crua (2 colheres de sopa)",
+     "p": 1
+    },
+    {
+     "k": 32,
+     "n": "Ervilha cozida (2 colheres de sopa)",
+     "p": 2
+    }
+   ],
+   "txt": "120g de frango, arroz, molho teryaki, cenoura ralada e ervilha no arroz"
+  },
+  "cafe": true,
+  "jantar": {
+   "c": 1,
+   "items": [
+    {
+     "f": "pao",
+     "q": 2
+    },
+    {
+     "f": "frango",
+     "q": 120
+    },
+    {
+     "f": "queijo",
+     "q": 40
+    }
+   ],
+   "txt": "2 fatias de queijo mussarela"
+  }
+ },
+ "sleep": null,
+ "steps": 3000,
+ "updated": 1793315739181,
+ "waist": null,
+ "water": 12,
+ "weight": null,
+ "workout": {
+  "done": true,
+  "letter": null,
+  "remo": false,
+  "sets": {
+   "rem_curv": [
+    {
+     "done": true,
+     "kg": 18,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 18,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 18,
+     "reps": 12
+    }
+   ],
+   "rem_uni": [
+    {
+     "done": true,
+     "kg": 24,
+     "reps": 12
+    },
+    {
+     "done": true,
+     "kg": 26,
+     "reps": 12
+    },
+    {
+     "done": true,
+     "kg": 24,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 26,
+     "reps": 12
+    }
+   ],
+   "sup_inc": [
+    {
+     "done": true,
+     "kg": 22,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 22,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 22,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 22,
+     "reps": 10
+    }
+   ],
+   "sup_reto": [
+    {
+     "done": true,
+     "kg": 24,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 24,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 24,
+     "reps": 10
+    }
+   ]
+  },
+  "warm": true
+ }
+}

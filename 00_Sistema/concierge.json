@@ -1,0 +1,4 @@
+{
+ "_doc": "Configuração do Concierge. voz: \"google:pt-BR-Chirp3-HD-<Nome>\" usa a voz neural do Google (chave no Keychain: orbitus-google-tts); \"sistema\" usa a voz do macOS. Para ouvir uma voz antes: http://localhost:8787/api/voz/amostra?v=<Nome>",
+ "voz": "google:pt-BR-Chirp3-HD-Enceladus"
+}

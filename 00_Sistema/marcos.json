@@ -1,0 +1,15 @@
+{
+  "_doc": "Marcos com data. Aparecem no painel (contagem regressiva) e no calendário.",
+  "marcos": [
+    {
+      "nome": "Viagem: Praia do Forte",
+      "curto": "Praia do Forte",
+      "data": "2026-12-12"
+    },
+    {
+      "nome": "Viagem: GRU 23:50 → Zurique",
+      "curto": "Alemanha e Suíça",
+      "data": "2026-12-28"
+    }
+  ]
+}

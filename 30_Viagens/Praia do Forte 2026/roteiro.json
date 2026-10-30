@@ -1,0 +1,172 @@
+{
+ "_doc": "Viagem a Praia do Forte. Voos GOL confirmados pelo Marcio em 2026-10-30 (ida antecipada de 19/12 para 12/12). Bilhete sem bagagem despachada: só mão. Clima = média histórica. O app grava só 'documentos' e 'bagagem'.",
+ "titulo": "Praia do Forte",
+ "aba": "Praia do Forte",
+ "subtitulo": "Bahia · 12 a 26 de dezembro",
+ "de": "2026-12-12",
+ "ate": "2026-12-26",
+ "paradas": [
+  {
+   "id": "cgh",
+   "nome": "São Paulo · Congonhas",
+   "regiao": "ida · GOL G3 1626",
+   "lat": -23.626,
+   "lon": -46.656,
+   "de": "2026-12-12",
+   "hora": "08:35",
+   "tipo": "voo",
+   "nota": "Viagem em família. A mala grande vai de carro com seus pais; no avião, só bagagem de mão (líquidos até 100 ml). Chegada em Salvador às 10:55."
+  },
+  {
+   "id": "ssa",
+   "nome": "Salvador · SSA",
+   "regiao": "chegada 10:55",
+   "lat": -12.911,
+   "lon": -38.331,
+   "de": "2026-12-12",
+   "hora": "10:55",
+   "tipo": "voo",
+   "nota": "De lá até Praia do Forte são uns 60 km pela Estrada do Coco (cerca de 1 hora de carro)."
+  },
+  {
+   "id": "pf",
+   "nome": "Praia do Forte",
+   "regiao": "Bahia",
+   "lat": -12.579,
+   "lon": -38.0,
+   "de": "2026-12-12",
+   "ate": "2026-12-26",
+   "tipo": "estadia",
+   "clima": {
+    "min": 24,
+    "max": 31,
+    "nota": "verão, ~50 mm de chuva no mês"
+   },
+   "levar": [
+    "Protetor solar e pós-sol (vão na mala do carro)",
+    "Repelente",
+    "Chapéu ou boné",
+    "Roupa leve e de banho",
+    "Chinelo e sandália"
+   ],
+   "nota": "Estadia de 12 a 26/12 com a família. A mala principal vai e volta de carro com seus pais, que saem depois de vocês: o que precisar voltar no avião tem de ir numa mala comprada à parte (veja o radar)."
+  },
+  {
+   "id": "volta",
+   "nome": "Volta · SSA → Congonhas",
+   "regiao": "GOL G3 1631 · chega 13:10",
+   "lat": -12.911,
+   "lon": -38.331,
+   "de": "2026-12-26",
+   "hora": "10:35",
+   "tipo": "voo",
+   "nota": "Bilhete sem mala de 23 kg. Seus pais voltam de carro com a mala principal e chegam depois; o que vocês precisarem em São Paulo antes disso (e para a Europa em 28/12) vai numa mala despachada comprada à parte."
+  }
+ ],
+ "trechos": [
+  {
+   "de": "cgh",
+   "para": "ssa",
+   "modo": "voo"
+  },
+  {
+   "de": "ssa",
+   "para": "pf",
+   "modo": "carro"
+  }
+ ],
+ "mapa": {
+  "vistas": [
+   {
+    "id": "brasil",
+    "nome": "Brasil",
+    "pontos": "br",
+    "trechos": "todos",
+    "mostrar": [
+     "cgh",
+     "ssa",
+     "pf"
+    ],
+    "rotulos": {
+     "cgh": {
+      "off": [
+       14,
+       6,
+       "l"
+      ],
+      "per": "12/12 · 08:35 · volta 26/12 13:10"
+     },
+     "ssa": {
+      "off": [
+       -14,
+       14,
+       "r"
+      ]
+     },
+     "pf": {
+      "off": [
+       14,
+       -14,
+       "l"
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "documentos": [
+  {
+   "nome": "Documento com foto (RG ou CNH)",
+   "ok": false
+  },
+  {
+   "nome": "Cartão de embarque da ida (G3 1626)",
+   "ok": false
+  },
+  {
+   "nome": "Cartão de embarque da volta (G3 1631)",
+   "ok": false
+  },
+  {
+   "nome": "Reserva da hospedagem em Praia do Forte",
+   "ok": false
+  }
+ ],
+ "bagagem": {
+  "precisa": true,
+  "comprada": false,
+  "voo": "G3 1631 · SSA → CGH · 26/12 10:35",
+  "data_voo": "2026-12-26",
+  "prazo_antecipado": "2026-12-24T10:35",
+  "faixas": [
+   {
+    "quando": "Mais de 48 h antes do voo (até 24/12, 10:35)",
+    "valor": "R$ 175 a 219"
+   },
+   {
+    "quando": "Menos de 48 h antes",
+    "valor": "R$ 220 a 249"
+   },
+   {
+    "quando": "No balcão do aeroporto",
+    "valor": "R$ 250"
+   }
+  ],
+  "como": "Site ou app da GOL › Minhas viagens › localizador da reserva › Bagagem.",
+  "fonte": "Tabela oficial da GOL para a 1ª mala de 23 kg em voo nacional (voegol.com.br › Bagagem despachada), conferida em 30/10/2026. A página traz também um bloco com 1ª mala \"a partir de R$ 130\": o valor exato só aparece na reserva.",
+  "precos": [],
+  "qtd": 1,
+  "motivo": "Itens da mala principal (que volta de carro com os pais) necessários em São Paulo antes de eles chegarem e para a viagem à Europa em 28/12.",
+  "radar": {
+   "data": "2026-10-30",
+   "resumo": "1ª mala R$ 175 a 219 (mais de 48 h antes). Nenhuma promoção de bagagem anunciada.",
+   "mudou": false,
+   "promo": false
+  }
+ },
+ "conferir": [],
+ "fontes": [
+  "Climatempo (Praia do Forte, dezembro)",
+  "Cartões e Viagens (bagagem GOL, 18/10/2026)"
+ ]
+}

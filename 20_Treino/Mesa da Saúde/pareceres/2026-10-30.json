@@ -1,0 +1,53 @@
+{
+ "data": "2026-10-30",
+ "gerado_em": "2026-10-30T18:30",
+ "agentes": {
+  "personal": {
+   "resumo": "Quatro treinos em quatro dias desde terça, incluindo o B variação de hoje com todas as séries. A força está em dia; o que trava a cintura é o movimento fora do treino (média de 3.280 passos contra 8.000).",
+   "bem": [
+    "Pernas de hoje completo: goblet, afundo reverso, stiff unilateral, elevação de quadril, prancha e panturrilha",
+    "Goblet já pediu 30 kg no B de terça: a progressão dupla está funcionando"
+   ],
+   "ajustes": [
+    "Registre o remo leve depois do almoço e do jantar no campo 'min': 20 min por dia valem 2.000 passos",
+    "Aquecimento de 5 min de remo antes de cada treino, sem pular",
+    "No hotel, use as versões de academia: o Orbitus troca sozinho sábado e domingo"
+   ],
+   "amanha": "Sábado no hotel: C · Ombros + Braços na academia (desenvolvimento com halteres 18 kg, elevação lateral no cabo, face pull no cabo, rosca com barra W, tríceps na polia com corda), depois remo ou esteira intervalada 8 × (30 s forte / 90 s leve). Domingo: corrida leve de 30 a 35 min na esteira + 20 min de ioga.",
+   "alerta": ""
+  },
+  "nutri": {
+   "resumo": "Café bom (pão integral, frango, mussarela e maçã) e água completa. Faltam lanche e jantar: a proteína está em 64 g e precisa chegar a 130 g.",
+   "bem": [
+    "10 copos de água",
+    "Jantar decidido antes das 16h"
+   ],
+   "ajustes": [
+    "Seu almoço registrado parece subestimado: 2 filés de frango têm uns 240 g e cerca de 70 g de proteína, não 30 g. Use 'Estimar' com a descrição ou o item Frango na lista",
+    "No lanche, garanta 25 a 30 g de proteína: whey com fruta ou iogurte proteico",
+    "Jantar de hoje com pelo menos 150 g de proteína e no máximo 2 colheres de arroz"
+   ],
+   "trocas": [
+    {
+     "de": "Pão francês no café do hotel",
+     "por": "Omelete de 3 ovos + 1 fruta + 1 fatia de pão integral",
+     "porque": "mais proteína e menos fome até o almoço"
+    },
+    {
+     "de": "Suco do buffet",
+     "por": "Água ou água de coco",
+     "porque": "suco de buffet costuma ter açúcar e não sacia"
+    },
+    {
+     "de": "Sobremesa no almoço e no jantar",
+     "por": "Uma sobremesa só, no jantar",
+     "porque": "o doce planejado é um por dia"
+    }
+   ],
+   "amanha": "Café: omelete de 3 ovos + fruta + 1 pão integral · Almoço: grelhado (frango ou peixe) 150 g, salada, 4 colheres de arroz e feijão · Lanche: iogurte natural com fruta ou whey · Jantar: proteína 150 g + legumes, sobremesa só se for o doce do dia.",
+   "alerta": ""
+  }
+ },
+ "respostas": [],
+ "semana": ""
+}

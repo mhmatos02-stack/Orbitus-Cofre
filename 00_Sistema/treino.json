@@ -1,0 +1,8 @@
+{
+  "_doc": "Resumo do treino para o painel. O módulo completo de treino substitui este arquivo.",
+  "divisao": "ABC",
+  "local": "em casa",
+  "ate": "2026-12-31",
+  "equipamentos": ["Halteres até 32 kg", "Banco inclinável", "Elásticos", "Remo", "Ioga", "Pilates"],
+  "sessoes": {}
+}

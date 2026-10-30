@@ -1,0 +1,6 @@
+{
+  "_doc": "Sistemas federados. 'pasta' é relativa à pasta-mãe do Orbitus (~/System). ativo=false fica fora do painel.",
+  "sistemas": [
+    {"id": "wealth", "nome": "AI Wealth Office", "icone": "💰", "pasta": "AI Wealth Office", "ativo": true}
+  ]
+}

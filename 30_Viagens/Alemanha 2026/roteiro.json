@@ -1,0 +1,258 @@
+{
+ "_doc": "Roteiro Alemanha e Suíça 2026/27. Datas informadas pelo Marcio em 2026-10-30. Clima = médias históricas do período (fontes no fim), não previsão. O app grava só 'documentos'.",
+ "titulo": "Alemanha e Suíça",
+ "aba": "Alemanha e Suíça",
+ "subtitulo": "Stuttgart · Lenk · Zurique",
+ "de": "2026-12-28",
+ "ate": "2027-01-08",
+ "paradas": [
+  {
+   "id": "gru",
+   "nome": "São Paulo · GRU",
+   "regiao": "saída",
+   "lat": -23.436,
+   "lon": -46.473,
+   "de": "2026-12-28",
+   "hora": "23:50",
+   "tipo": "voo",
+   "nota": "Voo noturno. Você volta de Praia do Forte em 26/12 e tem só o dia 27 e o 28 para refazer a mala: do calor de 31 °C para o inverno europeu."
+  },
+  {
+   "id": "zrh",
+   "nome": "Zurique · ZRH",
+   "regiao": "chegada",
+   "lat": 47.458,
+   "lon": 8.556,
+   "de": "2026-12-29",
+   "hora": "21:30",
+   "tipo": "voo",
+   "nota": "Chegada à noite com perto de 0 °C: deixe casaco, gorro e luvas na bagagem de mão. Transfer com o Lucas até Stuttgart (de carro, cerca de 2h30)."
+  },
+  {
+   "id": "str",
+   "nome": "Stuttgart",
+   "regiao": "Alemanha",
+   "lat": 48.776,
+   "lon": 9.183,
+   "de": "2026-12-29",
+   "ate": "2027-01-02",
+   "tipo": "estadia",
+   "clima": {
+    "min": -2,
+    "max": 4,
+    "nota": "inverno; Réveillon na cidade"
+   },
+   "levar": [
+    "Casaco quente e impermeável",
+    "Segunda pele (térmica)",
+    "Gorro, luvas e cachecol",
+    "Sapato fechado impermeável",
+    "Adaptador de tomada (Alemanha usa tipo F; o pino redondo fino tipo C encaixa)"
+   ],
+   "nota": "Hospedagem na casa da Milu, mãe do Lucas; os dois são brasileiros. A esposa e as filhas do Lucas são alemãs, então presente brasileiro (como o feijão) faz sentido."
+  },
+  {
+   "id": "lenk",
+   "nome": "Lenk im Simmental",
+   "regiao": "Suíça · 1.068 m",
+   "lat": 46.459,
+   "lon": 7.442,
+   "de": "2027-01-02",
+   "ate": "2027-01-07",
+   "tipo": "estadia",
+   "clima": {
+    "min": -4,
+    "max": 3,
+    "nota": "montanha, neve provável"
+   },
+   "levar": [
+    "Bota impermeável com sola antiderrapante",
+    "Meias de lã",
+    "Calça impermeável ou de neve",
+    "Óculos de sol (reflexo da neve)",
+    "Hidratante labial e de mãos",
+    "Adaptador suíço (tipo J; o tipo C também encaixa)"
+   ]
+  },
+  {
+   "id": "trem",
+   "nome": "Trem Lenk → Zurique",
+   "regiao": "panorâmico, com almoço",
+   "lat": 47.377,
+   "lon": 8.54,
+   "de": "2027-01-07",
+   "hora": "10:00",
+   "tipo": "trem",
+   "nota": "Saída por volta das 10h, almoço a bordo, até o centro de Zurique. Comprar e conferir horários e reserva de assento no app SBB."
+  },
+  {
+   "id": "rad",
+   "nome": "Radisson Blu · Zurich Airport",
+   "regiao": "hospedagem",
+   "lat": 47.45,
+   "lon": 8.562,
+   "de": "2027-01-07",
+   "ate": "2027-01-08",
+   "tipo": "hotel",
+   "clima": {
+    "min": -3,
+    "max": 3,
+    "nota": "Zurique em janeiro"
+   },
+   "nota": "O hotel fica no próprio aeroporto. Voo de volta às 07:35 de 08/01: chegar ao balcão por volta das 05:30."
+  },
+  {
+   "id": "volta",
+   "nome": "Volta · ZRH",
+   "regiao": "decolagem",
+   "lat": 47.458,
+   "lon": 8.556,
+   "de": "2027-01-08",
+   "hora": "07:35",
+   "tipo": "voo"
+  }
+ ],
+ "trechos": [
+  {
+   "de": "gru",
+   "para": "zrh",
+   "modo": "voo"
+  },
+  {
+   "de": "zrh",
+   "para": "str",
+   "modo": "carro"
+  },
+  {
+   "de": "str",
+   "para": "lenk",
+   "modo": "carro"
+  },
+  {
+   "de": "lenk",
+   "para": "trem",
+   "modo": "trem"
+  },
+  {
+   "de": "trem",
+   "para": "rad",
+   "modo": "trem"
+  }
+ ],
+ "mapa": {
+  "vistas": [
+   {
+    "id": "mundo",
+    "nome": "Mundo",
+    "pontos": "mundo",
+    "trechos": "voo",
+    "mostrar": [
+     "gru",
+     "zrh"
+    ],
+    "rotulos": {
+     "gru": {
+      "off": [
+       14,
+       10,
+       "l"
+      ]
+     },
+     "zrh": {
+      "off": [
+       -14,
+       -16,
+       "r"
+      ],
+      "nome": "Zurique · Stuttgart · Lenk",
+      "per": "29/12 – 08/01"
+     }
+    }
+   },
+   {
+    "id": "europa",
+    "nome": "Europa",
+    "pontos": "eu",
+    "trechos": "terra",
+    "mostrar": [
+     "zrh",
+     "str",
+     "lenk",
+     "trem",
+     "rad"
+    ],
+    "rotulos": {
+     "zrh": {
+      "off": [
+       -14,
+       -16,
+       "r"
+      ]
+     },
+     "str": {
+      "off": [
+       14,
+       -4,
+       "l"
+      ]
+     },
+     "lenk": {
+      "off": [
+       14,
+       8,
+       "l"
+      ]
+     },
+     "trem": {
+      "off": [
+       -14,
+       10,
+       "r"
+      ]
+     },
+     "rad": {
+      "off": [
+       14,
+       -20,
+       "l"
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "documentos": [
+  {
+   "nome": "Passaporte válido",
+   "ok": false
+  },
+  {
+   "nome": "Seguro-viagem com cobertura Schengen",
+   "ok": false
+  },
+  {
+   "nome": "Comprovante de hospedagem: carta-convite da Milu (mãe do Lucas), com endereço",
+   "ok": false
+  },
+  {
+   "nome": "Passagens de ida e volta impressas",
+   "ok": false
+  },
+  {
+   "nome": "Reserva do Radisson impressa",
+   "ok": false
+  },
+  {
+   "nome": "CNH física",
+   "ok": false
+  }
+ ],
+ "conferir": [
+  "A pasta Viagens do iCloud não foi lida: conecte a pasta no app do Claude para eu conferir reservas e horários."
+ ],
+ "fontes": [
+  "weather2travel (Stuttgart)",
+  "klima.org (Lenk im Simmental)",
+  "wetter.de (Zurique, janeiro)"
+ ]
+}

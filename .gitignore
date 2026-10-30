@@ -1,0 +1,7 @@
+.obsidian/workspace*.json
+.DS_Store
+__pycache__/
+*.pyc
+*.tmp
+.Lista.tmp
+.roteiro.tmp
