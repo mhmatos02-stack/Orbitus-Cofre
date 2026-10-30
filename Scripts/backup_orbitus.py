@@ -17,8 +17,10 @@ def git(*a):
 
 
 def erro(r):
+    """As linhas que explicam o erro (o git costuma pôr o motivo depois da primeira linha)."""
     t = (r.stderr or r.stdout or "").strip()
-    return t.splitlines()[0][:200] if t else "rc=%s" % r.returncode
+    ls = [l.strip() for l in t.splitlines() if l.strip() and not l.startswith("To ")]
+    return " | ".join(ls)[:400] if ls else ("rc=%s" % r.returncode)
 
 
 def head():
