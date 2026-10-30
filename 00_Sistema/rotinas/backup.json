@@ -1,6 +1,6 @@
 {
  "rotina": "backup",
- "quando": "2026-10-30T19:14",
+ "quando": "2026-10-30T19:16",
  "status": "falha",
- "detalhe": "não consegui verificar o envio: fatal: ambiguous argument 'origin/main..HEAD': unknown revision or path not in the working tree. · push: To https://github.com/mhmatos02-stack/Orbitus.git"
+ "detalhe": "2 commit(s) não enviados ao GitHub: ! [rejected]        main -> main (non-fast-forward) | error: failed to push some refs to 'https://github.com/mhmatos02-stack/Orbitus.git' | hint: Updates were rejected because the tip of your current branch is behind | hint: its remote counterpart. If you want to integrate the remote changes, | hint: use 'git pull' before pushing again. | hint: See the 'Note about fast-forwards' in 'git push --hel"
 }
