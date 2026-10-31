@@ -386,54 +386,73 @@ def concluidas_desde(dia_iso):
     return out
 
 
-def _contexto():
-    """Retrato compacto de tudo o que o Orbitus enxerga, para o Concierge."""
+def _contexto(secoes=None):
+    """Retrato do que o Orbitus enxerga, para o Concierge.
+    secoes=None manda tudo (rituais e perguntas abertas); senão só o núcleo + os temas pedidos:
+    financas, treino, viagem, emails, agenda, tarefas. Menos contexto = resposta mais rápida e mais barata."""
+    tudo = secoes is None
+    S = set(secoes or ())
     d = dados()
     hoje = date.today()
     lim = (hoje + timedelta(days=14)).isoformat()
+    lim_ag = lim if (tudo or 'agenda' in S or 'viagem' in S) else (hoje + timedelta(days=7)).isoformat()
     seg = (hoje - timedelta(days=hoje.weekday())).isoformat()
     c = {'hoje': d['hoje'], 'marcos': d.get('marcos'),
-         'tarefas_concluidas_semana': concluidas_desde(seg),
          'tarefas_abertas': [{k: t.get(k) for k in ('titulo', 'due', 'tag', 'nota', 'fonte')} for t in d['tarefas'] if not t.get('feito')],
-         'agenda_14_dias': {k: v for k, v in sorted(d['eventos'].items()) if d['hoje'] <= k <= lim},
-         'sistemas': [{k: f.get(k) for k in ('nome', 'saude', 'saude_txt', 'proxima', 'risco', 'esperando', 'esperando_lista', 'automacao')} for f in d['federacao']],
-         'mesa_investimentos': d.get('mesa_home'), 'viagem_alertas': d.get('viagem_alertas'),
-         'treino_resumo': d.get('treino_resumo')}
-    em = d.get('emails') or {}
-    c['emails'] = {'configurado': em.get('configurado'), 'contas': em.get('contas'),
-                   'pedem_resposta': [{k: e.get(k) for k in ('conta', 'de', 'assunto', 'quando', 'previa')} for e in (em.get('itens') or [])[:15]]}
-    try:
-        w = wealth.estado(VAULT)
-        c['wealth'] = {k: w.get(k) for k in ('data_base', 'total', 'caixa', 'reserva', 'renda_mensal_liq', 'meta_renda', 'meta_patrimonio',
-                                              'modo_preservacao', 'classes', 'bandas', 'alertas', 'decidir', 'isencao', 'proventos_proximos', 'historico')}
-        c['wealth']['posicoes'] = [{k: a.get(k) for k in ('ticker', 'classe', 'qtd', 'pm', 'preco', 'valor', 'ganho_pct', 'peso', 'tag')}
-                                   for a in (w.get('acoes') or []) + (w.get('fiis') or []) + (w.get('etfs') or [])] + (w.get('outros') or [])
-        c['wealth']['agenda'] = [x for x in (w.get('agenda') or []) if (x.get('data') or '') <= lim][:25]
-    except Exception as e:
-        c['wealth'] = {'erro': str(e)}
-    try:
-        m = treino.mesa(VAULT)
-        c['mesa_da_saude'] = {'ultimo_parecer': (m.get('pareceres') or [None])[0], 'perguntas': (m.get('perguntas') or [])[-5:]}
-        t = treino.tudo(VAULT)
-        c['treino_ultimos_7_dias'] = {k: {'treino': (v.get('workout') or {}).get('done'), 'passos': v.get('steps'), 'remo_min': v.get('mov'),
-                                          'agua': v.get('water'), 'peso': v.get('weight'), 'cintura': v.get('waist'),
-                                          'refeicoes': {r: (x.get('txt') if isinstance(x, dict) else x) for r, x in (v.get('meals') or {}).items()},
-                                          'extras': [x.get('n') for x in v.get('extras') or []]}
-                                      for k, v in sorted(t['dias'].items())[-7:]}
-        c['locais_de_treino'] = t.get('locais')
-    except Exception as e:
-        c['mesa_da_saude'] = {'erro': str(e)}
-    try:
-        vs = []
-        for v in viagem.listar(VAULT):
-            e = viagem.estado(VAULT, v['id'])
-            vs.append({'titulo': e.get('titulo'), 'de': e.get('de'), 'ate': e.get('ate'),
-                       'paradas': [{k: p.get(k) for k in ('nome', 'de', 'ate', 'hora', 'nota')} for p in e.get('paradas', [])],
-                       'falta_antes_de_ir': (e.get('vespera') or {}).get('falta'), 'bagagem': e.get('bagagem'),
-                       'lista_aberta': [i['titulo'] + (' (' + i['due'] + ')' if i['due'] else '') for i in e.get('lista', []) if not i['feito']]})
-        c['viagens'] = vs
-    except Exception as e:
-        c['viagens'] = {'erro': str(e)}
+         'agenda': {k: v for k, v in sorted(d['eventos'].items()) if d['hoje'] <= k <= lim_ag}}
+    if tudo or 'financas' in S:
+        c['sistemas'] = [{k: f.get(k) for k in ('nome', 'saude', 'saude_txt', 'proxima', 'risco', 'esperando', 'esperando_lista', 'automacao')} for f in d['federacao']]
+    else:
+        c['sistemas'] = [{'nome': f.get('nome'), 'saude': f.get('saude')} for f in d['federacao']]
+    if tudo or 'tarefas' in S:
+        c['tarefas_concluidas_semana'] = concluidas_desde(seg)
+    if tudo or 'emails' in S:
+        em = d.get('emails') or {}
+        c['emails'] = {'configurado': em.get('configurado'), 'contas': em.get('contas'),
+                       'pedem_resposta': [{k: e.get(k) for k in ('conta', 'de', 'assunto', 'quando', 'previa')} for e in (em.get('itens') or [])[:15]]}
+    else:
+        c['emails_pedem_resposta'] = len(((d.get('emails') or {}).get('itens')) or [])
+    if tudo or 'financas' in S:
+        c['mesa_investimentos'] = d.get('mesa_home')
+        try:
+            w = wealth.estado(VAULT)
+            c['wealth'] = {k: w.get(k) for k in ('data_base', 'total', 'caixa', 'reserva', 'renda_mensal_liq', 'meta_renda', 'meta_patrimonio',
+                                                  'modo_preservacao', 'classes', 'bandas', 'alertas', 'decidir', 'isencao', 'proventos_proximos', 'historico')}
+            c['wealth']['posicoes'] = [{k: a.get(k) for k in ('ticker', 'classe', 'qtd', 'pm', 'preco', 'valor', 'ganho_pct', 'peso', 'tag')}
+                                       for a in (w.get('acoes') or []) + (w.get('fiis') or []) + (w.get('etfs') or [])] + (w.get('outros') or [])
+            c['wealth']['agenda'] = [x for x in (w.get('agenda') or []) if (x.get('data') or '') <= lim][:25]
+        except Exception as e:
+            c['wealth'] = {'erro': str(e)}
+    if tudo or 'treino' in S:
+        c['treino_resumo'] = d.get('treino_resumo')
+        try:
+            m = treino.mesa(VAULT)
+            c['mesa_da_saude'] = {'ultimo_parecer': (m.get('pareceres') or [None])[0], 'perguntas': (m.get('perguntas') or [])[-5:]}
+            t = treino.tudo(VAULT)
+            c['treino_ultimos_7_dias'] = {k: {'treino': (v.get('workout') or {}).get('done'), 'passos': v.get('steps'), 'remo_min': v.get('mov'),
+                                              'agua': v.get('water'), 'peso': v.get('weight'), 'cintura': v.get('waist'),
+                                              'refeicoes': {r: (x.get('txt') if isinstance(x, dict) else x) for r, x in (v.get('meals') or {}).items()},
+                                              'extras': [x.get('n') for x in v.get('extras') or []]}
+                                          for k, v in sorted(t['dias'].items())[-7:]}
+            c['locais_de_treino'] = t.get('locais')
+        except Exception as e:
+            c['mesa_da_saude'] = {'erro': str(e)}
+    else:
+        tr = d.get('treino_resumo') or {}
+        c['treino_hoje'] = {k: tr.get(k) for k in ('data', 'sessao_nome', 'treino_ok', 'treinos_semana', 'treinos_alvo') if k in tr}
+    if tudo or 'viagem' in S:
+        c['viagem_alertas'] = d.get('viagem_alertas')
+        try:
+            vs = []
+            for v in viagem.listar(VAULT):
+                e = viagem.estado(VAULT, v['id'])
+                vs.append({'titulo': e.get('titulo'), 'de': e.get('de'), 'ate': e.get('ate'),
+                           'paradas': [{k: p.get(k) for k in ('nome', 'de', 'ate', 'hora', 'nota')} for p in e.get('paradas', [])],
+                           'falta_antes_de_ir': (e.get('vespera') or {}).get('falta'), 'bagagem': e.get('bagagem'),
+                           'lista_aberta': [i['titulo'] + (' (' + i['due'] + ')' if i['due'] else '') for i in e.get('lista', []) if not i['feito']]})
+            c['viagens'] = vs
+        except Exception as e:
+            c['viagens'] = {'erro': str(e)}
     return c
 
 
@@ -545,12 +564,58 @@ class H(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b)
 
+    def _fluxo(self, gerador):
+        """Server-sent events: cada pedaço da resposta sai assim que chega da API (a voz começa na primeira frase)."""
+        self.send_response(200)
+        self.send_header('Content-Type', 'text/event-stream; charset=utf-8')
+        self.send_header('Cache-Control', 'no-store')
+        self.send_header('X-Accel-Buffering', 'no')
+        self.send_header('Connection', 'close')
+        self.end_headers()
+        self.close_connection = True
+
+        def env(obj):
+            self.wfile.write(('data: ' + json.dumps(obj, ensure_ascii=False) + '\n\n').encode('utf-8'))
+            self.wfile.flush()
+        try:
+            for ev in gerador:
+                env(ev)
+        except (BrokenPipeError, ConnectionResetError):
+            return
+        except Exception as e:
+            try:
+                env({'t': 'erro', 'erro': str(e)})
+            except OSError:
+                pass
+
     def do_GET(self):
         if self.path.split('?')[0] in ('/', '/index.html'):
             b = (ler(os.path.join(STATIC, 'index.html')) or '').encode('utf-8')
             self.send_response(200)
             self.send_header('Content-Type', 'text/html; charset=utf-8')
             self.send_header('Cache-Control', 'no-cache')
+            self.send_header('Content-Length', str(len(b)))
+            self.end_headers()
+            self.wfile.write(b)
+        elif self.path.split('?')[0] == '/manifest.webmanifest':
+            b = json.dumps({'name': 'Orbitus', 'short_name': 'Orbitus', 'start_url': '/', 'display': 'standalone',
+                            'background_color': '#04060b', 'theme_color': '#04060b',
+                            'icons': [{'src': '/static/icone-192.png', 'sizes': '192x192', 'type': 'image/png'},
+                                      {'src': '/static/icone-512.png', 'sizes': '512x512', 'type': 'image/png'}]}).encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/manifest+json')
+            self.send_header('Content-Length', str(len(b)))
+            self.end_headers()
+            self.wfile.write(b)
+        elif re.fullmatch(r'/static/icone-(180|192|512)\.png', self.path.split('?')[0]):
+            try:
+                with open(os.path.join(STATIC, self.path.split('?')[0][8:]), 'rb') as f:
+                    b = f.read()
+            except OSError:
+                return self.send_error(404)
+            self.send_response(200)
+            self.send_header('Content-Type', 'image/png')
+            self.send_header('Cache-Control', 'max-age=86400')
             self.send_header('Content-Length', str(len(b)))
             self.end_headers()
             self.wfile.write(b)
@@ -630,7 +695,10 @@ class H(BaseHTTPRequestHandler):
             self.send_error(404)
 
     def do_POST(self):
-        if self.headers.get('Origin') not in (None, 'http://localhost:%d' % PORT, 'http://127.0.0.1:%d' % PORT):
+        o = self.headers.get('Origin')
+        # celular via Tailscale Serve: https://<mac>.<tailnet>.ts.net (só os aparelhos da sua rede Tailscale chegam aqui)
+        ts = bool(o and re.fullmatch(r'https://[a-z0-9-]+\.[a-z0-9-]+\.ts\.net', o))
+        if o not in (None, 'http://localhost:%d' % PORT, 'http://127.0.0.1:%d' % PORT) and not ts:
             return self._json({'erro': 'origem recusada'}, 403)
         try:
             n = int(self.headers.get('Content-Length') or 0)
@@ -645,9 +713,16 @@ class H(BaseHTTPRequestHandler):
                 return self._json(treino.salvar_despensa(VAULT, body))
             elif self.path == '/api/concierge':
                 try:
-                    return self._json(concierge.perguntar(body.get('pergunta'), _contexto(), capturar))
+                    sec = concierge.intencoes(body.get('pergunta'))
+                    return self._json(concierge.perguntar(body.get('pergunta'), _contexto(sec), capturar, sec))
                 except RuntimeError as e:
                     return self._json({'erro': str(e)}, 502)
+            elif self.path == '/api/concierge/fluxo':
+                sec = concierge.intencoes(body.get('pergunta'))
+                prep = concierge.preparar(body.get('pergunta'), _contexto(sec), sec)
+                return self._fluxo(concierge.perguntar_fluxo(prep, capturar))
+            elif self.path == '/api/treino/saude':
+                return self._json(treino.registrar_saude(VAULT, body))
             elif self.path == '/api/voz':
                 try:
                     b, tipo = concierge.sintetizar(body.get('texto'))

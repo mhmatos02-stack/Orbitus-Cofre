@@ -45,3 +45,19 @@ Tudo depois de ` — ` vira a linha cinza. Prioridade: 🔺 máxima · ⏫ alta 
 - Segredos fora do cofre: Keychain (`orbitus-email`, `orbitus-anthropic`, `orbitus-google-tts`) e `~/.orbitus/`
   (links ICS, uso do Concierge). O cofre vai para um GitHub **privado**; nunca ponha credencial dentro dele.
 - O Concierge manda um retrato do painel para a API do Claude a cada pergunta e só pode criar tarefas.
+
+## Acesso pelo celular (Tailscale)
+- Endereço: https://mac-mini.taila77abf.ts.net (só aparelhos da sua rede Tailscale; Funnel desligado)
+- Publicação: `/Applications/Tailscale.app/Contents/MacOS/Tailscale serve --bg 8787` (fica salvo; desligar com `serve --https=443 off`)
+- Abrir no login: `bash ~/System/Orbitus/App/instalar_tailscale_login.sh` (agente com.orbitus.tailscale, reabre a cada 10 min)
+- Chave do mac-mini: expiração desligada no painel da Tailscale
+
+## Concierge (atualização P1, 30/10)
+- Resposta em streaming: POST /api/concierge/fluxo (server-sent events). A voz começa na primeira frase; o resto é sintetizado em blocos de ~2 frases e tocado em sequência.
+- Contexto por assunto: concierge.intencoes() escolhe finanças, treino, viagem, e-mails, agenda ou tarefas; rituais e perguntas abertas mandam tudo. O rodapé da resposta mostra os tokens e o recorte usado.
+- Fala: concierge.para_fala() ajusta só o texto falado (Márcio, siglas, datas por extenso, unidades, sem emojis ou markdown).
+- Microfone: segurar = fala e envia ao soltar; toque rápido = mãos livres; no Mac, segurar ⌥ espaço; Esc interrompe; tocar na resposta corta a voz.
+
+## Passos do Apple Saúde (Atalho do iPhone)
+- POST https://mac-mini.taila77abf.ts.net/api/treino/saude com JSON {"passos": N} (opcional "data": "AAAA-MM-DD"). Grava steps no dia, sem apagar o resto.
+- Automação no Atalhos: 20:15 e 23:45, todos os dias, executar sem perguntar. Precisa do Tailscale ligado no iPhone.

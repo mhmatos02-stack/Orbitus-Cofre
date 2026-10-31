@@ -1,51 +1,53 @@
 {
  "data": "2026-10-30",
- "gerado_em": "2026-10-30T18:30",
+ "gerado_em": "2026-10-30T21:50",
  "agentes": {
   "personal": {
-   "resumo": "Quatro treinos em quatro dias desde terça, incluindo o B variação de hoje com todas as séries. A força está em dia; o que trava a cintura é o movimento fora do treino (média de 3.280 passos contra 8.000).",
+   "resumo": "Semana com 4 treinos em 4 dias (B terça, C quarta, A quinta, B variação hoje), todos com aquecimento e todas as séries marcadas. A força sobe; o que segura a cintura continua sendo o movimento: 1.541, 5.300 e 3.000 passos, hoje sem registro e 0 min de remo leve nos 4 dias.",
    "bem": [
-    "Pernas de hoje completo: goblet, afundo reverso, stiff unilateral, elevação de quadril, prancha e panturrilha",
-    "Goblet já pediu 30 kg no B de terça: a progressão dupla está funcionando"
+    "Goblet com 28 kg fez 12, 12, 10 e 10: passou do topo da faixa (8 a 10) pela segunda sessão seguida",
+    "Panturrilha subiu para 22 kg na última série mantendo 20 repetições",
+    "Aquecimento feito nos 4 treinos, como pedido no parecer anterior"
    ],
    "ajustes": [
-    "Registre o remo leve depois do almoço e do jantar no campo 'min': 20 min por dia valem 2.000 passos",
-    "Aquecimento de 5 min de remo antes de cada treino, sem pular",
-    "No hotel, use as versões de academia: o Orbitus troca sozinho sábado e domingo"
+    "Goblet: na próxima Pernas (terça) comece com 30 kg; com 28 kg ele já não é estímulo",
+    "Afundo reverso (6, 10, 8 com 14 kg) e stiff unilateral (8, 8, 8 com 20 kg) ficaram abaixo da faixa de 10 a 12: mantenha 14 kg no afundo e desça o stiff unilateral para 18 kg até fechar 3 × 10",
+    "O remo leve pedido ontem não apareceu (mov = 0). Meta mínima no hotel: 10 min de caminhada depois do almoço e 10 min depois do jantar, e anote no campo 'min'"
    ],
-   "amanha": "Sábado no hotel: C · Ombros + Braços na academia (desenvolvimento com halteres 18 kg, elevação lateral no cabo, face pull no cabo, rosca com barra W, tríceps na polia com corda), depois remo ou esteira intervalada 8 × (30 s forte / 90 s leve). Domingo: corrida leve de 30 a 35 min na esteira + 20 min de ioga.",
+   "amanha": "Sábado, academia do hotel: C · Ombros + Braços. Desenvolvimento com halteres começando em 18 kg (você fechou 4 × 10 com 16 kg em casa), elevação lateral no cabo 7 kg, face pull na corda 20 kg, rosca com barra W 25 kg, tríceps na corda 25 kg, mergulho nas paralelas 2 × 8 a 12. Feche com remo ou esteira 8 × (30 s forte / 90 s leve).",
    "alerta": ""
   },
   "nutri": {
-   "resumo": "Café bom (pão integral, frango, mussarela e maçã) e água completa. Faltam lanche e jantar: a proteína está em 64 g e precisa chegar a 130 g.",
+   "resumo": "Proteína está alta (cerca de 160 g hoje, 162 g no dia 28), mas as calorias ficaram baixas demais: hoje, com as 4 refeições registradas, o total foi cerca de 1.370 kcal, abaixo do piso de 1.650. Os registros do almoço e do lanche estão trocados: o almoço está subestimado e o lanche, superestimado.",
    "bem": [
-    "10 copos de água",
-    "Jantar decidido antes das 16h"
+    "Água em 10 a 12 copos nos 4 dias",
+    "Jantar decidido até 16h nos 4 dias",
+    "Café de hoje com 34 g de proteína (pão integral, frango e mussarela)"
    ],
    "ajustes": [
-    "Seu almoço registrado parece subestimado: 2 filés de frango têm uns 240 g e cerca de 70 g de proteína, não 30 g. Use 'Estimar' com a descrição ou o item Frango na lista",
-    "No lanche, garanta 25 a 30 g de proteína: whey com fruta ou iogurte proteico",
-    "Jantar de hoje com pelo menos 150 g de proteína e no máximo 2 colheres de arroz"
+    "Coma mais, não menos: acrescente cerca de 300 kcal por dia, por exemplo 4 colheres de arroz (130 kcal) e 1 concha de feijão (77 kcal) no almoço e 1 banana no lanche (90 kcal), para ficar entre 1.750 e 1.850",
+    "Lanche de hoje foi registrado como 2 potes de iogurte proteico + 1 dose de whey (54 g), mas a descrição é 100 g de iogurte natural + meia dose (cerca de 16 g). Registre 0,5 de whey; e o almoço de 2 filés como Frango 240 g, não 30 g de proteína",
+    "Dia 29 teve 2 doces de 150 kcal: o planejado é 1 por dia; no fim de semana no hotel, uma sobremesa só, no jantar"
    ],
    "trocas": [
     {
-     "de": "Pão francês no café do hotel",
-     "por": "Omelete de 3 ovos + 1 fruta + 1 fatia de pão integral",
-     "porque": "mais proteína e menos fome até o almoço"
+     "de": "Jantar só com 1 pão francês + 120 g de frango (cerca de 340 kcal)",
+     "por": "1 pão francês + 120 g de frango + 1 ovo + salada com 1 colher de azeite",
+     "porque": "soma cerca de 160 kcal e 6 g de proteína e tira o dia do piso"
     },
     {
-     "de": "Suco do buffet",
-     "por": "Água ou água de coco",
-     "porque": "suco de buffet costuma ter açúcar e não sacia"
+     "de": "Meia dose de whey com 100 g de iogurte natural",
+     "por": "1 dose inteira de whey + 1 banana",
+     "porque": "24 g de proteína e 210 kcal num lanche que segura até o jantar"
     },
     {
-     "de": "Sobremesa no almoço e no jantar",
-     "por": "Uma sobremesa só, no jantar",
-     "porque": "o doce planejado é um por dia"
+     "de": "Café do hotel só com pão e frios",
+     "por": "Omelete de 3 ovos + 1 tapioca pequena ou 2 fatias de pão integral + 1 fruta",
+     "porque": "cerca de 450 kcal e 21 g de proteína"
     }
    ],
-   "amanha": "Café: omelete de 3 ovos + fruta + 1 pão integral · Almoço: grelhado (frango ou peixe) 150 g, salada, 4 colheres de arroz e feijão · Lanche: iogurte natural com fruta ou whey · Jantar: proteína 150 g + legumes, sobremesa só se for o doce do dia.",
-   "alerta": ""
+   "amanha": "Café (hotel): omelete de 3 ovos + 2 fatias de pão integral + mamão · Almoço: 150 g de frango ou peixe grelhado, 4 colheres de arroz, 1 concha de feijão, salada · Lanche: 1 dose de whey + 1 banana · Jantar: 150 g de proteína grelhada + legumes + 1 batata média; sobremesa só se for o doce do dia.",
+   "alerta": "Ingestão abaixo do mínimo de 1.650 kcal: cerca de 1.370 kcal hoje com tudo registrado. Não corte mais; some cerca de 300 kcal por dia como nos ajustes."
   }
  },
  "respostas": [],

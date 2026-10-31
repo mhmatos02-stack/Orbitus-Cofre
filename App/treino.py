@@ -133,6 +133,57 @@ def salvar_dia(vault, corpo):
     return _salvar(os.path.join(_pasta(vault), 'dias', k + '.json'), d)
 
 
+def _numero(v):
+    """Aceita 8532, 8532.4, "8532", "8.532", "8532,4" (o Atalhos do iPhone manda de vários jeitos)."""
+    if v is None or v == '':
+        return None
+    if isinstance(v, (int, float)):
+        return float(v)
+    s = re.sub(r'[^\d,.\-]', '', str(v))
+    if ',' in s:
+        s = s.replace('.', '').replace(',', '.')
+    elif s.count('.') == 1 and len(s.split('.')[1]) == 3:
+        s = s.replace('.', '')          # "8.532" = oito mil e quinhentos
+    elif s.count('.') > 1:
+        s = s.replace('.', '')
+    try:
+        return float(s)
+    except ValueError:
+        raise ValueError('número inválido: %r' % v)
+
+
+def registrar_saude(vault, corpo):
+    """Dados do Apple Saúde enviados por um Atalho do iPhone: passos (e, se vier, peso).
+    Grava no registro do dia sem apagar o resto; "updated" novo faz a aba Treino adotar o valor."""
+    k = str(corpo.get('data') or date.today().isoformat())[:10]
+    if not DATA.match(k):
+        raise ValueError('data inválida')
+    if k > date.today().isoformat():
+        raise ValueError('data no futuro')
+    passos = _numero(corpo.get('passos'))
+    peso = _numero(corpo.get('peso'))
+    if passos is None and peso is None:
+        raise ValueError('mande "passos" (e, se quiser, "peso")')
+    if passos is not None and not (0 <= passos <= 150000):
+        raise ValueError('passos fora do esperado')
+    if peso is not None and not (30 <= peso <= 250):
+        raise ValueError('peso fora do esperado')
+    p = os.path.join(_pasta(vault), 'dias', k + '.json')
+    with TRAVA:
+        d = _ler(p)
+        if not isinstance(d, dict):
+            d = {'date': k, 'weight': None, 'waist': None, 'steps': None, 'sleep': None, 'water': 0, 'meals': {},
+                 'extras': [], 'habits': {}, 'workout': {'letter': None, 'sets': {}, 'done': False, 'warm': False, 'remo': False}}
+        if passos is not None:
+            d['steps'] = int(round(passos))
+        if peso is not None:
+            d['weight'] = round(peso, 1)
+        d['saude_ios'] = datetime.now().isoformat(timespec='minutes')
+        d['updated'] = int(datetime.now().timestamp() * 1000)
+        _gravar(p, d)
+    return {'ok': True, 'data': k, 'passos': d.get('steps'), 'peso': d.get('weight') if peso is not None else None}
+
+
 def salvar_despensa(vault, corpo):
     return _salvar(os.path.join(_pasta(vault), 'despensa.json'), corpo.get('despensa'))
 

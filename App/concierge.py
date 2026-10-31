@@ -125,7 +125,43 @@ def _ritual(pergunta):
     return None
 
 
-def perguntar(pergunta, contexto, capturar=None):
+TOPICOS = {
+    'financas': r'wealth|carteira|invest|patrim|a[cç][aã]o|a[cç][oõ]es|\bfii|fundo|dividend|provento|\brenda\b|caixa|reserva|decis|bolsa|ibov|selic|copom|cdb|tesouro|aporte|rebalanc|imposto|isen[cç]|ticker|cota|juros|d[oó]lar|mesa de invest|\b[a-z]{4}\d{1,2}\b',
+    'treino': r'treino|trein|exerc|academia|corrid|correr|\bremo\b|ioga|yoga|pilates|\bpeso\b|pesar|cintura|passo|prote[ií]n|caloria|kcal|refei|comi|aliment|dieta|[aá]gua|nutri|personal|sa[uú]de|sono|dormi|almo[cç]|jantar|caf[eé] da manh|lanche|shape|medida|muscula',
+    'viagem': r'viag|viaj|praia|forte|salvador|alemanha|stuttgart|lenk|su[ií][cç]a|\bvoo|v[oô]o|mala|bagagem|passaporte|hotel|iberostar|\bgol\b|presente|aeroporto|embarque|roteiro|f[eé]rias',
+    'emails': r'e-?mail|mensage|responder|resposta|inbox|caixa de entrada|escrever para|retornar',
+    'agenda': r'agenda|reuni|compromisso|calend[aá]rio|evento|marcad|hor[aá]rio|amanh|depois de amanh|pr[oó]xima semana|segunda|ter[cç]a|quarta|quinta|sexta|s[aá]bado|domingo',
+    'tarefas': r'tarefa|pend[eê]n|fazer|to-?do|lista|atrasad|conclu|feito|fiz\b|priorid|anot|lembr',
+}
+
+
+def _sem_acento(t):
+    import unicodedata
+    return re.sub(r'[̀-ͯ]', '', unicodedata.normalize('NFD', str(t or '').lower()))
+
+
+def intencoes(pergunta):
+    """Seções do contexto que a pergunta pede. None = mandar tudo (rituais e perguntas sem tema claro).
+    Pergunta curta no meio de uma conversa herda os temas da anterior ("e a de amanhã?")."""
+    if _ritual(pergunta):
+        return None
+    q = str(pergunta or '').lower()
+    achou = {k for k, rx in TOPICOS.items() if re.search(rx, q) or re.search(rx, _sem_acento(q))}
+    with TRAVA:
+        ativa = time.time() - CONVERSA['t'] <= 1800 and CONVERSA['msgs']
+        antes = set(CONVERSA.get('secoes') or ()) if ativa else set()
+        anterior_tudo = ativa and CONVERSA.get('secoes') is None
+    if not achou:
+        if anterior_tudo or not antes:
+            return None
+        return antes
+    if len(q) <= 60 and ativa and not anterior_tudo:
+        achou |= antes
+    return achou
+
+
+def preparar(pergunta, contexto, secoes='?'):
+    """Valida, confere chave e teto e monta o corpo do pedido. Erros aqui viram 400 antes de começar a resposta."""
     pergunta = re.sub(r'\s+', ' ', str(pergunta or '')).strip()[:1500]
     if not pergunta:
         raise ValueError('faça uma pergunta')
@@ -140,43 +176,139 @@ def perguntar(pergunta, contexto, capturar=None):
             CONVERSA['msgs'] = []
         hist = CONVERSA['msgs'][-8:]
     agora = datetime.now()
-    sistema = SISTEMA + '\n\nAgora: %s (%s).\n\nCONTEXTO (JSON, retrato do momento):\n%s' % (
+    recorte = '' if secoes in ('?', None) else '\nRecorte do contexto para esta pergunta: %s. Se a resposta depender de algo fora do recorte, diga que precisa olhar e sugira perguntar de novo citando o assunto.' % ', '.join(sorted(secoes))
+    sistema = SISTEMA + recorte + '\n\nAgora: %s (%s).\n\nCONTEXTO (JSON, retrato do momento):\n%s' % (
         agora.strftime('%Y-%m-%d %H:%M'), ['segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo'][agora.weekday()],
         json.dumps(contexto, ensure_ascii=False, separators=(',', ':'), default=str))
     rit = _ritual(pergunta)
     conteudo = pergunta if not rit else pergunta + '\n\n[' + rit[2] + ']'
     corpo = {'model': MODELO, 'max_tokens': rit[1] if rit else 700, 'system': sistema,
              'messages': hist + [{'role': 'user', 'content': conteudo}]}
-    j = _post(corpo, chave)
-    texto = ''.join(b.get('text', '') for b in j.get('content', []) if b.get('type') == 'text').strip()
-    us = j.get('usage') or {}
+    return {'pergunta': pergunta, 'chave': chave, 'corpo': corpo, 'secoes': None if secoes == '?' else secoes}
+
+
+def _visivel(texto):
+    """Texto que pode ir para a tela/voz: sem as linhas [[tarefa: ...]] e sem um marcador ainda incompleto no fim."""
+    t = re.sub(r'\s*\[\[tarefa:.*?\]\]', '', texto, flags=re.S)
+    i = t.find('[[')
+    if i >= 0:
+        t = t[:i]
+    elif t.endswith('['):
+        t = t[:-1]
+    return t
+
+
+def _finalizar(prep, texto, us, capturar):
     pi, po = PRECO.get(MODELO, (2.0, 10.0))
     custo = (us.get('input_tokens', 0) * pi + us.get('output_tokens', 0) * po) / 1e6
     criadas = []
-    for t in re.findall(r'\[\[tarefa:\s*(.+?)\]\]', texto):
-        t = t.strip()[:200]
+    for t in re.findall(r'\[\[tarefa:\s*(.+?)\]\]', texto, flags=re.S):
+        t = re.sub(r'\s+', ' ', t).strip()[:200]
         if capturar:
             try:
                 capturar(t)
                 criadas.append(t)
             except Exception as e:
                 texto += ' (Não consegui criar a tarefa "%s": %s.)' % (t, e)
-    texto = re.sub(r'\s*\[\[tarefa:.+?\]\]', '', texto).strip()
-    tarefa = '; '.join(criadas) or None
+    texto = re.sub(r'\s*\[\[tarefa:.+?\]\]', '', texto, flags=re.S).strip()
     with TRAVA:
         u = _uso()
         u['usd'] = u.get('usd', 0) + custo
         u['perguntas'] = u.get('perguntas', 0) + 1
         _gravar_uso(u)
-        CONVERSA['msgs'] = (CONVERSA['msgs'] + [{'role': 'user', 'content': pergunta}, {'role': 'assistant', 'content': texto or '...'}])[-12:]
+        CONVERSA['msgs'] = (CONVERSA['msgs'] + [{'role': 'user', 'content': prep['pergunta']}, {'role': 'assistant', 'content': texto or '...'}])[-12:]
         CONVERSA['t'] = time.time()
-    return {'resposta': texto, 'tarefa': tarefa, 'custo_usd': round(custo, 4), 'mes_usd': round(u['usd'], 4),
-            'teto': u.get('teto', TETO_PADRAO)}
+        CONVERSA['secoes'] = sorted(prep['secoes']) if prep.get('secoes') is not None else None
+    return {'resposta': texto, 'tarefa': '; '.join(criadas) or None, 'custo_usd': round(custo, 4), 'mes_usd': round(u['usd'], 4),
+            'teto': u.get('teto', TETO_PADRAO), 'tokens_entrada': us.get('input_tokens', 0),
+            'recorte': prep.get('secoes') if prep.get('secoes') is None else sorted(prep['secoes'])}
+
+
+def perguntar(pergunta, contexto, capturar=None, secoes='?'):
+    """Resposta inteira de uma vez (usada como plano B e por quem não precisa de streaming)."""
+    prep = preparar(pergunta, contexto, secoes)
+    j = _post(prep['corpo'], prep['chave'])
+    texto = ''.join(b.get('text', '') for b in j.get('content', []) if b.get('type') == 'text').strip()
+    return _finalizar(prep, texto, j.get('usage') or {}, capturar)
+
+
+def _eventos_sse(linhas):
+    """Lê o SSE da API (linhas em bytes) e devolve os eventos JSON."""
+    for raw in linhas:
+        l = raw.decode('utf-8', 'replace').strip()
+        if l.startswith('data:'):
+            try:
+                yield json.loads(l[5:].strip())
+            except ValueError:
+                continue
+
+
+def _stream(corpo, chave):
+    corpo = dict(corpo, stream=True)
+    dados = json.dumps(corpo).encode('utf-8')
+    hdr = {'content-type': 'application/json', 'x-api-key': chave, 'anthropic-version': '2023-06-01', 'accept': 'text/event-stream'}
+    try:
+        r = urllib.request.urlopen(urllib.request.Request('https://api.anthropic.com/v1/messages', data=dados, method='POST', headers=hdr), timeout=60)
+    except urllib.error.HTTPError as e:
+        try:
+            msg = json.loads(e.read().decode('utf-8')).get('error', {}).get('message', '')
+        except Exception:
+            msg = ''
+        raise RuntimeError('a API respondeu %s%s' % (e.code, ': ' + msg if msg else ''))
+    except urllib.error.URLError:
+        r = None
+    if r is not None:
+        with r:
+            for ev in _eventos_sse(r):
+                yield ev
+        return
+    # plano B: curl do sistema (certificados do macOS), também em streaming
+    p = subprocess.Popen(['/usr/bin/curl', '-sS', '-N', '--max-time', '90', 'https://api.anthropic.com/v1/messages',
+                          '-H', 'content-type: application/json', '-H', 'x-api-key: ' + chave,
+                          '-H', 'anthropic-version: 2023-06-01', '--data-binary', '@-'],
+                         stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p.stdin.write(dados)
+    p.stdin.close()
+    try:
+        primeiro = True
+        for raw in p.stdout:
+            if primeiro and raw.strip().startswith(b'{'):
+                j = json.loads(raw.decode('utf-8') or '{}')
+                raise RuntimeError('a API respondeu: ' + (j.get('error') or {}).get('message', 'erro'))
+            primeiro = False
+            for ev in _eventos_sse([raw]):
+                yield ev
+    finally:
+        p.stdout.close()
+        p.wait(timeout=5)
+
+
+def perguntar_fluxo(prep, capturar=None):
+    """Gera a resposta aos pedaços: {'t':'delta','x':texto} ... e por fim {'t':'fim', ...igual a perguntar()}."""
+    texto, enviado, us = '', '', {}
+    for ev in _stream(prep['corpo'], prep['chave']):
+        tp = ev.get('type')
+        if tp == 'message_start':
+            us.update((ev.get('message') or {}).get('usage') or {})
+        elif tp == 'content_block_delta' and (ev.get('delta') or {}).get('type') == 'text_delta':
+            texto += ev['delta'].get('text', '')
+            vis = _visivel(texto)
+            if len(vis) > len(enviado) and vis.startswith(enviado):
+                yield {'t': 'delta', 'x': vis[len(enviado):]}
+                enviado = vis
+        elif tp == 'message_delta':
+            us.update(ev.get('usage') or {})
+        elif tp == 'error':
+            raise RuntimeError('a API respondeu: ' + (ev.get('error') or {}).get('message', 'erro'))
+    fim = _finalizar(prep, texto.strip(), us, capturar)
+    fim['t'] = 'fim'
+    yield fim
 
 
 def nova_conversa():
     with TRAVA:
         CONVERSA['msgs'] = []
+        CONVERSA['secoes'] = None
     return {'ok': True}
 
 
@@ -252,11 +384,54 @@ def _google_tts(texto, voz):
     return base64.b64decode(j['audioContent']), 'audio/mpeg'
 
 
+MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro']
+SIGLAS = [  # (padrão, como falar) — só o que a voz costuma errar
+    (r'\bMarcio\b', 'Márcio'), (r'\bMARCIO\b', 'Márcio'),
+    (r'\bFIIs\b', 'fiis'), (r'\bFII\b', 'fii'), (r'\bIR\b', 'imposto de renda'), (r'\bD-1\b', 'dê menos um'),
+    (r'\bGRU\b', 'Guarulhos'), (r'\bSSA\b', 'Salvador'), (r'\bCGH\b', 'Congonhas'),
+    (r'\bkm\b', 'quilômetros'), (r'\bkcal\b', 'calorias'), (r'\bkg\b', 'quilos'), (r'\bml\b', 'mililitros'),
+    (r'\bvs\.?(?=\s)', 'contra'), (r'\bp/\s*', 'para '), (r'\bc/\s*', 'com '), (r'\bobs\.?:?', 'observação:'),
+    (r'\s*(?:→|->)\s*', ' para '),
+]
+
+
+def _data_falada(m):
+    a, mes, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    if not (1 <= mes <= 12 and 1 <= d <= 31):
+        return m.group(0)
+    txt = ('primeiro' if d == 1 else str(d)) + ' de ' + MESES[mes - 1]
+    return txt if a == date.today().year else txt + ' de ' + str(a)
+
+
+def para_fala(texto):
+    """Ajusta o texto só para a voz (a tela continua igual): tira markdown, emojis e marcadores,
+    acerta o nome e as siglas que o TTS lê errado, e fala datas e unidades por extenso."""
+    t = str(texto or '')
+    t = re.sub(r'\[\[tarefa:.*?\]\]', '', t, flags=re.S)
+    t = re.sub(r'https?://\S+', 'o link', t)
+    t = re.sub(r'(?m)^\s*(?:[-*•]|\d+[.)])\s+', '', t)          # marcadores de lista
+    t = re.sub(r'[*_#`>|~]+', '', t)                              # markdown
+    t = re.sub(r'[\U0001F000-\U0001FAFF☀-➿⬀-⯿️‍]', '', t)  # emojis
+    t = re.sub(r'\b(\d{4})-(\d{2})-(\d{2})\b', _data_falada, t)
+    t = re.sub(r'(\d)\s?g\b', r'\1 gramas', t)
+    t = re.sub(r'(\d)\s?min\b', r'\1 minutos', t)
+    t = re.sub(r'(\d)\s?h\b', r'\1 horas', t)
+    t = re.sub(r'(\d{1,2})h(\d{2})\b', r'\1 e \2', t)
+    t = re.sub(r'(\d)\s?x\s?(\d)', r'\1 por \2', t)
+    t = re.sub(r'R\$\s?-\s?', 'menos R$ ', t)
+    for rx, fala in SIGLAS:
+        t = re.sub(rx, fala, t)
+    t = re.sub(r'\s*\n+\s*', '. ', t)
+    t = re.sub(r'\.\s*\.', '.', t)
+    return re.sub(r'\s+', ' ', t).strip()
+
+
 def sintetizar(texto):
     """Devolve (bytes, tipo). Voz neural do Google se configurada; senão a voz do Mac."""
     voz = voz_escolhida() or ''
+    texto = para_fala(texto)
     if voz.startswith('google:'):
-        t = re.sub(r'\s+', ' ', str(texto or '')).strip()[:4500]
+        t = texto[:4500]
         if not t:
             raise ValueError('sem texto')
         try:

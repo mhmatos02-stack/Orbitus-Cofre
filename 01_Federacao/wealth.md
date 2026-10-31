@@ -9,7 +9,7 @@ motivo: ""
 idade: 5
 data_base: "2026-10-25"
 saude_txt: "amarelo. Automações do Mac religadas (backup remoto diário desde 21/10), razão válido, cotações ao vivo, Mesa em dia. Atenção: confiabilidade de 30 dias abaixo da meta e sem segunda cópia local (Time Machine)."
-proxima: "(1) destravar o conferidor da CVM para três candidatas; (2) análise completa da candidata bancária até 01/11; (3) recalibrar alvos de uma posição de mineração com o resultado do 3º tri."
+proxima: "(atualizado 2026-10-30, Mesa) (1) IPS v1.19 com revisão independente até 02/11; (2) análise completa da holding com o 3º tri do banco em 04/11; (3) tese de 10 anos do ETF global até 06/11."
 decisoes: ""
 risco: "reserva sem folga sobre o piso; renda fixa perto do teto da banda enquanto a rotação não compra."
 esperando: ""
@@ -25,4 +25,4 @@ falhas: []
 
 **Esperando de você:** —
 
-**Próxima ação:** (1) destravar o conferidor da CVM para três candidatas; (2) análise completa da candidata bancária até 01/11; (3) recalibrar alvos de uma posição de mineração com o resultado do 3º tri.
+**Próxima ação:** (atualizado 2026-10-30, Mesa) (1) IPS v1.19 com revisão independente até 02/11; (2) análise completa da holding com o 3º tri do banco em 04/11; (3) tese de 10 anos do ETF global até 06/11.

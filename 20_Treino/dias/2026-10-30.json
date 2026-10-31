@@ -1,8 +1,23 @@
 {
  "date": "2026-10-30",
- "extras": [],
+ "extras": [
+  {
+   "n": "Doce planejado",
+   "k": 150,
+   "p": 2,
+   "t": "doce"
+  },
+  {
+   "n": "Fruta",
+   "k": 70,
+   "p": 1,
+   "t": null
+  }
+ ],
  "habits": {
-  "jantar16": true
+  "jantar16": true,
+  "caminhada": true,
+  "creatina": true
  },
  "meals": {
   "cafe": {
@@ -51,13 +66,26 @@
     }
    ],
    "txt": "100g de Iogurte natural, 1/2 scoop de whey protein"
+  },
+  "jantar": {
+   "c": 1,
+   "items": [
+    {
+     "f": "pao",
+     "q": 1
+    },
+    {
+     "f": "frango",
+     "q": 120
+    }
+   ]
   }
  },
  "sleep": null,
- "steps": null,
- "updated": 1793395185412,
+ "steps": 2164,
+ "updated": 1793408355242,
  "waist": null,
- "water": 10,
+ "water": 12,
  "weight": null,
  "workout": {
   "done": true,
