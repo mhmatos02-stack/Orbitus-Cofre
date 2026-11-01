@@ -61,3 +61,37 @@ Tudo depois de ` — ` vira a linha cinza. Prioridade: 🔺 máxima · ⏫ alta 
 ## Passos do Apple Saúde (Atalho do iPhone)
 - POST https://mac-mini.taila77abf.ts.net/api/treino/saude com JSON {"passos": N} (opcional "data": "AAAA-MM-DD"). Grava steps no dia, sem apagar o resto.
 - Automação no Atalhos: 20:15 e 23:45, todos os dias, executar sem perguntar. Precisa do Tailscale ligado no iPhone.
+
+## Lista do dia (31/10)
+- Embaixo do calendário da Home: rotina + tarefas com data + agenda, em ordem de horário, com check. Segue o dia selecionado no calendário.
+- Rotina que se repete: 10_Tarefas/Rotina diária.md (`- HH:MM Texto [dias]`). Feitos: 10_Tarefas/Rotina/AAAA-MM.json.
+- Coisa de um dia só: tarefa normal com `📅 AAAA-MM-DD ⏰ HH:MM` (ou o campo "+ adicionar" embaixo da lista).
+- Treino, ioga, pilates, corrida e copos de água se marcam sozinhos pelo registro da aba Treino.
+- API: GET /api/dia?d=AAAA-MM-DD · POST /api/dia/marcar · POST /api/dia/adicionar. O Concierge recebe a lista_do_dia e o "Bom dia" lê em ordem.
+
+## Tarefas (31/10)
+- Aba Tarefas: criar (linguagem natural: "sexta 10h", "amanhã", "todo dia", "toda segunda", "urgente", "#trabalho"), situação (a fazer · fazendo · aguardando), editar, remover com desfazer, Concluídas (30 dias), Arquivo e Sugeridas.
+- Áreas por tag: #pessoal #trabalho #financas #saude #viagem. Situação por tag: #fazendo #aguardando. Repetição no formato do plugin Tasks (🔁 every week on Monday); ao concluir no painel, a próxima entra logo acima.
+- Remover = vira "- [-] … 🗑 data" na seção "## Arquivo" do Tarefas.md. Restaurar devolve para a Inbox.
+- Sugestões: Mesa do Wealth (plano e decisões), e-mails que pedem resposta, alertas de viagem, falhas das rotinas e tarefas do parecer da Mesa da Saúde. Aceitas/dispensadas em 00_Sistema/tarefas_sugestoes.json.
+- Siri e Compartilhar: POST https://mac-mini.taila77abf.ts.net/api/tarefas/rapida {"texto": "...", "url": "..."} → devolve "falar" para a Siri ler.
+
+## Lista do dia ↔ Treino, água e avisos (31/10)
+- Marcar treino, ioga, pilates ou corrida na lista do dia grava na aba Treino (workout.done/yoga/pilates/corrida) e pontua. Ioga passou a pontuar em qualquer dia (+15 XP).
+- Água: a linha `- água: 10 copos de 250 ml, das 08:00 às 20:00` da Rotina diária vira 5 lembretes (2 copos cada). Marcar soma no contador de água do Treino; desmarcar tira. Se você registrar a água no Treino, os lembretes se marcam sozinhos.
+- Avisos (Web Push): `bash ~/System/Orbitus/App/instalar_push.sh` instala o pywebpush, cria as chaves em ~/.orbitus e reinicia. No iPhone, abrir pelo ícone da Tela de Início e tocar em "Ativar avisos" embaixo da lista do dia. Avisa água e tarefas com ⏰ na hora (até 10 min de atraso), com o Mac ligado.
+- (31/10, revisão) Água saiu da lista do dia: virou um contador único embaixo do "Hoje" (barra, ritmo esperado, + copo / −). O aviso de água só sai se você estiver atrás do ritmo naquele horário. O Concierge comenta a hidratação nos rituais e, fora deles, só se estiver 2+ copos atrás; quando você diz "bebi meio litro", ele soma ([[agua: N]]).
+- Itens feitos somem da lista do dia (com Desfazer); "✓ N feitos · mostrar" traz de volta.
+
+## Agenda proativa (31/10)
+- Aba Agenda (#agenda), módulo App/agenda_pro.py, GET /api/agenda?dias=45. Somente leitura.
+- Junta: compromissos (ICS), tarefas com data, viagens (voos/estadias), proventos previstos e agenda do Wealth, feriados (BR, SP; DE-BW e CH-Berna nos dias da viagem) e datas do comércio (Black Friday, Mães, Pais…).
+- Clima: Open-Meteo (grátis, sem chave), 16 dias, no local onde você estará (roteiros das viagens; senão São Paulo). Além de 16 dias, usa a média do roteiro. Cache de 3 h.
+- Levar: regras por palavra (festa → presente; voo → documento e cartão de embarque; academia → roupa de treino; reunião → notebook…) + clima (chuva → guarda-chuva; frio → casaco) + a lista "levar" da parada da viagem.
+- Radar: presente que falta, chuva em dia de saída, dia cheio, horários colados, feriado que fecha banco/B3, proventos dos próximos 10 dias, Black Friday, Natal e Ano-Novo (onde você estará).
+- O Concierge recebe o radar e os próximos 10 dias quando a pergunta é de agenda/viagem e nos rituais.
+
+## Conversa com o CIO (31/10)
+- Na Mesa (#mesa): botão "Falar com o CIO" e o painel de conversa. Módulo App/cio.py, POST /api/cio (streaming), /api/cio/nova, /api/cio/1on1.
+- O CIO lê: SKILLS/Chief Investment Officer (CIO).md, IPS, Constraints, última Mesa (contexto + final da ata), último 1:1, Decision Journal recente, pendências da Mesa e a foto da carteira. O bloco de documentos vai em cache na API (perguntas seguidas em até 5 min saem bem mais baratas). Gasto soma no mesmo teto do Concierge.
+- Escritas: a conversa fica em Orbitus/01_Federacao/Conversas com o CIO/AAAA-MM-DD.md; "Levar ao 1:1" acrescenta um despacho D-AIW-NNN no _orbitus/INBOX.md do Wealth (Protocolo de Federação), que o 1:1 de domingo processa. Nada vira decisão formal sem a Mesa e o Decision Journal; nunca executa ordens.

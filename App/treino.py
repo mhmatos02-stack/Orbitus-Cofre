@@ -152,6 +152,34 @@ def _numero(v):
         raise ValueError('número inválido: %r' % v)
 
 
+def _soma_saude(v, campo=''):
+    """Valor vindo direto de "Buscar Amostras de Saúde" no Atalho, sem "Calcular Estatísticas":
+    pode chegar como número, "6420", "6.420 passos", "4,6 km", "4600 m", lista ou várias linhas (uma por amostra).
+    Várias amostras são somadas; distância em metros vira km."""
+    if v is None or v == '':
+        return None
+    if isinstance(v, (list, tuple)):
+        vals = [x for x in (_soma_saude(i, campo) for i in v) if x is not None]
+        return sum(vals) if vals else None
+    if isinstance(v, (int, float)):
+        return float(v)
+    linhas = [l.strip() for l in re.split(r'[\n;]+', str(v)) if l.strip()]
+    total, achou = 0.0, False
+    for l in linhas:
+        m = re.search(r'-?\d[\d.,]*', l)
+        if not m:
+            continue
+        n = _numero(m.group(0))
+        resto = l[m.end():].strip().lower()
+        if campo == 'distancia_km' and re.match(r'^m(etros?)?\b', resto):
+            n = n / 1000.0
+        elif campo == 'energia_ativa' and resto.startswith('cal') and n > 20000:
+            n = n / 1000.0
+        total += n
+        achou = True
+    return total if achou else None
+
+
 def registrar_saude(vault, corpo):
     """Dados do Apple Saúde enviados por um Atalho do iPhone: passos (e, se vier, peso).
     Grava no registro do dia sem apagar o resto; "updated" novo faz a aba Treino adotar o valor."""
@@ -160,10 +188,13 @@ def registrar_saude(vault, corpo):
         raise ValueError('data inválida')
     if k > date.today().isoformat():
         raise ValueError('data no futuro')
-    passos = _numero(corpo.get('passos'))
-    peso = _numero(corpo.get('peso'))
-    if passos is None and peso is None:
-        raise ValueError('mande "passos" (e, se quiser, "peso")')
+    passos = _soma_saude(corpo.get('passos'), 'passos')
+    peso = _numero(corpo.get('peso')) if not isinstance(corpo.get('peso'), (list, tuple)) else _soma_saude(corpo.get('peso')[-1:])
+    kcal = _soma_saude(corpo.get('energia_ativa') or corpo.get('kcal_ativas'), 'energia_ativa')
+    exerc = _soma_saude(corpo.get('minutos_exercicio') or corpo.get('exercicio_min'), 'minutos_exercicio')
+    dist = _soma_saude(corpo.get('distancia_km'), 'distancia_km')
+    if passos is None and peso is None and kcal is None and exerc is None and dist is None:
+        raise ValueError('mande "passos" (e, se quiser, "energia_ativa", "minutos_exercicio", "distancia_km", "peso")')
     if passos is not None and not (0 <= passos <= 150000):
         raise ValueError('passos fora do esperado')
     if peso is not None and not (30 <= peso <= 250):
@@ -174,14 +205,26 @@ def registrar_saude(vault, corpo):
         if not isinstance(d, dict):
             d = {'date': k, 'weight': None, 'waist': None, 'steps': None, 'sleep': None, 'water': 0, 'meals': {},
                  'extras': [], 'habits': {}, 'workout': {'letter': None, 'sets': {}, 'done': False, 'warm': False, 'remo': False}}
+        # o total do dia só cresce: uma leitura parcial ou vazia (iPhone bloqueado) não derruba a anterior
+        mx = lambda novo, velho: novo if velho is None or novo >= velho else velho
         if passos is not None:
-            d['steps'] = int(round(passos))
+            d['steps'] = mx(int(round(passos)), d.get('steps') if d.get('saude_ios') else None)
         if peso is not None:
             d['weight'] = round(peso, 1)
+        h = d.setdefault('health', {})
+        if kcal is not None and 0 <= kcal <= 8000:
+            h['kcal_ativas'] = mx(int(round(kcal)), h.get('kcal_ativas'))
+        if exerc is not None and 0 <= exerc <= 1000:
+            h['exercicio_min'] = mx(int(round(exerc)), h.get('exercicio_min'))
+        if dist is not None and 0 <= dist <= 200:
+            h['distancia_km'] = mx(round(dist, 1), h.get('distancia_km'))
+        if not h:
+            d.pop('health', None)
         d['saude_ios'] = datetime.now().isoformat(timespec='minutes')
         d['updated'] = int(datetime.now().timestamp() * 1000)
         _gravar(p, d)
-    return {'ok': True, 'data': k, 'passos': d.get('steps'), 'peso': d.get('weight') if peso is not None else None}
+    return {'ok': True, 'data': k, 'passos': d.get('steps'), 'peso': d.get('weight') if peso is not None else None,
+            'saude': d.get('health') or {}, 'falar': 'Orbitus: %s passos registrados.' % (d.get('steps') if d.get('steps') is not None else '—')}
 
 
 def salvar_despensa(vault, corpo):

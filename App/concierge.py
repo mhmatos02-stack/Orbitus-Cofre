@@ -15,6 +15,8 @@ USO = os.path.expanduser('~/.orbitus/concierge_uso.json')
 TETO_PADRAO = 15.0
 TRAVA = threading.Lock()
 CONVERSA = {'t': 0, 'msgs': []}
+AGUA_FN = None
+PESO_FN = None   # o servidor liga: grava o peso do dia no Treino   # o servidor liga: soma copos no contador de água do Treino quando ele diz que bebeu
 
 SISTEMA = """Você é o Concierge do Orbitus, o painel pessoal do Marcio (São Paulo, 42 anos, consultor independente).
 Você enxerga, no CONTEXTO abaixo, o que os sistemas dele já registraram: tarefas, agenda, viagens, treino e alimentação (com o parecer da Mesa da Saúde: personal e nutricionista), o AI Wealth Office (carteira, decisões da Mesa de investimentos, saúde das automações) e os e-mails que pedem resposta.
@@ -25,8 +27,11 @@ Como responder:
 - Use só o que está no contexto. Se não estiver lá, diga que não sabe e onde ele pode ver. Não invente valores, datas nem pareceres.
 - Você não executa ordens de compra ou venda, não manda e-mail e não altera nada. Para investimentos, relate o que a Mesa do Wealth decidiu ou recomenda; a decisão é dele.
 - Saúde: sem diagnóstico nem remédio. Dor, tontura ou lesão: diga para parar e procurar um profissional.
-- Se ele pedir para anotar ou criar tarefas, confirme numa frase e termine a resposta com uma linha por tarefa, exatamente assim: [[tarefa: texto da tarefa]] (com " 📅 AAAA-MM-DD" no fim do texto quando houver data).
-- Seja honesto, inclusive quando o número não for bom."""
+- Se ele pedir para anotar ou criar tarefas, confirme numa frase e termine a resposta com uma linha por tarefa, exatamente assim: [[tarefa: texto da tarefa]] (com " 📅 AAAA-MM-DD" no fim do texto quando houver data e " ⏰ HH:MM" quando ele disser um horário).
+- Seja honesto, inclusive quando o número não for bom.
+- Hidratação (agua_hoje no contexto: bebidos, meta, esperado até agora, atrás): nos rituais, diga em uma frase como está a água. Nas outras respostas, só se ele estiver 2 copos ou mais atrás do ritmo, feche com uma frase curta e leve, variando: incentive a beber ou pergunte se bebeu água recentemente. Não repita isso se já falou de água nas últimas trocas, e nunca transforme em sermão.
+- Se ele disser que bebeu água, confirme e termine com uma linha exatamente assim: [[agua: N]] (N = copos de 250 ml; meio litro = 2, uma garrafa de 1 litro = 4).
+- Se ele disser quanto pesou hoje, confirme o número, compare com o último peso do contexto em uma frase (sem drama; o oficial é o de domingo) e termine com uma linha exatamente assim: [[peso: 80.9]]."""
 
 
 def _chave():
@@ -64,7 +69,11 @@ def estado():
             'teto': u.get('teto', TETO_PADRAO), 'perguntas': u.get('perguntas', 0)}
 
 
-def _post(corpo, chave):
+def _sem_ajustes(corpo):
+    return {k: v for k, v in corpo.items() if k not in ('thinking', 'output_config')}
+
+
+def _post(corpo, chave, _tentou=False):
     dados = json.dumps(corpo).encode('utf-8')
     req = urllib.request.Request('https://api.anthropic.com/v1/messages', data=dados, method='POST', headers={
         'content-type': 'application/json', 'x-api-key': chave, 'anthropic-version': '2023-06-01'})
@@ -76,6 +85,8 @@ def _post(corpo, chave):
             msg = json.loads(e.read().decode('utf-8')).get('error', {}).get('message', '')
         except Exception:
             msg = ''
+        if e.code == 400 and not _tentou and ('thinking' in corpo or 'output_config' in corpo):
+            return _post(_sem_ajustes(corpo), chave, True)
         raise RuntimeError('a API respondeu %s%s' % (e.code, ': ' + msg if msg else ''))
     except urllib.error.URLError:
         # mesmo plano B da agenda: o curl do sistema usa os certificados do macOS
@@ -90,24 +101,24 @@ def _post(corpo, chave):
 
 
 RITUAIS = {
-    'bom dia': ('Bom dia', 1100, """BRIEFING DA MANHÃ. Comece com "Bom dia, Marcio." e diga, nesta ordem e em frases curtas para ouvir:
+    'bom dia': ('Bom dia', 4000, """BRIEFING DA MANHÃ. Comece com "Bom dia, Marcio." e diga, nesta ordem e em frases curtas para ouvir:
 1) o que está na agenda de hoje (horários);
-2) as tarefas de hoje e as atrasadas, as mais importantes primeiro (no máximo 5, pelo nome curto);
+2) a lista do dia em ordem de horário (lista_do_dia: rotina, tarefas com hora e compromissos), dizendo o horário de cada item; depois as atrasadas, se houver (no máximo 7 itens no total);
 3) quantos e-mails pedem resposta e de quem são os mais importantes;
 4) o treino de hoje (nome da sessão, onde, e o que a Mesa da Saúde recomendou para hoje) e a meta de proteína;
 5) se houver, o que o Wealth precisa de você hoje e a contagem das viagens;
 Feche com uma frase de foco para o dia. No máximo 10 frases."""),
-    'boa tarde': ('Boa tarde', 900, """BALANÇO DA TARDE. Comece com "Boa tarde, Marcio." e diga:
-1) o que já foi feito hoje (tarefas concluídas hoje, treino registrado ou não, refeições e água registradas);
+    'boa tarde': ('Boa tarde', 4000, """BALANÇO DA TARDE. Comece com "Boa tarde, Marcio." e diga:
+1) o que já foi feito hoje (itens marcados na lista_do_dia, tarefas concluídas, treino registrado ou não, refeições e água);
 2) o que ainda falta hoje, em ordem de prioridade;
 3) atualizações novas: e-mails que pedem resposta, decisões ou alertas do Wealth, viagens.
 No máximo 8 frases."""),
-    'boa noite': ('Boa noite', 1000, """FECHAMENTO DO DIA. Comece com "Boa noite, Marcio." e diga:
+    'boa noite': ('Boa noite', 4000, """FECHAMENTO DO DIA. Comece com "Boa noite, Marcio." e diga:
 1) o resumo do dia: o que foi concluído, treino, alimentação (proteína e calorias registradas contra a meta);
 2) o que ainda dá para fechar hoje (no máximo 3 itens rápidos, inclusive registrar o que falta no treino);
 3) o que fica para amanhã: tarefas, compromissos da agenda e o treino de amanhã.
 Feche com uma frase curta e gentil. No máximo 9 frases."""),
-    'boa sexta': ('Boa sexta', 1100, """FECHAMENTO DA SEMANA (sexta-feira). Comece com "Boa sexta, Marcio." e diga:
+    'boa sexta': ('Boa sexta', 4000, """FECHAMENTO DA SEMANA (sexta-feira). Comece com "Boa sexta, Marcio." e diga:
 1) o balanço da semana: tarefas concluídas, treinos feitos contra o alvo, cintura e peso se houver, decisões do Wealth;
 2) o que fica para o fim de semana (incluindo treino de sábado e a corrida e ioga de domingo, pesagem e cintura no domingo, local de treino);
 3) o que já está marcado para a próxima semana (agenda, tarefas com prazo, ações da Mesa, viagens).
@@ -182,14 +193,16 @@ def preparar(pergunta, contexto, secoes='?'):
         json.dumps(contexto, ensure_ascii=False, separators=(',', ':'), default=str))
     rit = _ritual(pergunta)
     conteudo = pergunta if not rit else pergunta + '\n\n[' + rit[2] + ']'
-    corpo = {'model': MODELO, 'max_tokens': rit[1] if rit else 700, 'system': sistema,
-             'messages': hist + [{'role': 'user', 'content': conteudo}]}
+    corpo = {'model': MODELO, 'max_tokens': rit[1] if rit else 3000, 'system': sistema,
+             'messages': hist + [{'role': 'user', 'content': conteudo}],
+             # Concierge é leitura de contexto, não problema difícil: sem raciocínio prévio a voz começa antes e o texto não trava no meio
+             'thinking': {'type': 'between_tools'}, 'output_config': {'effort': 'low'}}
     return {'pergunta': pergunta, 'chave': chave, 'corpo': corpo, 'secoes': None if secoes == '?' else secoes}
 
 
 def _visivel(texto):
     """Texto que pode ir para a tela/voz: sem as linhas [[tarefa: ...]] e sem um marcador ainda incompleto no fim."""
-    t = re.sub(r'\s*\[\[tarefa:.*?\]\]', '', texto, flags=re.S)
+    t = re.sub(r'\s*\[\[(?:tarefa|agua|peso):.*?\]\]', '', texto, flags=re.S)
     i = t.find('[[')
     if i >= 0:
         t = t[:i]
@@ -211,6 +224,22 @@ def _finalizar(prep, texto, us, capturar):
             except Exception as e:
                 texto += ' (Não consegui criar a tarefa "%s": %s.)' % (t, e)
     texto = re.sub(r'\s*\[\[tarefa:.+?\]\]', '', texto, flags=re.S).strip()
+    copos = sum(int(n) for n in re.findall(r'\[\[agua:\s*(-?\d{1,2})\s*\]\]', texto))
+    texto = re.sub(r'\s*\[\[agua:.*?\]\]', '', texto, flags=re.S).strip()
+    peso = None
+    mp = re.search(r'\[\[peso:\s*(\d{2,3}(?:[.,]\d{1,2})?)\s*\]\]', texto)
+    texto = re.sub(r'\s*\[\[peso:.*?\]\]', '', texto, flags=re.S).strip()
+    if mp and PESO_FN:
+        try:
+            peso = PESO_FN(float(mp.group(1).replace(',', '.')))
+        except Exception as e:
+            texto += ' (Não consegui registrar o peso: %s.)' % e
+    agua = None
+    if copos and AGUA_FN:
+        try:
+            agua = AGUA_FN(copos)
+        except Exception as e:
+            texto += ' (Não consegui somar a água: %s.)' % e
     with TRAVA:
         u = _uso()
         u['usd'] = u.get('usd', 0) + custo
@@ -219,7 +248,7 @@ def _finalizar(prep, texto, us, capturar):
         CONVERSA['msgs'] = (CONVERSA['msgs'] + [{'role': 'user', 'content': prep['pergunta']}, {'role': 'assistant', 'content': texto or '...'}])[-12:]
         CONVERSA['t'] = time.time()
         CONVERSA['secoes'] = sorted(prep['secoes']) if prep.get('secoes') is not None else None
-    return {'resposta': texto, 'tarefa': '; '.join(criadas) or None, 'custo_usd': round(custo, 4), 'mes_usd': round(u['usd'], 4),
+    return {'resposta': texto, 'tarefa': '; '.join(criadas) or None, 'agua': agua, 'peso': peso, 'custo_usd': round(custo, 4), 'mes_usd': round(u['usd'], 4),
             'teto': u.get('teto', TETO_PADRAO), 'tokens_entrada': us.get('input_tokens', 0),
             'recorte': prep.get('secoes') if prep.get('secoes') is None else sorted(prep['secoes'])}
 
@@ -243,17 +272,21 @@ def _eventos_sse(linhas):
                 continue
 
 
-def _stream(corpo, chave):
+def _stream(corpo, chave, _tentou=False, espera=60):
     corpo = dict(corpo, stream=True)
     dados = json.dumps(corpo).encode('utf-8')
     hdr = {'content-type': 'application/json', 'x-api-key': chave, 'anthropic-version': '2023-06-01', 'accept': 'text/event-stream'}
     try:
-        r = urllib.request.urlopen(urllib.request.Request('https://api.anthropic.com/v1/messages', data=dados, method='POST', headers=hdr), timeout=60)
+        r = urllib.request.urlopen(urllib.request.Request('https://api.anthropic.com/v1/messages', data=dados, method='POST', headers=hdr), timeout=espera)
     except urllib.error.HTTPError as e:
         try:
             msg = json.loads(e.read().decode('utf-8')).get('error', {}).get('message', '')
         except Exception:
             msg = ''
+        if e.code == 400 and not _tentou and ('thinking' in corpo or 'output_config' in corpo):
+            print('concierge: API recusou thinking/effort (%s); seguindo sem' % msg[:120])
+            yield from _stream(_sem_ajustes(corpo), chave, True, espera)
+            return
         raise RuntimeError('a API respondeu %s%s' % (e.code, ': ' + msg if msg else ''))
     except urllib.error.URLError:
         r = None
@@ -263,7 +296,7 @@ def _stream(corpo, chave):
                 yield ev
         return
     # plano B: curl do sistema (certificados do macOS), também em streaming
-    p = subprocess.Popen(['/usr/bin/curl', '-sS', '-N', '--max-time', '90', 'https://api.anthropic.com/v1/messages',
+    p = subprocess.Popen(['/usr/bin/curl', '-sS', '-N', '--max-time', str(max(90, espera * 3)), 'https://api.anthropic.com/v1/messages',
                           '-H', 'content-type: application/json', '-H', 'x-api-key: ' + chave,
                           '-H', 'anthropic-version: 2023-06-01', '--data-binary', '@-'],
                          stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -298,10 +331,18 @@ def perguntar_fluxo(prep, capturar=None):
                 enviado = vis
         elif tp == 'message_delta':
             us.update(ev.get('usage') or {})
+            if (ev.get('delta') or {}).get('stop_reason'):
+                us['_parou'] = ev['delta']['stop_reason']
         elif tp == 'error':
             raise RuntimeError('a API respondeu: ' + (ev.get('error') or {}).get('message', 'erro'))
+    parou = us.pop('_parou', '')
+    if parou == 'max_tokens':
+        texto = texto.rstrip() + '… (a resposta passou do limite e foi cortada; peça para continuar)'
+        yield {'t': 'delta', 'x': '… (a resposta passou do limite e foi cortada; peça para continuar)'}
     fim = _finalizar(prep, texto.strip(), us, capturar)
     fim['t'] = 'fim'
+    fim['parou'] = parou
+    fim['tokens_saida'] = us.get('output_tokens', 0)
     yield fim
 
 
@@ -407,7 +448,7 @@ def para_fala(texto):
     """Ajusta o texto só para a voz (a tela continua igual): tira markdown, emojis e marcadores,
     acerta o nome e as siglas que o TTS lê errado, e fala datas e unidades por extenso."""
     t = str(texto or '')
-    t = re.sub(r'\[\[tarefa:.*?\]\]', '', t, flags=re.S)
+    t = re.sub(r'\[\[(?:tarefa|agua|peso):.*?\]\]', '', t, flags=re.S)
     t = re.sub(r'https?://\S+', 'o link', t)
     t = re.sub(r'(?m)^\s*(?:[-*•]|\d+[.)])\s+', '', t)          # marcadores de lista
     t = re.sub(r'[*_#`>|~]+', '', t)                              # markdown

@@ -224,7 +224,7 @@
  "documentos": [
   {
    "nome": "Passaporte válido",
-   "ok": false
+   "ok": true
   },
   {
    "nome": "Seguro-viagem com cobertura Schengen",
@@ -244,7 +244,7 @@
   },
   {
    "nome": "CNH física",
-   "ok": false
+   "ok": true
   }
  ],
  "conferir": [

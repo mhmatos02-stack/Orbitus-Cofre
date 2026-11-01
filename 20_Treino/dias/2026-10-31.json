@@ -1,0 +1,209 @@
+{
+ "date": "2026-10-31",
+ "weight": null,
+ "waist": 87.5,
+ "steps": 5000,
+ "sleep": null,
+ "water": 10,
+ "meals": {
+  "cafe": {
+   "c": 1,
+   "items": [
+    {
+     "f": "ovo",
+     "q": 3
+    },
+    {
+     "n": "Queijo mussarela",
+     "k": 60,
+     "p": 4
+    },
+    {
+     "f": "leite",
+     "q": 400
+    }
+   ],
+   "txt": "3 ovos mexidos com mussarela, 10g de manteiga e 40 ml de café, 2 doces de doce de leite - 10g cada"
+  },
+  "almoco": {
+   "c": 1,
+   "items": [
+    {
+     "f": "arroz",
+     "q": 25
+    },
+    {
+     "f": "carne",
+     "q": 150
+    }
+   ],
+   "txt": "1 colher de arroz, 1 colher de nhoque, 1 linguiça, 150g de picanha"
+  },
+  "jantar": {
+   "c": 1,
+   "items": [
+    {
+     "f": "carne",
+     "q": 250
+    },
+    {
+     "f": "legumes",
+     "q": 50
+    },
+    {
+     "f": "legumes",
+     "q": 100
+    }
+   ],
+   "txt": "250g de carne wagyu, 200g de palmito com espinafre e parmesão, 100g de abóbora cabotcha, merengue com sorvete de nata e frutas vermelhas"
+  }
+ },
+ "extras": [],
+ "habits": {
+  "jantar16": true,
+  "creatina": true
+ },
+ "workout": {
+  "letter": null,
+  "sets": {
+   "g_desenv": [
+    {
+     "kg": 18,
+     "reps": 8,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 18
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 18
+    },
+    {
+     "done": true,
+     "reps": 5,
+     "kg": 18
+    }
+   ],
+   "g_lat_cabo": [
+    {
+     "done": true,
+     "kg": 5,
+     "reps": 8
+    },
+    {
+     "done": true,
+     "kg": 5,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 5,
+     "reps": 8
+    }
+   ],
+   "g_facepull": [
+    {
+     "done": true,
+     "kg": 15,
+     "reps": 15
+    },
+    {
+     "done": true,
+     "kg": 17.5,
+     "reps": 12
+    },
+    {
+     "done": true,
+     "kg": 17.5,
+     "reps": 10
+    }
+   ],
+   "cruc_inv": [
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 6
+    },
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 6
+    },
+    {
+     "kg": 6,
+     "reps": 10,
+     "done": true
+    }
+   ],
+   "g_rosca_w": [
+    {
+     "done": true,
+     "kg": 15,
+     "reps": 12
+    },
+    {
+     "done": true,
+     "kg": 15,
+     "reps": 12
+    },
+    {
+     "done": true,
+     "kg": 20,
+     "reps": 8
+    }
+   ],
+   "g_triceps_corda": [
+    {
+     "done": true,
+     "kg": 17.5,
+     "reps": 15
+    },
+    {
+     "done": true,
+     "kg": 17.5,
+     "reps": 12
+    },
+    {
+     "done": true,
+     "kg": 17.5,
+     "reps": 12
+    }
+   ],
+   "martelo": [
+    {
+     "done": true,
+     "kg": 12,
+     "reps": 12
+    },
+    {
+     "kg": 10,
+     "reps": 10,
+     "done": true
+    }
+   ],
+   "g_paralela": [
+    {
+     "kg": null,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 12,
+     "done": true
+    }
+   ]
+  },
+  "done": true,
+  "warm": true,
+  "remo": false,
+  "yoga": true,
+  "rec": "ioga"
+ },
+ "updated": 1793490406152,
+ "mov": 5
+}

@@ -32,6 +32,13 @@ import wealth
 import viagem
 import treino
 import concierge
+import rotina
+import tarefas_api
+import push
+import agenda_pro
+import cio
+concierge.AGUA_FN = lambda n: rotina.agua_somar(VAULT, date.today().isoformat(), n)
+concierge.PESO_FN = lambda kg: treino.registrar_saude(VAULT, {'peso': kg})
 
 TASK_RE = re.compile(r'^(\s*[-*] \[)([ xX])(\] )(.*)$')
 DUE_RE = re.compile(r'📅\s*(\d{4}-\d{2}-\d{2})')
@@ -60,6 +67,7 @@ def ler_json(p, default):
 def limpar_titulo(txt):
     t = DUE_RE.sub('', txt)
     t = DONE_RE.sub('', t)
+    t = rotina.HORA_TXT.sub('', t)
     for e in list(PRIO) + ['⏳', '🛫', '➕', '🔁']:
         t = re.sub(re.escape(e) + r'\s*(\d{4}-\d{2}-\d{2})?', '', t)
     t = re.sub(r'(^|\s)#[\w\-/À-ÿ]+', ' ', t)
@@ -90,20 +98,125 @@ def tarefas(hoje):
                 due = DUE_RE.search(corpo)
                 due = due.group(1) if due else ''
                 prio = min([PRIO[e] for e in PRIO if e in corpo] or [3])
-                low = corpo.lower()
-                tag = 'Finanças' if any(t in low for t in FIN_TAGS) else 'Pessoal'
-                titulo, fonte = limpar_titulo(corpo)
+                info = tarefas_api.ler_linha(linha) or {}
+                tag = info.get('area') or 'Pessoal'
+                titulo, fonte = (info['titulo'], info['fonte']) if info.get('titulo') else limpar_titulo(corpo)
                 if due and due <= hoje.isoformat() or prio == 0:
                     col = 'hoje'
                 elif due and due <= (hoje + timedelta(days=7)).isoformat():
                     col = 'semana'
                 else:
                     col = 'depois'
-                out.append({'arquivo': rel, 'linha': i, 'texto': linha, 'titulo': titulo, 'fonte': fonte,
+                out.append({'arquivo': rel, 'linha': i, 'texto': linha, 'titulo': titulo, 'fonte': fonte, 'hora': rotina.hora_da_tarefa(corpo),
+                            'status': info.get('status', ''), 'repete': info.get('repete', ''), 'url': info.get('url', ''), 'criada': info.get('criada', ''),
                             'tag': tag, 'due': due, 'prio': prio, 'feito': feito, 'col': col,
                             'atrasada': bool(due and due < hoje.isoformat() and not feito)})
     out.sort(key=lambda t: (t['feito'], t['prio'], t['due'] or '9999'))
     return out
+
+
+def tarefas_do_dia(d_iso):
+    """Tarefas com data nesse dia (feitas ou não); no dia de hoje, também as atrasadas ainda abertas."""
+    hoje = date.today().isoformat()
+    out = []
+    for raiz, _, arqs in os.walk(os.path.join(VAULT, '10_Tarefas')):
+        for a in sorted(arqs):
+            if not a.endswith('.md'):
+                continue
+            p = os.path.join(raiz, a)
+            for i, linha in enumerate((ler(p) or '').splitlines()):
+                m = TASK_RE.match(linha)
+                if not m:
+                    continue
+                corpo, feito = m.group(4), m.group(2).lower() == 'x'
+                due = DUE_RE.search(corpo)
+                due = due.group(1) if due else ''
+                feita = DONE_RE.search(corpo)
+                atrasada = bool(not feito and due and due < d_iso and d_iso == hoje)
+                if not (due == d_iso or atrasada or (feito and feita and feita.group(1) == d_iso and due and due < d_iso)):
+                    continue
+                out.append({'arquivo': os.path.relpath(p, VAULT), 'linha': i, 'linha_txt': linha, 'hora': rotina.hora_da_tarefa(corpo),
+                            'texto': (tarefas_api.ler_linha(linha) or {}).get('titulo') or limpar_titulo(corpo)[0], 'feito': feito, 'atrasada': atrasada, 'due': due})
+    return out
+
+
+def _sugestoes():
+    try:
+        ms = treino.mesa(VAULT)
+        ms = {'ultimo_parecer': (ms.get('pareceres') or [None])[0]}
+    except Exception:
+        ms = {}
+    return tarefas_api.sugestoes(VAULT, dados(), ms)
+
+
+def _cio_fluxo(prep):
+    """Streaming da resposta do CIO, com o gasto somado ao mesmo teto mensal do Concierge.
+    Análises longas: espera de até 5 min (antes o plano B cortava em 90 s e a resposta saía vazia)."""
+    texto, us, parada = '', {}, ''
+    for ev in concierge._stream(prep['corpo'], prep['chave'], espera=100):
+        tp = ev.get('type')
+        if tp == 'message_start':
+            us.update((ev.get('message') or {}).get('usage') or {})
+        elif tp == 'content_block_delta' and (ev.get('delta') or {}).get('type') == 'text_delta':
+            x = ev['delta'].get('text', '')
+            texto += x
+            yield {'t': 'delta', 'x': x}
+        elif tp == 'message_delta':
+            us.update(ev.get('usage') or {})
+            parada = (ev.get('delta') or {}).get('stop_reason') or parada
+        elif tp == 'error':
+            raise RuntimeError('a API respondeu: ' + (ev.get('error') or {}).get('message', 'erro'))
+    if parada == 'max_tokens' and texto.strip():
+        nota = '\n\n_(A resposta foi cortada no limite de tamanho. Peça "continue" para o resto.)_'
+        texto += nota
+        yield {'t': 'delta', 'x': nota}
+    if not texto.strip():
+        raise RuntimeError('o CIO não devolveu texto (%s). Tente de novo; se repetir, peça em partes menores.' % (parada or 'conexão encerrada antes da resposta'))
+    cio.finalizar(prep, texto.strip(), VAULT)
+    pi, po = concierge.PRECO.get(concierge.MODELO, (2.0, 10.0))
+    custo = (us.get('input_tokens', 0) * pi + us.get('cache_creation_input_tokens', 0) * pi * 1.25 +
+             us.get('cache_read_input_tokens', 0) * pi * 0.1 + us.get('output_tokens', 0) * po) / 1e6
+    with concierge.TRAVA:
+        u = concierge._uso()
+        u['usd'] = u.get('usd', 0) + custo
+        u['perguntas'] = u.get('perguntas', 0) + 1
+        concierge._gravar_uso(u)
+    yield {'t': 'fim', 'resposta': texto.strip(), 'custo_usd': round(custo, 4), 'mes_usd': round(u['usd'], 4), 'teto': u.get('teto', concierge.TETO_PADRAO),
+           'cache': us.get('cache_read_input_tokens', 0)}
+
+
+def agenda_proativa(dias=45):
+    d = dados()
+    try:
+        vs = [viagem.estado(VAULT, v['id']) for v in viagem.listar(VAULT)]
+    except Exception:
+        vs = []
+    try:
+        w = wealth.estado(VAULT)
+    except Exception:
+        w = {}
+    lt = {}
+    for l in (ler_json(os.path.join(VAULT, '20_Treino', 'locais.json'), {}) or {}).get('locais') or []:
+        try:
+            a, b = date.fromisoformat(l['de']), date.fromisoformat(l.get('ate') or l['de'])
+        except (KeyError, ValueError):
+            continue
+        while a <= b:
+            lt[a.isoformat()] = l.get('local', '')
+            a += timedelta(days=1)
+    return agenda_pro.montar(d['eventos'], d['tarefas'], vs, w, lt, dias)
+
+
+def dia_ordenado(d_iso):
+    ev = (agenda(date.today())[0] or {}).get(d_iso, [])
+    r = rotina.dia(VAULT, d_iso, tarefas_do_dia(d_iso), ev)
+    if d_iso == date.today().isoformat():
+        tr = _treino_resumo() or {}
+        if tr.get('data') == d_iso and tr.get('sessao_nome'):
+            for x in r['itens']:
+                if x.get('liga') == 'treino':
+                    x['detalhe'] = tr['sessao_nome']
+    return r
 
 
 def alternar(arquivo, linha, texto):
@@ -115,14 +228,26 @@ def alternar(arquivo, linha, texto):
         if linha >= len(linhas) or linhas[linha] != texto:
             raise ValueError('a tarefa mudou no Obsidian; recarregue o painel')
         m = TASK_RE.match(linhas[linha])
+        proxima = None
         if m.group(2) == ' ':
             nova = m.group(1) + 'x' + m.group(3) + m.group(4).rstrip() + ' ✅ ' + date.today().isoformat()
+            linhas[linha] = nova
+            proxima = tarefas_api.concluir_com_repeticao(linhas, linha, date.today().isoformat())
+            if proxima:
+                linha += 1          # a próxima ocorrência entrou logo acima
         else:
             nova = m.group(1) + ' ' + m.group(3) + DONE_RE.sub('', m.group(4)).rstrip()
-        linhas[linha] = nova
+            linhas[linha] = nova
+            # desfazendo uma repetição: tira a ocorrência que tinha sido criada logo acima, se ainda estiver intacta
+            f0 = tarefas_api.ler_linha(nova) or {}
+            if f0.get('repete') and linha > 0:
+                ac = tarefas_api.ler_linha(linhas[linha - 1]) or {}
+                if ac and not ac['feito'] and ac['titulo'] == f0['titulo'] and ac['repete'] == f0['repete'] and ac['criada'] == date.today().isoformat():
+                    del linhas[linha - 1]
+                    linha -= 1
         with open(p, 'w', encoding='utf-8') as f:
             f.write('\n'.join(linhas))
-        return nova
+        return nova, linha, proxima
 
 
 def capturar(texto):
@@ -400,6 +525,17 @@ def _contexto(secoes=None):
     c = {'hoje': d['hoje'], 'marcos': d.get('marcos'),
          'tarefas_abertas': [{k: t.get(k) for k in ('titulo', 'due', 'tag', 'nota', 'fonte')} for t in d['tarefas'] if not t.get('feito')],
          'agenda': {k: v for k, v in sorted(d['eventos'].items()) if d['hoje'] <= k <= lim_ag}}
+    try:
+        ag = rotina.agua_estado(VAULT, d['hoje'])
+        c['agua_hoje'] = {k: ag[k] for k in ('bebidos', 'meta', 'esperado', 'atras', 'proximo')}
+    except Exception as e:
+        c['agua_hoje'] = {'erro': str(e)}
+    try:
+        dh = dia_ordenado(d['hoje'])
+        c['lista_do_dia'] = [{'hora': x.get('hora'), 'o_que': x.get('texto') + (' (' + x['detalhe'] + ')' if x.get('detalhe') else ''),
+                              'tipo': x['tipo'], 'feito': x.get('feito')} for x in dh['itens']]
+    except Exception as e:
+        c['lista_do_dia'] = {'erro': str(e)}
     if tudo or 'financas' in S:
         c['sistemas'] = [{k: f.get(k) for k in ('nome', 'saude', 'saude_txt', 'proxima', 'risco', 'esperando', 'esperando_lista', 'automacao')} for f in d['federacao']]
     else:
@@ -429,7 +565,7 @@ def _contexto(secoes=None):
             m = treino.mesa(VAULT)
             c['mesa_da_saude'] = {'ultimo_parecer': (m.get('pareceres') or [None])[0], 'perguntas': (m.get('perguntas') or [])[-5:]}
             t = treino.tudo(VAULT)
-            c['treino_ultimos_7_dias'] = {k: {'treino': (v.get('workout') or {}).get('done'), 'passos': v.get('steps'), 'remo_min': v.get('mov'),
+            c['treino_ultimos_7_dias'] = {k: {'treino': (v.get('workout') or {}).get('done'), 'passos': v.get('steps'), 'remo_min': v.get('mov'), 'app_saude': v.get('health'),
                                               'agua': v.get('water'), 'peso': v.get('weight'), 'cintura': v.get('waist'),
                                               'refeicoes': {r: (x.get('txt') if isinstance(x, dict) else x) for r, x in (v.get('meals') or {}).items()},
                                               'extras': [x.get('n') for x in v.get('extras') or []]}
@@ -440,6 +576,15 @@ def _contexto(secoes=None):
     else:
         tr = d.get('treino_resumo') or {}
         c['treino_hoje'] = {k: tr.get(k) for k in ('data', 'sessao_nome', 'treino_ok', 'treinos_semana', 'treinos_alvo') if k in tr}
+    if tudo or 'agenda' in S or 'viagem' in S:
+        try:
+            ap = agenda_proativa(16)
+            c['agenda_radar'] = [r['texto'] + (' ' + r['acao'] if r.get('acao') else '') for r in ap['radar']]
+            c['proximos_dias'] = [{'data': x['data'], 'local': x['local'], 'clima': ({k: x['clima'].get(k) for k in ('texto', 'min', 'max', 'chuva')} if x['clima'] else None),
+                                   'itens': [(i['hora'] + ' ' if i['hora'] else '') + i['titulo'] for i in x['itens']], 'levar': x['levar']}
+                                  for x in ap['dias'][:10] if x['itens'] or x['clima']]
+        except Exception as e:
+            c['agenda_radar'] = {'erro': str(e)}
     if tudo or 'viagem' in S:
         c['viagem_alertas'] = d.get('viagem_alertas')
         try:
@@ -619,6 +764,17 @@ class H(BaseHTTPRequestHandler):
             self.send_header('Content-Length', str(len(b)))
             self.end_headers()
             self.wfile.write(b)
+        elif self.path.split('?')[0] == '/sw.js':
+            b = (ler(os.path.join(STATIC, 'sw.js')) or '').encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/javascript; charset=utf-8')
+            self.send_header('Service-Worker-Allowed', '/')
+            self.send_header('Cache-Control', 'no-cache')
+            self.send_header('Content-Length', str(len(b)))
+            self.end_headers()
+            self.wfile.write(b)
+        elif self.path.split('?')[0] == '/api/push':
+            self._json(push.estado())
         elif self.path.split('?')[0] == '/treino.html':
             b = (ler(os.path.join(STATIC, 'treino.html')) or '').encode('utf-8')
             self.send_response(200)
@@ -627,6 +783,32 @@ class H(BaseHTTPRequestHandler):
             self.send_header('Content-Length', str(len(b)))
             self.end_headers()
             self.wfile.write(b)
+        elif self.path.split('?')[0] == '/api/tarefas/entender':
+            t = parse_qs(urlparse(self.path).query).get('t', [''])[0][:400]
+            self._json(tarefas_api.interpretar(t))
+        elif self.path.split('?')[0] == '/api/tarefas':
+            try:
+                h = tarefas_api.historico(VAULT)
+                h['sugestoes'] = _sugestoes()
+                for k in ('feitas', 'arquivo'):
+                    h[k] = [{c: t.get(c) for c in ('titulo', 'fonte', 'area', 'due', 'hora', 'feita_em', 'removida_em', 'arquivo', 'linha', 'texto', 'repete')} for t in h[k]]
+                self._json(h)
+            except Exception as e:
+                self._json({'erro': str(e)}, 500)
+        elif self.path.split('?')[0] == '/api/agenda':
+            try:
+                n = int(parse_qs(urlparse(self.path).query).get('dias', ['45'])[0])
+                self._json(agenda_proativa(max(7, min(90, n))))
+            except Exception as e:
+                self._json({'erro': str(e)}, 500)
+        elif self.path.split('?')[0] == '/api/dia':
+            d = parse_qs(urlparse(self.path).query).get('d', [date.today().isoformat()])[0]
+            if not re.match(r'^\d{4}-\d{2}-\d{2}$', d):
+                return self._json({'erro': 'data inválida'}, 400)
+            try:
+                self._json(dia_ordenado(d))
+            except Exception as e:
+                self._json({'erro': str(e)}, 500)
         elif self.path.split('?')[0] == '/api/concierge':
             self._json(concierge.estado())
         elif self.path.split('?')[0] == '/api/voz/amostra':
@@ -704,7 +886,8 @@ class H(BaseHTTPRequestHandler):
             n = int(self.headers.get('Content-Length') or 0)
             body = json.loads(self.rfile.read(min(n, 400000)) or b'{}')
             if self.path == '/api/alternar':
-                return self._json({'ok': True, 'texto': alternar(body['arquivo'], int(body['linha']), body['texto'])})
+                nova, n, prox = alternar(body['arquivo'], int(body['linha']), body['texto'])
+                return self._json({'ok': True, 'texto': nova, 'linha': n, 'proxima': prox})
             elif self.path == '/api/capturar':
                 capturar(body.get('texto', ''))
             elif self.path == '/api/treino/dia':
@@ -717,10 +900,106 @@ class H(BaseHTTPRequestHandler):
                     return self._json(concierge.perguntar(body.get('pergunta'), _contexto(sec), capturar, sec))
                 except RuntimeError as e:
                     return self._json({'erro': str(e)}, 502)
+            elif self.path == '/api/cio':
+                chave = concierge._chave()
+                if not chave:
+                    raise ValueError('chave da API não configurada')
+                u = concierge._uso()
+                if u['usd'] >= u.get('teto', concierge.TETO_PADRAO):
+                    raise ValueError('teto do mês atingido (US$ %.2f)' % u.get('teto', concierge.TETO_PADRAO))
+                try:
+                    w = wealth.estado(VAULT)
+                except Exception:
+                    w = {}
+                prep = cio.preparar(body.get('pergunta'), mesa.pasta_wealth(VAULT), w, concierge.MODELO, chave)
+                return self._fluxo(_cio_fluxo(prep))
+            elif self.path == '/api/cio/nova':
+                return self._json(cio.nova())
+            elif self.path == '/api/cio/1on1':
+                return self._json(cio.levar_ao_1on1(mesa.pasta_wealth(VAULT), body))
             elif self.path == '/api/concierge/fluxo':
                 sec = concierge.intencoes(body.get('pergunta'))
                 prep = concierge.preparar(body.get('pergunta'), _contexto(sec), sec)
                 return self._fluxo(concierge.perguntar_fluxo(prep, capturar))
+            elif self.path == '/api/tarefas/criar':
+                return self._json(tarefas_api.criar(VAULT, body))
+            elif self.path == '/api/tarefas/editar':
+                return self._json(tarefas_api.editar(VAULT, body))
+            elif self.path == '/api/tarefas/remover':
+                return self._json(tarefas_api.remover(VAULT, body))
+            elif self.path == '/api/tarefas/restaurar':
+                return self._json(tarefas_api.restaurar(VAULT, body))
+            elif self.path == '/api/tarefas/rapida':
+                # Siri, menu Compartilhar e o campo de captura: entende "sexta 10h", "amanhã", "todo dia", "urgente"
+                f = tarefas_api.interpretar(body.get('texto') or '')
+                u = str(body.get('url') or '').strip()
+                if u and not f['url'] and re.match(r'^https?://\S+$', u):
+                    f['url'] = u
+                if not f['titulo'] and f['url']:
+                    f['titulo'] = 'Ver ' + re.sub(r'^https?://(www\.)?', '', f['url']).split('/')[0]
+                if body.get('dia') and not f['due']:
+                    f['due'] = str(body['dia'])[:10]
+                for k in ('due', 'hora', 'area', 'prio', 'repete', 'status'):
+                    if body.get(k) not in (None, ''):
+                        f[k] = body[k]
+                r = tarefas_api.criar(VAULT, f)
+                fala = 'Anotado: ' + r['resumo'] + '.'
+                # aniversário, casamento…: cria a tarefa do presente e confere a agenda do dia
+                r['extras'] = []
+                abertas = [tarefas_api._palavras(t['titulo']) for t in tarefas_api._todas(VAULT) if not t['feito'] and not t['cancelada']]
+                for x in tarefas_api.tarefas_do_evento(f):
+                    if tarefas_api._parecida(x['titulo'], abertas):
+                        continue
+                    try:
+                        tarefas_api.criar(VAULT, x)
+                        r['extras'].append(tarefas_api.resumo(dict(x, hora='', repete='')))
+                    except Exception as e:
+                        print('evento: presente falhou', e, file=sys.stderr)
+                r['conflitos'] = []
+                if f.get('due'):
+                    try:
+                        ev = (agenda(date.today())[0] or {}).get(f['due'], [])
+                        r['conflitos'] = tarefas_api.conflitos(f['due'], f.get('hora'), ev, tarefas_do_dia(f['due']), f['titulo'])
+                    except Exception as e:
+                        print('evento: conflito falhou', e, file=sys.stderr)
+                if r['extras']:
+                    fala += ' Criei também: ' + '; '.join(r['extras']) + '.'
+                if r['conflitos']:
+                    fala += ' Atenção, nesse dia já tem: ' + '; '.join(c['hora'] + ' ' + c['texto'] for c in r['conflitos'][:3]) + '.'
+                r['due'] = f.get('due', '')
+                r['falar'] = fala
+                return self._json(r)
+            elif self.path == '/api/tarefas/sugestao':
+                return self._json(tarefas_api.responder_sugestao(VAULT, body, _sugestoes()))
+            elif self.path == '/api/diag':
+                linha = json.dumps({'em': datetime.now().isoformat(timespec='seconds'), 'ev': str(body.get('ev'))[:30], 'det': str(body.get('det'))[:80],
+                                    'ua': str(body.get('ua'))[:140], 'app': bool(body.get('sa'))}, ensure_ascii=False)
+                pd_ = os.path.join(VAULT, '00_Sistema', 'diagnostico.jsonl')
+                with LOCK:
+                    ls = ((ler(pd_) or '').splitlines() + [linha])[-300:]
+                    with open(pd_, 'w', encoding='utf-8') as f:
+                        f.write('\n'.join(ls) + '\n')
+                return self._json({'ok': True})
+            elif self.path == '/api/push/inscrever':
+                return self._json(push.inscrever(body))
+            elif self.path == '/api/push/teste':
+                try:
+                    return self._json(push.enviar('Orbitus', 'Avisos ligados. Água e tarefas com hora chegam aqui.', 'teste', '/'))
+                except RuntimeError as e:
+                    return self._json({'erro': str(e)}, 400)
+            elif self.path == '/api/agua':
+                return self._json(rotina.agua_somar(VAULT, str(body.get('dia') or date.today().isoformat())[:10], body.get('delta', 1)))
+            elif self.path == '/api/dia/marcar':
+                return self._json(rotina.marcar(VAULT, body))
+            elif self.path == '/api/dia/adicionar':
+                d = str(body.get('dia') or date.today().isoformat())[:10]
+                t = re.sub(r'\s+', ' ', str(body.get('texto') or '')).strip()
+                if not re.match(r'^\d{4}-\d{2}-\d{2}$', d) or not t:
+                    raise ValueError('escreva o que fazer')
+                m = re.match(r'^(\d{1,2})[:h](\d{2})\s+(.+)$', t)
+                hora, t = (('%02d:%s' % (int(m.group(1)), m.group(2))), m.group(3)) if m else (str(body.get('hora') or '')[:5], t)
+                capturar(t + ' 📅 ' + d + (' ⏰ ' + hora if re.match(r'^\d{2}:\d{2}$', hora or '') else ''))
+                return self._json({'ok': True})
             elif self.path == '/api/treino/saude':
                 return self._json(treino.registrar_saude(VAULT, body))
             elif self.path == '/api/voz':
@@ -754,4 +1033,5 @@ class H(BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     print('Orbitus em http://localhost:%d  (cofre: %s)' % (PORT, VAULT))
+    threading.Thread(target=push.ciclo, args=(dia_ordenado,), daemon=True).start()
     ThreadingHTTPServer(('127.0.0.1', PORT), H).serve_forever()

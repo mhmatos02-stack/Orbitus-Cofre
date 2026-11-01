@@ -18,3 +18,14 @@ Migrada do Lembretes em 2026-10-30 (o item "Presentes" foi separado em um por pe
 - [ ] Levar garrafa de água
 - [ ] Imprimir passagens de retorno e reserva do hotel 📅 2026-12-27
 - [ ] Creme dental Marvis 📅 2026-12-30
+- [ ] Levar Ecobag 📅 2026-11-20
+
+## Comprinhas
+
+- [ ] Comprar mochila Ailon Thule 40L na Alemanha 📅 2026-12-30
+- [ ] Ampolas de tratamento facial e séruns — marca Balea (da DM) ou Isana (da Rossmann) 📅 2026-12-30
+- [ ] Roupa Térmica Uniqlo — Linha Heattech - 15 a 30 EUROS 📅 2026-12-30
+- [ ] Chocolates — Ritter Sport 📅 2026-12-30
+- [ ] Pão de Mel - Lebkuchen — Caixas de lata decorada 📅 2026-12-30
+- [ ] Loja Zwilling — Facas, copos e acessórios 📅 2026-12-30
+- [ ] Quebra-Cabeça - Ravensburger 📅 2026-12-30

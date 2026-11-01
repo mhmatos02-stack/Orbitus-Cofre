@@ -11,13 +11,14 @@ Agentes que acompanham treino, alimentação e corpo do Marcio. Fonte de dados: 
 ## Formato do parecer (pareceres/AAAA-MM-DD.json)
 ```json
 {"data":"AAAA-MM-DD","gerado_em":"AAAA-MM-DDTHH:MM","agentes":{
-  "personal":{"resumo":"...","bem":["..."],"ajustes":["..."],"amanha":"...","alerta":""},
-  "nutri":{"resumo":"...","bem":["..."],"ajustes":["..."],"trocas":[{"de":"...","por":"...","porque":"..."}],"amanha":"...","alerta":""}},
+  "personal":{"resumo":"...","bem":["..."],"ajustes":["..."],"amanha":"...","alerta":"","tarefas":[{"titulo":"...","data":"AAAA-MM-DD","porque":"..."}]},
+  "nutri":{"resumo":"...","bem":["..."],"ajustes":["..."],"trocas":[{"de":"...","por":"...","porque":"..."}],"amanha":"...","alerta":"","tarefas":[{"titulo":"...","data":"AAAA-MM-DD","porque":"..."}]}},
  "respostas":[{"id":"<id da pergunta>","agente":"personal|nutri","texto":"..."}],
  "semana":"(só aos domingos) leitura da semana: cintura, peso, aderência, decisão da regra de ajuste"}
 ```
 
 ## Regras da mesa
+- `tarefas`: até 3 por agente, curtas e acionáveis (comprar, agendar, separar, preparar), com data quando fizer sentido. Não repetir o que já está na rotina diária (10_Tarefas/Rotina diária.md) nem o treino do dia. Elas aparecem no Orbitus em Tarefas › Sugeridas; o Marcio aceita ou dispensa.
 - Nada de diagnóstico, remédio ou suplemento além de creatina e whey, que já estão no plano. Dor, tontura ou lesão: parar e procurar um profissional.
 - Nunca recomendar menos de 1.650 kcal por dia nem jejum longo, diurético ou dieta de choque.
 - Ser direto e específico: números, alimentos e exercícios concretos. Elogiar o que foi feito de verdade, sem bajular.
