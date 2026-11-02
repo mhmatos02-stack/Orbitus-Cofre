@@ -1,0 +1,82 @@
+{
+ "date": "2026-11-01",
+ "weight": 69,
+ "waist": 89.8,
+ "steps": 5989,
+ "sleep": null,
+ "water": 10,
+ "meals": {
+  "cafe": {
+   "c": 1,
+   "items": [
+    {
+     "f": "ovo",
+     "q": 3
+    },
+    {
+     "f": "queijo",
+     "q": 30
+    },
+    {
+     "f": "salada",
+     "q": 1
+    },
+    {
+     "n": "Manga",
+     "k": 90,
+     "p": 1
+    },
+    {
+     "f": "whey",
+     "q": 1
+    }
+   ],
+   "txt": "3 ovos mexidos com queijo branco e tomate, 1 café latte, 200g de frutas cortadas ( melancia, melão e manga)"
+  },
+  "almoco": {
+   "c": 1,
+   "items": [
+    {
+     "f": "carne",
+     "q": 300
+    },
+    {
+     "n": "Chocolate",
+     "k": 1620,
+     "p": 21
+    }
+   ],
+   "txt": "1 colher de sopa de risoto de aspargo, 300g de filé mignon, 300g de chocolate Lindt"
+  },
+  "jantar": {
+   "c": 1,
+   "items": [
+    {
+     "f": "iogurte",
+     "q": 1
+    },
+    {
+     "f": "whey",
+     "q": 0.5
+    }
+   ],
+   "txt": "1 iogurte com meio scoop de whey"
+  }
+ },
+ "extras": [],
+ "habits": {
+  "jantar16": true,
+  "creatina": true
+ },
+ "workout": {
+  "letter": null,
+  "sets": {},
+  "done": false,
+  "warm": false,
+  "remo": false,
+  "corrida": true,
+  "yoga": true,
+  "rec": "ioga"
+ },
+ "updated": 1793616825057
+}

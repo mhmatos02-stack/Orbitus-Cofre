@@ -166,6 +166,12 @@ def feitos(vault, dia):
     return _ler(_arq_feitos(vault, dia)).get(dia, {})
 
 
+def _id_evento(titulo):
+    """Id estável de um evento da agenda (para marcar como feito): 'ev-' + título sem acento, em minúsculas."""
+    t = unicodedata.normalize('NFD', str(titulo or '')).encode('ascii', 'ignore').decode().lower()
+    return ('ev-' + re.sub(r'[^a-z0-9]+', '-', t).strip('-')[:45]).rstrip('-')
+
+
 def marcar(vault, corpo):
     dia, iid, feito = str(corpo.get('dia') or ''), str(corpo.get('id') or ''), bool(corpo.get('feito'))
     if not re.match(r'^\d{4}-\d{2}-\d{2}$', dia) or not re.match(r'^[a-z0-9-]{1,48}$', iid):
@@ -304,7 +310,9 @@ def dia(vault, d_iso, tarefas_do_dia, eventos):
     for t in tarefas_do_dia:
         out.append(dict(t, tipo='tarefa'))
     for e in eventos or []:
-        out.append({'tipo': 'evento', 'hora': '' if e[0] == 'dia todo' else e[0][:5], 'texto': e[1], 'cor': e[2] if len(e) > 2 else ''})
+        eid = _id_evento(e[1])
+        out.append({'tipo': 'evento', 'hora': '' if e[0] == 'dia todo' else e[0][:5], 'texto': e[1], 'cor': e[2] if len(e) > 2 else '',
+                    'id': eid, 'feito': eid in fe and ('-' + eid) not in fe})
     out.sort(key=lambda x: (x['hora'] == '', x['hora'] or '99', {'evento': 0, 'tarefa': 1, 'rotina': 2}[x['tipo']]))
     return {'dia': d_iso, 'itens': out, 'arquivo': ARQ, 'agua': agua_estado(vault, d_iso, au.get('agua', 0)),
-            'feitos': sum(1 for x in out if x.get('feito')), 'total': sum(1 for x in out if x['tipo'] != 'evento')}
+            'feitos': sum(1 for x in out if x.get('feito') and x['tipo'] != 'evento'), 'total': sum(1 for x in out if x['tipo'] != 'evento')}

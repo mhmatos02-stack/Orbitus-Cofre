@@ -50,8 +50,9 @@ Treino (com Mesa da Saúde), Wealth (com a Mesa de investimentos), Agenda, E-mai
 
 O painel mostra tudo isso como o sistema "Rotinas do Orbitus".
 
-## Concierge
+## Concierge (Vega)
 
+A voz do Orbitus se chama Vega (nome na Home e no prompt `SISTEMA` de `concierge.py`; código e rotas continuam "concierge"). Personalidade: sagaz, com opinião baseada nos dados, ironia dosada, sem linguagem de atendimento. Rituais aceitam "bom dia, Vega".
 Barra na Home (texto e voz). Usa a API do Claude com a chave no Keychain (`orbitus-anthropic`), teto mensal em
 `~/.orbitus/concierge_uso.json`. Voz: Google Chirp 3 HD (chave `orbitus-google-tts`), escolhida em
 `00_Sistema/concierge.json`; sem chave, usa a voz do Mac. Frases prontas: Bom dia, Boa tarde, Boa noite, Boa sexta.

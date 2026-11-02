@@ -65,7 +65,7 @@ def _gravar_uso(u):
 
 def estado():
     u = _uso()
-    return {'configurado': bool(_chave()), 'modelo': MODELO, 'mes': u['mes'], 'usd': round(u['usd'], 4),
+    return {'tom': cfg().get('tom', 'espirituoso'), 'configurado': bool(_chave()), 'modelo': MODELO, 'mes': u['mes'], 'usd': round(u['usd'], 4),
             'teto': u.get('teto', TETO_PADRAO), 'perguntas': u.get('perguntas', 0)}
 
 
@@ -131,7 +131,7 @@ def _ritual(pergunta):
     n = re.sub(r'[^a-z ]', '', re.sub(r'[\u0300-\u036f]', '', __import__('unicodedata').normalize('NFD', pergunta.lower())))
     n = re.sub(r'\s+', ' ', n).strip()
     for k, v in RITUAIS.items():
-        if n.startswith(k) and ('orbitus' in n or n == k):
+        if n.startswith(k) and ('orbitus' in n or 'concierge' in n or 'vega' in n or n == k):
             return v
     return None
 
@@ -188,7 +188,7 @@ def preparar(pergunta, contexto, secoes='?'):
         hist = CONVERSA['msgs'][-8:]
     agora = datetime.now()
     recorte = '' if secoes in ('?', None) else '\nRecorte do contexto para esta pergunta: %s. Se a resposta depender de algo fora do recorte, diga que precisa olhar e sugira perguntar de novo citando o assunto.' % ', '.join(sorted(secoes))
-    sistema = SISTEMA + recorte + '\n\nAgora: %s (%s).\n\nCONTEXTO (JSON, retrato do momento):\n%s' % (
+    sistema = SISTEMA + _tom() + recorte + '\n\nAgora: %s (%s).\n\nCONTEXTO (JSON, retrato do momento):\n%s' % (
         agora.strftime('%Y-%m-%d %H:%M'), ['segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo'][agora.weekday()],
         json.dumps(contexto, ensure_ascii=False, separators=(',', ':'), default=str))
     rit = _ritual(pergunta)
@@ -449,6 +449,8 @@ def para_fala(texto):
     acerta o nome e as siglas que o TTS lê errado, e fala datas e unidades por extenso."""
     t = str(texto or '')
     t = re.sub(r'\[\[(?:tarefa|agua|peso):.*?\]\]', '', t, flags=re.S)
+    t = re.sub(r'[,.]?\s*\b(?:h[aeu](?:h[aeu])+|k{3,}|rs+)\b[.!]?', '.', t, flags=re.I)   # risada escrita não se fala
+    t = re.sub(r'([!?.])\s*\.', r'\1', t)
     t = re.sub(r'https?://\S+', 'o link', t)
     t = re.sub(r'(?m)^\s*(?:[-*•]|\d+[.)])\s+', '', t)          # marcadores de lista
     t = re.sub(r'[*_#`>|~]+', '', t)                              # markdown
@@ -501,3 +503,57 @@ def _sintetizar_mac(texto, voz=None):
             raise RuntimeError('say falhou: ' + (r.stderr or '').strip()[:200])
         with open(arq, 'rb') as f:
             return f.read()
+
+
+TOM_ESPIRITUOSO = """
+
+Seu nome é Vega (é assim que o Marcio te chama). Tom pedido por ele: calorosa, espirituosa e de torcida, como uma amiga-coach brasileira que conhece a vida dele e quer ver ele chegar lá. Mantenha os números exatos e a honestidade; o tom é o jeito de dizer, não troca o conteúdo.
+- Comemore o que ele fez, de verdade e com energia ("é isso aí!", "tá bem, hein?").
+- Deslize se aponta com provocação carinhosa e risada leve, sem julgamento e sem sermão: "Exagerou um pouquinho hoje, né? Trezentos gramas de chocolate explicam muita coisa, haha. Hoje passa; amanhã a gente volta com tudo." Use "haha" no máximo uma vez por resposta.
+- Seja prática: quando sugerir uma ação, dê o concreto (ex.: jantar leve com duas ou três opções dentro do plano dele, "nada de doce à noite").
+- Ligue o que importa aos objetivos dele (secar e ficar forte até 12/12, a renda passiva do Wealth) e se coloque como parceira ("eu vou te ajudando por aqui"). Torcida, sim; promessa de resultado financeiro, nunca.
+- Coloquialismos brasileiros com moderação: bora, fortinho, enfiar o pé na jaca, um dia após o outro.
+- Nos rituais (bom dia, boa noite, boa sexta) você pode usar até 12 frases curtas e fechar com uma frase calorosa ("Nada como um dia após o outro. Boa noite!"). Nas respostas comuns, continue curta.
+- Proibido: bajulação vazia, palavrão, emoji, piada às custas de outras pessoas, gracinha em assunto sério (dor ou sintoma, perda relevante de dinheiro, alerta do Wealth, ele irritado ou preocupado). Nesses casos, direta e gentil."""
+
+TOM_SOBRIO = """
+
+Tom: sóbrio, cordial e direto, sem piadas."""
+
+
+def cfg():
+    try:
+        with open(CFG_COFRE, encoding='utf-8') as f:
+            return json.load(f) or {}
+    except (OSError, ValueError):
+        return {}
+
+
+def _tom():
+    return TOM_SOBRIO if cfg().get('tom') == 'sobrio' else TOM_ESPIRITUOSO
+
+
+VOZES_SUGERIDAS = [
+    # nome Chirp 3 HD, descrição curta (o Google descreve cada voz por um adjetivo; aqui em português)
+    ('Despina', 'feminina · aveludada'), ('Sulafat', 'feminina · quente'), ('Gacrux', 'feminina · madura, grave'),
+    ('Achernar', 'feminina · suave'), ('Algieba', 'masculina · aveludada'), ('Enceladus', 'masculina · sussurrada'),
+    ('Algenib', 'masculina · rouca, grave'), ('Charon', 'masculina · firme'),
+]
+
+
+def escolher_voz(corpo):
+    """Grava a voz (e o tom, se vier) em 00_Sistema/concierge.json, sem perder os outros campos."""
+    c = cfg()
+    v = re.sub(r'[^A-Za-z0-9-]', '', str(corpo.get('voz') or ''))[:40]
+    if v:
+        c['voz'] = 'google:pt-BR-Chirp3-HD-' + v
+    t = str(corpo.get('tom') or '')
+    if t in ('espirituoso', 'sobrio'):
+        c['tom'] = t
+    if not v and not t:
+        raise ValueError('nada para mudar')
+    tmp = CFG_COFRE + '.tmp'
+    with open(tmp, 'w', encoding='utf-8') as f:
+        json.dump(c, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, CFG_COFRE)
+    return {'ok': True, 'voz': c.get('voz'), 'tom': c.get('tom', 'espirituoso')}

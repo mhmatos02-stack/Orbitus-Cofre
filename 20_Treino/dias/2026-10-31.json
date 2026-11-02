@@ -4,7 +4,7 @@
  "waist": 87.5,
  "steps": 5000,
  "sleep": null,
- "water": 10,
+ "water": 1,
  "meals": {
   "cafe": {
    "c": 1,
@@ -204,6 +204,6 @@
   "yoga": true,
   "rec": "ioga"
  },
- "updated": 1793490406152,
+ "updated": 1793524571777,
  "mov": 5
 }

@@ -95,3 +95,9 @@ Tudo depois de ` — ` vira a linha cinza. Prioridade: 🔺 máxima · ⏫ alta 
 - Na Mesa (#mesa): botão "Falar com o CIO" e o painel de conversa. Módulo App/cio.py, POST /api/cio (streaming), /api/cio/nova, /api/cio/1on1.
 - O CIO lê: SKILLS/Chief Investment Officer (CIO).md, IPS, Constraints, última Mesa (contexto + final da ata), último 1:1, Decision Journal recente, pendências da Mesa e a foto da carteira. O bloco de documentos vai em cache na API (perguntas seguidas em até 5 min saem bem mais baratas). Gasto soma no mesmo teto do Concierge.
 - Escritas: a conversa fica em Orbitus/01_Federacao/Conversas com o CIO/AAAA-MM-DD.md; "Levar ao 1:1" acrescenta um despacho D-AIW-NNN no _orbitus/INBOX.md do Wealth (Protocolo de Federação), que o 1:1 de domingo processa. Nada vira decisão formal sem a Mesa e o Decision Journal; nunca executa ordens.
+
+## Atualização automática do código (desde 01/11/2026)
+O servidor vigia os arquivos .py de App/. Quando um muda, ele confere num processo à parte se tudo compila e importa;
+se estiver bom, encerra e o launchd (KeepAlive) sobe de novo com o código novo, sem kickstart manual.
+Se o código novo estiver quebrado, segue rodando o antigo. Cada reinício ou recusa fica anotado em 00_Sistema/reinicio.log.
+Vale a partir do primeiro reinício manual depois desta data.

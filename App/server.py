@@ -27,6 +27,7 @@ LOCK = threading.Lock()
 sys.path.insert(0, os.path.join(VAULT, 'Scripts'))
 sys.path.insert(0, APP)
 import emails
+import wealth_rotinas
 import mesa
 import wealth
 import viagem
@@ -210,6 +211,11 @@ def agenda_proativa(dias=45):
 def dia_ordenado(d_iso):
     ev = (agenda(date.today())[0] or {}).get(d_iso, [])
     r = rotina.dia(VAULT, d_iso, tarefas_do_dia(d_iso), ev)
+    if d_iso <= date.today().isoformat():
+        try:
+            r['wealth_rotinas'] = wealth_rotinas.do_dia(mesa.pasta_wealth(VAULT), date.fromisoformat(d_iso))
+        except Exception as e:
+            r['wealth_rotinas'] = {'ok': False, 'erro': str(e)[:160], 'itens': []}
     if d_iso == date.today().isoformat():
         tr = _treino_resumo() or {}
         if tr.get('data') == d_iso and tr.get('sessao_nome'):
@@ -532,8 +538,12 @@ def _contexto(secoes=None):
         c['agua_hoje'] = {'erro': str(e)}
     try:
         dh = dia_ordenado(d['hoje'])
+        # revisões/checks do Wealth na agenda não são tarefa dele: quem diz se rodaram é wealth_rotinas_hoje
+        _wre = re.compile(r'oportunidade|dividend|provento|sem[aá]foro|carteira|rebalanc|check|revis', re.I)
         c['lista_do_dia'] = [{'hora': x.get('hora'), 'o_que': x.get('texto') + (' (' + x['detalhe'] + ')' if x.get('detalhe') else ''),
-                              'tipo': x['tipo'], 'feito': x.get('feito')} for x in dh['itens']]
+                              'tipo': x['tipo'], 'feito': x.get('feito')} for x in dh['itens']
+                             if not (x['tipo'] == 'evento' and _wre.search(x.get('texto') or '') and not re.search(r'relat[oó]rio mensal', x.get('texto') or '', re.I))]
+        c['wealth_rotinas_hoje'] = [{'rotina': r['nome'], 'estado': r['estado'], 'como': r['texto']} for r in (dh.get('wealth_rotinas') or {}).get('itens', [])]
     except Exception as e:
         c['lista_do_dia'] = {'erro': str(e)}
     if tudo or 'financas' in S:
@@ -764,6 +774,20 @@ class H(BaseHTTPRequestHandler):
             self.send_header('Content-Length', str(len(b)))
             self.end_headers()
             self.wfile.write(b)
+        elif re.fullmatch(r'/static/rosto/[a-z0-9_]+\.(js|json)', self.path.split('?')[0]):
+            # rosto 3D da Vega: módulo e malha (só estes dois tipos, só desta pasta)
+            nome = self.path.split('?')[0][len('/static/rosto/'):]
+            try:
+                with open(os.path.join(STATIC, 'rosto', nome), 'rb') as f:
+                    b = f.read()
+            except OSError:
+                return self.send_error(404)
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/javascript; charset=utf-8' if nome.endswith('.js') else 'application/json')
+            self.send_header('Cache-Control', 'no-cache' if nome.endswith('.js') else 'max-age=604800')
+            self.send_header('Content-Length', str(len(b)))
+            self.end_headers()
+            self.wfile.write(b)
         elif self.path.split('?')[0] == '/sw.js':
             b = (ler(os.path.join(STATIC, 'sw.js')) or '').encode('utf-8')
             self.send_response(200)
@@ -809,12 +833,29 @@ class H(BaseHTTPRequestHandler):
                 self._json(dia_ordenado(d))
             except Exception as e:
                 self._json({'erro': str(e)}, 500)
+        elif self.path.split('?')[0] == '/api/sistema':
+            # página "Saúde do sistema": onde ficam os erros técnicos (fora da Home)
+            try:
+                w = mesa.pasta_wealth(VAULT)
+                rot = []
+                pr = os.path.join(VAULT, '00_Sistema', 'rotinas')
+                for n in sorted(os.listdir(pr)) if os.path.isdir(pr) else []:
+                    if n.endswith('.json'):
+                        j = ler_json(os.path.join(pr, n), None)
+                        if isinstance(j, dict):
+                            rot.append({k: j.get(k) for k in ('rotina', 'quando', 'status', 'detalhe')})
+                rl = (ler(os.path.join(VAULT, '00_Sistema', 'reinicio.log')) or '').strip().splitlines()[-8:]
+                return self._json({'wealth_hoje': wealth_rotinas.do_dia(w, date.today()),
+                                   'wealth_ontem': wealth_rotinas.do_dia(w, date.today() - timedelta(days=1), datetime.now()),
+                                   'saude_wealth': wealth_rotinas.status_automacao(w), 'orbitus': rot, 'reinicios': rl})
+            except Exception as e:
+                return self._json({'erro': str(e)}, 500)
         elif self.path.split('?')[0] == '/api/concierge':
             self._json(concierge.estado())
         elif self.path.split('?')[0] == '/api/voz/amostra':
             nome = re.sub(r'[^A-Za-z0-9-]', '', parse_qs(urlparse(self.path).query).get('v', ['Aoede'])[0])[:40] or 'Aoede'
             try:
-                b, tipo = concierge._google_tts('Olá, Marcio. Eu sou o Orbitus. Faltam quarenta e três dias para Praia do Forte, e hoje você tem três tarefas na semana.', 'google:pt-BR-Chirp3-HD-' + nome)
+                b, tipo = concierge._google_tts('Boa noite, Marcio. Você está em sete de dez copos de água, o que para um domingo é quase heroico. Praia do Forte está chegando, e a mala, como sempre, vai ser feita na véspera.', 'google:pt-BR-Chirp3-HD-' + nome)
             except RuntimeError as e:
                 return self._json({'erro': str(e)}, 400)
             self.send_response(200)
@@ -823,7 +864,8 @@ class H(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b)
         elif self.path.split('?')[0] == '/api/voz':
-            self._json({'voz': concierge.voz_escolhida(), 'disponiveis': concierge.vozes()})
+            self._json({'voz': concierge.voz_escolhida(), 'disponiveis': concierge.vozes(), 'tom': concierge.cfg().get('tom', 'espirituoso'),
+                        'sugeridas': [{'nome': n, 'desc': d} for n, d in concierge.VOZES_SUGERIDAS]})
         elif self.path.split('?')[0] == '/api/treino':
             try:
                 self._json(treino.tudo(VAULT))
@@ -1002,6 +1044,8 @@ class H(BaseHTTPRequestHandler):
                 return self._json({'ok': True})
             elif self.path == '/api/treino/saude':
                 return self._json(treino.registrar_saude(VAULT, body))
+            elif self.path == '/api/voz/escolher':
+                return self._json(concierge.escolher_voz(body))
             elif self.path == '/api/voz':
                 try:
                     b, tipo = concierge.sintetizar(body.get('texto'))
@@ -1031,7 +1075,52 @@ class H(BaseHTTPRequestHandler):
             self._json({'erro': str(e)}, 400)
 
 
+
+def _marcas_codigo():
+    import glob
+    return {f: os.path.getmtime(f) for f in glob.glob(os.path.join(APP, '*.py'))}
+
+
+def _anotar_reinicio(txt):
+    try:
+        with open(os.path.join(VAULT, '00_Sistema', 'reinicio.log'), 'a', encoding='utf-8') as f:
+            f.write('%s  %s\n' % (datetime.now().isoformat(timespec='seconds'), txt))
+    except OSError:
+        pass
+
+
+def vigia_codigo():
+    """Aplica código novo sozinho (fim do kickstart manual). Quando um .py do App muda, confere num processo à parte
+    se tudo compila e importa; se estiver bom, encerra e o launchd (KeepAlive) sobe o servidor de novo com o código novo.
+    Se estiver quebrado, segue rodando o código antigo e anota o erro em 00_Sistema/reinicio.log."""
+    import subprocess
+    base = _marcas_codigo()
+    while True:
+        time.sleep(5)
+        try:
+            agora = _marcas_codigo()
+            if agora == base:
+                continue
+            time.sleep(4)                       # espera a cópia dos arquivos terminar
+            agora = _marcas_codigo()
+            mods = ['server']                   # importar o server puxa todos os módulos que ele usa (o __main__ não roda)
+            prova = ('import sys, glob, py_compile; sys.path.insert(0, %r); '
+                     '[py_compile.compile(f, doraise=True) for f in glob.glob(%r)]; ' % (APP, os.path.join(APP, '*.py'))
+                     + '; '.join('import ' + m for m in mods))
+            r = subprocess.run([sys.executable, '-c', prova], capture_output=True, text=True, timeout=90, cwd=APP)
+            mudou = ', '.join(sorted(os.path.basename(f) for f in agora if agora.get(f) != base.get(f)))
+            if r.returncode == 0:
+                _anotar_reinicio('código novo (%s) conferido: reiniciando' % mudou)
+                os._exit(0)
+            _anotar_reinicio('código novo (%s) NÃO aplicado, segue o antigo: %s' % (mudou, (r.stderr or r.stdout).strip().splitlines()[-1:]))
+            base = agora
+        except Exception as e:
+            _anotar_reinicio('vigia: ' + str(e)[:200])
+            base = _marcas_codigo()
+
 if __name__ == '__main__':
     print('Orbitus em http://localhost:%d  (cofre: %s)' % (PORT, VAULT))
     threading.Thread(target=push.ciclo, args=(dia_ordenado,), daemon=True).start()
+    threading.Thread(target=vigia_codigo, daemon=True).start()
+    _anotar_reinicio('servidor no ar (pid %d)' % os.getpid())
     ThreadingHTTPServer(('127.0.0.1', PORT), H).serve_forever()

@@ -120,6 +120,19 @@ def ciclo(montar_dia):
                                 enviar('💧 Hidratação', 'Você está em %d de %d copos. Que tal um copo agora?' % (ag.get('bebidos', 0), ag.get('meta', 10)), 'agua', '/')
                             except Exception as e:
                                 ULTIMO['erro'] = str(e)[:160]
+                # rotinas do Wealth que falharam ou não rodaram no horário: um aviso por rotina por dia, com o motivo
+                for r in (dia.get('wealth_rotinas') or {}).get('itens') or []:
+                    if r.get('estado') != 'falha':
+                        continue
+                    chave = hoje + '|w|' + r.get('id', '')
+                    if chave in env:
+                        continue
+                    env[chave] = hoje
+                    mudou = True
+                    try:
+                        enviar('⚠️ Wealth · ' + r.get('nome', ''), r.get('texto', '')[:180], 'wealth-' + r.get('id', ''), '/')
+                    except Exception as e:
+                        ULTIMO['erro'] = str(e)[:160]
                 for x in dia['itens']:
                     h = x.get('hora') or ''
                     if not h or x.get('feito') or not (lim <= h <= hm):

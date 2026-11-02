@@ -3,26 +3,27 @@ tipo: federacao
 id: "wealth"
 nome: "AI Wealth Office"
 icone: "💰"
-coletado: "2026-10-31"
+coletado: "2026-11-02"
 saude: "🟡"
 motivo: ""
-idade: 6
-data_base: "2026-10-25"
-saude_txt: "amarelo. Automações do Mac religadas (backup remoto diário desde 21/10), razão válido, cotações ao vivo, Mesa em dia. Atenção: confiabilidade de 30 dias abaixo da meta e sem segunda cópia local (Time Machine)."
-proxima: "(atualizado 2026-10-30, Mesa) (1) IPS v1.19 com revisão independente até 02/11; (2) análise completa da holding com o 3º tri do banco em 04/11; (3) tese de 10 anos do ETF global até 06/11."
+idade: 1
+data_base: "2026-11-01"
+saude_txt: "amarelo. Razão válido, cotações ao vivo, Mesa em dia, fechamento de outubro entregue, sentinela de eventos rodando. Atenção: sem segunda cópia local (Time Machine); teste de restauração estreia em 03/11."
+proxima: "(1) nova versão do IPS com revisão independente (02/11); (2) análise da holding com o resultado do banco (04/11); (3) tese de 10 anos do ETF global (06/11); (4) recalibrar a mineradora com o 3º tri (atrasada); (5)…"
 decisoes: ""
-risco: "reserva sem folga sobre o piso; renda fixa perto do teto da banda enquanto a rotação não compra."
-esperando: ""
-esperando_lista: []
+risco: "liquidez abaixo do piso do plano até a venda da elétrica em novembro; Copom (04/11) e resultado do banco (03/11) mexem em gatilhos da Mesa de Debate na mesma semana."
+esperando: "Confirmar 2 lançamento(s) na Mesa"
+esperando_lista:
+  - "Confirmar 2 lançamento(s) na Mesa"
 automacao: "🟡 ATENÇÃO · 0 falha(s) · 1 atenção(ões)"
 falhas: []
 ---
 # 💰 AI Wealth Office
 
-> Gerado por `coletar_federacao.py` em 2026-10-31. Não editar.
+> Gerado por `coletar_federacao.py` em 2026-11-02. Não editar.
 
-**Saúde:** 🟡 amarelo. Automações do Mac religadas (backup remoto diário desde 21/10), razão válido, cotações ao vivo, Mesa em dia. Atenção: confiabilidade de 30 dias abaixo da meta e sem segunda cópia local (Time Machine).
+**Saúde:** 🟡 amarelo. Razão válido, cotações ao vivo, Mesa em dia, fechamento de outubro entregue, sentinela de eventos rodando. Atenção: sem segunda cópia local (Time Machine); teste de restauração estreia em 03/11.
 
-**Esperando de você:** —
+**Esperando de você:** Confirmar 2 lançamento(s) na Mesa
 
-**Próxima ação:** (atualizado 2026-10-30, Mesa) (1) IPS v1.19 com revisão independente até 02/11; (2) análise completa da holding com o 3º tri do banco em 04/11; (3) tese de 10 anos do ETF global até 06/11.
+**Próxima ação:** (1) nova versão do IPS com revisão independente (02/11); (2) análise da holding com o resultado do banco (04/11); (3) tese de 10 anos do ETF global (06/11); (4) recalibrar a mineradora com o 3º tri (atrasada); (5)…

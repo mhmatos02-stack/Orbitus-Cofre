@@ -1,0 +1,84 @@
+{
+ "data": "2026-11-01",
+ "gerado_em": "2026-11-01T21:50",
+ "agentes": {
+  "personal": {
+   "resumo": "Cinco treinos de força em cinco dias seguidos (terça a sábado), todos com aquecimento, e corrida mais ioga hoje: a parte do treino está em dia. O que segura a cintura é o movimento fora dele: média de 3.501 passos por dia contra 8.000, hoje sem passos registrados, e 5 min de remo leve na semana inteira.",
+   "bem": [
+    "Supino inclinado 22 kg em 4 × 10 e supino reto 24 kg em 3 × 10 na quinta: topo da faixa em todas as séries, hora de subir",
+    "Goblet 28 kg em 12, 12, 10, 10 na sexta e desenvolvimento com 18 kg no hotel (8, 8, 8, 5), como sugerido",
+    "Aquecimento nos 5 treinos de força e ioga feita no sábado e no domingo"
+   ],
+   "ajustes": [
+    "O A de quinta registrou só 4 exercícios (supino inclinado, supino reto, remada unilateral e curvada); crucifixo inclinado, puxada com elástico e flexão ficaram de fora. Amanhã faça os 7: se faltar tempo, encurte o descanso para 60 s, não a lista",
+    "Movimento pós-refeição foi pedido em três pareceres e apareceu uma vez (5 min no sábado). Com a regra da semana (abaixo), passa a ser obrigatório: 10 min de remo leve logo depois do almoço e 10 min depois do jantar, o que vale 2.000 passos",
+    "Corrida de hoje está sem minutos e sem passos, e o remo intervalado de sábado não foi feito. Anote a duração no campo de minutos; sábado que vem, 8 × (30 s forte / 90 s leve) logo depois do C"
+   ],
+   "amanha": "Segunda, em casa: A · Peito + Costas. Supino inclinado 24 kg (fechou 4 × 10 com 22), remada unilateral 26 kg nas 4 séries (na quinta alternou 24 e 26), supino reto 26 kg (fechou 3 × 10 com 24), remada curvada 18 kg buscando 3 × 12, crucifixo inclinado 10 kg, puxada com elástico e flexão. Depois do almoço e do jantar, 10 min de remo leve.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Deixar o remo montado na sala, perto da mesa de jantar",
+     "data": "2026-11-02",
+     "porque": "5 min de movimento pós-refeição na semana; com o remo guardado, não acontece"
+    },
+    {
+     "titulo": "Medir a cintura em casa, em jejum, na altura do umbigo, 3 vezes, e anotar a média",
+     "data": "2026-11-08",
+     "porque": "87,5 cm no sábado e 89,8 cm hoje: a diferença de 2,3 cm em um dia é erro de medida, e a regra de ajuste depende desse número"
+    }
+   ]
+  },
+  "nutri": {
+   "resumo": "Nos dias úteis você registrou 1.270 a 1.590 kcal, abaixo do piso de 1.650, e no fim de semana foi para cerca de 2.800 kcal por dia: hoje são 2.789 kcal até o almoço, 1.620 delas em 300 g de chocolate, e o jantar não foi registrado até as 21h47. A proteína segue forte, 162 a 167 g em 4 de 5 dias com registro; a média de 28/10 a 01/11 fica em cerca de 1.970 kcal com o sábado real, acima da meta de 1.850.",
+   "bem": [
+    "Proteína acima de 160 g em 28, 30 e 31/10 e hoje (166 g)",
+    "Água de volta a 10 copos hoje, depois de 1 copo no sábado; 12 copos de terça a sexta",
+    "Jantar decidido até 16h em todos os 6 dias registrados"
+   ],
+   "ajustes": [
+    "O padrão 1.400 kcal na semana e 2.800 no fim de semana é o problema, não o total: coma 1.800 a 1.850 todo dia. Amanhã não compense o chocolate: café, almoço, lanche e jantar completos, nunca abaixo de 1.650",
+    "Registro: se jantou hoje, lance o jantar; se pulou, saiba que é exatamente o que o último parecer pediu para não fazer. O café latte de hoje entrou como 1 dose de whey (24 g de proteína); registre como Leite desnatado 200 g (70 kcal, 7 g). E o café de 29/10 está marcado sem itens, por isso aquele dia mostra só 101 g de proteína",
+    "Restaurante com kcal explícita: picanha cerca de 290 kcal por 100 g, wagyu 350 a 400, filé mignon cerca de 200; linguiça, nhoque e sobremesa também entram. O sábado ainda aparece como 1.371 kcal num dia de cerca de 2.800"
+   ],
+   "trocas": [
+    {
+     "de": "300 g de chocolate Lindt de uma vez (cerca de 1.620 kcal)",
+     "por": "25 a 30 g por dia (2 a 3 quadradinhos, cerca de 150 kcal) depois do almoço, barra guardada fora da vista",
+     "porque": "é o doce planejado do dia e não pede compensação"
+    },
+    {
+     "de": "Café de dia útil só com whey e 1 fruta (cerca de 220 kcal)",
+     "por": "1 pão francês com 3 ovos mexidos + 1 fruta",
+     "porque": "cerca de 420 kcal e 23 g de proteína: tira o dia útil do piso e reduz a fome do fim de semana"
+    },
+    {
+     "de": "Jantar de 1 pão francês com 120 g de frango (cerca de 340 kcal)",
+     "por": "1 pão francês com 120 g de frango + 1 ovo + salada com 1 colher de azeite",
+     "porque": "soma cerca de 180 kcal e 7 g de proteína sem sair do que você gosta"
+    }
+   ],
+   "amanha": "Café: 1 pão francês com 3 ovos mexidos e 30 g de queijo branco + 1 porção de mamão · Almoço: 150 g de frango, 4 colheres de arroz, 1 concha de feijão, salada com 1 colher de azeite · Lanche: 1 dose de whey + 1 banana · Jantar: 150 g de peixe grelhado, 1 batata média (150 g), 150 g de legumes, 1 colher de azeite · Doce: 1, cerca de 150 kcal. Total cerca de 1.830 kcal e 154 g de proteína.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Corrigir o registro de sábado com kcal explícitas (picanha, wagyu, linguiça, nhoque, sobremesa)",
+     "data": "2026-11-02",
+     "porque": "o app mostra 1.371 kcal num dia de cerca de 2.800 e distorce a média"
+    },
+    {
+     "titulo": "Cozinhar e desfiar 600 g de frango para os pães da semana",
+     "data": "2026-11-02",
+     "porque": "garante a proteína e as calorias dos dias úteis sem delivery"
+    },
+    {
+     "titulo": "Comprar bananas, mamão e ovos para a semana",
+     "data": "2026-11-02",
+     "porque": "lanche e café prontos evitam chegar ao fim de semana com fome acumulada"
+    }
+   ]
+  }
+ },
+ "respostas": [],
+ "semana": "Cintura: 89,8 cm hoje, contra 92 cm da base; faltam 2,3 cm para a meta de 87,5 cm em 12/12, ou cerca de 0,4 cm por semana nas 6 semanas restantes. Não há medida do domingo anterior; os 87,5 cm de sábado no hotel não se sustentam diante dos 89,8 cm de hoje e devem ser tratados como erro de medida. Peso: 69,0 kg hoje, contra 69,1 kg em 28/10 e 71 kg da base; sem pesagem no domingo anterior. Treinos: 5 de 6 sessões de força (terça a sábado, segunda 26/10 sem registro), corrida e ioga hoje; o A de quinta saiu incompleto e o remo intervalado de sábado não foi feito. Aderência: proteína acima de 130 g em 4 de 5 dias com registro; calorias abaixo de 1.650 nos dias úteis e cerca de 2.800 no sábado e no domingo; doces acima do planejado em 29/10, 31/10 e hoje; água 12 copos de terça a sexta, 1 no sábado e 10 hoje; passos com média de 3.501 por dia contra 8.000 e 5 min de remo leve na semana. Decisão da regra de ajuste: somar 2.000 passos por dia, na forma de 10 min de remo leve depois do almoço e 10 min depois do jantar, a partir de segunda. Não cortar 150 kcal do jantar: nos dias úteis você já come abaixo do piso e o excesso está no fim de semana, que se resolve com o doce de 150 kcal por dia, não com corte. O parecer de 16h07 previa esta decisão se a cintura passasse de 88 cm; 89,8 cm passou. A medida em casa de 08/11 (jejum, umbigo, média de 3) vira a referência da próxima semana."
+}
