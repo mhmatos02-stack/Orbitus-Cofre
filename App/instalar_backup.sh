@@ -1,5 +1,5 @@
 #!/bin/bash
-# Orbitus — instala o backup diário do cofre (23:17) e roda a primeira vez.
+# Orbitus — instala o backup diário do cofre (23:17, e também ao ligar o Mac) e roda a primeira vez.
 # Uso:  bash ~/System/Orbitus/App/instalar_backup.sh  [URL do repositório privado no GitHub]
 set -u
 V="$(cd "$(dirname "$0")/.." && pwd)"
@@ -25,11 +25,12 @@ cat > "$PL" <<PL
   <key>ProgramArguments</key><array><string>$PY</string><string>$V/Scripts/backup_orbitus.py</string></array>
   <key>WorkingDirectory</key><string>$V</string>
   <key>StartCalendarInterval</key><dict><key>Hour</key><integer>23</integer><key>Minute</key><integer>17</integer></dict>
+  <key>RunAtLoad</key><true/>
   <key>StandardOutPath</key><string>$LOG</string>
   <key>StandardErrorPath</key><string>$LOG</string>
 </dict></plist>
 PL
 plutil -lint "$PL" >/dev/null || { echo "✗ plist inválido"; exit 1; }
 launchctl bootout "gui/$(id -u)/$LABEL" 2>/dev/null
-launchctl bootstrap "gui/$(id -u)" "$PL" && echo "✓ backup diário agendado para 23:17"
+launchctl bootstrap "gui/$(id -u)" "$PL" && echo "✓ backup diário agendado para 23:17 e ao ligar o Mac"
 echo "Primeira execução:"; "$PY" "$V/Scripts/backup_orbitus.py"

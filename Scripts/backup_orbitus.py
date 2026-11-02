@@ -65,7 +65,13 @@ if not git("remote").stdout.strip():
     sinal("atencao", "commit local feito (%s), mas sem GitHub: a cópia ainda está só neste Mac" % (head() or "")[:7])
     raise SystemExit(0)
 
-p = git("push", "-u", "origin", "main")
+# Ao ligar o Mac a rede pode demorar a subir: tenta o envio até 4 vezes, com 30 s entre as tentativas
+import time
+for _tent in range(4):
+    p = git("push", "-u", "origin", "main")
+    if p.returncode == 0:
+        break
+    time.sleep(30)
 pend = git("rev-list", "--count", "origin/main..HEAD")
 if pend.returncode != 0:
     sinal("falha", "não consegui verificar o envio: " + erro(pend) + (" · push: " + erro(p) if p.returncode else ""))
