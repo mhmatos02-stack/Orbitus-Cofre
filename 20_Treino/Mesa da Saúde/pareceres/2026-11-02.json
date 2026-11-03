@@ -1,0 +1,85 @@
+{
+ "data": "2026-11-02",
+ "gerado_em": "2026-11-02T21:50",
+ "agentes": {
+  "personal": {
+   "resumo": "O A de hoje saiu completo, 7 exercícios e 22 séries com aquecimento, e o supino inclinado já subiu para 24 kg. A queda veio no segundo par (supino reto e remada curvada abaixo do que você fez na quinta), o que bate com a sua pergunta, e o remo leve depois das refeições, que virou regra a partir de hoje, ficou em 0 min.",
+   "bem": [
+    "Fez os 7 exercícios do A, como pedido no parecer anterior (na quinta tinham ficado 3 de fora)",
+    "Supino inclinado com 24 kg em 8, 10, 10, 10: dentro da faixa já na primeira sessão com a carga nova",
+    "Remada unilateral 4 × 12 com 24 kg, crucifixo inclinado 3 × 15 com 10 kg e puxada com elástico 3 × 15: topo da faixa em todas as séries"
+   ],
+   "ajustes": [
+    "Na quinta: remada unilateral 26 kg nas 4 séries, crucifixo inclinado 12 kg e flexão com os pés no banco, 2 × 12 a 15 (com 2 × 25 no chão ela já não é estímulo)",
+    "Supino reto foi de 3 × 10 com 24 kg (29/10) para 12, 8, 10 trocando entre 22 e 24 kg, e remada curvada de 10, 10, 12 para 10, 8, 8. Na quinta, 24 kg no supino reto nas 3 séries sem trocar de carga no meio, 120 s de descanso depois dos pares A e B, e a remada curvada fica em 18 kg até fechar 3 × 10",
+    "A regra da semana começou hoje e o registro mostra 0 min de remo leve e 3.000 passos (número redondo, parece estimativa). Amanhã, 10 min de remo leve logo depois do almoço e 10 min logo depois do jantar, antes de sentar; anote os minutos no campo de movimento e os passos reais do celular"
+   ],
+   "amanha": "Terça, em casa: B · Pernas. Goblet 30 kg (fechou 12, 12, 10, 10 com 28 kg), stiff 22 kg (fechou 4 × 10 com 20 kg), búlgaro 10 kg buscando 3 × 8 (com 12 kg fez 10, 6, 5), elevação de quadril 18 kg, prancha 3 × 60 s, panturrilha 22 kg nas 3 séries. Descanso cheio de 90 s no goblet e no stiff. Depois do almoço e do jantar, 10 min de remo leve.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Comprar um elástico de nível acima do atual para a puxada",
+     "data": "2026-11-07",
+     "porque": "3 × 15 no topo da faixa com o elástico de hoje; sem resistência nova, a puxada vira aquecimento"
+    },
+    {
+     "titulo": "Pôr dois alarmes diários, 13h30 e 20h30: remo leve 10 min",
+     "data": "2026-11-03",
+     "porque": "o movimento pós-refeição foi pedido em quatro pareceres e saiu 5 min em 7 dias; precisa de gatilho, não de vontade"
+    }
+   ]
+  },
+  "nutri": {
+   "resumo": "O app marca 1.899 kcal e 162 g de proteína hoje, mas café e lanche foram marcados sem itens (o app soma 650 kcal e 63 g do plano padrão) e o jantar entrou como 2 potes de iogurte proteico quando foi 100 g de iogurte com 1 dose de whey: o dia real fica perto de 1.720 kcal e 136 g. Dessas, 500 kcal foram doce (150 planejado e 350 fora do plano), o terceiro dia seguido com doce acima do plano, depois do doce de leite e do merengue de sábado e dos 300 g de chocolate de domingo.",
+   "bem": [
+    "Jantar decidido até 16h e creatina marcada nos 7 dias",
+    "Água em 10 copos pelo segundo dia seguido",
+    "Proteína acima de 130 g em 6 dos 7 dias no app, e hoje perto de 136 g mesmo com o registro corrigido"
+   ],
+   "ajustes": [
+    "Doce: a troca do chocolate por porções de 25 a 30 g foi sugerida ontem e hoje entraram 350 kcal fora do plano. A partir de amanhã, um doce de 150 kcal por dia, depois do almoço, e nenhum à noite; se a vontade vier depois do jantar, é a sobremesa proteica (cerca de 180 kcal e 20 g)",
+    "Duas noites seguidas o jantar foi iogurte com whey, cerca de 180 kcal. Isso é lanche, não jantar: o plano pede cerca de 430 kcal com 150 g de proteína, legumes e um carboidrato pequeno, e é o jantar curto que abre espaço para o doce da noite",
+    "Registro: pela terceira vez os 100 g de iogurte natural entraram como 2 potes de iogurte proteico (240 kcal e 30 g contra cerca de 60 kcal e 4 g reais). Lance como item manual 'Iogurte natural 100 g', 60 kcal, 4 g, e abra café e lanche com os itens. O sábado (1.371 kcal no app num dia de cerca de 2.800) e o café latte de domingo continuam sem correção"
+   ],
+   "trocas": [
+    {
+     "de": "Jantar de 100 g de iogurte com 1 dose de whey (cerca de 180 kcal)",
+     "por": "150 g de tilápia grelhada + 1 batata média (150 g) + 150 g de legumes + 1 colher de azeite",
+     "porque": "cerca de 440 kcal e 44 g de proteína: jantar de verdade, que segura a noite sem doce"
+    },
+    {
+     "de": "Doce fora do plano de 350 kcal",
+     "por": "Sobremesa proteica: 1 pote de iogurte proteico + 100 g de morango",
+     "porque": "cerca de 150 kcal e 16 g de proteína, cabe como o doce do dia"
+    },
+    {
+     "de": "Cheeseburger simples no almoço (cerca de 390 kcal)",
+     "por": "150 g de frango, 4 colheres de arroz, 1 concha de feijão e salada com 1 colher de azeite",
+     "porque": "cerca de 565 kcal e 55 g de proteína; almoço completo reduz a fome da tarde"
+    }
+   ],
+   "amanha": "Café: 1 pão francês com 3 ovos mexidos e 30 g de queijo branco + 1 porção de mamão · Almoço: 150 g de frango, 4 colheres de arroz, 1 concha de feijão, salada com 1 colher de azeite · Lanche: 1 dose de whey + 1 banana · Jantar: 150 g de tilápia, 1 batata média (150 g), 150 g de legumes, 1 colher de azeite · Doce: 1, cerca de 150 kcal, depois do almoço. Total cerca de 1.830 kcal e 153 g de proteína.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Comprar 600 g de tilápia ou pescada para os jantares de terça a quinta",
+     "data": "2026-11-03",
+     "porque": "duas noites com iogurte no lugar do jantar; peixe pronto na geladeira resolve a decisão das 16h"
+    },
+    {
+     "titulo": "Dividir o doce que tiver em casa em porções de 150 kcal e guardar o resto fora da vista",
+     "data": "2026-11-03",
+     "porque": "3 dias seguidos de doce acima do plano; porção pronta evita o pacote inteiro"
+    }
+   ]
+  }
+ },
+ "respostas": [
+  {
+   "id": "20261102173228",
+   "agente": "personal",
+   "texto": "Seus números confirmam: no primeiro par (supino inclinado e remada unilateral) você fechou todas as séries, e a queda veio no segundo par. O supino reto foi de 3 × 10 com 24 kg na quinta para 12, 8 e 10 trocando entre 22 e 24 kg, e a remada curvada de 10, 10, 12 para 10, 8, 8. Isso é fadiga acumulada, esperada numa supersérie com 15 s de transição e 90 s de pausa, e pesou mais hoje por dois motivos: a remada unilateral soma 8 séries (4 por lado) antes de qualquer descanso, e o jantar de domingo foi só iogurte com meio whey. Na quinta: 1) mantenha os pares, mas descanse 120 s depois do par A e do par B (os 60 s do par C ficam); 2) passe a transição de 15 s para 30 s; 3) termine cada série com 1 a 2 repetições sobrando, sem ir à falha; 4) faça uma refeição de verdade 2 a 3 horas antes, como pão com 3 ovos. Se mesmo assim cair mais de 2 repetições da primeira para a última série de um exercício, troque o par A por séries normais: supino inclinado 4 séries com 90 s, depois remada unilateral 4 séries com 90 s; o treino vai de 45 para cerca de 55 min. Cansaço muscular é normal; tontura, falta de ar fora do comum ou dor no peito não são: nesse caso, pare e procure um médico."
+  }
+ ],
+ "semana": ""
+}

@@ -16,5 +16,41 @@
   "em": "2026-10-31T08:14",
   "titulo": "Comprar a 1ª parcela de Tesouro IPCA+ (2032 ou 2035)",
   "origem": "Mesa do Wealth"
+ },
+ "c8ea806c81c3": {
+  "acao": "aceitar",
+  "em": "2026-11-02T08:23",
+  "titulo": "Comprar WRLD11 (1ª parcela: o dinheiro da BSOX39)",
+  "origem": "Mesa do Wealth"
+ },
+ "83a9dc575a93": {
+  "acao": "aceitar",
+  "em": "2026-11-02T08:23",
+  "titulo": "Deixar o remo montado na sala, perto da mesa de jantar",
+  "origem": "Mesa da Saúde"
+ },
+ "f72c231a24d3": {
+  "acao": "aceitar",
+  "em": "2026-11-02T08:23",
+  "titulo": "Corrigir o registro de sábado com kcal explícitas (picanha, wagyu, linguiça, nhoque, sobremesa)",
+  "origem": "Mesa da Saúde"
+ },
+ "89d2011397a4": {
+  "acao": "dispensar",
+  "em": "2026-11-02T08:24",
+  "titulo": "Cozinhar e desfiar 600 g de frango para os pães da semana",
+  "origem": "Mesa da Saúde"
+ },
+ "a85cd0bf9eaa": {
+  "acao": "aceitar",
+  "em": "2026-11-02T08:24",
+  "titulo": "Comprar bananas, mamão e ovos para a semana",
+  "origem": "Mesa da Saúde"
+ },
+ "16dd966be115": {
+  "acao": "aceitar",
+  "em": "2026-11-02T08:24",
+  "titulo": "Medir a cintura em casa, em jejum, na altura do umbigo, 3 vezes, e anotar a média",
+  "origem": "Mesa da Saúde"
  }
 }

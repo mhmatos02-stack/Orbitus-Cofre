@@ -32,6 +32,7 @@ não um assistente genérico.
 - Cada sistema é soberano e mora na própria pasta em `~/System/`. O Orbitus nunca edita arquivos de outro
   sistema, exceto o `_orbitus/INBOX.md` dele e o `respostas.jsonl` da Mesa do Wealth (só acrescenta).
 - Cada sistema escreve `_orbitus/STATUS.md` e `_orbitus/MENSAGEM.md`. Regras em [[Protocolo de Federação]].
+- **Três camadas (2026-11-02):** dados e regras ficam com o sistema; a operação dos agentes é do Orbitus; mudanças aprovadas pelo Marcio o Orbitus executa (etapa 3). Inventário em [[Inventário de Agentes]].
 
 ## App (painel visual)
 
@@ -44,6 +45,7 @@ Treino (com Mesa da Saúde), Wealth (com a Mesa de investimentos), Agenda, E-mai
 | Horário | Rotina | Rastro no cofre |
 |---|---|---|
 | 07:47 | Radar da bagagem GOL (volta 26/12) | `30_Viagens/Praia do Forte 2026/roteiro.json` › `bagagem.radar` |
+| 10:37 e 22:37 | Sentinela das rotinas do Wealth (confere, tenta de novo uma vez, avisa) | `00_Sistema/rotinas/sentinela_wealth.json` |
 | 13:37 e 20:37 | Lembrete de treino e alimentação (push) | `00_Sistema/rotinas/lembretes.json` |
 | 21:47 | Mesa da Saúde: parecer do Personal e da Nutricionista | `20_Treino/Mesa da Saúde/pareceres/AAAA-MM-DD.json` |
 | 23:17 | Backup do cofre (launchd `com.orbitus.backup`, não é tarefa do Claude) | `00_Sistema/rotinas/backup.json` |

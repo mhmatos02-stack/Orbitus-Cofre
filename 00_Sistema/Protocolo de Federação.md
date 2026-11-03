@@ -31,3 +31,17 @@ O Orbitus mostra a Mesa na aba própria e **só acrescenta** linhas em `_orbitus
 (uma resposta do investidor por linha, com trava compartilhada). Quem aplica as respostas é a rotina das 20h47
 do Wealth Office, via `Scripts/mesa_arquivos.py`. Valores aparecem na Mesa porque ela fica no Mac local;
 STATUS e MENSAGEM seguem sem valores.
+
+## Três camadas (aprovado em 2026-11-02)
+
+O Orbitus é o gestor dos sistemas, não o dono dos dados deles.
+
+| Camada | Quem decide | Na prática |
+|---|---|---|
+| Dados e regras do domínio | o sistema | razão, política, constituição e conteúdo continuam soberanos. Valores financeiros só no Wealth. |
+| Operação dos agentes | **o Orbitus** | registro central de todos os agentes de todas as pastas; nenhum agente roda fora do registro. O Orbitus monitora, dispara de novo, pausa e avisa. |
+| Mudanças | o Orbitus executa, com aprovação do Marcio | despacho aprovado pelo Marcio pode ser aplicado pelo Orbitus sem esperar o ciclo do sistema (etapa 3). |
+
+Implantação em etapas, uma por semana: (1) inventário, em [[Inventário de Agentes]]; (2) registro central e Sentinela
+ampliada para os sistemas ativos; (3) execução de despachos aprovados, começando pelo Wealth.
+Até a etapa 3 entrar, vale a regra antiga: o Orbitus só escreve no `INBOX.md` dos outros sistemas.

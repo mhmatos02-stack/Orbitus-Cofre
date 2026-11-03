@@ -2,18 +2,196 @@
  "date": "2026-11-02",
  "weight": null,
  "waist": null,
- "steps": null,
+ "steps": 3000,
  "sleep": null,
- "water": 1,
- "meals": {},
- "extras": [],
- "habits": {},
+ "water": 10,
+ "meals": {
+  "cafe": true,
+  "almoco": {
+   "c": 1,
+   "items": [
+    {
+     "f": "carne",
+     "q": 100
+    },
+    {
+     "n": "Queijo mussarela",
+     "k": 30,
+     "p": 2
+    },
+    {
+     "f": "pao",
+     "q": 1
+    }
+   ],
+   "txt": "Cheeseburger simples. 100g de carne, 10g de mussarela, pão de hambúrguer pequeno"
+  },
+  "lanche": true,
+  "jantar": {
+   "c": 1,
+   "items": [
+    {
+     "f": "iogurte",
+     "q": 2
+    },
+    {
+     "f": "whey",
+     "q": 1
+    }
+   ],
+   "txt": "100g de iogurte com 1 scoop de whey"
+  }
+ },
+ "extras": [
+  {
+   "n": "Doce planejado",
+   "k": 150,
+   "p": 2,
+   "t": "doce"
+  },
+  {
+   "n": "Doce fora do plano",
+   "k": 350,
+   "p": 4,
+   "t": "doceExtra"
+  }
+ ],
+ "habits": {
+  "jantar16": true,
+  "creatina": true,
+  "caminhada": true
+ },
  "workout": {
   "letter": null,
-  "sets": {},
-  "done": false,
-  "warm": false,
+  "sets": {
+   "sup_inc": [
+    {
+     "kg": 24,
+     "reps": 8,
+     "done": true
+    },
+    {
+     "kg": 24,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 24,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 24,
+     "reps": 10,
+     "done": true
+    }
+   ],
+   "rem_uni": [
+    {
+     "kg": 24,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "kg": 24,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "kg": 24,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "kg": 24,
+     "reps": 12,
+     "done": true
+    }
+   ],
+   "sup_reto": [
+    {
+     "done": true,
+     "kg": 22,
+     "reps": 12
+    },
+    {
+     "done": true,
+     "kg": 24,
+     "reps": 8
+    },
+    {
+     "done": true,
+     "kg": 22,
+     "reps": 10
+    }
+   ],
+   "rem_curv": [
+    {
+     "kg": 18,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 18
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 18
+    }
+   ],
+   "cruc_inc": [
+    {
+     "kg": 10,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": 10,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": 10,
+     "reps": 15,
+     "done": true
+    }
+   ],
+   "puxada_el": [
+    {
+     "kg": null,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 15,
+     "done": true
+    }
+   ],
+   "flexao": [
+    {
+     "kg": null,
+     "reps": 25,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 25,
+     "done": true
+    }
+   ]
+  },
+  "done": true,
+  "warm": true,
   "remo": false
  },
- "updated": 1793616773442
+ "updated": 1793665990810
 }

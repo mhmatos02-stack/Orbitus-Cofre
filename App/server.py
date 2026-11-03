@@ -664,12 +664,28 @@ def rotinas_saude():
             falhas.append('Lembretes de treino não rodam desde ' + (q[:16].replace('T', ' ') or '?'))
         else:
             ok.append('lembretes')
+    # Sentinela do Wealth (10:37 e 22:37) grava 00_Sistema/rotinas/sentinela_wealth.json.
+    # Aqui só conta se ela está viva; o conteúdo (atenção do Wealth) já aparece no card do Wealth.
+    sw = ler_json(os.path.join(VAULT, '00_Sistema', 'rotinas', 'sentinela_wealth.json'), None)
+    if hoje >= '2026-11-02':
+        if not sw:
+            avisos.append('Sentinela do Wealth: ainda sem sinal')
+        else:
+            q = sw.get('quando') or ''
+            m = agora.hour * 60 + agora.minute
+            lim = hoje + 'T22:37' if m >= 23 * 60 + 20 else hoje + 'T10:37' if m >= 11 * 60 + 20 else ontem + 'T22:37'
+            if q < lim:
+                falhas.append('Sentinela do Wealth não roda desde ' + (q[:16].replace('T', ' ') or '?'))
+            elif sw.get('status') == 'falha':
+                falhas.append('Sentinela achou rotina do Wealth parada: ' + (sw.get('detalhe') or '')[:120])
+            else:
+                ok.append('sentinela do Wealth')
     saude = '🔴' if falhas else '🟡' if avisos else '🟢'
     txt = ('vermelho' if falhas else 'amarelo' if avisos else 'verde') + '. ' + (
         'Em dia: ' + ', '.join(ok) + '.' if ok else '') + ((' Atenção: ' + '; '.join(avisos) + '.') if avisos else '')
     return {'id': 'orbitus', 'nome': 'Rotinas do Orbitus', 'icone': '🛰️', 'saude': saude, 'saude_txt': txt.strip(),
             'falhas': falhas, 'esperando': '', 'esperando_lista': avisos,
-            'proxima': 'Mac ligado e app do Claude aberto às 07:47, 13:37, 20:37, 21:47 e 23:17',
+            'proxima': 'Mac ligado e app do Claude aberto às 07:47, 10:37, 13:37, 20:37, 21:47, 22:37 e 23:17',
             'automacao': '%d falha(s) · %d atenção(ões)' % (len(falhas), len(avisos))}
 
 
