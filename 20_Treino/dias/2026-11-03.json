@@ -1,0 +1,175 @@
+{
+ "date": "2026-11-03",
+ "weight": null,
+ "waist": null,
+ "steps": 4000,
+ "sleep": null,
+ "water": 10,
+ "meals": {
+  "cafe": {
+   "c": 1,
+   "items": [
+    {
+     "f": "pao_int",
+     "q": 1
+    },
+    {
+     "f": "queijo",
+     "q": 20
+    },
+    {
+     "f": "frango",
+     "q": 100
+    }
+   ],
+   "txt": "1 pão de forma, 1 colher de cottage, 100g de frango desfiado, café preto sem açúcar"
+  },
+  "almoco": {
+   "c": 1,
+   "items": []
+  },
+  "lanche": {
+   "c": 1,
+   "items": [
+    {
+     "f": "whey",
+     "q": 1
+    },
+    {
+     "f": "morango",
+     "q": 400
+    }
+   ],
+   "txt": "1scoop de whey, 4 morangos, 1 colher de açaí"
+  }
+ },
+ "extras": [],
+ "habits": {
+  "jantar16": true,
+  "creatina": true
+ },
+ "workout": {
+  "letter": null,
+  "sets": {
+   "goblet": [
+    {
+     "kg": 30,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 30,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 30,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 30,
+     "reps": 10,
+     "done": true
+    }
+   ],
+   "stiff": [
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 22
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 22
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 22
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 22
+    }
+   ],
+   "bulgaro": [
+    {
+     "kg": 10,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 10
+    },
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 10
+    }
+   ],
+   "elev_quadril": [
+    {
+     "done": true,
+     "reps": 15,
+     "kg": 16
+    },
+    {
+     "kg": 16,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": 16,
+     "reps": 15,
+     "done": true
+    }
+   ],
+   "prancha": [
+    {
+     "kg": null,
+     "reps": 60,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 60,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 60,
+     "done": true
+    }
+   ],
+   "panturrilha": [
+    {
+     "kg": 22,
+     "reps": 20,
+     "done": true
+    },
+    {
+     "kg": 22,
+     "reps": 20,
+     "done": true
+    },
+    {
+     "kg": 22,
+     "reps": 20,
+     "done": true
+    }
+   ]
+  },
+  "done": true,
+  "warm": true,
+  "remo": false,
+  "yoga": true,
+  "rec": "ioga"
+ },
+ "updated": 1793751495930,
+ "mov": 5
+}

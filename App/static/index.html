@@ -525,6 +525,9 @@ body.mesa #vMesa{display:flex}body.mesa #vHome{display:none!important}
 .sis-i{display:grid;grid-template-columns:10px minmax(0,1fr);column-gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,.06)}.sis-i i{width:7px;height:7px;border-radius:50%;margin-top:7px}
 .sis-i b{font-weight:400;font-size:14.5px}.sis-i small{display:block;color:var(--mut2);font-size:13px}.sis-i details{grid-column:2;margin-top:4px}.sis-i summary{cursor:pointer;color:var(--cy);font-size:12.5px}
 .sis-i pre{white-space:pre-wrap;word-break:break-word;font:12px/1.5 ui-monospace,Menlo,monospace;color:#c8cfdb;background:rgba(255,255,255,.04);border-radius:10px;padding:10px;margin:6px 0 0}
+
+/* o cartão "Esperando de você" saiu da Home: o mesmo item já está na lista do dia ao lado */
+#wait{display:none!important}
 </style>
 </head>
 <body>
@@ -1016,7 +1019,6 @@ function vozMsgs(){var m=[],j=DIA.hj;
     else if(tot&&falta<=2&&pend.length)m.push({k:'Quase lá · '+fe+' de '+tot,t:(function(q){return vozPick('q',['Falta'+(pend.length>1?'m ':' ')+q+'.','Falta'+(pend.length>1?'m ':' ')+q+'. Tão perto que dá pra sentir o gosto.','Só '+q+'. A última tarefa é sempre a mais preguiçosa.'])})(pend.slice(0,2).map(function(x){return x.texto.split(/\s+[-–—]\s+/)[0].replace(/\s*\(.*?\)/,'')}).join(' e ')),go:'dia'});
     else if(tot)m.push({k:'Hoje',t:fe?vozPick('h',[fe+' de '+tot+' feitos. Bom ritmo, segue.',fe+' de '+tot+'. Ritmo de quem sabe o que está fazendo.',fe+' de '+tot+'. Nada mal para um ser humano.']):vozPick('z',['0 de '+tot+'. Comece pelo mais curto.','0 de '+tot+'. Comece pelo mais curto: o cérebro adora uma vitória barata.','0 de '+tot+'. A lista não vai se fazer sozinha. Eu chequei.']),go:'dia'});
     if(atras.length)m.push({k:'Atrasada'+(atras.length>1?'s · '+atras.length:''),t:vozPick('t',[atras[0].texto,atras[0].texto.split(/\s+[-–—]\s+/)[0]+'. Ela não vai se resolver por vergonha.',atras[0].texto.split(/\s+[-–—]\s+/)[0]+'. Já está ficando íntima da lista.']),go:'dia'})}
-  var wt=$('waitT')&&$('waitT').textContent.trim();if(wt&&!$('wait').hidden)m.push({k:'Esperando você',t:wt,go:'espera'});
   return m.slice(0,4)}
 function vozAtualizar(){VOZ.m=vozMsgs();vozDesenhar()}
 function vozDesenhar(){var el=$('voz');if(!el)return;var m=VOZ.m,o=(typeof ORB!=='undefined'?ORB:null);if(!m.length||(o&&(o.fala||o.pensa))){el.hidden=true;return}
@@ -1885,6 +1887,7 @@ load().then(route); setInterval(load,5*60*1000);
 document.addEventListener('visibilitychange',function(){if(!document.hidden)load()});
 })();
 </script>
-<script type="module" src="/static/rosto/esfera3d.js"></script>
+<script>/* centro da Home: sala 3D dos agentes; ?anel=1 volta ao anel 2D */
+if(!/[?&]anel=1/.test(location.search)){var sm=document.createElement('script');sm.type='module';sm.src='/static/rosto/sala3d.js';document.body.appendChild(sm)}</script>
 </body>
 </html>

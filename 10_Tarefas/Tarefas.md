@@ -13,8 +13,8 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Montar o plano de treino até dezembro — Orbitus · próximo módulo #pessoal ✅ 2026-10-30
 - [x] Cancelar o ClickUp 🔽 #pessoal ✅ 2026-10-30
 - [x] Preparar a mala para o Hotel Tivoli (saída de casa às 13:30) 📅 2026-10-31 ⏰ 12:30 #pessoal #fazendo ➕ 2026-10-31 ✅ 2026-10-31
-- [ ] Vender a BBAS3 inteira (1.000 ações) — sugerido por Mesa do Wealth · Mesa do Wealth · plano 🔼 📅 2026-11-03 #financas ➕ 2026-10-31
-- [ ] Vender metade do RURA11 (~780 cotas) — sugerido por Mesa do Wealth · Mesa do Wealth · plano 🔼 📅 2026-11-03 #financas ➕ 2026-10-31
+- [x] Vender a BBAS3 inteira (1.000 ações) — sugerido por Mesa do Wealth · Mesa do Wealth · plano 🔼 📅 2026-11-03 #financas ➕ 2026-10-31 ✅ 2026-11-03
+- [x] Vender metade do RURA11 (~780 cotas) — sugerido por Mesa do Wealth · Mesa do Wealth · plano 🔼 📅 2026-11-03 #financas ➕ 2026-10-31 ✅ 2026-11-03
 - [ ] Comprar a 1ª parcela de Tesouro IPCA+ (2032 ou 2035) — sugerido por Mesa do Wealth · Mesa do Wealth · plano 🔼 📅 2026-11-05 #financas ➕ 2026-10-31
 - [ ] Aniversário Bella 📅 2026-11-08 ⏰ 14:00 #pessoal ➕ 2026-10-31
 - [x] Comprar presente para a Bella — Aniversário Bella · 08/11 🔼 📅 2026-11-05 #pessoal ➕ 2026-10-31 ✅ 2026-11-02
@@ -23,7 +23,8 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Corrigir o registro de sábado com kcal explícitas (picanha, wagyu, linguiça, nhoque, sobremesa) — sugerido por Mesa da Saúde · Nutricionista 📅 2026-11-02 #saude #aguardando ➕ 2026-11-02 ✅ 2026-11-02
 - [x] Comprar bananas, mamão e ovos para a semana — sugerido por Mesa da Saúde · Nutricionista 📅 2026-11-02 #saude ➕ 2026-11-02 ✅ 2026-11-02
 - [ ] Medir a cintura em casa, em jejum, na altura do umbigo, 3 vezes, e anotar a média — sugerido por Mesa da Saúde · Personal trainer 📅 2026-11-08 #saude ➕ 2026-11-02
-- [ ] Rosuvastatina 🔁 every day 📅 2026-11-02 ⏰ 20:00 #saude ➕ 2026-11-02
+- [ ] Rosuvastatina 🔁 every day 📅 2026-11-03 ⏰ 20:00 #saude ➕ 2026-11-03
+- [x] Rosuvastatina 🔁 every day 📅 2026-11-02 ⏰ 20:00 #saude ➕ 2026-11-02 ✅ 2026-11-03
 
 ## Migradas do Lembretes
 

@@ -52,6 +52,10 @@ Treino (com Mesa da Saúde), Wealth (com a Mesa de investimentos), Agenda, E-mai
 
 O painel mostra tudo isso como o sistema "Rotinas do Orbitus".
 
+## Sala dos agentes (Home)
+
+O centro da Home é a sala 3D (`App/static/rosto/sala3d.js`, three.js). Personagens: Vega (concierge, mesa), CIO (cofre do Wealth), Brasa (personal) e Sálvia (nutricionista) no raio-x, Pulso (saúde do sistema) no rack. Cada boneco mostra um dado real de `/api/dados` e `/api/sistema`; sem valores em reais. Regra: boneco sem dado por trás não entra. `?anel=1` volta ao anel 2D. Visual congelado até 2026-11-24 (só ajustes).
+
 ## Concierge (Vega)
 
 A voz do Orbitus se chama Vega (nome na Home e no prompt `SISTEMA` de `concierge.py`; código e rotas continuam "concierge"). Personalidade: sagaz, com opinião baseada nos dados, ironia dosada, sem linguagem de atendimento. Rituais aceitam "bom dia, Vega".
