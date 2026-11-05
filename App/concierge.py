@@ -16,6 +16,7 @@ TETO_PADRAO = 15.0
 TRAVA = threading.Lock()
 CONVERSA = {'t': 0, 'msgs': []}
 AGUA_FN = None
+PASSOS_FN = None   # o servidor liga: grava os passos do dia no Treino
 PESO_FN = None   # o servidor liga: grava o peso do dia no Treino   # o servidor liga: soma copos no contador de água do Treino quando ele diz que bebeu
 
 SISTEMA = """Você é o Concierge do Orbitus, o painel pessoal do Marcio (São Paulo, 42 anos, consultor independente).
@@ -31,7 +32,8 @@ Como responder:
 - Seja honesto, inclusive quando o número não for bom.
 - Hidratação (agua_hoje no contexto: bebidos, meta, esperado até agora, atrás): nos rituais, diga em uma frase como está a água. Nas outras respostas, só se ele estiver 2 copos ou mais atrás do ritmo, feche com uma frase curta e leve, variando: incentive a beber ou pergunte se bebeu água recentemente. Não repita isso se já falou de água nas últimas trocas, e nunca transforme em sermão.
 - Se ele disser que bebeu água, confirme e termine com uma linha exatamente assim: [[agua: N]] (N = copos de 250 ml; meio litro = 2, uma garrafa de 1 litro = 4).
-- Se ele disser quanto pesou hoje, confirme o número, compare com o último peso do contexto em uma frase (sem drama; o oficial é o de domingo) e termine com uma linha exatamente assim: [[peso: 80.9]]."""
+- Se ele disser quanto pesou hoje, confirme o número, compare com o último peso do contexto em uma frase (sem drama; o oficial é o de domingo) e termine com uma linha exatamente assim: [[peso: 80.9]].
+- Se ele disser quantos passos deu hoje (ou que o app Saúde mostra tal número), confirme, compare com a meta do contexto em uma frase e termine com uma linha exatamente assim: [[passos: 8200]] (número inteiro, sem ponto)."""
 
 
 def _chave():
@@ -117,7 +119,7 @@ No máximo 8 frases."""),
 1) o resumo do dia: o que foi concluído, treino, alimentação (proteína e calorias registradas contra a meta);
 2) o que ainda dá para fechar hoje (no máximo 3 itens rápidos, inclusive registrar o que falta no treino);
 3) o que fica para amanhã: tarefas, compromissos da agenda e o treino de amanhã.
-Feche com uma frase curta e gentil. No máximo 9 frases."""),
+Feche com uma frase curta e gentil pedindo que ele conte o dia no painel "Contar meu dia" que acabou de abrir embaixo (o que comeu, passos, treino, vitaminas), para você registrar o que faltou. No máximo 9 frases."""),
     'boa sexta': ('Boa sexta', 4000, """FECHAMENTO DA SEMANA (sexta-feira). Comece com "Boa sexta, Marcio." e diga:
 1) o balanço da semana: tarefas concluídas, treinos feitos contra o alvo, cintura e peso se houver, decisões do Wealth;
 2) o que fica para o fim de semana (incluindo treino de sábado e a corrida e ioga de domingo, pesagem e cintura no domingo, local de treino);
@@ -202,7 +204,7 @@ def preparar(pergunta, contexto, secoes='?'):
 
 def _visivel(texto):
     """Texto que pode ir para a tela/voz: sem as linhas [[tarefa: ...]] e sem um marcador ainda incompleto no fim."""
-    t = re.sub(r'\s*\[\[(?:tarefa|agua|peso):.*?\]\]', '', texto, flags=re.S)
+    t = re.sub(r'\s*\[\[(?:tarefa|agua|peso|passos):.*?\]\]', '', texto, flags=re.S)
     i = t.find('[[')
     if i >= 0:
         t = t[:i]
@@ -234,6 +236,13 @@ def _finalizar(prep, texto, us, capturar):
             peso = PESO_FN(float(mp.group(1).replace(',', '.')))
         except Exception as e:
             texto += ' (Não consegui registrar o peso: %s.)' % e
+    mpa = re.search(r'\[\[passos:\s*([\d.]{3,7})\s*\]\]', texto)
+    texto = re.sub(r'\s*\[\[passos:.*?\]\]', '', texto, flags=re.S).strip()
+    if mpa and PASSOS_FN:
+        try:
+            PASSOS_FN(int(mpa.group(1).replace('.', '')))
+        except Exception as e:
+            texto += ' (Não consegui registrar os passos: %s.)' % e
     agua = None
     if copos and AGUA_FN:
         try:
@@ -448,7 +457,7 @@ def para_fala(texto):
     """Ajusta o texto só para a voz (a tela continua igual): tira markdown, emojis e marcadores,
     acerta o nome e as siglas que o TTS lê errado, e fala datas e unidades por extenso."""
     t = str(texto or '')
-    t = re.sub(r'\[\[(?:tarefa|agua|peso):.*?\]\]', '', t, flags=re.S)
+    t = re.sub(r'\[\[(?:tarefa|agua|peso|passos):.*?\]\]', '', t, flags=re.S)
     t = re.sub(r'[,.]?\s*\b(?:h[aeu](?:h[aeu])+|k{3,}|rs+)\b[.!]?', '.', t, flags=re.I)   # risada escrita não se fala
     t = re.sub(r'([!?.])\s*\.', r'\1', t)
     t = re.sub(r'https?://\S+', 'o link', t)

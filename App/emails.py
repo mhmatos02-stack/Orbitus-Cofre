@@ -33,6 +33,8 @@ def _dec(v):
         return (v or '').strip()
 
 
+MASSA_CORPO = re.compile(rb'(?i)unsubscribe|descadastr|cancelar (a )?inscri|cancele (a )?inscri|darse de baja|opt.?out|'
+                         rb'prefer.{1,2}ncias de e-?mail|email preferences|view (this|in) (email|browser)|ver no navegador')
 UIDRE = re.compile(rb'UID (\d+)')
 FLAGRE = re.compile(rb'FLAGS \(([^)]*)\)')
 
@@ -67,7 +69,9 @@ def _texto(msg):
             break
         if l:
             linhas.append(l)
-    return re.sub(r'\s+', ' ', ' '.join(linhas))[:240]
+    t = ' '.join(linhas)
+    t = re.sub(r'https?://\S+|www\.\S+', '', t)          # prévia sem links de rastreamento
+    return re.sub(r'\s+', ' ', t).strip(' ·|-')[:240]
 
 
 def _uma_conta(c, eu):
@@ -100,7 +104,9 @@ def _uma_conta(c, eu):
                 nome, end = email.utils.parseaddr(_dec(h.get('From')))
                 massa = bool(h.get('List-Unsubscribe') or h.get('List-Id')
                              or (h.get('Precedence') or '').lower() in ('bulk', 'list', 'junk')
-                             or (h.get('Auto-Submitted') or 'no').lower() != 'no' or ROBO.search(end or ''))
+                             or (h.get('Auto-Submitted') or 'no').lower() != 'no' or ROBO.search(end or '')
+                             # sem cabeçalho de lista, mas com cara de envio em massa (acabamento Lente 01)
+                             or raw.count(b'http') >= 6 or bool(MASSA_CORPO.search(raw)))
                 if (end or '').lower() in eu:
                     continue
                 try:

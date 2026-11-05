@@ -1,6 +1,6 @@
 /* Orbitus — Sala dos agentes (WebGL, three.js). Personagens originais, feitos de formas simples:
    capuz, visor escuro e olhos de luz. Cada boneco mostra um dado real do Orbitus:
-   Vega (concierge, mesa no centro) · CIO (cofre do Wealth) · Personal e Nutricionista (raio-x do corpo) · Pulso (saúde do sistema).
+   Vega (concierge, mesa no centro) · CIO (cofre do Wealth) · Personal e Nutricionista (raio-x do corpo) · Pulso (saúde do sistema) · Lente (UX/UI, cavalete com o mapa de calor).
    Lê a voz por window.ORBX() e os dados por /api/dados e /api/sistema. Se algo falhar, a Home continua com o anel 2D. */
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/+esm';
 import { RoundedBoxGeometry } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/geometries/RoundedBoxGeometry.js/+esm';
@@ -314,6 +314,52 @@ function focoDaSessao(nome) {
 }
 desenharRx([], false);
 
+/* ---------- Lente: UX/UI (cavalete com o mapa de calor do dia) ---------- */
+const AMBAR = 0xffbe50;
+const lente = boneco({ cor: 0xc97d1c, barra: 0xa8661a, olho: 0xffe2a8, capuz: true });
+const calorCanvas = document.createElement('canvas'); calorCanvas.width = 256; calorCanvas.height = 176;
+const calorTex = new THREE.CanvasTexture(calorCanvas); calorTex.colorSpace = THREE.SRGBColorSpace;
+const calorM = new THREE.MeshBasicMaterial({ map: calorTex, transparent: true, side: THREE.DoubleSide, depthWrite: false });
+const cavalete = new THREE.Group();
+cavalete.add(malha(new THREE.PlaneGeometry(1.05, .72), calorM, 0, 1.42, .03, false));                 // tela
+cavalete.add(malha(rb(1.13, .8, .04, .02), M.escuro, 0, 1.42, 0));                                      // moldura
+cavalete.add(malha(rb(1.05, .04, .1, .01), M.aro, 0, 1.0, .05));                                         // apoio
+for (const s of [-1, 1]) { const p = malha(new THREE.CylinderGeometry(.022, .022, 1.95, 8), M.aro, .42 * s, .95, .05); p.rotation.z = -.12 * s; cavalete.add(p); }
+const pe = malha(new THREE.CylinderGeometry(.02, .02, 1.7, 8), M.aro, 0, .82, -.32); pe.rotation.x = .38; cavalete.add(pe);
+const luzLente = new THREE.PointLight(AMBAR, .55, 2.4); luzLente.position.set(0, 1.45, .6); cavalete.add(luzLente);
+cavalete.position.set(1.4, 0, 3.3); cavalete.rotation.y = .45; cavalete.scale.setScalar(.85);
+sala.add(cavalete);
+lente.position.set(.15, 0, 3.25); lente.rotation.y = .95;
+// lupa na mão esquerda, erguida até o visor
+const lupa = new THREE.Group();
+lupa.add(malha(new THREE.TorusGeometry(.12, .018, 10, 32), M.aro, 0, 0, 0));
+const vidroLupa = malha(new THREE.CircleGeometry(.11, 28), luz(AMBAR, .35), 0, 0, 0, false);
+vidroLupa.material.transparent = true; vidroLupa.material.opacity = .45; lupa.add(vidroLupa);
+const cabo = malha(new THREE.CylinderGeometry(.018, .022, .2, 8), M.escuro, 0, -.22, 0); lupa.add(cabo);
+lupa.position.set(0, -.5, .08); lupa.rotation.x = 1.25;
+lente.userData.bracos[0].add(lupa);
+lente.userData.bracos[0].rotation.x = -1.35; lente.userData.bracos[0].rotation.z = -.25;
+lente.userData.bracos[1].rotation.x = -.35;
+sala.add(lente);
+function desenharCalor(pts) {
+  const g = calorCanvas.getContext('2d'), W = calorCanvas.width, H = calorCanvas.height;
+  g.clearRect(0, 0, W, H);
+  g.fillStyle = 'rgba(10,14,24,.92)'; g.fillRect(0, 0, W, H);
+  // esboço da Home: cabeçalho, sala, calendário e os três blocos de baixo
+  g.strokeStyle = 'rgba(255,255,255,.28)'; g.lineWidth = 2;
+  [[10, 10, 150, 22], [10, 40, 170, 78], [188, 10, 58, 108], [10, 128, 74, 38], [92, 128, 74, 38], [174, 128, 72, 38]].forEach(r => g.strokeRect(...r));
+  g.globalCompositeOperation = 'lighter';
+  for (const [x, y, m] of pts) {
+    const px = x * W, py = y * H, r = g.createRadialGradient(px, py, 0, px, py, 22);
+    r.addColorStop(0, m ? 'rgba(255,93,140,.8)' : 'rgba(255,190,80,.75)'); r.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = r; g.beginPath(); g.arc(px, py, 22, 0, 6.283); g.fill();
+  }
+  g.globalCompositeOperation = 'source-over';
+  if (!pts.length) { g.fillStyle = 'rgba(255,226,168,.75)'; g.font = '500 15px Manrope, sans-serif'; g.textAlign = 'center'; g.fillText('observando o uso', W / 2, H / 2 + 5); }
+  calorTex.needsUpdate = true;
+}
+desenharCalor([]);
+
 /* ---------- etiquetas (HTML) ---------- */
 const etiquetas = [];
 function etiqueta(obj, altura, nome, cor) {
@@ -328,8 +374,9 @@ const tCio = etiqueta(cio, 1.62, 'CIO · Wealth', '#3fbf8a');
 const tPersonal = etiqueta(personal, 1.62, 'Brasa · Personal', '#ff7a4d');
 const tNutri = etiqueta(nutri, 1.62, 'Sálvia · Nutricionista', '#2fd0bf');
 const tPulso = etiqueta(pulso, 1.62, 'Pulso · Sistema', '#5b8cff');
+const tLente = etiqueta(lente, 1.62, 'Lente · UX/UI', '#ffbe50');
 function texto(e, t, alerta) { if (e.linha.textContent !== t) e.linha.textContent = t; e.el.classList.toggle('alerta', !!alerta); }
-texto(tVega, 'Pronta'); texto(tCio, '…'); texto(tPersonal, '…'); texto(tNutri, '…'); texto(tPulso, '…');
+texto(tVega, 'Pronta'); texto(tCio, '…'); texto(tPersonal, '…'); texto(tNutri, '…'); texto(tPulso, '…'); texto(tLente, '…');
 
 /* ---------- dados reais ---------- */
 const E = { cofre: 0, rxFoco: [], rxOk: false, pulso: 'ok' };
@@ -371,8 +418,17 @@ async function atualizarDados() {
     tablet.children[0].material.color.setHex(c); tablet.children[0].material.emissive.setHex(c);
   } catch (e) { /* sem dados: a sala continua animada com o último estado */ }
 }
-atualizarDados();
-setInterval(atualizarDados, 60000);
+async function atualizarLente() {
+  try {
+    const u = await fetch('/api/uso?resumo=1', { cache: 'no-store' }).then(r => r.json());
+    desenharCalor(u.pontos || []);
+    const taxa = u.cliques ? u.mortos / u.cliques : 0, alerta = u.raiva > 0 || (u.cliques >= 20 && taxa > .15);
+    texto(tLente, u.cliques ? 'Hoje: ' + u.cliques + ' clique' + (u.cliques > 1 ? 's' : '') + (u.mortos ? ' · ' + u.mortos + ' sem efeito' : '') + (u.raiva ? ' · ' + u.raiva + ' de frustração' : '')
+      : u.ultima_avaliacao ? 'Avaliação de ' + u.ultima_avaliacao.slice(8, 10) + '/' + u.ultima_avaliacao.slice(5, 7) + ' · observando' : 'Observando o uso', alerta);
+  } catch (e) { /* sem dados: mantém o último estado */ }
+}
+atualizarDados(); atualizarLente();
+setInterval(atualizarDados, 60000); setInterval(atualizarLente, 60000);
 
 /* ---------- enquadramento ---------- */
 let W0 = 0, H0 = 0, DIST = 19;
@@ -411,7 +467,7 @@ function quadro(now) {
   ult = now;
   encaixar(s);
   const t = reduz ? 0 : (now - t0) / 1000;
-  vivo(cio, t, 1); vivo(personal, t, 2); vivo(nutri, t, 3); vivo(pulso, t, 4); vivo(vega, t, 5);
+  vivo(cio, t, 1); vivo(personal, t, 2); vivo(nutri, t, 3); vivo(pulso, t, 4); vivo(vega, t, 5); vivo(lente, t, 6);
   // Vega: voz nos olhos, na tela e na cabeça; digita quando está calada
   const alvo = s.fala ? Math.min(1, .3 + s.lvl * 1.5) : 0;
   fala += (alvo - fala) * .25; pensa += ((s.pensa ? 1 : 0) - pensa) * .1;
@@ -437,6 +493,11 @@ function quadro(now) {
   // Pulso: leds piscando e farol respirando
   leds.forEach((l, i) => { l.material.emissiveIntensity = (Math.sin(t * 6 + i * 1.9) > .2 ? 2.2 : .4); l.material.color.setHex(COR_PULSO[E.pulso]); l.material.emissive.setHex(COR_PULSO[E.pulso]); });
   farol.material.emissiveIntensity = 1.5 + 1.2 * Math.sin(t * (E.pulso === 'ok' ? 1.2 : 4));
+  // Lente: lupa passeando devagar e o cavalete respirando
+  lente.userData.bracos[0].rotation.x = -1.35 + .07 * Math.sin(t * .9);
+  lente.userData.bracos[0].rotation.z = -.25 + .05 * Math.sin(t * .6);
+  luzLente.intensity = .45 + .15 * Math.sin(t * 1.1);
+  vidroLupa.material.emissiveIntensity = .3 + .15 * Math.sin(t * 1.7);
   // câmera respira de leve
   const yaw = s.yaw * .35 + .03 * Math.sin(t * .15);
   camera.position.copy(ALVO).addScaledVector(DIR.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw), DIST);

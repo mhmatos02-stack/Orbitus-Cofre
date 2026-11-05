@@ -303,6 +303,7 @@ h1,h2,h3{font-weight:300;letter-spacing:-.01em}.brand h1{font-size:30px;text-tra
 .inp,.set label,.pin{background:rgba(255,255,255,.04)}
 #timer{background:rgba(6,9,15,.94);backdrop-filter:blur(18px);color:#eef2f8;border-top:1px solid rgba(255,255,255,.1)}
 #timer .tc button{color:#eef2f8}
+@media (max-width:560px){#timer .wrap{grid-template-columns:1fr}#timer .tc{justify-content:space-between}#timer .tc button{flex:1;padding:10px 6px;font-size:15px}#timer .tl{letter-spacing:.06em}#timer .tt{font-size:52px}}
 .medal{box-shadow:0 0 40px rgba(127,233,223,.35)}
 .fig{background:rgba(255,255,255,.03)}
 .embed .top-row{display:none}.embed .top .wrap{padding-top:8px}
@@ -329,6 +330,13 @@ body{letter-spacing:.005em}
 .toggle.on{background:rgba(127,233,223,.14);border-color:rgba(127,233,223,.5);color:#bff6f0}
 .note{border-radius:14px;border:1px solid rgba(255,255,255,.06)}
 .note.bad{border-color:rgba(255,93,140,.25)}.note.amber{border-color:rgba(255,210,122,.22)}.note.good{border-color:rgba(127,233,223,.22)}
+.reminders .note.menor{padding:8px 12px;font-size:13px;background:rgba(255,255,255,.025)}
+.reminders .note.principal{padding:14px 16px;font-size:15px}
+.mesa-hoje{align-items:flex-start}
+.mh-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px 22px;flex:1}
+.mh-nm{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px}
+.mh-col ul{margin:0;padding-left:18px;display:grid;gap:5px}
+.mh-col li{line-height:1.45}
 .inp{border-radius:12px;border-color:rgba(255,255,255,.12)}
 .pip{background:rgba(255,255,255,.08)}.pip.on{background:#7fe9df;box-shadow:0 0 10px rgba(127,233,223,.5)}
 .bar{background:rgba(255,255,255,.07)}.bar>i{background:linear-gradient(90deg,#7fe9df,#6c8cff)}
@@ -872,8 +880,11 @@ function viewMesa(){
   return h;
 }
 function mesaHoje(k){const P=(S.mesa&&S.mesa.pareceres)||[];const p=P.find(x=>x.data<k);if(!p||k!==todayKey()||diffDays(p.data,k)>1)return '';const A=p.agentes||{};
-  const L=[A.personal&&A.personal.amanha?`<div><b>Personal:</b> ${esc(A.personal.amanha)}</div>`:'',A.nutri&&A.nutri.amanha?`<div style="margin-top:6px"><b>Nutricionista:</b> ${esc(A.nutri.amanha)}</div>`:''].join('');
-  return L?`<div class="note remind"><span>${L}</span><button class="toggle" data-act="tab" data-tab="mesa">Mesa da Saúde</button></div>`:''}
+  /* acabamento Lente 01: o parecer vira uma ação por linha, Personal e Nutricionista lado a lado */
+  const passos=t=>String(t).replace(/\)\s*,\s+(?=[^\d\s])/g,')\u0001').replace(/\s+·\s+(?=[A-Za-zÀ-ú ]{2,16}:)/g,'\u0001').split(/\u0001|;\s+|(?<=\.)\s+(?=[A-ZÀ-Ú0-9])/).map(x=>x.trim().replace(/\.$/,'')).filter(Boolean).map(x=>x.charAt(0).toUpperCase()+x.slice(1));
+  const col=(nm,t)=>t?`<div class="mh-col"><div class="mh-nm">${nm}</div><ul>${passos(t).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:'';
+  const L=col('Personal',A.personal&&A.personal.amanha)+col('Nutricionista',A.nutri&&A.nutri.amanha);
+  return L?`<div class="note remind mesa-hoje"><div class="mh-grid">${L}</div><button class="toggle" data-act="tab" data-tab="mesa">Mesa da Saúde</button></div>`:''}
 function viewHoje(){
   const k=S.sel,d=getDay(k),cs=checks(k),sc=cs.filter(c=>c.ok).length,sk=sessionKey(k);
   const dayN=diffDays(PLAN.start,k)+1,tripLeft=diffDays(k,PLAN.trip);
@@ -903,6 +914,10 @@ function viewHoje(){
     <div class="grid2">
       <label class="field"><span>${isSun?'Domingo: peso oficial, em jejum, depois do banheiro (kg)':'Peso (kg) · o oficial é no domingo, em jejum'}</span><input class="inp" id="h-weight" inputmode="decimal" data-f="weight" value="${d.weight??''}" placeholder="71,0"></label>
       <label class="field"><span>Sono (horas)</span><input class="inp" id="h-sleep" inputmode="decimal" data-f="sleep" value="${d.sleep??''}" placeholder="7,5"></label>
+    </div>
+    <div class="grid2">
+      <label class="field"><span>Passos do dia${d.saude_ios?' · vindo do app Saúde':''}</span><input class="inp" id="h-steps2" inputmode="numeric" data-f="steps" value="${d.steps??''}" placeholder="8.000"></label>
+      <label class="field"><span>Remo leve (min) · cada minuto conta 100 passos</span><input class="inp" id="h-mov2" inputmode="numeric" data-f="mov" value="${d.mov||''}" placeholder="0"></label>
     </div>
     <label class="field"><span>${isSun?'Domingo: cintura oficial, na altura do umbigo (cm)':'Cintura (cm) · a oficial é no domingo'}</span><input class="inp" id="h-waist" inputmode="decimal" data-f="waist" value="${d.waist??''}" placeholder="92,0"></label>
     ${(d.saude_ios||d.health)?`<div class="field" style="grid-column:1/-1"><span>Do app Saúde${d.saude_ios?' · atualizado '+d.saude_ios.slice(11,16):''}</span><div class="small" style="padding-top:6px">${[d.steps!=null?f0(d.steps)+' passos':'',d.health&&d.health.kcal_ativas!=null?f0(d.health.kcal_ativas)+' kcal ativas':'',d.health&&d.health.exercicio_min!=null?f0(d.health.exercicio_min)+' min de exercício':'',d.health&&d.health.distancia_km!=null?String(d.health.distancia_km).replace('.',',')+' km':''].filter(Boolean).join(' · ')}</div></div>`:''}
@@ -1399,7 +1414,10 @@ function reminders(k){
   if(h>=20.5&&d.steps==null)out.push({c:'amber',t:'<b>Registre os passos do dia</b> antes de dormir. Copie o número do app Atividade.',b:`<button class="toggle" data-act="focus" data-id="h-steps">Registrar</button>`});
   return out;
 }
-function remindersHTML(k){const r=reminders(k);if(!r.length)return '';return `<div class="reminders">${r.map(x=>`<div class="note ${x.c} remind"><span>${x.t}</span>${x.b}</div>`).join('')}</div>`}
+function remindersHTML(k){const r=reminders(k);if(!r.length)return '';
+  /* acabamento Lente 01: o aviso mais urgente em destaque, os demais menores */
+  const ord=r.map((x,i)=>[x,i]).sort((a,b)=>((a[0].c==='bad'?0:a[0].c==='amber'?1:2)-(b[0].c==='bad'?0:b[0].c==='amber'?1:2))||a[1]-b[1]).map(a=>a[0]);
+  return `<div class="reminders">${ord.map((x,i)=>`<div class="note ${x.c} remind${i?' menor':' principal'}"><span>${x.t}</span>${x.b}</div>`).join('')}</div>`}
 
 /* workout review */
 function modeKg(sets){const c={};sets.forEach(r=>{const v=num(r.kg);if(v!=null)c[v]=(c[v]||0)+1});let best=null,bn=0;for(const v in c){if(c[v]>bn||(c[v]===bn&&+v<best)){best=+v;bn=c[v]}}return best}
@@ -1769,8 +1787,13 @@ function beep(times=2,freq=880){try{const a=TM.audio;if(!a)return;for(let i=0;i<
 async function wake(){try{if(navigator.wakeLock&&!TM.lock){TM.lock=await navigator.wakeLock.request('screen');TM.lock.addEventListener('release',()=>{TM.lock=null})}}catch(e){}}
 function startTimer(phases){try{window.parent.postMessage({orbitus:'timer'},location.origin)}catch(e){}ensureAudio();wake();TM.phases=phases;TM.idx=0;runPhase()}
 function runPhase(){const p=TM.phases[TM.idx];TM.total=p.sec;TM.end=Date.now()+p.sec*1000;clearInterval(TM.iv);TM.iv=setInterval(tick,250);tick()}
+/* Dentro do painel no celular, a barra de navegação (fixa no rodapé do painel) cobria o timer: sobe o timer até ficar acima dela */
+function folgaNav(){try{if(window.parent===window)return 0;const pd=parent.document,nav=pd.getElementById('nav'),fr=pd.getElementById('trFrame');
+  if(!nav||!fr||parent.getComputedStyle(nav).position!=='fixed')return 0;const a=fr.getBoundingClientRect(),n=nav.getBoundingClientRect();
+  return Math.max(0,Math.min(Math.round(a.bottom-n.top),Math.round(a.height-160)))}catch(e){return 0}}
 function tick(){
   const el=document.getElementById('timer');const p=TM.phases[TM.idx];if(!p)return stopTimer();
+  const fg=folgaNav();el.style.bottom=fg+'px';el.style.paddingBottom=fg?'0':'';
   const left=Math.max(0,Math.ceil((TM.end-Date.now())/1000));
   if(left<=0){beep(p.hard?3:2,p.hard?660:880);const cb=p.onEnd;TM.idx++;if(TM.idx<TM.phases.length)runPhase();else stopTimer();if(cb)try{cb()}catch(e){}return}
   el.hidden=false;document.body.classList.add('timing');el.className=p.hard?'hard':'';
@@ -1862,7 +1885,7 @@ document.addEventListener('change',e=>{
   const el=e.target;const k=S.sel;
   if(el.dataset.mi){const sl=el.dataset.mi,i=+el.dataset.i;const v=num(el.value);mutate(k,d=>{const it=d.meals[sl]&&d.meals[sl].items[i];if(it)it.q=v!=null&&v>0?v:0});return}
   if(el.dataset.pf){const id=el.dataset.pf;const v=num(el.value);_cc=null;pmutate(()=>pSet(id,v||0));return}
-  if(el.dataset.f){const f=el.dataset.f;const v=num(el.value);mutate(k,d=>{d[f]=f==='steps'&&v!=null?Math.round(v):v})}
+  if(el.dataset.f){const f=el.dataset.f;const v=num(f==='steps'?String(el.value).replace(/[.\s]/g,''):el.value);mutate(k,d=>{d[f]=f==='steps'&&v!=null?Math.round(v):v})}
   else if(el.dataset.set){const id=el.dataset.ex,i=+el.dataset.i,f=el.dataset.set;
     mutate(k,d=>{d.workout.sets=d.workout.sets||{};const arr=d.workout.sets[id]=d.workout.sets[id]||[];while(arr.length<=i)arr.push(null);const r=arr[i]||{done:false};r[f]=num(el.value);
       if(f==='kg'&&r.reps==null){const rp=document.getElementById(`rp-${k}-${id}-${i}`);r.reps=rp?num(rp.value):null}
@@ -1899,4 +1922,5 @@ setInterval(()=>{if(!isTyping()&&S.tab==='hoje'&&!S.coachBusy)render()},5*60*100
 initCloud();
 </script>
 
+<script src="/static/uso.js" defer></script>
 </body></html>

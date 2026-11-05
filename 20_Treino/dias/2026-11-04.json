@@ -1,0 +1,169 @@
+{
+ "date": "2026-11-04",
+ "weight": null,
+ "waist": null,
+ "steps": null,
+ "sleep": null,
+ "water": 12,
+ "meals": {
+  "cafe": true,
+  "almoco": true,
+  "lanche": true,
+  "jantar": true
+ },
+ "extras": [
+  {
+   "n": "Doce planejado",
+   "k": 150,
+   "p": 2,
+   "t": "doce"
+  }
+ ],
+ "habits": {
+  "jantar16": true
+ },
+ "workout": {
+  "letter": null,
+  "sets": {
+   "desenv": [
+    {
+     "kg": 18,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 18,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 18,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 18,
+     "reps": 10,
+     "done": true
+    }
+   ],
+   "elev_lat": [
+    {
+     "kg": 9,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 9
+    },
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 9
+    }
+   ],
+   "face_pull": [
+    {
+     "kg": null,
+     "reps": 20,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 20,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 20,
+     "done": true
+    }
+   ],
+   "cruc_inv": [
+    {
+     "kg": 5,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 5,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 5,
+     "reps": 10,
+     "done": true
+    }
+   ],
+   "rosca": [
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 10
+    },
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 10
+    },
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 10
+    }
+   ],
+   "triceps_fr": [
+    {
+     "kg": 15,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": 15,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 15,
+     "kg": 15
+    }
+   ],
+   "martelo": [
+    {
+     "kg": 12,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "kg": 10,
+     "reps": 10,
+     "done": true
+    }
+   ],
+   "mergulho": [
+    {
+     "kg": null,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 15,
+     "done": true
+    }
+   ]
+  },
+  "done": true,
+  "warm": true,
+  "remo": false,
+  "yoga": true,
+  "rec": "ioga",
+  "pilates": true
+ },
+ "updated": 1793837924875,
+ "mov": 10
+}

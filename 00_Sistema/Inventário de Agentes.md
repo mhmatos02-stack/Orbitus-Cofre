@@ -27,6 +27,7 @@ Levantamento feito pelo Orbitus, só leitura. Nada foi alterado nos sistemas. Ba
 | Lembrete treino e alimentação | tarefa agendada `trig_01X49W5i4vrv4DJEMCKiBcNA` | 13:37, 20:37 | `rotinas/lembretes.json` | sim |
 | Mesa da Saúde | tarefa agendada `trig_01FMUVFYiMDpn6D71UAeXwW8` | 21:47 | `Mesa da Saúde/pareceres/` | sim |
 | Sentinela das rotinas do Wealth | tarefa agendada `trig_015UCipc8iqfisz4Ty55dtTT` | 10:37, 22:37 | `rotinas/sentinela_wealth.json` | sim (desde 02/11) |
+| Lente (UX/UI) | tarefa agendada (a criar) | qua 09:23 | `rotinas/lente.json` · `00_Sistema/lente/` | sim (a partir de 11/11) |
 | App (painel) | launchd `com.orbitus.app` | sempre (KeepAlive) | `reinicio.log` | não |
 | Backup do cofre | launchd `com.orbitus.backup` | 23:17 | `rotinas/backup.json` | sim |
 | Tailscale login | launchd `com.orbitus.tailscale` | (no login) | `~/.orbitus/` | não |

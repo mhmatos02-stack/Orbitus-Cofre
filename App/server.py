@@ -38,8 +38,10 @@ import tarefas_api
 import push
 import agenda_pro
 import cio
+import diario
 concierge.AGUA_FN = lambda n: rotina.agua_somar(VAULT, date.today().isoformat(), n)
 concierge.PESO_FN = lambda kg: treino.registrar_saude(VAULT, {'peso': kg})
+concierge.PASSOS_FN = lambda n: treino.registrar_saude(VAULT, {'passos': n})
 
 TASK_RE = re.compile(r'^(\s*[-*] \[)([ xX])(\] )(.*)$')
 DUE_RE = re.compile(r'📅\s*(\d{4}-\d{2}-\d{2})')
@@ -680,6 +682,16 @@ def rotinas_saude():
                 falhas.append('Sentinela achou rotina do Wealth parada: ' + (sw.get('detalhe') or '')[:120])
             else:
                 ok.append('sentinela do Wealth')
+    # Lente (UX/UI): quarta 09:23 grava 00_Sistema/rotinas/lente.json (a partir de 11/11)
+    if hoje >= '2026-11-11':
+        ln = ler_json(os.path.join(VAULT, '00_Sistema', 'rotinas', 'lente.json'), None) or {}
+        qua = date.today() - timedelta(days=(date.today().weekday() - 2) % 7)
+        if qua == date.today() and (agora.hour, agora.minute) < (10, 30):
+            qua -= timedelta(days=7)
+        if (ln.get('quando') or '')[:10] < qua.isoformat():
+            falhas.append('Lente não avaliou desde ' + ((ln.get('quando') or '?')[:10]))
+        else:
+            ok.append('lente')
     saude = '🔴' if falhas else '🟡' if avisos else '🟢'
     txt = ('vermelho' if falhas else 'amarelo' if avisos else 'verde') + '. ' + (
         'Em dia: ' + ', '.join(ok) + '.' if ok else '') + ((' Atenção: ' + '; '.join(avisos) + '.') if avisos else '')
@@ -720,6 +732,63 @@ def _mesa_home():
     lanc = [l for l in e['lancamentos'] if l.get('status') == 'aguardando']
     return {'disponivel': True, 'abertas': abertas, 'respostas': e['respostas'], 'proximos_passos': prox,
             'lancamentos_aguardando': len(lanc), 'hoje': hoje}
+
+
+USO_CAMPOS = {'em': str, 'ev': str, 'aba': str, 'alvo': str, 'x': (int, float), 'y': (int, float),
+              'vw': (int, float), 'vh': (int, float), 'morto': bool, 'raiva': (int, float), 'seg': (int, float)}
+
+
+def uso_gravar(body):
+    """Eventos de uso para o Lente e o mapa de calor: só posição, elemento e aba (nunca texto)."""
+    evs = body.get('eventos') if isinstance(body, dict) else None
+    if not isinstance(evs, list):
+        return {'ok': False}
+    linhas = []
+    for e in evs[:200]:
+        if not isinstance(e, dict) or e.get('ev') not in ('clique', 'aba', 'tempo'):
+            continue
+        d = {k: (v[:120] if isinstance(v, str) else v) for k, v in e.items() if k in USO_CAMPOS and isinstance(v, USO_CAMPOS[k])}
+        if not re.fullmatch(r'[a-z0-9_-]{1,20}', d.get('aba', '')):
+            continue
+        d['em'] = datetime.now().isoformat(timespec='seconds')   # hora do Mac, não do navegador
+        linhas.append(json.dumps(d, ensure_ascii=False))
+    if linhas:
+        pasta = os.path.join(VAULT, '00_Sistema', 'uso')
+        os.makedirs(pasta, exist_ok=True)
+        with LOCK:
+            with open(os.path.join(pasta, date.today().strftime('%Y-%m') + '.jsonl'), 'a', encoding='utf-8') as f:
+                f.write('\n'.join(linhas) + '\n')
+    return {'ok': True, 'gravados': len(linhas)}
+
+
+def uso_resumo():
+    """Para o Lente na sala 3D: cliques de hoje, cliques sem efeito e os pontos da Home (sem texto)."""
+    hoje = date.today().isoformat()
+    evs = [e for e in uso_ler('?dias=1')['eventos'] if (e.get('em') or '')[:10] == hoje]
+    cl = [e for e in evs if e.get('ev') == 'clique']
+    pts = [[e.get('x', 0), min(1.0, round((e.get('y') or 0) / 1300, 3)), 1 if e.get('morto') else 0]
+           for e in cl if e.get('aba') == 'home'][-300:]
+    pasta = os.path.join(VAULT, '00_Sistema', 'lente')
+    av = sorted(n[:10] for n in os.listdir(pasta) if re.fullmatch(r'\d{4}-\d{2}-\d{2}\.md', n)) if os.path.isdir(pasta) else []
+    return {'cliques': len(cl), 'mortos': sum(1 for e in cl if e.get('morto')), 'raiva': sum(1 for e in cl if e.get('raiva')),
+            'abas': len({e.get('aba') for e in evs if e.get('aba')}), 'pontos': pts, 'ultima_avaliacao': av[-1] if av else None}
+
+
+def uso_ler(caminho):
+    m = re.search(r'[?&]dias=(\d+)', caminho)
+    dias = min(int(m.group(1)) if m else 30, 120)
+    corte = (datetime.now() - timedelta(days=dias)).isoformat(timespec='seconds')
+    pasta, out = os.path.join(VAULT, '00_Sistema', 'uso'), []
+    if os.path.isdir(pasta):
+        for n in sorted(os.listdir(pasta))[-5:]:
+            for l in (ler(os.path.join(pasta, n)) or '').splitlines():
+                try:
+                    e = json.loads(l)
+                except ValueError:
+                    continue
+                if e.get('em', '') >= corte:
+                    out.append(e)
+    return {'eventos': out[-20000:]}
 
 
 class H(BaseHTTPRequestHandler):
@@ -804,6 +873,16 @@ class H(BaseHTTPRequestHandler):
             self.send_header('Content-Length', str(len(b)))
             self.end_headers()
             self.wfile.write(b)
+        elif self.path.split('?')[0] in ('/static/uso.js', '/static/demo.js'):
+            b = (ler(os.path.join(STATIC, self.path.split('?')[0][8:])) or '').encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/javascript; charset=utf-8')
+            self.send_header('Cache-Control', 'no-cache')
+            self.send_header('Content-Length', str(len(b)))
+            self.end_headers()
+            self.wfile.write(b)
+        elif self.path.split('?')[0] == '/api/uso':
+            self._json(uso_resumo() if 'resumo=1' in self.path else uso_ler(self.path))
         elif self.path.split('?')[0] == '/sw.js':
             b = (ler(os.path.join(STATIC, 'sw.js')) or '').encode('utf-8')
             self.send_response(200)
@@ -942,7 +1021,7 @@ class H(BaseHTTPRequestHandler):
             return self._json({'erro': 'origem recusada'}, 403)
         try:
             n = int(self.headers.get('Content-Length') or 0)
-            body = json.loads(self.rfile.read(min(n, 400000)) or b'{}')
+            body = json.loads(self.rfile.read(min(n, 3500000 if self.path == '/api/voz/transcrever' else 400000)) or b'{}')
             if self.path == '/api/alternar':
                 nova, n, prox = alternar(body['arquivo'], int(body['linha']), body['texto'])
                 return self._json({'ok': True, 'texto': nova, 'linha': n, 'proxima': prox})
@@ -1029,6 +1108,8 @@ class H(BaseHTTPRequestHandler):
                 return self._json(r)
             elif self.path == '/api/tarefas/sugestao':
                 return self._json(tarefas_api.responder_sugestao(VAULT, body, _sugestoes()))
+            elif self.path == '/api/uso':
+                return self._json(uso_gravar(body))
             elif self.path == '/api/diag':
                 linha = json.dumps({'em': datetime.now().isoformat(timespec='seconds'), 'ev': str(body.get('ev'))[:30], 'det': str(body.get('det'))[:80],
                                     'ua': str(body.get('ua'))[:140], 'app': bool(body.get('sa'))}, ensure_ascii=False)
@@ -1060,6 +1141,15 @@ class H(BaseHTTPRequestHandler):
                 return self._json({'ok': True})
             elif self.path == '/api/treino/saude':
                 return self._json(treino.registrar_saude(VAULT, body))
+            elif self.path == '/api/diario/entender':
+                d = str(body.get('dia') or date.today().isoformat())[:10]
+                return self._json(diario.entender(VAULT, body.get('texto'), d, dia_ordenado(d).get('itens', []), 140))
+            elif self.path == '/api/diario/aplicar':
+                return self._json(diario.aplicar(VAULT, body, alternar, capturar))
+            elif self.path == '/api/diario/desfazer':
+                return self._json(diario.desfazer(VAULT, body.get('id')))
+            elif self.path == '/api/voz/transcrever':
+                return self._json(diario.transcrever(body))
             elif self.path == '/api/voz/escolher':
                 return self._json(concierge.escolher_voz(body))
             elif self.path == '/api/voz':

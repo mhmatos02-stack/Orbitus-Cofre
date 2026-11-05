@@ -16,3 +16,19 @@
 2026-11-02T11:02:45  servidor no ar (pid 3582)
 2026-11-02T11:09:53  código novo (server.py) conferido: reiniciando
 2026-11-02T11:09:53  servidor no ar (pid 3631)
+2026-11-04T14:59:38  código novo (concierge.py, server.py) conferido: reiniciando
+2026-11-04T14:59:38  servidor no ar (pid 27364)
+2026-11-04T17:30:27  código novo (server.py) conferido: reiniciando
+2026-11-04T17:30:27  servidor no ar (pid 29223)
+2026-11-04T17:33:49  código novo (server.py) conferido: reiniciando
+2026-11-04T17:33:49  servidor no ar (pid 29316)
+2026-11-04T17:39:06  código novo (emails.py) conferido: reiniciando
+2026-11-04T17:39:06  servidor no ar (pid 29441)
+2026-11-04T17:40:56  código novo (server.py) conferido: reiniciando
+2026-11-04T17:40:56  servidor no ar (pid 29483)
+2026-11-04T18:50:01  código novo (server.py) conferido: reiniciando
+2026-11-04T18:50:01  servidor no ar (pid 30445)
+2026-11-04T19:15:35  código novo (concierge.py, diario.py, server.py) conferido: reiniciando
+2026-11-04T19:15:35  servidor no ar (pid 30918)
+2026-11-04T19:16:50  código novo (diario.py) conferido: reiniciando
+2026-11-04T19:16:50  servidor no ar (pid 30945)

@@ -4,13 +4,27 @@ O Orbitus é o **painel central da vida do Marcio**: um cofre Obsidian que junta
 treino e alimentação, viagens e o estado de todos os outros sistemas dele. Ao trabalhar aqui, você opera o hub,
 não um assistente genérico.
 
-## Princípios (aprovados em 2026-10-30)
+## Princípios (aprovados em 2026-10-30; princípio 3 reescrito em 2026-11-04)
 
 1. **Uso diário primeiro.** O Orbitus existe para ser aberto todo dia.
 2. **Saúde visível.** Todo sistema e toda rotina aparecem no painel com 🟢/🟡/🔴. Rotina que parar fica vermelha
    no dia seguinte, nunca em silêncio (ver "Rotinas do Orbitus").
-3. **Um módulo por vez.** Um módulo novo só entra depois que o anterior sobreviveu uma semana de uso real.
-   Em 2026-10-30 entraram vários de uma vez; a semana seguinte é de uso e correções, sem módulo novo.
+3. **Mudança entra por necessidade comprovada, não por data.** Toda mudança é classificada antes de ser feita:
+   - **Correção** (algo quebrado ou escondido): entra direto.
+   - **Acabamento** (melhora sem mudar a estrutura: texto, espaçamento, contraste, carregamento): entra com evidência.
+   - **Estrutural** (aba, módulo, agente, redesenho visual): passa pelo portão abaixo e o Marcio aprova.
+     Agente aprovado ganha lugar na sala 3D na mesma entrega, sem novo portão (ver "Sala dos agentes").
+
+   Portão das mudanças estruturais (as quatro precisam ser "sim"):
+   1. **Há uma dor com evidência?** Dado de uso (mapa de calor, tempo na aba, clique sem efeito), falha do Pulso,
+      ou um "tentei fazer X e não consegui" do Marcio. "Ficaria bonito" ou "seria legal ter" não conta.
+   2. **O sistema está estável?** Com 🔴 aberto no painel, só entram correções.
+   3. **Não cabe no que já existe?** Primeiro melhorar a tela ou o agente atual; coisa nova só se a dor não couber.
+   4. **É a única mudança grande em andamento?** A próxima começa quando a anterior foi usada e conferida.
+
+   Registro e conferência: cada mudança estrutural vira uma linha em `00_Sistema/mudancas.md` (dor, evidência,
+   decisão). Sete dias depois o Lente confere no uso se a dor diminuiu; se não diminuiu, a mudança é revista ou desfeita.
+   Quem avalia: Lente (uso), Pulso (estabilidade), Marcio (decide).
 
 ## Estrutura
 
@@ -48,13 +62,33 @@ Treino (com Mesa da Saúde), Wealth (com a Mesa de investimentos), Agenda, E-mai
 | 10:37 e 22:37 | Sentinela das rotinas do Wealth (confere, tenta de novo uma vez, avisa) | `00_Sistema/rotinas/sentinela_wealth.json` |
 | 13:37 e 20:37 | Lembrete de treino e alimentação (push) | `00_Sistema/rotinas/lembretes.json` |
 | 21:47 | Mesa da Saúde: parecer do Personal e da Nutricionista | `20_Treino/Mesa da Saúde/pareceres/AAAA-MM-DD.json` |
+| qua 09:23 | Lente: avaliação semanal de UX/UI (`00_Sistema/agentes/lente.md`) | `00_Sistema/rotinas/lente.json` · avaliações em `00_Sistema/lente/` |
 | 23:17 | Backup do cofre (launchd `com.orbitus.backup`, não é tarefa do Claude) | `00_Sistema/rotinas/backup.json` |
 
 O painel mostra tudo isso como o sistema "Rotinas do Orbitus".
 
 ## Sala dos agentes (Home)
 
-O centro da Home é a sala 3D (`App/static/rosto/sala3d.js`, three.js). Personagens: Vega (concierge, mesa), CIO (cofre do Wealth), Brasa (personal) e Sálvia (nutricionista) no raio-x, Pulso (saúde do sistema) no rack. Cada boneco mostra um dado real de `/api/dados` e `/api/sistema`; sem valores em reais. Regra: boneco sem dado por trás não entra. `?anel=1` volta ao anel 2D. Visual congelado até 2026-11-24 (só ajustes).
+O centro da Home é a sala 3D (`App/static/rosto/sala3d.js`, three.js). Personagens: Vega (concierge, mesa), CIO (cofre do Wealth), Brasa (personal) e Sálvia (nutricionista) no raio-x, Pulso (saúde do sistema) no rack, Lente (UX/UI) com a lupa e o cavalete que mostra o mapa de calor do dia (`/api/uso?resumo=1`, entrou em 2026-11-04 a pedido do Marcio). Cada boneco mostra um dado real de `/api/dados` e `/api/sistema`; sem valores em reais. **A sala é o mostruário do Orbitus**: o Marcio a usa para apresentar e vender o sistema a empresas e pessoas.
+Por isso, **todo agente ativo precisa estar na sala**, entregue junto com o agente (decisão de 2026-11-04). Para cada agente novo:
+personagem com cor e objeto próprios ligados à função; etiqueta "Nome · Função" com um dado real (sem dado ainda,
+mostra o estado: "em teste desde DD/MM"); posição que não cubra outro personagem nem a legenda central; conferir no
+Chrome antes de entregar, nos dois modos (real e `?demo=1`). Agente desligado sai da sala. `?anel=1` volta ao anel 2D.
+
+## Modo de demonstração (mostruário)
+
+Para apresentar o Orbitus a clientes: abrir `http://localhost:8787/?demo=1` (vale para a aba até `?demo=0`, ou o
+link "sair" no selo do topo). `App/static/demo.js` intercepta todas as leituras de `/api/` e devolve dados fictícios
+(pessoa "Ana", datas relativas a hoje); bloqueia toda gravação; a Vega responde com falas prontas, sem chamar a API;
+a coleta de uso fica desligada. A vitrine é a Home com a sala; as outras abas mostram um aviso no lugar dos dados.
+**Agente novo entra também no demo.js** (o dado fictício da etiqueta dele), senão aparece vazio na vitrine.
+
+## Uso e mapa de calor (Lente)
+
+`App/static/uso.js` (carregado no painel e no treino) grava cliques, troca de aba e tempo em cada aba em
+`00_Sistema/uso/AAAA-MM.jsonl` via POST `/api/uso`. Só posição, elemento (tag/id/classe) e aba: **nunca texto**.
+Mapa de calor por cima da tela real: abrir `http://localhost:8787/?calor=1` (amarelo = clique útil, rosa = clique
+em algo que não faz nada). Quem lê: o Lente (UX/UI), toda quarta. Cada proposta dele vem classificada pelo princípio 3.
 
 ## Concierge (Vega)
 
