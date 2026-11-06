@@ -8,7 +8,7 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Vender toda a BSOX39 — Wealth Office · Plano C2 · rode a pré-ordem antes 🔺 📅 2026-10-30 #financas ✅ 2026-10-30
 - [x] Instalar Dataview, Tasks e Homepage no Orbitus — Orbitus · configuração 📅 2026-10-30 #pessoal ✅ 2026-10-30
 - [x] Mandar extratos do mês para a pasta Entrada — conta, fatura, Tesouro, B3 · até dia 5 📅 2026-11-03 #financas #aguardando ✅ 2026-11-02
-- [ ] Escolher o caminho do Plano 2026–2028 — depois do Copom 📅 2026-11-05 #financas
+- [x] Escolher o caminho do Plano 2026–2028 — depois do Copom 📅 2026-11-05 #financas ✅ 2026-11-05
 - [ ] Decidir a trilha de aporte (Goals v3) — contrato termina em dezembro 📅 2026-11-16 #financas
 - [x] Montar o plano de treino até dezembro — Orbitus · próximo módulo #pessoal ✅ 2026-10-30
 - [x] Cancelar o ClickUp 🔽 #pessoal ✅ 2026-10-30
@@ -23,7 +23,8 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Corrigir o registro de sábado com kcal explícitas (picanha, wagyu, linguiça, nhoque, sobremesa) — sugerido por Mesa da Saúde · Nutricionista 📅 2026-11-02 #saude #aguardando ➕ 2026-11-02 ✅ 2026-11-02
 - [x] Comprar bananas, mamão e ovos para a semana — sugerido por Mesa da Saúde · Nutricionista 📅 2026-11-02 #saude ➕ 2026-11-02 ✅ 2026-11-02
 - [ ] Medir a cintura em casa, em jejum, na altura do umbigo, 3 vezes, e anotar a média — sugerido por Mesa da Saúde · Personal trainer 📅 2026-11-08 #saude ➕ 2026-11-02
-- [ ] Rosuvastatina 🔁 every day 📅 2026-11-05 ⏰ 20:00 #saude ➕ 2026-11-04
+- [ ] Rosuvastatina 🔁 every day 📅 2026-11-06 ⏰ 20:00 #saude ➕ 2026-11-05
+- [x] Rosuvastatina 🔁 every day 📅 2026-11-05 ⏰ 20:00 #saude ➕ 2026-11-04 ✅ 2026-11-05
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-04 ⏰ 20:00 #saude ➕ 2026-11-04 ✅ 2026-11-04
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-03 ⏰ 20:00 #saude ➕ 2026-11-03 ✅ 2026-11-04
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-02 ⏰ 20:00 #saude ➕ 2026-11-02 ✅ 2026-11-03

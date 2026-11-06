@@ -1,7 +1,7 @@
 {
   "rotina": "sentinela_wealth",
-  "quando": "2026-11-04T22:37",
+  "quando": "2026-11-05T22:37",
   "status": "atencao",
-  "detalhe": "Rotinas de hoje rodaram (health check, news radar, dashboard, mesa de caixa); ressalva: health check com resultado ATENÇÃO (2 avisos, 0 falhas).",
+  "detalhe": "Rotinas de hoje em dia (health check, news radar, tesouro, dashboard, mesa caixa 20:51); ressalva: health check com resultado ATENÇÃO (0 falhas).",
   "retentativas": {}
 }

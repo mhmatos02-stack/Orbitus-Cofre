@@ -1,0 +1,192 @@
+{
+ "date": "2026-11-05",
+ "weight": null,
+ "waist": null,
+ "steps": null,
+ "sleep": null,
+ "water": 13,
+ "meals": {
+  "almoco": true,
+  "lanche": {
+   "c": 1,
+   "items": [
+    {
+     "f": "whey",
+     "q": 0.8
+    },
+    {
+     "f": "banana",
+     "q": 1
+    },
+    {
+     "f": "leite",
+     "q": 200
+    }
+   ],
+   "txt": "Whey protein 24g batido com banana e leite"
+  },
+  "jantar": {
+   "c": 1,
+   "items": [
+    {
+     "f": "pao",
+     "q": 1
+    },
+    {
+     "f": "frango",
+     "q": 120
+    },
+    {
+     "n": "Queijo mussarela",
+     "k": 60,
+     "p": 4
+    }
+   ],
+   "txt": "Mussarela"
+  }
+ },
+ "extras": [
+  {
+   "n": "Doce fora do plano",
+   "k": 350,
+   "p": 4,
+   "t": "doceExtra"
+  }
+ ],
+ "habits": {
+  "jantar16": true
+ },
+ "workout": {
+  "letter": null,
+  "sets": {
+   "sup_inc": [
+    {
+     "kg": 24,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 24,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 24,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 24,
+     "reps": 10,
+     "done": true
+    }
+   ],
+   "rem_uni": [
+    {
+     "kg": 26,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 26,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 26,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 26,
+     "reps": 12,
+     "done": true
+    }
+   ],
+   "sup_reto": [
+    {
+     "kg": 22,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 22,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 22,
+     "reps": 10,
+     "done": true
+    }
+   ],
+   "rem_curv": [
+    {
+     "kg": 16,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "kg": 16,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "kg": 16,
+     "reps": 8,
+     "done": true
+    }
+   ],
+   "cruc_inc": [
+    {
+     "kg": 12,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": 12,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": 12,
+     "reps": 15,
+     "done": true
+    }
+   ],
+   "puxada_el": [
+    {
+     "kg": null,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 15,
+     "done": true
+    }
+   ],
+   "flexao": [
+    {
+     "done": true,
+     "reps": 20,
+     "kg": null
+    },
+    {
+     "kg": null,
+     "reps": 25,
+     "done": true
+    }
+   ]
+  },
+  "done": true,
+  "warm": true,
+  "remo": false
+ },
+ "updated": 1793926206787
+}

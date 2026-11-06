@@ -482,6 +482,9 @@ def _chave_google():
         return None
 
 
+_ULT = {'msg': ''}
+
+
 def _stt(pcm, chave, modelo=True):
     cfg = {'encoding': 'LINEAR16', 'sampleRateHertz': 16000, 'languageCode': 'pt-BR', 'enableAutomaticPunctuation': True}
     if modelo:
@@ -500,8 +503,10 @@ def _stt(pcm, chave, modelo=True):
         msg = (j.get('error') or {}).get('message', '')
         if e.code == 400 and modelo and 'model' in msg.lower():
             return _stt(pcm, chave, False)
+        if 'are blocked' in msg:
+            raise RuntimeError('STT_BLOQUEADA')
         if e.code == 403 or 'SERVICE_DISABLED' in json.dumps(j) or 'has not been used' in msg or 'disabled' in msg.lower():
-            raise RuntimeError('STT_DESLIGADO')
+            _ULT['msg'] = msg[:300]; raise RuntimeError('STT_DESLIGADO')
         raise RuntimeError('o Google respondeu %s%s' % (e.code, ': ' + msg[:200] if msg else ''))
     except urllib.error.URLError:
         r = subprocess.run(['/usr/bin/curl', '-sS', '--max-time', '90', url, '-H', 'content-type: application/json',
@@ -509,8 +514,10 @@ def _stt(pcm, chave, modelo=True):
         j = json.loads(r.stdout.decode('utf-8') or '{}')
         if j.get('error'):
             msg = j['error'].get('message', '')
+            if 'are blocked' in msg:
+                raise RuntimeError('STT_BLOQUEADA')
             if 'SERVICE_DISABLED' in json.dumps(j) or 'has not been used' in msg or 'disabled' in msg.lower():
-                raise RuntimeError('STT_DESLIGADO')
+                _ULT['msg'] = msg[:300]; raise RuntimeError('STT_DESLIGADO')
             raise RuntimeError('o Google respondeu: ' + msg[:200])
         return j
 
@@ -536,7 +543,11 @@ def transcrever(corpo):
         if str(e) == 'STT_DESLIGADO':
             raise ValueError('O microfone novo precisa da API "Cloud Speech-to-Text" ligada no mesmo projeto do Google da voz. '
                              'Abra console.cloud.google.com, APIs e serviços, Biblioteca, procure "Cloud Speech-to-Text API" e clique em Ativar. '
-                             'Enquanto isso, use o ditado do teclado no campo de texto.')
+                             'Enquanto isso, use o ditado do teclado no campo de texto. (Google: %s)' % _ULT['msg'][:160])
+        if str(e) == 'STT_BLOQUEADA':
+            raise ValueError('A chave do Google da Vega só libera a voz (Text-to-Speech), por isso o áudio não foi transcrito. '
+                             'No console.cloud.google.com: APIs e serviços › Credenciais › abra a chave da Vega › Restrições de API › '
+                             'marque também "Cloud Speech-to-Text API" › Salvar. Leva uns minutos para valer.')
         raise ValueError(str(e))
     partes = [((r.get('alternatives') or [{}])[0].get('transcript') or '').strip() for r in j.get('results') or []]
     return {'texto': ' '.join(p for p in partes if p)}

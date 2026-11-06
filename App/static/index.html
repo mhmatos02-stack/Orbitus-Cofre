@@ -315,7 +315,7 @@ body.mesa #vMesa{display:flex}body.mesa #vHome{display:none!important}
 .corb{width:12px;height:12px;border-radius:50%;flex:none;background:radial-gradient(circle,#fff,#7fe9df 50%,rgba(127,233,223,0) 72%);box-shadow:0 0 12px rgba(127,233,223,.8)}
 .conc.busy .corb{animation:pul2 .9s ease-in-out infinite}@keyframes pul2{50%{transform:scale(1.6);opacity:.6}}
 .cchips{display:flex;gap:6px;flex-wrap:wrap}.cchips button{height:28px;padding:0 11px;border-radius:9px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--mut2);font:400 12px Manrope;cursor:pointer}.cchips button.now{border-color:rgba(255,90,235,.55);color:#fff;background:rgba(230,50,210,.14)}
-.cans{border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.6;color:#e3e8f1;max-height:190px;overflow:auto}
+.cans{border-radius:16px;padding:14px 16px;font-size:14px;line-height:1.6;color:#e3e8f1;max-height:190px;overflow:auto;position:relative}.cans .cx{position:sticky;top:-6px;float:right;margin:-6px -8px 0 8px;width:28px;height:28px;border-radius:9px;border:1px solid rgba(255,255,255,.12);background:rgba(10,12,22,.75);color:var(--mut2);font-size:18px;line-height:1;cursor:pointer;z-index:1}
 .cans small{display:block;color:var(--mut);font-size:12px;margin-top:8px}
 .cans .q{color:var(--mut2);font-size:12px;margin-bottom:6px}
 .cans .caret{display:inline-block;width:7px;height:14px;margin-left:2px;vertical-align:-2px;background:rgba(255,255,255,.55);animation:pul 1s steps(2) infinite}
@@ -1666,7 +1666,7 @@ function cortarFala(p,primeiro,fim){if(fim)return p.length;var re=/[.!?…:;](?=
   while((m=re.exec(p))){var i=m.index+1;if(i>=min){if(primeiro)return i;ult=i}}return ult}
 function concPerguntar(q){q=(q||'').trim();if(!q)return;audioCtx();pararVoz();if(CV.ctl)try{CV.ctl.abort()}catch(e){}
   var g=CV.ger,box=$('cAns');ORB.pensa=true;$('conc').classList.add('busy');box.hidden=false;
-  var cab='<div class="q">'+esc(q)+'</div>',txt='',falado=0,F=CV.voz?novaFila():null;CV.fila=F;
+  var cab='<button type="button" class="cx" aria-label="Fechar a resposta" title="Fechar">×</button><div class="q">'+esc(q)+'</div>',txt='',falado=0,F=CV.voz?novaFila():null;CV.fila=F;
   box.innerHTML=cab+'<span class="pens">Pensando…</span>';
   function mostrar(fimTxt){box.innerHTML=cab+esc(txt).replace(/\n/g,'<br>')+(fimTxt||'<span class="caret"></span>');box.scrollTop=box.scrollHeight}
   function alimentar(fim){if(!F||g!==CV.ger)return;for(;;){var p=txt.slice(falado),c=cortarFala(p,falado===0,fim);if(c<=0)break;F.add(p.slice(0,c));falado+=c;if(fim)break}}
@@ -1691,7 +1691,10 @@ function concPerguntar(q){q=(q||'').trim();if(!q)return;audioCtx();pararVoz();if
 $('cForm').addEventListener('submit',function(e){e.preventDefault();destravarAudio();var q=$('cIn').value;$('cIn').value='';if(pareceRelato(q.trim())){abrirDiario();$('dTxt').value=q.trim();diarioEntender();return}concPerguntar(q)});
 $('cVoz').setAttribute('aria-pressed',CV.voz);
 $('cVoz').onclick=function(){CV.voz=!CV.voz;this.setAttribute('aria-pressed',CV.voz);try{localStorage.setItem('orbitus-voz',CV.voz?'1':'0')}catch(e){}if(!CV.voz)pararVoz()};
-$('cAns').addEventListener('click',function(){if(ORB.fala)pararVoz()});
+$('cAns').addEventListener('click',function(e){if(e.target.closest('.cx')){pararVoz();$('cAns').hidden=true;return}if(ORB.fala)pararVoz()});
+/* a resposta sai sozinha da tela 20 s depois que a Vega termina de escrever e de falar (passar o mouse ou rolar segura) */
+(function(){var ult=Date.now(),b=$('cAns');b.addEventListener('scroll',function(){ult=Date.now()},{passive:true});b.addEventListener('touchstart',function(){ult=Date.now()},{passive:true});
+  setInterval(function(){if(b.hidden)return;if(ORB.fala||$('conc').classList.contains('busy')||b.matches(':hover')){ult=Date.now();return}if(Date.now()-ult>20000)b.hidden=true},1500)})();
 $('cStop').addEventListener('click',function(){pararVoz()});
 /* ===================== CONTAR MEU DIA (diário falado) =====================
    Você conta o dia (texto, ditado do teclado ou microfone); a Vega devolve o que entendeu como uma lista para conferir;
@@ -1751,11 +1754,11 @@ var MIC={on:false,destino:''};
     for(var i=0;i<m;i++){var a=Math.floor(i*r),z=Math.min(n,Math.floor((i+1)*r)),s=0;for(var k=a;k<z;k++)s+=f[k];var v=s/Math.max(1,z-a);v=v<-1?-1:v>1?1:v;out[i]=v<0?v*32768:v*32767}return out}
   function b64(i16){var u=new Uint8Array(i16.buffer),s='',C=0x8000;for(var i=0;i<u.length;i+=C)s+=String.fromCharCode.apply(null,u.subarray(i,i+C));return btoa(s)}
   function enviar(fim){if(!S)return;var bufs=S.bufs,n=S.n;S.bufs=[];S.n=0;var seq=S.seq++,st=S;
-    if(n<st.sr*.3){if(fim)concluir(st);return}
+    if(n<st.sr*.3){if(fim){if(!st.ntot)st.erro='O microfone não mandou som. No iPhone: feche e abra o Orbitus, toque em Falar e permita o microfone.';concluir(st)}return}
     var pcm=para16k(bufs,n,st.sr);st.pend++;
     fetch('/api/voz/transcrever',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pcm:b64(pcm)})})
     .then(function(r){return r.json()}).then(function(j){if(j.erro)throw new Error(j.erro);st.txt[seq]=j.texto||''})
-    .catch(function(e){st.erro=e.message}).then(function(){st.pend--;if(st.fim)concluir(st)})}
+    .catch(function(e){st.erro=e.message;diagM('stt',e.message)}).then(function(){st.pend--;if(st.fim)concluir(st)})}
   function status(t){if(MIC.destino==='diario')diarioSt(t);else $('cStat').textContent=t}
   function concluir(st){if(st.pend>0||st.feito)return;st.feito=true;var t=st.txt.filter(Boolean).join(' ').trim();
     if(st.erro){status('');if(st.destino==='diario')diarioSt(st.erro);else{$('cStat').textContent=st.erro;toast(st.erro.slice(0,140));setTimeout(function(){$('cStat').textContent=''},15000)}}
@@ -1764,18 +1767,21 @@ var MIC={on:false,destino:''};
     if(st.destino==='diario'){var a=$('dTxt');a.value=(a.value.trim()?a.value.trim()+' ':'')+t;diarioEntender()}
     else if(pareceRelato(t)){abrirDiario();$('dTxt').value=t;diarioEntender()}
     else concPerguntar(t)}
+  function diagM(ev,det){try{fetch('/api/diag',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ev:'mic2-'+ev,det:String(det||'').slice(0,160),ua:navigator.userAgent.slice(0,140)})}).catch(function(){})}catch(e){}}
   function comecar(destino){pararVoz();sessaoMic();MIC.destino=destino||'';
+    var ctx;try{ctx=new AC();if(ctx.resume)ctx.resume()}catch(e){diagM('ctx',e.message);toast('Não consegui abrir o áudio: '+e.message);return}   /* no iPhone o áudio só nasce dentro do toque */
+    diagM('inicio',ctx.state+' '+ctx.sampleRate);
     navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,channelCount:1}}).then(function(stream){
-      var ctx=new AC(),src=ctx.createMediaStreamSource(stream),pr=ctx.createScriptProcessor(4096,1,1),mudo=ctx.createGain();mudo.gain.value=0;
+      if(ctx.resume)ctx.resume();var src=ctx.createMediaStreamSource(stream),pr=ctx.createScriptProcessor(4096,1,1),mudo=ctx.createGain();mudo.gain.value=0;
       S={ctx:ctx,stream:stream,pr:pr,sr:ctx.sampleRate,bufs:[],n:0,seq:0,pend:0,txt:[],t0:Date.now(),destino:MIC.destino};
-      pr.onaudioprocess=function(e){if(!S)return;var d=e.inputBuffer.getChannelData(0),c=new Float32Array(d);S.bufs.push(c);S.n+=c.length;
+      pr.onaudioprocess=function(e){if(!S)return;var d=e.inputBuffer.getChannelData(0),c=new Float32Array(d);S.bufs.push(c);S.n+=c.length;S.ntot=(S.ntot||0)+c.length;
         var s=0;for(var i=0;i<c.length;i+=16)s+=c[i]*c[i];ORB.lvl=Math.min(1,Math.sqrt(s/(c.length/16))*6);
         if(S.n>=S.sr*TRECHO)enviar(false)};
       src.connect(pr);pr.connect(mudo);mudo.connect(ctx.destination);if(ctx.resume)ctx.resume();
       MIC.on=true;mic.classList.add('on');var dm=$('dMic');if(dm)dm.classList.add('on'),dm.textContent='Terminar';
       S.tick=setInterval(function(){if(!S)return;var s=Math.round((Date.now()-S.t0)/1000);status('Gravando '+Math.floor(s/60)+':'+('0'+s%60).slice(-2)+' · toque de novo para terminar');if(s>600)parar()},500)
-    }).catch(function(e){MIC.on=false;status('');var m=e&&e.name==='NotAllowedError'?'O microfone está bloqueado para o Orbitus. Libere nas permissões do navegador.':'Não consegui abrir o microfone: '+(e&&e.message||e);toast(m);if(MIC.destino==='diario')diarioSt(m)})}
-  function parar(){if(!S)return;var st=S;clearInterval(st.tick);status('Transcrevendo…');st.fim=true;enviar(true);S=null;MIC.on=false;ORB.lvl=0;mic.classList.remove('on');var dm=$('dMic');if(dm)dm.classList.remove('on'),dm.textContent='Falar';
+    }).catch(function(e){try{ctx.close()}catch(x){}diagM('erro',e&&(e.name+' '+e.message));MIC.on=false;status('');var m=e&&e.name==='NotAllowedError'?'O microfone está bloqueado para o Orbitus. Libere nas permissões do navegador.':'Não consegui abrir o microfone: '+(e&&e.message||e);toast(m);if(MIC.destino==='diario')diarioSt(m)})}
+  function parar(){if(!S)return;var st=S;clearInterval(st.tick);diagM('fim',Math.round((st.ntot||0)/st.sr)+'s · '+st.ctx.state);status('Transcrevendo…');st.fim=true;enviar(true);S=null;MIC.on=false;ORB.lvl=0;mic.classList.remove('on');var dm=$('dMic');if(dm)dm.classList.remove('on'),dm.textContent='Falar';
     try{st.pr.disconnect();st.stream.getTracks().forEach(function(t){t.stop()});st.ctx.close()}catch(e){}sessaoMidia();concluir(st)}
   window.micAlternar=function(destino){if(MIC.on)parar();else comecar(destino!=null?destino:($('dPan')&&!$('dPan').hidden?'diario':''))};
   mic.addEventListener('click',function(e){e.preventDefault();micAlternar()});
