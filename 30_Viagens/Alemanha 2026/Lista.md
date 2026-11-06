@@ -8,7 +8,7 @@ Migrada do Lembretes em 2026-10-30 (o item "Presentes" foi separado em um por pe
 - [ ] Comprar feijão — 2 sacos 📅 2026-12-07
 - [ ] Presente Sofia 📅 2026-12-10
 - [ ] Presente Luiza 📅 2026-12-10
-- [ ] Presente Lucas + Steff 📅 2026-12-10
+- [x] Presente Lucas + Steff 📅 2026-12-10 ✅ 2026-11-06
 - [ ] Presente Milu — mãe do Lucas 📅 2026-12-10
 
 ## Outros

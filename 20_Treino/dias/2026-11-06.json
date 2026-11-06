@@ -1,0 +1,41 @@
+{
+ "date": "2026-11-06",
+ "weight": null,
+ "waist": null,
+ "steps": 5000,
+ "sleep": null,
+ "water": 10,
+ "meals": {
+  "cafe": true,
+  "almoco": {
+   "c": 1,
+   "items": [
+    {
+     "n": "Queijo mussarela",
+     "k": 60,
+     "p": 4
+    },
+    {
+     "f": "salada",
+     "q": 1
+    }
+   ],
+   "txt": "Ravioli com mussarela de búfala e molho de tomate"
+  }
+ },
+ "extras": [],
+ "habits": {
+  "jantar16": true,
+  "creatina": true
+ },
+ "workout": {
+  "letter": null,
+  "sets": {},
+  "done": true,
+  "warm": false,
+  "remo": false,
+  "yoga": true,
+  "rec": "ioga"
+ },
+ "updated": 1793997436295
+}

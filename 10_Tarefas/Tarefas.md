@@ -15,7 +15,7 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Preparar a mala para o Hotel Tivoli (saída de casa às 13:30) 📅 2026-10-31 ⏰ 12:30 #pessoal #fazendo ➕ 2026-10-31 ✅ 2026-10-31
 - [x] Vender a BBAS3 inteira (1.000 ações) — sugerido por Mesa do Wealth · Mesa do Wealth · plano 🔼 📅 2026-11-03 #financas ➕ 2026-10-31 ✅ 2026-11-03
 - [x] Vender metade do RURA11 (~780 cotas) — sugerido por Mesa do Wealth · Mesa do Wealth · plano 🔼 📅 2026-11-03 #financas ➕ 2026-10-31 ✅ 2026-11-03
-- [ ] Comprar a 1ª parcela de Tesouro IPCA+ (2032 ou 2035) — sugerido por Mesa do Wealth · Mesa do Wealth · plano 🔼 📅 2026-11-05 #financas ➕ 2026-10-31
+- [x] Comprar a 1ª parcela de Tesouro IPCA+ (2032 ou 2035) — sugerido por Mesa do Wealth · Mesa do Wealth · plano 🔼 📅 2026-11-05 #financas ➕ 2026-10-31 ✅ 2026-11-06
 - [ ] Aniversário Bella 📅 2026-11-08 ⏰ 14:00 #pessoal ➕ 2026-10-31
 - [x] Comprar presente para a Bella — Aniversário Bella · 08/11 🔼 📅 2026-11-05 #pessoal ➕ 2026-10-31 ✅ 2026-11-02
 - [ ] Comprar WRLD11 (1ª parcela: o dinheiro da BSOX39) — sugerido por Mesa do Wealth · Mesa do Wealth · plano 🔼 📅 2026-11-09 #financas ➕ 2026-11-02
@@ -31,6 +31,8 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Separar o tapete e escolher o vídeo de pilates de 20 min — sugerido por Mesa da Saúde · Personal trainer 📅 2026-11-04 #saude ➕ 2026-11-04 ✅ 2026-11-04
 - [x] Conferir no app Saúde os passos reais de 02 e 03/11 e corrigir no Orbitus — sugerido por Mesa da Saúde · Personal trainer 📅 2026-11-04 #saude ➕ 2026-11-04 ✅ 2026-11-04
 - [ ] Validar informações check in Latam #viagem ➕ 2026-11-04
+- [ ] Fazer o treino de Pernas · variação (remarcado de sexta) 📅 2026-11-07 ➕ 2026-11-06
+- [ ] Churrasco Família Moliterno das 12:00 às 17:00 📅 2026-11-07 ⏰ 12:00 ➕ 2026-11-06
 
 ## Migradas do Lembretes
 
