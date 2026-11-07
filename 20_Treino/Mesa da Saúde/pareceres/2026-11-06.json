@@ -1,0 +1,74 @@
+{
+ "data": "2026-11-06",
+ "gerado_em": "2026-11-06T21:55",
+ "agentes": {
+  "personal": {
+   "resumo": "Hoje era B · Pernas var. e o treino está marcado como feito, mas sem nenhuma série lançada e sem aquecimento: só a ioga aparece. Na semana são 5 dias marcados (A, B, C, A e hoje), porém passos de 04 e 05/11 seguem em branco e o remo leve está em 0 min há 3 dias.",
+   "bem": [
+    "5 dias seguidos com treino marcado nesta semana, contra a meta de 6 até sábado",
+    "Ioga feita hoje, terceira vez na semana (03, 04 e 06/11)",
+    "5.000 passos hoje, o maior registro desde segunda (3.000 e 4.000 em 02 e 03/11)"
+   ],
+   "ajustes": [
+    "Treino marcado sem séries não serve para a progressão: se fez pernas, lance amanhã cedo as cargas e repetições de cada exercício; se não fez, desmarque e faça a B2 amanhã no lugar do C, porque pernas teve só 1 sessão na semana e ombros e braços já tiveram 1 na quarta",
+    "Passos de 04 e 05/11 continuam vazios depois de 3 pedidos. A média registrada está em 4.165 contra a meta de 8.000; sem correção até domingo de manhã, a decisão de domingo será somar 2.000 passos por dia",
+    "Remo leve em 0 min em 04, 05 e 06/11 (meta de 10 min depois do almoço e do jantar). Deixe o remo montado na sala e faça os 10 min antes de sentar no sofá depois do jantar: são 1.000 passos que já entram na média"
+   ],
+   "amanha": "Sábado, em casa: C · Ombros + Braços (ou B2 se as pernas de hoje não foram feitas: goblet 32 kg buscando 4 × 8, afundo reverso 14 kg 3 × 10, stiff unilateral 20 kg 3 × 10). No C: desenvolvimento sobe para 20 kg buscando 4 × 8 (fechou 4 × 10 com 18 kg), elevação lateral fica em 9 kg até 3 × 12 (fez 12, 10, 10), crucifixo invertido com peito apoiado no banco a 30 graus, 6 kg, 3 × 12 a 15 com 2 s de pausa, rosca 12 kg buscando 3 × 8, martelo 12 kg nas 2 séries, tríceps francês 15 kg até 3 × 15. Fecha com remo intervalado: 5 min leve, 8 × (30 s forte + 90 s leve), 3 min leve.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Lançar as séries de pernas de 06/11 ou desmarcar o treino",
+     "data": "2026-11-07",
+     "porque": "sem cargas e repetições não dá para aplicar a progressão no goblet, no afundo e no stiff"
+    },
+    {
+     "titulo": "Deixar o remo montado na sala para os 10 min depois do jantar",
+     "data": "2026-11-07",
+     "porque": "3 dias seguidos com 0 min de remo leve; tirar o atrito é o que faz o hábito voltar"
+    }
+   ]
+  },
+  "nutri": {
+   "resumo": "O registro soma cerca de 1.730 kcal e 115 g de proteína, mas o almoço só tem a mussarela e a salada (80 kcal): o ravioli não foi lançado. Com uma porção normal de ravioli (cerca de 250 g, 550 kcal e 20 g de proteína) o dia real fica perto de 2.280 kcal, acima do teto de 1.950, e com 2 doces no mesmo dia (150 planejado + 350 fora do plano).",
+   "bem": [
+    "Creatina marcada hoje, depois de 2 dias sem marcar, como foi pedido",
+    "Água em 12 copos, acima da meta de 10 pelo sétimo dia seguido",
+    "Jantar decidido até 16h em todos os 7 dias"
+   ],
+   "ajustes": [
+    "Lance o ravioli do almoço em gramas (ou em unidades, se for mais fácil). Sem ele, as 1.730 kcal de hoje estão cerca de 550 kcal abaixo do real e a média da semana lida no domingo fica errada",
+    "Doce fora do plano em 05 e 06/11, 2 dias seguidos, e hoje junto com o planejado: 500 kcal só de doce. Regra simples para o fim de semana: o planejado de 150 kcal depois do almoço e, se a vontade voltar à noite, a fruta (70 kcal), nunca o segundo doce",
+    "Proteína registrada em 115 g, abaixo do mínimo de 130 g, porque o almoço de massa teve cerca de 25 g. Quando o almoço for massa, o jantar precisa ter 180 g de frango ou peixe em vez de 150 g"
+   ],
+   "trocas": [
+    {
+     "de": "Ravioli com mussarela de búfala (prato inteiro, cerca de 250 g)",
+     "por": "Meia porção de ravioli (cerca de 150 g) + 120 g de frango grelhado + salada",
+     "porque": "cerca de 550 kcal e 45 g de proteína, contra cerca de 630 kcal e 25 g no prato inteiro"
+    },
+    {
+     "de": "Doce fora do plano à noite (350 kcal)",
+     "por": "1 pote de iogurte proteico com 100 g de morango",
+     "porque": "cerca de 150 kcal e 16 g de proteína, e entra como o doce planejado"
+    }
+   ],
+   "amanha": "Café: 1 pão francês, 3 ovos mexidos + 2 claras, 1 porção de mamão · Almoço: 150 g de frango, 4 colheres de arroz, 1 concha de feijão, salada com 1 colher de azeite · Lanche: 1 dose de whey + 1 banana · Jantar: 150 g de tilápia, 1 batata média (150 g), 150 g de legumes, 1 colher de azeite · Doce: 1, cerca de 150 kcal, depois do almoço. Total cerca de 1.795 kcal e 155 g de proteína.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Lançar no Orbitus o ravioli do almoço de 06/11",
+     "data": "2026-11-07",
+     "porque": "é a única refeição de hoje sem o prato principal e muda o dia em cerca de 550 kcal"
+    },
+    {
+     "titulo": "Tirar 300 g de tilápia do congelador para o jantar de sábado e domingo",
+     "data": "2026-11-07",
+     "porque": "com o peixe pronto o jantar de fim de semana não vira delivery"
+    }
+   ]
+  }
+ },
+ "respostas": [],
+ "semana": ""
+}

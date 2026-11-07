@@ -4,7 +4,7 @@
  "waist": null,
  "steps": 5000,
  "sleep": null,
- "water": 10,
+ "water": 12,
  "meals": {
   "cafe": true,
   "almoco": {
@@ -21,9 +21,30 @@
     }
    ],
    "txt": "Ravioli com mussarela de búfala e molho de tomate"
-  }
+  },
+  "lanche": true,
+  "jantar": true
  },
- "extras": [],
+ "extras": [
+  {
+   "n": "Doce planejado",
+   "k": 150,
+   "p": 2,
+   "t": "doce"
+  },
+  {
+   "n": "Fruta",
+   "k": 70,
+   "p": 1,
+   "t": null
+  },
+  {
+   "n": "Doce fora do plano",
+   "k": 350,
+   "p": 4,
+   "t": "doceExtra"
+  }
+ ],
  "habits": {
   "jantar16": true,
   "creatina": true
@@ -37,5 +58,5 @@
   "yoga": true,
   "rec": "ioga"
  },
- "updated": 1793997436295
+ "updated": 1794010637604
 }
