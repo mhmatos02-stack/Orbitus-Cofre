@@ -33,7 +33,7 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Conferir no app Saúde os passos reais de 02 e 03/11 e corrigir no Orbitus — sugerido por Mesa da Saúde · Personal trainer 📅 2026-11-04 #saude ➕ 2026-11-04 ✅ 2026-11-04
 - [ ] Validar informações check in Latam #viagem ➕ 2026-11-04
 - [ ] Fazer o treino de Pernas · variação (remarcado de sexta) 📅 2026-11-07 ➕ 2026-11-06
-- [ ] Churrasco Família Moliterno das 12:00 às 17:00 📅 2026-11-07 ⏰ 12:00 ➕ 2026-11-06
+- [x] Churrasco Família Moliterno das 12:00 às 17:00 📅 2026-11-07 ⏰ 12:00 ➕ 2026-11-06 ✅ 2026-11-07
 
 ## Migradas do Lembretes
 

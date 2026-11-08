@@ -1,0 +1,74 @@
+{
+ "data": "2026-11-07",
+ "gerado_em": "2026-11-07T21:55",
+ "agentes": {
+  "personal": {
+   "resumo": "Sábado sem treino: o C · Ombros + Braços e o remo intervalado não foram feitos, e passos e remo leve ficaram em branco. A semana fecha com 4 treinos de força confirmados com séries (A, B, C, A), mais a sexta marcada como feita sem nenhuma carga lançada, contra a meta de 6.",
+   "bem": [
+    "Os 4 treinos com séries tiveram aquecimento e todas as séries marcadas como feitas, sem pular exercício",
+    "Supino inclinado fechou 4 × 10 com 24 kg e remada unilateral já roda 26 kg: as duas progressões da semana estão prontas para segunda",
+    "Ioga feita em 4 dias da semana (01, 03, 04 e 06/11) e pilates na quarta, como previsto"
+   ],
+   "ajustes": [
+    "Nenhum dos 3 pedidos de ontem foi feito: as séries de pernas de 06/11 continuam vazias, o remo leve está em 0 min há 4 dias (04 a 07/11) e o C de hoje não saiu. Quando o dia apertar, faça o treino mínimo de 20 min (2 exercícios principais, 3 séries cada) em vez de zerar: dia zerado é o que derruba a meta de 6",
+    "Passos de 04, 05 e 07/11 seguem em branco e a média registrada da semana é 3.898 contra 8.000. Isso já decide amanhã: sem os números reais lançados até a leitura de domingo, a regra de ajuste vai somar 2.000 passos por dia",
+    "Não tente compensar o C amanhã. Domingo é corrida leve e ioga; ombros e braços tiveram 1 sessão (04/11) e voltam no C de quarta, 11/11, com desenvolvimento a 20 kg"
+   ],
+   "amanha": "Domingo, em casa e na rua: ao acordar, pese e meça a cintura em jejum, depois do banheiro, fita na altura do umbigo. Depois, corrida leve de 35 min num ritmo em que dá para conversar + ioga de 20 min. Segunda, 09/11, A com supino reto e remada curvada em séries normais (90 s), supino inclinado 26 kg buscando 4 × 8.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Separar hoje à noite tênis, roupa e fone da corrida de domingo",
+     "data": "2026-11-07",
+     "porque": "sábado zerou; tirar a decisão da manhã de domingo garante a sessão"
+    },
+    {
+     "titulo": "Lançar até domingo 10h os passos de 04, 05 e 07/11 tirados do app Saúde",
+     "data": "2026-11-08",
+     "porque": "é o último prazo antes da decisão da regra de ajuste; sem eles vale a média de 3.898"
+    }
+   ]
+  },
+  "nutri": {
+   "resumo": "O app soma 1.956 kcal e 231 g de proteína, mas a picanha de 400 g foi lançada como carne magra (patinho, 219 kcal por 100 g). Picanha grelhada com a capa fica perto de 290 kcal e 26 g de proteína por 100 g, então o dia real é cerca de 2.240 kcal e 207 g de proteína, acima do teto de 1.950, num dia sem treino.",
+   "bem": [
+    "Zero doce hoje, nem o planejado nem extra, depois de 2 dias seguidos com doce fora do plano (05 e 06/11)",
+    "Café, lanche e jantar marcados como o sugerido: 3 das 4 refeições no plano",
+    "Proteína acima de 130 g pelo segundo dia seguido no registro"
+   ],
+   "ajustes": [
+    "400 g de carne no almoço é 2,5 porções. A porção do plano é 150 a 180 g; o excesso de hoje (cerca de 650 kcal só de picanha a mais) é exatamente o que separa o dia do teto. Em churrasco ou restaurante, peça a porção individual ou separe metade no prato antes de começar",
+    "Água em 6 copos, a primeira vez na semana abaixo da meta de 10, depois de 6 dias entre 10 e 13. Deixe 2 garrafas de 500 ml na mesa no domingo e termine a primeira até o almoço",
+    "O ravioli de 06/11 continua sem lançamento e hoje os hábitos (creatina, jantar até 16h) ficaram sem marcar. Lance o almoço de picanha com a capa ou como item manual (cerca de 1.160 kcal, 104 g de proteína), para a média da semana lida amanhã não sair cerca de 830 kcal abaixo do real"
+   ],
+   "trocas": [
+    {
+     "de": "400 g de picanha com a capa de gordura",
+     "por": "180 g de picanha sem a capa + 4 colheres de arroz + 1 concha de feijão + salada",
+     "porque": "cerca de 720 kcal e 55 g de proteína, contra cerca de 1.160 kcal só da carne"
+    },
+    {
+     "de": "Lanche de fim de semana sem plano",
+     "por": "1 pote de iogurte proteico + 1 banana",
+     "porque": "cerca de 210 kcal e 16 g de proteína, segura a fome até o jantar sem virar doce"
+    }
+   ],
+   "amanha": "Café: 1 pão francês com 3 ovos mexidos e 30 g de queijo branco, 1 porção de mamão · Almoço: 150 g de frango grelhado, 4 colheres de arroz, 1 concha de feijão, salada com 1 colher de azeite · Lanche: 1 dose de whey + 1 banana · Jantar: 150 g de tilápia, 1 batata média (150 g), 150 g de legumes · Doce: 1, cerca de 150 kcal, depois do almoço. Total cerca de 1.830 kcal e 152 g de proteína.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Porcionar a carne que sobrou em pacotes de 180 g antes de congelar",
+     "data": "2026-11-08",
+     "porque": "com a porção já separada o almoço de carne não passa de 400 kcal só na proteína"
+    },
+    {
+     "titulo": "Desfiar 300 g de frango para o café e o jantar de segunda e terça",
+     "data": "2026-11-08",
+     "porque": "pão com frango é a sua refeição mais repetida e segura a semana de treino A e B"
+    }
+   ]
+  }
+ },
+ "respostas": [],
+ "semana": ""
+}

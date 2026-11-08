@@ -1,0 +1,33 @@
+{
+ "date": "2026-11-07",
+ "weight": null,
+ "waist": null,
+ "steps": null,
+ "sleep": null,
+ "water": 6,
+ "meals": {
+  "cafe": true,
+  "almoco": {
+   "c": 1,
+   "items": [
+    {
+     "f": "carne",
+     "q": 400
+    }
+   ],
+   "txt": "400g de picanha"
+  },
+  "lanche": true,
+  "jantar": true
+ },
+ "extras": [],
+ "habits": {},
+ "workout": {
+  "letter": null,
+  "sets": {},
+  "done": false,
+  "warm": false,
+  "remo": false
+ },
+ "updated": 1794096045045
+}

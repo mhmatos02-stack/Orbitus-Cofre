@@ -1,7 +1,7 @@
 {
   "rotina": "sentinela_wealth",
-  "quando": "2026-11-06T22:37",
+  "quando": "2026-11-07T22:38",
   "status": "atencao",
-  "detalhe": "health-check, news-radar, dashboard e mesa-caixa de hoje OK; health check com resultado ATENÇÃO (0 falhas, 2 avisos), ressalva sem ação",
+  "detalhe": "health-check de hoje OK com resultado ATENÇÃO (0 falhas, 2 avisos); mesa-caixa de hoje OK (20:49); demais rotinas sem horario hoje (sabado). Ressalva sem acao",
   "retentativas": {}
 }
