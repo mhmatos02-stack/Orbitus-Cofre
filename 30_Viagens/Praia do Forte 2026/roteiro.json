@@ -134,7 +134,7 @@
  ],
  "bagagem": {
   "precisa": true,
-  "comprada": false,
+  "comprada": true,
   "voo": "G3 1631 · SSA → CGH · 26/12 10:35",
   "data_voo": "2026-12-26",
   "prazo_antecipado": "2026-12-24T10:35",
@@ -154,7 +154,13 @@
   ],
   "como": "Site ou app da GOL › Minhas viagens › localizador da reserva › Bagagem.",
   "fonte": "Tabela oficial da GOL para a 1ª mala de 23 kg em voo nacional (voegol.com.br › Bagagem despachada), conferida em 30/10/2026. A página traz também um bloco com 1ª mala \"a partir de R$ 130\": o valor exato só aparece na reserva.",
-  "precos": [],
+  "precos": [
+   {
+    "data": "2026-11-09",
+    "valor": 175.0,
+    "nota": ""
+   }
+  ],
   "qtd": 1,
   "motivo": "Itens da mala principal (que volta de carro com os pais) necessários em São Paulo antes de eles chegarem e para a viagem à Europa em 28/12.",
   "radar": {
@@ -162,7 +168,8 @@
    "resumo": "1ª mala R$ 175 a 219 (mais de 48 h antes); bloco alternativo da página segue R$ 130 a 250. Nenhuma promoção de bagagem válida encontrada.",
    "mudou": false,
    "promo": false
-  }
+  },
+  "comprada_em": "2026-11-09"
  },
  "conferir": [],
  "fontes": [

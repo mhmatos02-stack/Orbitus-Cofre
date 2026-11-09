@@ -5,7 +5,7 @@ Ida e volta só com bagagem de mão: na seção "Levar", pense no que cabe nela.
 
 ## Antes de ir
 
-- [ ] Combinar o transporte Salvador → Praia do Forte 📅 2026-12-10
+- [x] Combinar o transporte Salvador → Praia do Forte 📅 2026-12-10 ✅ 2026-11-09
 - [ ] Fazer o check-in online da ida 📅 2026-12-11
 
 ## Levar

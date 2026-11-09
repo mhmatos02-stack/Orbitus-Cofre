@@ -506,21 +506,34 @@ def sugestoes(vault, d, mesa_saude=None):
     existentes = [_palavras(t['titulo']) for t in _todas(vault)]
     cand = []
 
-    def add(origem, titulo, area, due='', fonte='', motivo='', prio=3, chave=None):
+    def add(origem, titulo, area, due='', fonte='', motivo='', prio=3, chave=None, dedup=True):
         titulo = re.sub(r'\s+', ' ', str(titulo or '')).strip()
         if not titulo or len(titulo) < 4:
             return
         sid = _sid(origem, chave or titulo)
-        if sid in est or _parecida(titulo, existentes) or any(c['id'] == sid for c in cand):
+        if sid in est or (dedup and _parecida(titulo, existentes)) or any(c['id'] == sid for c in cand):
             return
         cand.append({'id': sid, 'origem': origem, 'titulo': titulo[:200], 'area': area, 'due': due or '', 'fonte': fonte,
                      'motivo': motivo, 'prio': prio})
 
-    # Mesa do Wealth: próximos passos que são seus e decisões esperando resposta
+    # Mesa do Wealth: só passos do plano que o Wealth liberou (os bloqueados ficam "na fila" na Home e na Mesa)
+    import wealth_plano
     mh = d.get('mesa_home') or {}
     for p in mh.get('proximos_passos') or []:
-        add('Mesa do Wealth', p.get('acao'), 'Finanças', (p.get('inicio') or '')[:10], 'Mesa do Wealth · plano',
-            p.get('condicao') or '', 2, 'plano:' + str(p.get('id')))
+        if not p.get('liberada'):
+            continue
+        add('Mesa do Wealth', wealth_plano.titulo(p), 'Finanças', max((p.get('inicio') or '')[:10], hoje) if p.get('inicio') else '',
+            'Mesa do Wealth · plano ' + str(p.get('id')), wealth_plano.motivo(p), 1 if p.get('tipo') == 'ordem' else 2, 'plano:' + str(p.get('id')))
+    # tarefas do plano marcadas feitas aqui, mas que o Wealth ainda não sabe
+    for x in mh.get('feitas_sem_registro') or []:
+        add('Mesa do Wealth', 'Confirmar ao Wealth: ' + str(x.get('acao')), 'Finanças', hoje, 'Mesa do Wealth · plano ' + str(x.get('passo')),
+            'Você marcou como feito no Tarefas em %s, mas o Wealth ainda mostra pendente. Aceitar = avisar o Wealth que executou '
+            '(ele confere no razão às 20h47 e pede a nota). Se não executou, dispense e desmarque a tarefa.' % wealth_plano._br(x.get('feita_em')),
+            0, 'confirmar:' + str(x.get('passo')), dedup=False)
+        sid = _sid('Mesa do Wealth', 'confirmar:' + str(x.get('passo')))
+        for c in cand:
+            if c['id'] == sid:
+                c['plano_feito'] = x.get('passo')
     for dc in mh.get('abertas') or []:
         if ('decisao:' + str(dc.get('id'))) in (mh.get('respostas') or {}):
             continue
@@ -561,7 +574,11 @@ def responder_sugestao(vault, corpo, cand):
     if acao not in ('aceitar', 'dispensar'):
         raise ValueError('ação inválida')
     out = {'ok': True}
-    if acao == 'aceitar':
+    if acao == 'aceitar' and c.get('plano_feito'):
+        import mesa
+        mesa.responder(vault, {'tipo': 'plano', 'id': c['plano_feito'], 'acao': 'feito',
+                               'nota': 'confirmado pelo Tarefas do Orbitus; a nota de corretagem vai para a pasta Entrada'})
+    elif acao == 'aceitar':
         campos = dict(c)
         campos.update({k: v for k, v in (corpo.get('campos') or {}).items() if k in ('titulo', 'due', 'hora', 'prio', 'area')})
         campos['fonte'] = 'sugerido por ' + c['origem'] + (' · ' + c['fonte'] if c['fonte'] and c['fonte'] != c['origem'] else '')

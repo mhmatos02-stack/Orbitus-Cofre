@@ -39,6 +39,7 @@ import push
 import agenda_pro
 import cio
 import diario
+import wealth_plano
 concierge.AGUA_FN = lambda n: rotina.agua_somar(VAULT, date.today().isoformat(), n)
 concierge.PESO_FN = lambda kg: treino.registrar_saude(VAULT, {'peso': kg})
 concierge.PASSOS_FN = lambda n: treino.registrar_saude(VAULT, {'passos': n})
@@ -255,7 +256,11 @@ def alternar(arquivo, linha, texto):
                     linha -= 1
         with open(p, 'w', encoding='utf-8') as f:
             f.write('\n'.join(linhas))
-        return nova, linha, proxima
+    try:       # tarefa do plano do Wealth: avisa pelo canal oficial (respostas.jsonl)
+        wealth_plano.avisar_wealth(VAULT, nova, m.group(2) == ' ')
+    except Exception as ex:
+        print('wealth_plano: aviso ao Wealth falhou:', ex, file=sys.stderr)
+    return nova, linha, proxima
 
 
 def capturar(texto):
@@ -725,12 +730,22 @@ def _mesa_home():
     if not e.get('disponivel'):
         return {'disponivel': False}
     hoje = date.today().isoformat()
+    plano = {p['id']: p for p in e['plano']}
+    try:
+        wealth_plano.reconciliar(VAULT, plano)
+    except Exception as ex:
+        print('wealth_plano: reconciliação falhou:', ex, file=sys.stderr)
     abertas = [d for d in e['decisoes'] if d.get('status') == 'aberta']
-    prox = sorted([p for p in e['plano'] if p.get('status') == 'pendente' and p.get('quem') == 'voce'
+    prox = sorted([dict(p, liberada=wealth_plano.liberacao(p)[0], bloqueio=wealth_plano.liberacao(p)[1])
+                   for p in e['plano'] if p.get('status') == 'pendente' and p.get('quem') == 'voce'
                    and ('plano:' + p['id']) not in e['respostas']],
-                  key=lambda p: p.get('inicio') or '9999')[:3]
+                  key=lambda p: p.get('inicio') or '9999')[:6]
+    try:
+        sem_reg = wealth_plano.feitas_sem_registro(VAULT, plano)
+    except Exception:
+        sem_reg = []
     lanc = [l for l in e['lancamentos'] if l.get('status') == 'aguardando']
-    return {'disponivel': True, 'abertas': abertas, 'respostas': e['respostas'], 'proximos_passos': prox,
+    return {'disponivel': True, 'abertas': abertas, 'respostas': e['respostas'], 'proximos_passos': prox, 'feitas_sem_registro': sem_reg,
             'lancamentos_aguardando': len(lanc), 'hoje': hoje}
 
 

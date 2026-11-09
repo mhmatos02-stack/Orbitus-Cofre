@@ -3,26 +3,27 @@ tipo: federacao
 id: "wealth"
 nome: "AI Wealth Office"
 icone: "💰"
-coletado: "2026-11-07"
+coletado: "2026-11-09"
 saude: "🟡"
 motivo: ""
-idade: 6
-data_base: "2026-11-01"
-saude_txt: "amarelo. Razão válido, cotações ao vivo, Mesa em dia, fechamento de outubro entregue, sentinela de eventos rodando. Atenção: sem segunda cópia local (Time Machine); teste de restauração estreia em 03/11."
-proxima: "(atualizado 2026-11-05, Mesa 20h47) política ratificada (v1.20) e alvos da mineradora gravados; análise da holding em 10/11; compra do ETF global e rotação em FIIs na semana de 09/11; lote 1 da elétrica em 16–19/11."
+idade: 1
+data_base: "2026-11-08"
+saude_txt: "amarelo. Razão válido, cotações ao vivo, rotinas em dia, teste de restauração verde (03/11). Atenção: sem Time Machine no Mac; a ferramenta de checagem pré-ordem e o painel ainda refletem uma regra antiga (conserto…"
+proxima: "análise da holding (10/11); conserto da checagem pré-ordem; lote 1 da elétrica em 16–19/11; depois dela, ETF global e rotação em FIIs."
 decisoes: ""
-risco: "liquidez abaixo do piso do plano até a venda da elétrica em novembro; Copom (04/11) e resultado do banco (03/11) mexem em gatilhos da Mesa de Debate na mesma semana."
-esperando: ""
-esperando_lista: []
-automacao: "🟡 ATENÇÃO · 0 falha(s) · 2 atenção(ões)"
+risco: "liquidez abaixo do piso do plano até a venda da elétrica; se ela atrasar, três compras escorregam e um gatilho da Mesa de Debate dispara."
+esperando: "Comprar HGLG11 (rotação dentro de FIIs) (até 27/11)"
+esperando_lista:
+  - "Comprar HGLG11 (rotação dentro de FIIs) (até 27/11)"
+automacao: "🟢 SAUDÁVEL · 0 falha(s) · 0 atenção(ões)"
 falhas: []
 ---
 # 💰 AI Wealth Office
 
-> Gerado por `coletar_federacao.py` em 2026-11-07. Não editar.
+> Gerado por `coletar_federacao.py` em 2026-11-09. Não editar.
 
-**Saúde:** 🟡 amarelo. Razão válido, cotações ao vivo, Mesa em dia, fechamento de outubro entregue, sentinela de eventos rodando. Atenção: sem segunda cópia local (Time Machine); teste de restauração estreia em 03/11.
+**Saúde:** 🟡 amarelo. Razão válido, cotações ao vivo, rotinas em dia, teste de restauração verde (03/11). Atenção: sem Time Machine no Mac; a ferramenta de checagem pré-ordem e o painel ainda refletem uma regra antiga (conserto…
 
-**Esperando de você:** —
+**Esperando de você:** Comprar HGLG11 (rotação dentro de FIIs) (até 27/11)
 
-**Próxima ação:** (atualizado 2026-11-05, Mesa 20h47) política ratificada (v1.20) e alvos da mineradora gravados; análise da holding em 10/11; compra do ETF global e rotação em FIIs na semana de 09/11; lote 1 da elétrica em 16–19/11.
+**Próxima ação:** análise da holding (10/11); conserto da checagem pré-ordem; lote 1 da elétrica em 16–19/11; depois dela, ETF global e rotação em FIIs.

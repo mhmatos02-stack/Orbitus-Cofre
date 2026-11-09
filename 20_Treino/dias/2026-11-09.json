@@ -1,0 +1,33 @@
+{
+ "date": "2026-11-09",
+ "weight": null,
+ "waist": null,
+ "steps": null,
+ "sleep": null,
+ "water": 4,
+ "meals": {
+  "cafe": true,
+  "almoco": {
+   "c": 1,
+   "items": [
+    {
+     "n": "Queijo mussarela",
+     "k": 600,
+     "p": 44
+    }
+   ],
+   "txt": "200g de ravioli de mussarela de búfala"
+  }
+ },
+ "extras": [],
+ "habits": {},
+ "workout": {
+  "letter": null,
+  "sets": {},
+  "done": true,
+  "warm": false,
+  "remo": false
+ },
+ "updated": 1794243182985,
+ "mov": 20
+}

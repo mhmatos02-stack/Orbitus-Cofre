@@ -1186,7 +1186,7 @@ function renderDecHome(){
   $('kDecS').textContent=n?(pend.length?pend.length+' decisão(ões) esperando você':'')+(lanc?(pend.length?' · ':'')+lanc+' lançamento(s) para confirmar':''):(sem.length?sem.length+' passo(s) do plano nesta semana':'nada para decidir agora');
   var rows=pend.map(function(d){return '<a class="mr" href="#mesa"><span class="chip wait" style="flex:none">decidir</span><div class="x"><div>'+esc(d.titulo||d.pergunta)+'</div>'+(d.prazo?'<small>até '+fdate(d.prazo)+'</small>':'')+'</div></a>'});
   if(lanc)rows.push('<a class="mr" href="#mesa"><span class="chip mut" style="flex:none">confirmar</span><div class="x"><div>'+lanc+' compra(s), venda(s) ou provento(s) achados pela rotina</div><small>confira na Mesa › Lançamentos</small></div></a>');
-  rows=rows.concat(sem.map(function(p){return '<a class="mr" href="#mesa"><span class="r" style="width:64px">'+fdate(p.inicio)+'</span><div class="x"><div>'+esc(p.acao)+'</div><small>passo do plano'+(p.condicao?' · '+esc(p.condicao):'')+'</small></div></a>'}));
+  rows=rows.concat(sem.map(function(p){return '<a class="mr" href="#mesa"><span class="r" style="width:64px">'+fdate(p.inicio)+'</span><div class="x"><div>'+esc(p.acao)+'</div><small>'+(p.liberada===false?'<b style="color:#ffd27a;font-weight:500">na fila</b> · '+esc(p.bloqueio||p.condicao||''):'passo do plano'+(p.condicao?' · '+esc(p.condicao):''))+'</small></div></a>'}));
   L.innerHTML=rows.slice(0,4).join('')||'<div class="empty" style="padding:4px 2px">A Mesa não precisa de você agora. Quando houver uma decisão para escolher ou um lançamento para confirmar, aparece aqui.'+(prx?'<br>Próximo passo do plano: '+fdate(prx.inicio)+' · '+esc(prx.acao):'')+'</div>';
 }
 function renderMailMini(){
