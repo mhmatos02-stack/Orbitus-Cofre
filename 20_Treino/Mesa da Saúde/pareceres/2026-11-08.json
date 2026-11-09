@@ -1,0 +1,79 @@
+{
+ "data": "2026-11-08",
+ "gerado_em": "2026-11-08T21:50",
+ "agentes": {
+  "personal": {
+   "resumo": "Domingo sem nenhum registro: corrida, ioga, peso e cintura não foram lançados, e o sábado já tinha zerado (sem C e sem remo intervalado). A semana fecha com 4 treinos de força com séries (A 02/11, B 03/11, C 04/11, A 05/11) e a sexta marcada como feita sem nenhuma carga, contra a meta de 6.",
+   "bem": [
+    "Nos 4 treinos com séries não houve exercício pulado e o aquecimento foi feito em todos",
+    "Supino inclinado subiu de 24 kg × 8, 10, 10, 10 na segunda para 4 × 10 na quinta, e a remada unilateral passou de 24 para 26 kg (10, 10, 10, 12)",
+    "Pilates na quarta e ioga em 03, 04 e 06/11, como previsto"
+   ],
+   "ajustes": [
+    "O padrão da semana é forte de segunda a quinta e zerado de sexta a domingo: 0 série lançada em 3 dias seguidos. Para o fim de semana que vem, decida na sexta à noite o horário do treino de sábado e use o treino mínimo de 20 min se o dia apertar (desenvolvimento e rosca, 3 séries cada), em vez de pular",
+    "Remada curvada caiu de 18 kg (10, 8, 8) para 16 kg (12, 12, 8): a terceira série desaba nas duas sessões. Na próxima A, faça a remada curvada em séries normais com 90 s de descanso, fora da supersérie, e fique em 16 kg até fechar 3 × 12",
+    "Remo leve somou 15 min na semana (5 min em 03/11 e 10 min em 04/11) contra 140 min pedidos no domingo passado (20 min por dia). Comece pelo jantar: 10 min de remo antes de sentar no sofá, todos os dias desta semana, e só depois some o do almoço"
+   ],
+   "amanha": "Segunda, 09/11, em casa: C · Ombros + Braços, porque o Orbitus segue o ciclo e o C de sábado não saiu (a A fica para terça). Desenvolvimento 20 kg buscando 4 × 8 (fechou 4 × 10 com 18 kg), elevação lateral 9 kg até 3 × 12 (fez 12, 10, 10), crucifixo inverso 5 kg buscando 3 × 12, rosca direta 10 kg até 3 × 12, tríceps francês sobe para 17,5 kg buscando 3 × 10 (fez 15, 12, 15 com 15 kg, acima da faixa de 10 a 12), martelo 12 kg nas 2 séries. Depois do jantar, 10 min de remo leve.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Medir cintura e peso segunda cedo, em jejum, fita no umbigo, média de 3 medidas",
+     "data": "2026-11-09",
+     "porque": "a semana fechou sem medida e a última é 89,8 cm de 01/11; sem ela a regra de ajuste não tem base"
+    },
+    {
+     "titulo": "Pôr um alarme diário às 21h30 para lançar passos, treino e água no Orbitus",
+     "data": "2026-11-09",
+     "porque": "passos ficaram em branco em 4 de 7 dias e domingo ficou sem registro nenhum"
+    }
+   ]
+  },
+  "nutri": {
+   "resumo": "Domingo sem nenhuma refeição registrada. Na semana, os dias com registro somam de 1.620 a 1.960 kcal no app, mas sexta e sábado ficam perto de 2.280 e 2.240 kcal reais (ravioli sem lançamento e picanha lançada como patinho), e houve 3 doces fora do plano (02, 05 e 06/11, 1.050 kcal).",
+   "bem": [
+    "Água na meta de 10 copos em 5 de 6 dias registrados (10, 10, 12, 13 e 12)",
+    "Jantar decidido até 16h de 02 a 06/11, 5 dias seguidos",
+    "Proteína acima de 140 g em 02/11 (161 g) e 04/11 (150 g), sempre com whey ou iogurte no jantar"
+   ],
+   "ajustes": [
+    "O excesso da semana tem endereço: fim de semana e doce. Em 3 dias (01, 06 e 07/11) você passou do teto de 1.950 kcal em 300 a 1.000 kcal; nos dias úteis o registro fica no plano. Não corte nada na segunda a quinta; segure sexta a domingo com 1 doce de 150 kcal por dia e carne em porção de 180 g",
+    "Registro incompleto em 3 dias: terça sem almoço e sem jantar (526 kcal no app), quinta sem café e hoje vazio. Com buracos assim a média semanal não serve para decidir corte, e é por isso que hoje a decisão não mexe em calorias",
+    "Proteína ficou abaixo de 130 g na quinta (122 g) e na sexta (117 g): nos dois dias o almoço não teve carne lançada. Quando o almoço for fora ou massa, o jantar leva 180 g de frango em vez de 120 g"
+   ],
+   "trocas": [
+    {
+     "de": "Barra de chocolate inteira em casa (300 g de Lindt somaram 1.620 kcal em 01/11)",
+     "por": "2 quadradinhos, cerca de 25 g, depois do almoço",
+     "porque": "cerca de 135 kcal, cabe no doce planejado de 150 kcal"
+    },
+    {
+     "de": "Delivery de jantar no fim de semana (hambúrguer, massa)",
+     "por": "Frango ou tilápia grelhada com 2 colheres de arroz e legumes do mesmo restaurante",
+     "porque": "cerca de 450 kcal e 40 g de proteína, contra 800 a 1.000 kcal e 25 g"
+    },
+    {
+     "de": "Almoço de massa sem proteína",
+     "por": "Meia porção de massa + 120 g de frango + salada",
+     "porque": "sobe a proteína do almoço de cerca de 20 g para cerca de 45 g com menos calorias"
+    }
+   ],
+   "amanha": "Café: 1 pão francês, 3 ovos + 2 claras mexidos, 30 g de queijo branco, 1 porção de mamão · Almoço: 150 g de frango grelhado, 4 colheres de arroz, 1 concha de feijão, salada com 1 colher de azeite · Lanche: 1 dose de whey + 1 banana · Jantar: 1 pão francês com 120 g de frango desfiado + salada · Doce: 1, cerca de 150 kcal, depois do almoço. Total cerca de 1.785 kcal e 160 g de proteína.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Dividir o chocolate que estiver em casa em porções de 25 g",
+     "data": "2026-11-09",
+     "porque": "com a porção pronta o doce fica no planejado de 150 kcal"
+    },
+    {
+     "titulo": "Salvar no app de delivery 2 pedidos de jantar com frango ou peixe grelhado, arroz e legumes",
+     "data": "2026-11-13",
+     "porque": "sexta e sábado foram os dias que passaram do teto; com o pedido pronto a escolha não vira hambúrguer"
+    }
+   ]
+  }
+ },
+ "respostas": [],
+ "semana": "Cintura: sem medida hoje. A última é 89,8 cm de 01/11, contra 92 cm da base; faltam 2,3 cm para 87,5 cm em 12/12, cerca de 0,5 cm por semana nas 5 semanas restantes. Peso: sem pesagem hoje; o último é 69,0 kg de 01/11, contra 71 kg da base. Treinos: 4 sessões de força com séries (A, B, C, A), sexta marcada sem cargas, sábado sem C e sem remo intervalado, domingo sem corrida e ioga registradas; pilates feito e ioga em 3 dias. Aderência: água na meta em 5 de 6 dias; jantar até 16h em 5 de 6; creatina marcada em 3 de 7; proteína acima de 130 g em 3 dos 6 dias com registro; calorias acima do teto de 1.950 em 3 dias (01, 06 e 07/11) e registro incompleto em 03, 05 e 08/11; doces fora do plano em 3 dias; passos lançados em só 3 dias (3.000, 4.000 e 5.000, média 4.000 contra 8.000) e 15 min de remo leve contra 140 min pedidos. O ajuste da semana passada (somar 2.000 passos por dia com 20 min de remo leve) foi cumprido em 2 de 7 dias e nunca por inteiro. Decisão da regra de ajuste: manter. Os 20 min de remo leve por dia continuam valendo e não somam mais 2.000 passos, porque o ajuste anterior nem foi testado; também não há corte de 150 kcal no jantar, porque sem medida de cintura e com 3 dias de registro incompleto não há base, e o excesso está no fim de semana e nos doces, não no jantar dos dias úteis. A medida de segunda, 09/11, em jejum, vira a referência; se no domingo, 15/11, a cintura não tiver caído de 89,8 cm e o remo tiver sido feito em 6 dias ou mais, aí entra o corte de 150 kcal no jantar."
+}
