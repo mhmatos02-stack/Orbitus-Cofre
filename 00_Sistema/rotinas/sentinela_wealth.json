@@ -1,7 +1,7 @@
 {
   "rotina": "sentinela_wealth",
-  "quando": "2026-11-09T10:38",
+  "quando": "2026-11-09T22:37",
   "status": "ok",
-  "detalhe": "Health check (06:55 ATENCAO, 07:47 SAUDAVEL), news radar e git commit de ontem OK; dashboard 10:05 ja rodou.",
+  "detalhe": "Rodada da noite: health check (ATENCAO, 1 aviso), news radar, dashboard e mesa de caixa (20:51) OK.",
   "retentativas": {}
 }

@@ -1,0 +1,74 @@
+{
+ "data": "2026-11-09",
+ "gerado_em": "2026-11-09T21:49",
+ "agentes": {
+  "personal": {
+   "resumo": "Segunda com o C · Ombros + Braços completo: 8 exercícios, 23 séries, todas feitas, com aquecimento, depois de 3 dias seguidos sem série lançada (06 a 08/11). Duas falhas: o desenvolvimento caiu para 4 × 5 por braço ao virar unilateral com 20 kg, e cintura, peso e passos de hoje não foram lançados.",
+   "bem": [
+    "Remo leve de 20 min hoje, o dobro dos 10 min pedidos ontem, depois de 4 dias seguidos em 0 (05 a 08/11)",
+    "Tríceps francês subiu de 15 para 17 kg e fechou 3 × 12, topo da faixa: na próxima C vai para 19 kg buscando 3 × 10",
+    "Mergulho foi de 2 × 15 para 2 × 20 e o face pull repetiu 3 × 20 sem queda"
+   ],
+   "ajustes": [
+    "Desenvolvimento: você mudou duas coisas ao mesmo tempo (bilateral para unilateral e 18 para 20 kg) e caiu de 4 × 10 para 4 × 5 por braço. Na C de quinta, 12/11, volte ao desenvolvimento sentado com os dois braços, 18 kg, buscando 4 × 10 de novo; os 20 kg só entram depois disso",
+    "Rosca direta parou em 10 kg × 3 × 10 nas duas últimas C (04 e 09/11). Na quinta, troque por rosca alternada em pé com 10 kg e descida de 3 s, buscando 3 × 12; e o martelo volta a 12 kg, porque fez 2 × 15 com 10 kg, acima da faixa",
+    "A medida de segunda cedo não saiu: a última cintura é 89,8 cm de 01/11, e a decisão de domingo, 15/11, depende de uma medida desta semana. Meça amanhã ao acordar, em jejum, fita no umbigo, média de 3 leituras, e lance também os passos de hoje (média registrada de 3.125 contra 8.000)"
+   ],
+   "amanha": "Terça, 10/11, em casa: A · Peito + Costas. Supino inclinado 26 kg buscando 4 × 8 (fechou 4 × 10 com 24 kg em 05/11), remada unilateral 26 kg buscando 4 × 12 (fez 10, 10, 10, 12), supino reto sobe para 24 kg buscando 3 × 8 (fez 3 × 10 com 22 kg), remada curvada 16 kg em séries normais com 90 s de descanso, fora da supersérie, buscando 3 × 12, crucifixo inclinado sobe para 14 kg (fez 3 × 15 com 12 kg). Depois do jantar, 10 min de remo leve.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Deixar a fita métrica e a balança no banheiro hoje à noite",
+     "data": "2026-11-09",
+     "porque": "a medida de segunda não saiu; com tudo à mão a de terça cedo leva 2 minutos"
+    },
+    {
+     "titulo": "Lançar os passos de hoje tirados do app Saúde",
+     "data": "2026-11-09",
+     "porque": "passos em branco em 5 dos últimos 7 dias; sem eles a regra de domingo decide no escuro"
+    }
+   ]
+  },
+  "nutri": {
+   "resumo": "Almoço de 200 g de ravioli de búfala lançado com 600 kcal e 44 g de proteína: a caloria é plausível, mas massa recheada tem cerca de 11 g de proteína por 100 g, então o real fica perto de 22 g. Com o café sugerido (cerca de 420 kcal e 35 g), o dia registrado tem cerca de 1.020 kcal e 57 g de proteína reais, com lanche e jantar em branco.",
+   "bem": [
+    "Água na meta de 10 copos, de volta depois dos 6 copos de sábado",
+    "Nenhum doce lançado hoje, depois dos doces fora do plano de 05 e 06/11 (700 kcal)",
+    "Jantar decidido até 16h e café da manhã no sugerido"
+   ],
+   "ajustes": [
+    "Segunda massa sem carne em 4 dias (ravioli em 06 e 09/11), e a troca de ontem (meia porção de massa + frango) não foi aplicada. É esse almoço que puxa a proteína para baixo de 130 g: nos dois dias o almoço deu cerca de 20 g, contra 45 a 55 g do almoço do plano",
+    "Lanche e jantar sem registro: do jeito que está, o resumo mostra 1.020 kcal, o que pareceria um dia abaixo do piso de 1.650 kcal. Lance o que comeu antes de dormir; se não jantou, coma 1 pão francês com 120 g de frango desfiado (cerca de 340 kcal e 42 g de proteína) e não compense amanhã",
+    "Creatina marcada em só 2 dos últimos 7 dias (03 e 06/11). Deixe o pote ao lado do whey e tome junto com o café da manhã, que você já marca todo dia"
+   ],
+   "trocas": [
+    {
+     "de": "200 g de ravioli de búfala puro",
+     "por": "120 g de ravioli + 120 g de frango grelhado + salada",
+     "porque": "cerca de 540 kcal e 50 g de proteína, contra cerca de 600 kcal e 22 g"
+    },
+    {
+     "de": "Dia sem lanche registrado",
+     "por": "1 dose de whey batida com 200 ml de leite desnatado",
+     "porque": "cerca de 190 kcal e 31 g de proteína, fecha o buraco entre almoço e jantar"
+    }
+   ],
+   "amanha": "Café: 1 pão francês, 3 ovos + 2 claras mexidos, 1 porção de mamão · Almoço: 150 g de patinho grelhado, 4 colheres de arroz, 1 concha de feijão, salada com 1 colher de azeite · Lanche: 1 iogurte proteico + 1 banana · Jantar: 150 g de tilápia, 1 batata média (150 g), 150 g de legumes · Doce: 1, cerca de 150 kcal, depois do almoço. Total cerca de 1.780 kcal e 148 g de proteína.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Lançar o lanche e o jantar de hoje no Orbitus antes de dormir",
+     "data": "2026-11-09",
+     "porque": "sem eles o dia aparece com 1.020 kcal e 79 g de proteína e a média da semana sai errada"
+    },
+    {
+     "titulo": "Deixar 150 g de frango grelhado pronto na geladeira para juntar à massa",
+     "data": "2026-11-10",
+     "porque": "a massa sem carne já apareceu 2 vezes em 4 dias; com o frango pronto a troca leva 1 minuto"
+    }
+   ]
+  }
+ },
+ "respostas": [],
+ "semana": ""
+}

@@ -15,7 +15,7 @@ risco: "liquidez abaixo do piso do plano até a venda da elétrica; se ela atras
 esperando: "Comprar HGLG11 (rotação dentro de FIIs) (até 27/11)"
 esperando_lista:
   - "Comprar HGLG11 (rotação dentro de FIIs) (até 27/11)"
-automacao: "🟢 SAUDÁVEL · 0 falha(s) · 0 atenção(ões)"
+automacao: "🟡 ATENÇÃO · 0 falha(s) · 1 atenção(ões)"
 falhas: []
 ---
 # 💰 AI Wealth Office

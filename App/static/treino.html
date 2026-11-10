@@ -281,6 +281,10 @@ body.timing #toast{bottom:calc(env(safe-area-inset-bottom,0px) + 118px)}
 .toast .mono{color:var(--amber)}
 .toast.big .mono{color:inherit}
 @keyframes tin{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+.pchat .pc-log{display:flex;flex-direction:column;gap:6px;max-height:260px;overflow:auto;margin:10px 0 8px;padding-right:2px}
+.pchat .pc-q{align-self:flex-end;max-width:85%;background:var(--accent-soft);color:var(--ink);border-radius:12px 12px 4px 12px;padding:7px 10px;font-size:13.5px}
+.pchat .pc-a{align-self:flex-start;max-width:92%;background:var(--surface-2);border-radius:12px 12px 12px 4px;padding:8px 11px;font-size:14px;line-height:1.45;white-space:pre-wrap}
+.pchat .pc-in{display:flex;gap:8px;flex-wrap:nowrap;margin-top:8px}.pchat .pc-in .inp{flex:1;min-width:0;font-size:16px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
@@ -948,6 +952,30 @@ function checkAction(c,k,d){
   return '';
 }
 
+/* ===== Personal ao vivo: perguntas durante o treino (resposta na hora, com a sessão de hoje como contexto) ===== */
+const PC={dia:null,msgs:[],ocupado:false,draft:'',erro:''};
+function pcSessao(k){const d=getDay(k),sk=sessionKey(k),t=T_[sk];if(!t)return '';
+  let s=`${LETTER_LABEL[sk]} · ${t.title} (${t.dur||''}). ${t.sub||''}\nLocal: ${isGym(k)?'academia':'casa'} · aquecimento ${d.workout.warm?'feito':'não feito'} · treino ${d.workout.done?'concluído':'em andamento'}\n`;
+  (t.items||[]).forEach(([id,tag,rest])=>{const ex=EX[id];if(!ex)return;const sets=(d.workout.sets||{})[id]||[];
+    const feitas=sets.filter(r=>r&&r.done).map(r=>(r.kg!=null&&r.kg!==''?r.kg+' kg × ':'')+(r.reps??'?')).join(', ');let sg={};try{sg=suggest(ex,k)||{}}catch(e){}
+    s+=`- ${ex.n}${tag?' ['+tag+']':''}: ${ex.s} séries de ${ex.lo}–${ex.hi}${ex.unit==='s'?' s':' reps'}, descanso ${rest} s${sg.kg!=null?', carga indicada '+sg.kg+' kg '+(ex.per||''):''}. Feito: ${feitas||'nada ainda'}\n`});
+  return s}
+function pcCarregar(k){PC.dia=k;PC.msgs=[];PC.erro='';fetch('/api/treino/personal?dia='+k).then(r=>r.json()).then(j=>{if(PC.dia===k&&(j.mensagens||[]).length){PC.msgs=j.mensagens;if(S.tab==='treino'&&!isTyping())render()}}).catch(()=>{})}
+function personalCard(k){if(PC.dia!==k)pcCarregar(k);const ms=PC.msgs;
+  const log=ms.slice(-8).map(m=>`<div class="pc-q">${esc(m.pergunta)}</div><div class="pc-a">${esc(m.resposta)}</div>`).join('');
+  return `<section class="card pchat"><div class="block"><div><div class="eyebrow">Brasa · Personal</div><b>Pergunte durante o treino</b><div class="small muted">Ele vê o treino de hoje, as séries e as cargas. Dor forte ou pontada: pare a série.</div></div></div>
+    ${log||PC.ocupado?`<div class="pc-log" id="pc-log">${log}</div>`:''}
+    ${PC.erro?`<div class="small" style="color:var(--bad)">${esc(PC.erro)}</div>`:''}
+    <div class="pc-in"><input class="inp" id="pc-txt" placeholder="Ex.: o ombro incomodou no supino, troco por qual?" value="${esc(PC.draft)}" enterkeyhint="send" autocomplete="off"><button class="btn" data-act="pcSend" ${PC.ocupado?'disabled':''}>Enviar</button></div></section>`}
+function pcRolar(){const l=document.getElementById('pc-log');if(l)l.scrollTop=l.scrollHeight}
+function pcEnviar(k){const el=document.getElementById('pc-txt');const tx=(el?el.value:PC.draft).trim();if(!tx||PC.ocupado){el&&el.focus();return}
+  PC.draft='';PC.erro='';PC.ocupado=true;PC.msgs.push({pergunta:tx,resposta:'Brasa está pensando…'});const i=PC.msgs.length-1;render();pcRolar();
+  fetch('/api/treino/personal',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({dia:k,texto:tx,sessao:pcSessao(k)})})
+  .then(r=>r.json()).then(j=>{if(j.erro)throw new Error(j.erro);PC.msgs[i]=j}).catch(e=>{PC.msgs.splice(i,1);PC.draft=tx;PC.erro=e.message})
+  .then(()=>{PC.ocupado=false;if(S.tab==='treino')render();pcRolar()})}
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='pc-txt')PC.draft=e.target.value});
+window.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target&&e.target.id==='pc-txt'){e.preventDefault();e.stopPropagation();pcEnviar(S.sel)}},true);
+
 function viewTreino(){
   const k=S.sel,d=getDay(k),sk=sessionKey(k),t=T_[sk],tot=sessionTotals(k);
   const letters=['A','B1','B2','C','V','R'];
@@ -962,6 +990,7 @@ function viewTreino(){
       <div class="letters" role="group" aria-label="Trocar treino">${letters.map(l=>`<button class="chip ${sk===l?'on':''}" data-act="letter" data-l="${l}">${LETTER_LABEL[l]}</button>`).join('')}</div></details>
     ${tot.total?`<div class="prog"><span class="num">${tot.done}/${tot.total} séries</span><div class="bar"><i style="width:${Math.round(tot.done/tot.total*100)}%"></i></div></div>`:''}
   </section>`;
+  html+=personalCard(k);
   if(sk==='R'){
     html+=`<section class="card"><h3>Domingo: corrida + ioga</h3><ul class="rules small"><li><b>Corrida 30 a 40 min</b>, ritmo leve: dá para falar frases inteiras. ${isGym(k)?'Na esteira da academia, 1% de inclinação.':'Esteira do condomínio ou rua.'} Comece com 30 min e suba 5 min por semana se estiver fácil.</li><li><b>Ioga 15 a 20 min</b> no Fitness+ logo depois, focada em quadril e posterior.</li><li>Sem força e sem HIIT: amanhã é peito e costas.</li></ul>
       ${recButtons(d)}</section>`;
@@ -1817,6 +1846,7 @@ document.addEventListener('click',e=>{
     case 'habit':mutate(k,d=>{d.habits=d.habits||{};d.habits[b.dataset.h]=!d.habits[b.dataset.h]});break;
     case 'mesadata':S.mesaData=b.dataset.d;render();break;
     case 'pqpara':S.pqPara=b.dataset.p;render();break;
+    case 'pcSend':pcEnviar(k);break;
     case 'perguntar':{const el=document.getElementById('pq-txt');const tx=el&&el.value.trim();if(!tx){el&&el.focus();break}
       apiPost('/api/treino/pergunta',{para:S.pqPara||'mesa',texto:tx}).then(()=>{toast('Pergunta enviada. A resposta sai no parecer das 21:47');el.value='';el.blur();initCloud()}).catch(e=>toast(esc(e.message)));break}
     case 'local':{const l=b.dataset.l;mutate(k,d=>{const auto=(S.locais||[]).find(x=>k>=x.de&&k<=x.ate);const base=auto?auto.local:'casa';if(l===base){delete d.local;delete d.localNome}else{d.local=l;d.localNome=l==='academia'?'Academia':''}});break}

@@ -4,7 +4,7 @@
  "waist": null,
  "steps": null,
  "sleep": null,
- "water": 4,
+ "water": 10,
  "meals": {
   "cafe": true,
   "almoco": {
@@ -20,14 +20,148 @@
   }
  },
  "extras": [],
- "habits": {},
+ "habits": {
+  "jantar16": true
+ },
  "workout": {
   "letter": null,
-  "sets": {},
+  "sets": {
+   "desenv": [
+    {
+     "done": true,
+     "reps": 5,
+     "kg": 20
+    },
+    {
+     "done": true,
+     "reps": 5,
+     "kg": 20
+    },
+    {
+     "done": true,
+     "reps": 5,
+     "kg": 20
+    },
+    {
+     "done": true,
+     "reps": 5,
+     "kg": 20
+    }
+   ],
+   "elev_lat": [
+    {
+     "kg": 8,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 12,
+     "kg": 8
+    },
+    {
+     "done": true,
+     "reps": 12,
+     "kg": 8
+    }
+   ],
+   "face_pull": [
+    {
+     "kg": null,
+     "reps": 20,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 20,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 20,
+     "done": true
+    }
+   ],
+   "cruc_inv": [
+    {
+     "done": true,
+     "reps": 12,
+     "kg": 4
+    },
+    {
+     "done": true,
+     "reps": 12,
+     "kg": 4
+    },
+    {
+     "done": true,
+     "reps": 12,
+     "kg": 4
+    }
+   ],
+   "rosca": [
+    {
+     "kg": 10,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 10,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 10,
+     "reps": 10,
+     "done": true
+    }
+   ],
+   "triceps_fr": [
+    {
+     "kg": 17,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "kg": 17,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "kg": 17,
+     "reps": 12,
+     "done": true
+    }
+   ],
+   "martelo": [
+    {
+     "done": true,
+     "reps": 15,
+     "kg": 10
+    },
+    {
+     "done": true,
+     "reps": 15,
+     "kg": 10
+    }
+   ],
+   "mergulho": [
+    {
+     "done": true,
+     "reps": 20,
+     "kg": null
+    },
+    {
+     "done": true,
+     "reps": 20,
+     "kg": null
+    }
+   ]
+  },
   "done": true,
-  "warm": false,
+  "warm": true,
   "remo": false
  },
- "updated": 1794243182985,
+ "updated": 1794259688222,
  "mov": 20
 }

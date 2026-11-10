@@ -22,8 +22,9 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Deixar o remo montado na sala, perto da mesa de jantar — sugerido por Mesa da Saúde · Personal trainer 📅 2026-11-02 #saude ➕ 2026-11-02 ✅ 2026-11-02
 - [x] Corrigir o registro de sábado com kcal explícitas (picanha, wagyu, linguiça, nhoque, sobremesa) — sugerido por Mesa da Saúde · Nutricionista 📅 2026-11-02 #saude #aguardando ➕ 2026-11-02 ✅ 2026-11-02
 - [x] Comprar bananas, mamão e ovos para a semana — sugerido por Mesa da Saúde · Nutricionista 📅 2026-11-02 #saude ➕ 2026-11-02 ✅ 2026-11-02
-- [ ] Medir a cintura em casa, em jejum, na altura do umbigo, 3 vezes, e anotar a média — sugerido por Mesa da Saúde · Personal trainer 📅 2026-11-08 #saude ➕ 2026-11-02
-- [ ] Rosuvastatina 🔁 every day 📅 2026-11-09 ⏰ 20:00 #saude ➕ 2026-11-09
+- [x] Medir a cintura em casa, em jejum, na altura do umbigo, 3 vezes, e anotar a média — sugerido por Mesa da Saúde · Personal trainer 📅 2026-11-08 #saude ➕ 2026-11-02 ✅ 2026-11-09
+- [ ] Rosuvastatina 🔁 every day 📅 2026-11-10 ⏰ 20:00 #saude ➕ 2026-11-09
+- [x] Rosuvastatina 🔁 every day 📅 2026-11-09 ⏰ 20:00 #saude ➕ 2026-11-09 ✅ 2026-11-09
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-08 ⏰ 20:00 #saude ➕ 2026-11-09 ✅ 2026-11-09
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-07 ⏰ 20:00 #saude ➕ 2026-11-06 ✅ 2026-11-09
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-06 ⏰ 20:00 #saude ➕ 2026-11-05 ✅ 2026-11-06

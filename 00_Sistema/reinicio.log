@@ -39,3 +39,6 @@
 2026-11-06T18:11:43  servidor no ar (pid 1616)
 2026-11-09T13:45:16  código novo (server.py, tarefas_api.py, wealth_plano.py) conferido: reiniciando
 2026-11-09T13:45:16  servidor no ar (pid 34487)
+2026-11-09T16:00:19  servidor no ar (pid 1550)
+2026-11-09T17:23:04  código novo (personal_chat.py, server.py) conferido: reiniciando
+2026-11-09T17:23:04  servidor no ar (pid 3681)

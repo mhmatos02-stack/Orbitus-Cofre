@@ -39,6 +39,7 @@ import push
 import agenda_pro
 import cio
 import diario
+import personal_chat
 import wealth_plano
 concierge.AGUA_FN = lambda n: rotina.agua_somar(VAULT, date.today().isoformat(), n)
 concierge.PESO_FN = lambda kg: treino.registrar_saude(VAULT, {'peso': kg})
@@ -976,6 +977,11 @@ class H(BaseHTTPRequestHandler):
         elif self.path.split('?')[0] == '/api/voz':
             self._json({'voz': concierge.voz_escolhida(), 'disponiveis': concierge.vozes(), 'tom': concierge.cfg().get('tom', 'espirituoso'),
                         'sugeridas': [{'nome': n, 'desc': d} for n, d in concierge.VOZES_SUGERIDAS]})
+        elif self.path.split('?')[0] == '/api/treino/personal':
+            try:
+                self._json(personal_chat.historico(VAULT, parse_qs(urlparse(self.path).query).get('dia', [''])[0]))
+            except ValueError as e:
+                self._json({'erro': str(e)}, 400)
         elif self.path.split('?')[0] == '/api/treino':
             try:
                 self._json(treino.tudo(VAULT))
@@ -1181,6 +1187,8 @@ class H(BaseHTTPRequestHandler):
                 return
             elif self.path == '/api/concierge/nova':
                 return self._json(concierge.nova_conversa())
+            elif self.path == '/api/treino/personal':
+                return self._json(personal_chat.perguntar(VAULT, body))
             elif self.path == '/api/treino/pergunta':
                 return self._json(treino.perguntar(VAULT, body))
             elif self.path == '/api/treino/resumo':
