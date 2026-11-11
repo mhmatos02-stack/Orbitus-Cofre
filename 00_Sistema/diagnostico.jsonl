@@ -130,3 +130,6 @@
 {"em": "2026-11-09T13:54:56", "ev": "voz-fila", "det": "running · sem sessão", "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36", "app": false}
 {"em": "2026-11-09T13:55:00", "ev": "voz-pronta", "det": "running", "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36", "app": false}
 {"em": "2026-11-09T13:55:06", "ev": "voz-tocou", "det": "running · 273.9s", "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36", "app": false}
+{"em": "2026-11-10T07:44:34", "ev": "voz-fila", "det": "running · sem sessão", "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36", "app": false}
+{"em": "2026-11-10T07:44:38", "ev": "voz-pronta", "det": "running", "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36", "app": false}
+{"em": "2026-11-10T07:44:39", "ev": "voz-tocou", "det": "running · 5.2s", "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36", "app": false}

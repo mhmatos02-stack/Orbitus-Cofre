@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
+<head><script>/* erros do navegador vão para 00_Sistema/diagnostico.jsonl (no celular), para achar tela branca à distância */
+(function(){var n=0,cel=innerWidth<760||/iPhone|iPad|Android/i.test(navigator.userAgent);function env(ev,det){if(!cel||n++>8)return;try{navigator.sendBeacon('/api/diag',new Blob([JSON.stringify({ev:ev,det:String(det||'').slice(0,80),ua:navigator.userAgent.slice(0,140)})],{type:'application/json'}))}catch(e){}}
+addEventListener('error',function(e){env('js-erro',(e.message||'recurso')+' @'+String(e.filename||(e.target&&e.target.src)||'').split('/').pop()+':'+(e.lineno||''))},true);
+addEventListener('unhandledrejection',function(e){env('js-promessa',e.reason&&e.reason.message||e.reason)});
+addEventListener('load',function(){env('carregou',innerWidth+'x'+innerHeight+' '+document.body.innerText.length)});
+addEventListener('pagehide',function(){env('saiu',Math.round(performance.now()/1000)+'s')})})();</script>
 <meta charset="utf-8">
 <script src="/static/demo.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">

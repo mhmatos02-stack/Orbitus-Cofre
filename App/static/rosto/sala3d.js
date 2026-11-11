@@ -30,11 +30,16 @@ css.textContent = `
 @media (max-width:760px){#sala3d .tag{font-size:10px;padding:4px 8px}#sala3d .tag span{display:none}}`;
 document.head.appendChild(css);
 
-const renderer = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: true, powerPreference: 'low-power' });
-const DPR = Math.min(devicePixelRatio || 1, 2);
+const MOVEL = window.innerWidth < 760 || /iPhone|iPad|Android/i.test(navigator.userAgent);   // celular: leve, sem sombra e sem antialias
+const renderer = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: !MOVEL, powerPreference: 'low-power' });
+const DPR = Math.min(devicePixelRatio || 1, MOVEL ? 1.5 : 2);
+cv.addEventListener('webglcontextlost', (e) => {     // o celular tirou a memória do 3D: volta para o anel 2D em vez de tela branca
+  e.preventDefault(); caixa.remove(); window.ESFERA3D_OK = false;
+  try { navigator.sendBeacon('/api/diag', new Blob([JSON.stringify({ ev: 'sala3d-perdeu', det: innerWidth + 'x' + innerHeight, ua: navigator.userAgent.slice(0, 140) })], { type: 'application/json' })); } catch (x) {}
+});
 renderer.setPixelRatio(DPR);
 renderer.setClearColor(0x000000, 0);
-renderer.shadowMap.enabled = true;
+renderer.shadowMap.enabled = !MOVEL;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
@@ -48,7 +53,7 @@ const DIR = new THREE.Vector3(0.62, 0.58, 0.95).normalize();
 scene.add(new THREE.HemisphereLight(0xc9d2ff, 0x241a35, 1.1));
 const sol = new THREE.DirectionalLight(0xffffff, 1.9);
 sol.position.set(5, 10, 7);
-sol.castShadow = true;
+sol.castShadow = !MOVEL;
 sol.shadow.mapSize.set(1024, 1024);
 Object.assign(sol.shadow.camera, { left: -8, right: 8, top: 8, bottom: -8, near: 1, far: 30 });
 sol.shadow.radius = 4;

@@ -1,0 +1,185 @@
+{
+ "date": "2026-11-10",
+ "weight": 69.3,
+ "waist": 90,
+ "steps": null,
+ "sleep": null,
+ "water": 14,
+ "meals": {
+  "cafe": {
+   "c": 1,
+   "items": [
+    {
+     "f": "pao",
+     "q": 1
+    },
+    {
+     "f": "frango",
+     "q": 120
+    }
+   ]
+  },
+  "almoco": {
+   "c": 1,
+   "items": [
+    {
+     "f": "carne",
+     "q": 300
+    },
+    {
+     "n": "Queijo mussarela",
+     "k": 60,
+     "p": 4
+    }
+   ],
+   "txt": "2 panquecas de carne moída com mussarela"
+  },
+  "jantar": {
+   "c": 1,
+   "items": [
+    {
+     "f": "frango",
+     "q": 150
+    }
+   ],
+   "txt": "torta de frango"
+  }
+ },
+ "extras": [],
+ "habits": {
+  "jantar16": true
+ },
+ "workout": {
+  "letter": null,
+  "sets": {
+   "sup_inc": [
+    {
+     "kg": 26,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 26
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 26
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 26
+    }
+   ],
+   "rem_uni": [
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 26
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 26
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 26
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 26
+    }
+   ],
+   "sup_reto": [
+    {
+     "done": true,
+     "kg": 22,
+     "reps": 12
+    },
+    {
+     "done": true,
+     "kg": 24,
+     "reps": 10
+    },
+    {
+     "done": true,
+     "kg": 24,
+     "reps": 10
+    }
+   ],
+   "rem_curv": [
+    {
+     "kg": 16,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "kg": 16,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 12,
+     "kg": 16
+    }
+   ],
+   "cruc_inc": [
+    {
+     "kg": 14,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": 14,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": 14,
+     "reps": 15,
+     "done": true
+    }
+   ],
+   "puxada_el": [
+    {
+     "kg": null,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 15,
+     "done": true
+    }
+   ],
+   "flexao": [
+    {
+     "kg": null,
+     "reps": 20,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 25,
+     "done": true
+    }
+   ]
+  },
+  "done": true,
+  "warm": true,
+  "remo": false
+ },
+ "updated": 1794359273273
+}
