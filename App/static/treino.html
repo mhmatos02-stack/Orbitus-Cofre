@@ -348,6 +348,13 @@ body{letter-spacing:.005em}
 .check small,.small,.muted{color:#b4bccd}
 .badge .bi{font-weight:300}
 canvas.agf{display:block}
+@media (max-width:760px){   /* acabamento Lente design */
+.tabs.mais-d{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}
+.tabs.mais-e{-webkit-mask-image:linear-gradient(90deg,transparent,#000 18%);mask-image:linear-gradient(90deg,transparent,#000 18%)}
+.tabs.mais-e.mais-d{-webkit-mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent)}
+.btn,.toggle,.tab{min-height:44px}.chk{height:44px}
+.chart text,.heat .wk,.pin span{font-size:12px}.eyebrow,.set label span,th,.heat .hd,.pill{font-size:11.5px}
+}
 </style>
 <header class="top" id="top"></header>
 <main><div class="wrap" id="view"></div></main>
@@ -800,10 +807,14 @@ function suggest(ex,k){
 }
 
 /* ---------- render ---------- */
+/* acabamento Lente design: no celular a faixa de abas não volta ao começo a cada toque; a aba ativa fica visível e a borda esmaece enquanto há abas escondidas */
+function centralizarAba(){const t=document.querySelector('nav.tabs'),on=t&&t.querySelector('.tab.on');if(!t)return;
+  if(on&&t.scrollWidth>t.clientWidth)t.scrollLeft=Math.max(0,on.offsetLeft-(t.clientWidth-on.offsetWidth)/2);
+  const marca=()=>{t.classList.toggle('mais-d',t.scrollLeft+t.clientWidth<t.scrollWidth-4);t.classList.toggle('mais-e',t.scrollLeft>4)};marca();t.addEventListener('scroll',marca,{passive:true})}
 function render(){
   _cc=null;_sk={};setTimeout(()=>{if(typeof acordar==='function')acordar(8000)},0);
   const act=document.activeElement&&document.activeElement.id;
-  renderTop();
+  renderTop();centralizarAba();
   const v=document.getElementById('view');
   v.innerHTML=({mesa:viewMesa,hoje:viewHoje,treino:viewTreino,comida:viewComida,compras:viewCompras,medidas:viewMedidas,jornada:viewJornada,plano:viewPlano}[S.tab])();
   if(act){const el=document.getElementById(act);if(el&&el.tagName==='INPUT'){el.focus({preventScroll:true})}}

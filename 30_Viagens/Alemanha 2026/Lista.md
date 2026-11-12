@@ -10,6 +10,7 @@ Migrada do Lembretes em 2026-10-30 (o item "Presentes" foi separado em um por pe
 - [ ] Presente Luiza 📅 2026-12-10
 - [x] Presente Lucas + Steff 📅 2026-12-10 ✅ 2026-11-06
 - [ ] Presente Milu — mãe do Lucas 📅 2026-12-10
+- [ ] Trio de Livros "Vamos Dormir" 📅 2026-11-19
 
 ## Outros
 

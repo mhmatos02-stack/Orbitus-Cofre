@@ -27,7 +27,8 @@ css.textContent = `
 #sala3d .tag b i{width:7px;height:7px;border-radius:50%;display:inline-block;box-shadow:0 0 8px currentColor}
 #sala3d .tag span{display:block;margin-top:2px;font-weight:400;color:rgba(215,222,240,.82);font-size:10.5px}
 #sala3d .tag.alerta{border-color:rgba(255,190,90,.55)}
-@media (max-width:760px){#sala3d .tag{font-size:10px;padding:4px 8px}#sala3d .tag span{display:none}}`;
+#sala3d .tag.aberta{border-color:rgba(255,255,255,.42);background:rgba(14,16,28,.88)}
+@media (max-width:760px){#sala3d .tag{font-size:10px;padding:4px 8px}#sala3d .tag span{display:none}#sala3d .tag.aberta{display:block}#sala3d .tag.aberta span{display:block;font-size:10px}}   /* no celular as etiquetas ficam escondidas; o toque mostra a do personagem */`;
 document.head.appendChild(css);
 
 const MOVEL = window.innerWidth < 760 || /iPhone|iPad|Android/i.test(navigator.userAgent);   // celular: leve, sem sombra e sem antialias
@@ -380,7 +381,40 @@ const tPersonal = etiqueta(personal, 1.62, 'Brasa · Personal', '#ff7a4d');
 const tNutri = etiqueta(nutri, 1.62, 'Sálvia · Nutricionista', '#2fd0bf');
 const tPulso = etiqueta(pulso, 1.62, 'Pulso · Sistema', '#5b8cff');
 const tLente = etiqueta(lente, 1.62, 'Lente · UX/UI', '#ffbe50');
-function texto(e, t, alerta) { if (e.linha.textContent !== t) e.linha.textContent = t; e.el.classList.toggle('alerta', !!alerta); }
+/* acabamento Lente 02: tocar num personagem. No Mac abre o destino; no celular o 1º toque mostra a etiqueta com o dado, o 2º abre. */
+tVega.ir = 'concierge'; tCio.ir = '#mesa'; tPersonal.ir = '#treino'; tNutri.ir = '#treino'; tPulso.ir = '#sistema'; tLente.ir = null;
+function personagemEm(cx, cy) {
+  const r = caixa.getBoundingClientRect(), x = cx - r.left, y = cy - r.top, meia = W0 < 760 ? 30 : 42;
+  let achou = null, melhor = 1e9;
+  for (const e of etiquetas) {
+    if (e.px == null) continue;
+    const dx = Math.abs(x - e.px);
+    if (dx < meia && y > e.ty - 30 && y < e.py + 8 && dx < melhor) { melhor = dx; achou = e; }
+  }
+  return achou;
+}
+window.SALA_ALVO = (cx, cy) => !!personagemEm(cx, cy);
+let fechar = 0;
+function abrirTag(e) {
+  for (const o of etiquetas) o.el.classList.toggle('aberta', o === e);
+  clearTimeout(fechar); fechar = setTimeout(() => e.el.classList.remove('aberta'), 8000);
+}
+function irPara(e) {
+  if (e.ir === 'concierge') { const c = document.getElementById('cIn'); if (c) { c.scrollIntoView({ behavior: 'smooth', block: 'center' }); c.focus({ preventScroll: true }); } }
+  else if (e.ir) location.hash = e.ir;
+  else abrirTag(e);
+}
+const orb = document.getElementById('orb');
+if (orb) {
+  orb.addEventListener('click', (ev) => {
+    const e = personagemEm(ev.clientX, ev.clientY); if (!e) return;
+    if (W0 < 760 && !e.el.classList.contains('aberta')) { abrirTag(e); return; }
+    irPara(e);
+  });
+  orb.addEventListener('pointermove', (ev) => { if (ev.pointerType === 'mouse') orb.style.cursor = personagemEm(ev.clientX, ev.clientY) ? 'pointer' : ''; }, { passive: true });
+}
+function texto(e, t, alerta) { if (e === tCio && document.body.classList.contains('privado')) t = String(t).split(':')[0];   // modo privado: sem nome de ativo na vitrine
+  if (e.linha.textContent !== t) e.linha.textContent = t; e.el.classList.toggle('alerta', !!alerta); }
 texto(tVega, 'Pronta'); texto(tCio, '…'); texto(tPersonal, '…'); texto(tNutri, '…'); texto(tPulso, '…'); texto(tLente, '…');
 
 /* ---------- dados reais ---------- */
@@ -508,10 +542,17 @@ function quadro(now) {
   camera.position.copy(ALVO).addScaledVector(DIR.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw), DIST);
   camera.lookAt(ALVO);
   renderer.render(scene, camera);
+  // acabamento Lente design: etiqueta nunca sai da sala nem entra embaixo da coluna da direita (Mac)
+  let limD = W0;
+  if (W0 >= 760) { const col = hero.querySelector('.hcal'), cr = caixa.getBoundingClientRect(); if (col) { const c = col.getBoundingClientRect(); if (c.width && c.left > cr.left) limD = Math.min(W0, c.left - cr.left - 8); } }
   for (const e of etiquetas) {
     e.v.set(0, e.altura, 0); e.obj.localToWorld(e.v); e.v.project(camera);
-    e.el.style.left = ((e.v.x + 1) / 2 * W0) + 'px';
-    e.el.style.top = ((1 - e.v.y) / 2 * H0) + 'px';
+    e.tx = (e.v.x + 1) / 2 * W0; e.ty = (1 - e.v.y) / 2 * H0;
+    const meia = (e.el.offsetWidth || 0) / 2, alt = e.el.offsetHeight || 0;
+    e.el.style.left = Math.max(meia + 4, Math.min(limD - meia - 4, e.tx)) + 'px';
+    e.el.style.top = Math.max(alt + 4, e.ty) + 'px';
+    e.v.set(0, 0, 0); e.obj.localToWorld(e.v); e.v.project(camera);   // pés do personagem: base da área de toque
+    e.px = (e.v.x + 1) / 2 * W0; e.py = (1 - e.v.y) / 2 * H0;
   }
 }
 window.ESFERA3D_OK = true;   // o anel 2D para de desenhar e só cuida do estado da voz

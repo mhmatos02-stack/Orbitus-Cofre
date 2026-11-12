@@ -17,12 +17,6 @@
   "titulo": "Comprar a 1ª parcela de Tesouro IPCA+ (2032 ou 2035)",
   "origem": "Mesa do Wealth"
  },
- "c8ea806c81c3": {
-  "acao": "aceitar",
-  "em": "2026-11-02T08:23",
-  "titulo": "Comprar WRLD11 (1ª parcela: o dinheiro da BSOX39)",
-  "origem": "Mesa do Wealth"
- },
  "83a9dc575a93": {
   "acao": "aceitar",
   "em": "2026-11-02T08:23",
@@ -64,5 +58,11 @@
   "em": "2026-11-04T10:19",
   "titulo": "Conferir no app Saúde os passos reais de 02 e 03/11 e corrigir no Orbitus",
   "origem": "Mesa da Saúde"
+ },
+ "3838ab8b67ca": {
+  "acao": "aceitar",
+  "em": "2026-11-11T13:05",
+  "titulo": "Confirmar ao Wealth: Comprar a 1ª parcela de Tesouro IPCA+ (2032 ou 2035)",
+  "origem": "Mesa do Wealth"
  }
 }

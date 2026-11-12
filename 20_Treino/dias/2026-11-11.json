@@ -1,0 +1,185 @@
+{
+ "date": "2026-11-11",
+ "weight": null,
+ "waist": null,
+ "steps": null,
+ "sleep": null,
+ "water": 10,
+ "meals": {
+  "cafe": {
+   "c": 1,
+   "items": [
+    {
+     "n": "Queijo mussarela",
+     "k": 60,
+     "p": 4
+    },
+    {
+     "f": "frango",
+     "q": 100
+    }
+   ],
+   "txt": "Sanduíche de mussarela com 100g de frango desfiado"
+  },
+  "almoco": {
+   "c": 1,
+   "items": [
+    {
+     "f": "peixe",
+     "q": 300
+    },
+    {
+     "f": "legumes",
+     "q": 200
+    },
+    {
+     "f": "legumes",
+     "q": 50
+    }
+   ],
+   "txt": "300g de tilápia e 200g de abobrinha com cenoura cozida"
+  },
+  "jantar": {
+   "c": 1,
+   "items": [
+    {
+     "n": "Presunto",
+     "k": 330,
+     "p": 51
+    },
+    {
+     "n": "Queijo mussarela",
+     "k": 60,
+     "p": 4
+    }
+   ],
+   "txt": "300g de rondelli de presunto e queijo com molho ao sugo"
+  }
+ },
+ "extras": [],
+ "habits": {
+  "jantar16": true
+ },
+ "workout": {
+  "letter": null,
+  "sets": {
+   "goblet": [
+    {
+     "kg": 32,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 32,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 32,
+     "reps": 10,
+     "done": true
+    },
+    {
+     "kg": 32,
+     "reps": 10,
+     "done": true
+    }
+   ],
+   "stiff": [
+    {
+     "kg": 22,
+     "reps": 8,
+     "done": true
+    },
+    {
+     "kg": 22,
+     "reps": 8,
+     "done": true
+    },
+    {
+     "kg": 22,
+     "reps": 8,
+     "done": true
+    },
+    {
+     "kg": 22,
+     "reps": 8,
+     "done": true
+    }
+   ],
+   "bulgaro": [
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 12
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 12
+    },
+    {
+     "done": true,
+     "reps": 8,
+     "kg": 12
+    }
+   ],
+   "elev_quadril": [
+    {
+     "done": true,
+     "kg": 16,
+     "reps": 20
+    },
+    {
+     "done": true,
+     "kg": 16,
+     "reps": 20
+    },
+    {
+     "kg": 18,
+     "reps": 15,
+     "done": true
+    }
+   ],
+   "prancha": [
+    {
+     "kg": null,
+     "reps": 60,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 60,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 60,
+     "done": true
+    }
+   ],
+   "panturrilha": [
+    {
+     "kg": 24,
+     "reps": 20,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 18,
+     "kg": 24
+    },
+    {
+     "done": true,
+     "reps": 18,
+     "kg": 24
+    }
+   ]
+  },
+  "done": true,
+  "warm": true,
+  "remo": false
+ },
+ "updated": 1794442067571,
+ "mov": 15
+}

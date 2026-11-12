@@ -12,13 +12,16 @@
     while (el && el.nodeType === 1 && n < 4) {
       var s = el.tagName.toLowerCase();
       if (el.id) { p.unshift(s + '#' + el.id); break; }
-      var c = (typeof el.className === 'string' ? el.className : '').trim().split(/\s+/)[0];
+      var c = (typeof el.className === 'string' ? el.className : (el.getAttribute && el.getAttribute('class')) || '').trim().split(/\s+/)[0];   // svg também tem classe
       if (c) s += '.' + c.replace(/[^\w-]/g,'').slice(0,24);
       p.unshift(s); el = el.parentElement; n++;
     }
     return p.join('>').slice(0,120);
   }
-  function interativo(el){ return !!(el && el.closest && el.closest('a,button,input,select,textarea,label,summary,[role=button],[onclick],[tabindex]')); }
+  function interativo(el, e){
+    if (el && el.id === 'orb' && typeof window.SALA_ALVO === 'function') return !!window.SALA_ALVO(e.clientX, e.clientY);   // sala 3D: só conta se o toque caiu num personagem
+    return !!(el && el.closest && el.closest('a,button,input,select,textarea,label,summary,[role=button],[onclick],[tabindex],[data-act]'));
+  }
   function pos(e){ return {x: +(e.clientX / innerWidth).toFixed(3), y: Math.round(e.clientY + scrollY), vw: innerWidth, vh: innerHeight}; }
   function registrar(o){ o.em = new Date().toISOString().slice(0,19); o.aba = o.aba || aba(); FILA.push(o); if (FILA.length >= 40) enviar(); }
   function enviar(){
@@ -26,12 +29,20 @@
     try { fetch('/api/uso', {method:'POST', keepalive:true, headers:{'Content-Type':'application/json'}, body: JSON.stringify({eventos: lote})}).catch(function(){}); } catch(e){}
   }
   var ultClique = {t:0, x:0, y:0, n:0};
-  addEventListener('pointerdown', function(e){
+  // Correção Lente 02: no toque, pointerdown dispara ao começar a rolar. Agora só conta toque de verdade:
+  // dedo que sobe perto de onde desceu (até 10 px) e em menos de 700 ms. Rolagem gera pointercancel e não entra.
+  // (Não usa 'click' porque o Safari do iPhone não dispara click em área sem ação, e os cliques mortos sumiriam.)
+  var desceu = null;
+  addEventListener('pointerdown', function(e){ desceu = {x: e.clientX, y: e.clientY, t: Date.now(), id: e.pointerId}; }, {capture:true, passive:true});
+  addEventListener('pointercancel', function(){ desceu = null; }, {capture:true, passive:true});
+  addEventListener('pointerup', function(e){
     if (CALOR.ativo) return;
+    var d = desceu; desceu = null;
+    if (!d || d.id !== e.pointerId || Math.abs(e.clientX - d.x) > 10 || Math.abs(e.clientY - d.y) > 10 || Date.now() - d.t > 700) return;
     var el = e.target, p = pos(e), agora = Date.now();
     var perto = Math.abs(e.clientX - ultClique.x) < 30 && Math.abs(e.clientY - ultClique.y) < 30 && agora - ultClique.t < 700;
     ultClique.n = perto ? ultClique.n + 1 : 1; ultClique.t = agora; ultClique.x = e.clientX; ultClique.y = e.clientY;
-    p.ev = 'clique'; p.alvo = seletor(el); p.morto = !interativo(el); if (ultClique.n >= 3) p.raiva = ultClique.n;
+    p.ev = 'clique'; p.alvo = seletor(el); p.morto = !interativo(el, e); if (ultClique.n >= 3 && p.morto) p.raiva = ultClique.n;   // raiva só quando o alvo não responde (registrar vários copos não é frustração)
     registrar(p);
   }, {capture:true, passive:true});
   function trocaAba(){

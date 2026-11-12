@@ -9,6 +9,8 @@ busca cotação, só reempacota o que o Wealth já calculou). Somente leitura; n
 import json, os, subprocess, sys, threading, time
 
 import mesa
+import rendimentos
+import desempenho
 import wealth_rotinas
 
 _TRAVA = threading.Lock()
@@ -54,6 +56,14 @@ def estado(vault):
     except Exception:
         d['saude_wealth'] = None
     _radar_precos(w, d)
+    try:
+        d['rendimentos'] = rendimentos.calcular(vault, d)
+    except Exception as e:
+        d['rendimentos'] = {'ok': False, 'erro': str(e)[:160]}
+    try:
+        d['desempenho'] = desempenho.calcular(vault, d)
+    except Exception as e:
+        d['desempenho'] = {'ok': False, 'erro': str(e)[:160]}
     return d
 
 

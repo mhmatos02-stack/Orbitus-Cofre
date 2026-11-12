@@ -737,7 +737,7 @@ def _mesa_home():
     except Exception as ex:
         print('wealth_plano: reconciliação falhou:', ex, file=sys.stderr)
     abertas = [d for d in e['decisoes'] if d.get('status') == 'aberta']
-    prox = sorted([dict(p, liberada=wealth_plano.liberacao(p)[0], bloqueio=wealth_plano.liberacao(p)[1])
+    prox = sorted([dict(p, liberada=wealth_plano.liberacao(p, VAULT)[0], bloqueio=wealth_plano.liberacao(p, VAULT)[1])
                    for p in e['plano'] if p.get('status') == 'pendente' and p.get('quem') == 'voce'
                    and ('plano:' + p['id']) not in e['respostas']],
                   key=lambda p: p.get('inicio') or '9999')[:6]
