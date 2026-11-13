@@ -864,7 +864,7 @@ function renderHero(){
 
 function dueL(t){if(!t.due)return 'sem data';if(t.due===D.hoje)return 'Hoje';if(t.atrasada)return 'atrasada';return t.due.slice(8)+'/'+t.due.slice(5,7)}
 /* ===================== TAREFAS: criar, acompanhar, editar, remover, sugestões ===================== */
-var TT=null,AREAS_T=['Pessoal','Trabalho','Finanças','Saúde','Viagem'],AREA_COR={'Pessoal':'#9feee6','Trabalho':'#c6d0ff','Finanças':'#ffb3c8','Saúde':'#ffd27a','Viagem':'#b8f0c8'};
+var TT=null,AREAS_T=['Pessoal','Trabalho','Finanças','Saúde','Viagem','Manutenção'],AREA_COR={'Pessoal':'#9feee6','Trabalho':'#c6d0ff','Finanças':'#ffb3c8','Saúde':'#ffd27a','Viagem':'#b8f0c8','Manutenção':'#f5c27a'};
 var REP_T=[['','Não repete'],['every day','Todo dia'],['every weekday','Dias úteis'],['every week','Toda semana'],['every month','Todo mês'],['every year','Todo ano']];
 var PRIO_T=[['3','Normal'],['0','Urgente'],['1','Alta'],['2','Média'],['4','Baixa']],ST_T={'':'A fazer','fazendo':'Fazendo','aguardando':'Aguardando'};
 function fdT(k){if(!k)return '';var d=pd(k);var hj=pd(D.hoje),df=Math.round((d-hj)/864e5);return df===0?'Hoje':df===1?'Amanhã':df===-1?'Ontem':DS[d.getDay()].slice(0,3).toLowerCase()+' '+k.slice(8)+'/'+k.slice(5,7)}
@@ -1399,12 +1399,14 @@ function renderWealth(){
   var hist=(W.historico||[]).map(function(h){return [h.data,h.patrimonio]});
   var metaP=W.meta_patrimonio?100*W.total/W.meta_patrimonio:null, metaR=W.meta_renda?100*W.renda_mensal_liq/W.meta_renda:null;
   $('wSub').textContent='Data-base '+(W.data_base||'')+' · '+(W.fonte_cotacoes||'')+(W.atualizando?' · atualizando…':'');
+  var LL=W.liquidez_livre;
   $('wTop').innerHTML=
+    (LL?'<div class="kp glass" style="grid-column:1/-1;border:1px solid var(--cy)"><div class="kick" style="font-size:11.5px">Cofrinho Investimentos livre · já deduzido o piso de liquidez</div><div class="kb" style="font-size:2.1em;color:'+(LL.livre<0?'var(--pk2)':'var(--cy)')+'">'+brl(LL.livre)+'</div><div class="ks">Cofrinho '+brl(LL.cofrinho_investimentos)+' − '+brl(LL.parte_do_piso)+' que completam o piso de '+brl(LL.piso)+' (reserva estrita '+brl(LL.reserva_estrita)+' + caixa '+brl(LL.caixa)+' cobrem o resto) · liquidez total '+brl(LL.liquidez)+'</div></div>':'')+
     kpi('Patrimônio',brl(W.total),hist.length>1?'desde '+fdate(hist[0][0])+': '+brl(W.total-hist[0][1]):'' ,'<div style="margin-top:8px">'+spark(hist,220,46)+'</div>')+
     kpi('Renda passiva líquida',brl(W.renda_mensal_liq)+'<small>/mês</small>','meta '+brl(W.meta_renda)+' · '+pct(metaR,0),barra(metaR))+
     kpi('Meta de patrimônio',pct(metaP,0),brl(W.total)+' de '+brl(W.meta_patrimonio),barra(metaP))+
     kpi('Reserva',pct(W.reserva&&W.reserva.pct,0),brl(W.reserva&&W.reserva.valor)+' · alvo '+brl(W.reserva&&W.reserva.alvo),barra(W.reserva&&W.reserva.pct))+
-    kpi('Caixa',brl(W.caixa),W.modo_preservacao?'<span class="chip wait">modo preservação</span>':'')+
+    kpi('Caixa',brl(W.caixa),'')+
     (function(sw){if(!sw||!sw.itens||!sw.itens.length)return '';var f=sw.itens.some(function(x){return x.estado==='falha'});
       return '<div class="wsaude '+(f?'falha':'atencao')+'"><div class="wsh"><i></i><b>Saúde das automações do Wealth: '+(f?'falha':'atenção')+'</b><span class="ks">Health Check de '+esc(sw.atualizado)+'</span></div>'+
         sw.itens.map(function(x){return '<div class="wsi"><span>'+(x.estado==='falha'?'🔴':'🟡')+' '+esc(x.nome)+'</span><span class="ks">'+esc(x.evidencia)+'</span></div>'}).join('')+'</div>'})(W.saude_wealth);

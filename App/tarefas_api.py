@@ -15,8 +15,10 @@ TASK_RE = re.compile(r'^(\s*[-*] \[)([ xX\-])(\] )(.*)$')
 PRIO = {'🔺': 0, '⏫': 1, '🔼': 2, '🔽': 4}
 PRIO_INV = {0: '🔺', 1: '⏫', 2: '🔼', 4: '🔽'}
 AREAS = {'financas': 'Finanças', 'finanças': 'Finanças', 'wealth': 'Finanças', 'saude': 'Saúde', 'saúde': 'Saúde', 'treino': 'Saúde',
-         'viagem': 'Viagem', 'trabalho': 'Trabalho', 'vik': 'Trabalho', 'pessoal': 'Pessoal'}
-AREA_TAG = {'Finanças': '#financas', 'Saúde': '#saude', 'Viagem': '#viagem', 'Trabalho': '#trabalho', 'Pessoal': '#pessoal'}
+         'viagem': 'Viagem', 'trabalho': 'Trabalho', 'vik': 'Trabalho', 'pessoal': 'Pessoal',
+         'manutencao': 'Manutenção', 'manutenção': 'Manutenção'}
+AREA_TAG = {'Finanças': '#financas', 'Saúde': '#saude', 'Viagem': '#viagem', 'Trabalho': '#trabalho', 'Pessoal': '#pessoal',
+            'Manutenção': '#manutencao'}
 STATUS = ('fazendo', 'aguardando')
 REPETE = {'': '', 'every day': 'Todo dia', 'every weekday': 'Dias úteis', 'every week': 'Toda semana',
           'every month': 'Todo mês', 'every year': 'Todo ano'}
@@ -448,7 +450,7 @@ def interpretar(texto, hoje=None):
     if f['due']:   # sobrou uma data repetida ("sexta dia 06/11")? sai do título
         tira(r'\s(?:dia\s+)?\d{1,2}/\d{1,2}(?:/\d{2,4})?(?=\s)')
     # área por tag escrita ou palavra-chave
-    m = tira(r'\s#(pessoal|trabalho|financas|finanças|saude|saúde|viagem|vik|wealth)(?=\s)')
+    m = tira(r'\s#(pessoal|trabalho|financas|finanças|saude|saúde|viagem|vik|wealth|manutencao|manutenção)(?=\s)')
     if m:
         f['area'] = AREAS[m.group(1).lower()]
     t = re.sub(r'^\s*(?:anota(?:r)?|lembra(?:r)?(?:\s+de)?|me\s+lembra(?:\s+de)?|criar?\s+tarefa|tarefa)\s*:?\s*', ' ', t, flags=re.I)

@@ -1,0 +1,210 @@
+{
+ "date": "2026-11-12",
+ "weight": null,
+ "waist": null,
+ "steps": null,
+ "sleep": null,
+ "water": 10,
+ "meals": {
+  "cafe": {
+   "c": 1,
+   "items": [
+    {
+     "f": "pao",
+     "q": 2
+    },
+    {
+     "f": "frango",
+     "q": 120
+    },
+    {
+     "n": "Queijo mussarela",
+     "k": 300,
+     "p": 22
+    }
+   ],
+   "txt": "100g Mussarela"
+  },
+  "almoco": {
+   "c": 1,
+   "items": [
+    {
+     "f": "arroz",
+     "q": 100
+    },
+    {
+     "f": "ovo",
+     "q": 0
+    },
+    {
+     "f": "carne",
+     "q": 50
+    },
+    {
+     "f": "legumes",
+     "q": 20
+    },
+    {
+     "f": "legumes",
+     "q": 10
+    }
+   ],
+   "txt": "100g Arroz com ovo, 50g de carne com moayshi, 20g de brócolis, 10g de cenoura e beterraba ralada"
+  },
+  "jantar": {
+   "c": 1,
+   "items": [
+    {
+     "n": "Macarrão cozido",
+     "k": 316,
+     "p": 12
+    }
+   ],
+   "txt": "200g de macarrão parafuso com 6 tomates cereja, molho pesto e cream chesse"
+  }
+ },
+ "extras": [],
+ "habits": {},
+ "workout": {
+  "letter": null,
+  "sets": {
+   "desenv": [
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 18
+    },
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 18
+    },
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 18
+    },
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 18
+    }
+   ],
+   "elev_lat": [
+    {
+     "kg": 8,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 15,
+     "kg": 8
+    },
+    {
+     "kg": 8,
+     "reps": 12,
+     "done": true
+    }
+   ],
+   "face_pull": [
+    {
+     "kg": null,
+     "reps": 20,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 20,
+     "done": true
+    },
+    {
+     "kg": null,
+     "reps": 20,
+     "done": true
+    }
+   ],
+   "cruc_inv": [
+    {
+     "done": true,
+     "reps": 15,
+     "kg": 4
+    },
+    {
+     "done": true,
+     "reps": 15,
+     "kg": 4
+    },
+    {
+     "done": true,
+     "reps": 15,
+     "kg": 4
+    }
+   ],
+   "rosca": [
+    {
+     "kg": 10,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 12,
+     "kg": 10
+    },
+    {
+     "done": true,
+     "reps": 12,
+     "kg": 10
+    }
+   ],
+   "triceps_fr": [
+    {
+     "kg": 10,
+     "reps": 12,
+     "done": true
+    },
+    {
+     "done": true,
+     "kg": 10,
+     "reps": 12
+    },
+    {
+     "done": true,
+     "kg": 10,
+     "reps": 12
+    }
+   ],
+   "martelo": [
+    {
+     "done": true,
+     "reps": 12,
+     "kg": 12
+    },
+    {
+     "done": true,
+     "reps": 10,
+     "kg": 12
+    }
+   ],
+   "mergulho": [
+    {
+     "kg": null,
+     "reps": 15,
+     "done": true
+    },
+    {
+     "done": true,
+     "reps": 20,
+     "kg": null
+    }
+   ]
+  },
+  "done": true,
+  "warm": true,
+  "remo": true,
+  "remoOn": true,
+  "cond": "remo"
+ },
+ "updated": 1794530201362
+}
