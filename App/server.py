@@ -39,6 +39,7 @@ import push
 import agenda_pro
 import cio
 import diario
+import refeicao
 import personal_chat
 import wealth_plano
 concierge.AGUA_FN = lambda n: rotina.agua_somar(VAULT, date.today().isoformat(), n)
@@ -736,7 +737,7 @@ def _mesa_home():
         wealth_plano.reconciliar(VAULT, plano)
     except Exception as ex:
         print('wealth_plano: reconciliação falhou:', ex, file=sys.stderr)
-    abertas = [d for d in e['decisoes'] if d.get('status') == 'aberta']
+    abertas = [d for d in e['decisoes'] if mesa.aberta(d)]
     prox = sorted([dict(p, liberada=wealth_plano.liberacao(p, VAULT)[0], bloqueio=wealth_plano.liberacao(p, VAULT)[1])
                    for p in e['plano'] if p.get('status') == 'pendente' and p.get('quem') == 'voce'
                    and ('plano:' + p['id']) not in e['respostas']],
@@ -1187,6 +1188,8 @@ class H(BaseHTTPRequestHandler):
                 return
             elif self.path == '/api/concierge/nova':
                 return self._json(concierge.nova_conversa())
+            elif self.path == '/api/treino/estimar':
+                return self._json(refeicao.estimar(VAULT, body))
             elif self.path == '/api/treino/personal':
                 return self._json(personal_chat.perguntar(VAULT, body))
             elif self.path == '/api/treino/pergunta':

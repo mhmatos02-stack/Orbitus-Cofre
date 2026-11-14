@@ -10,6 +10,7 @@ import json, os, subprocess, sys, threading, time
 
 import mesa
 import rendimentos
+import recomendacoes
 import desempenho
 import wealth_rotinas
 
@@ -56,6 +57,10 @@ def estado(vault):
     except Exception:
         d['saude_wealth'] = None
     _radar_precos(w, d)
+    try:
+        d['mudancas_recomendacao'] = recomendacoes.ler(vault)
+    except Exception:
+        d['mudancas_recomendacao'] = []
     try:
         d['rendimentos'] = rendimentos.calcular(vault, d)
     except Exception as e:

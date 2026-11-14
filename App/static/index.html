@@ -618,7 +618,7 @@ body.privado #kDecL .x{filter:blur(6px);user-select:none;transition:filter .2s} 
         <div class="ml" id="kDecL"></div>
         <a class="btn g go" href="#mesa">Abrir a Mesa</a>
       </section>
-      <section class="mini glass" aria-label="E-mails" id="kMail">
+      <section class="mini glass" aria-label="E-mails" id="kMail" hidden style="display:none">
         <div class="mh"><span class="ptile glass mt"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e3e8f1" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 6.5h17v11h-17zM3.5 7l8.5 6 8.5-6"/></svg></span><div style="min-width:0"><h3>E-mails</h3><div class="ps" id="kMailS"></div></div></div>
         <div class="ml" id="kMailL"></div>
         <a class="btn g go" href="#emails">Ver todos os e-mails</a>
@@ -808,7 +808,9 @@ function pd(s){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
 function key(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 
 var ICON={mesa:'M3 10h18M5 10v9M19 10v9M8 6h8l3 4H5z',home:'M3 11.5L12 4l9 7.5M5.5 9.8V20h13V9.8',tasks:'M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2',train:'M3 9v6M6 7v10M18 7v10M21 9v6M6 12h12',wealth:'M5 19V12M10 19V8M15 19v-5M20 19V5',cal:'M4 7h16v13H4zM4 11h16M8 4v4M16 4v4',mail:'M3.5 6.5h17v11h-17zM4 7l8 6 8-6',goals:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',trip:'M2.5 15l19-6.5-3-2-6 1.5-5-4h-2l3 5.2-4 1-2-1.5H1.5l1 6.3z',ideas:'M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z'};
-var NAV=[['Home','home','home'],['Tarefas','tasks','tarefas'],['Treino','train','treino'],['Wealth','wealth','wealth',1],['Agenda','cal','agenda'],['E-mails','mail','emails'],['Viagem','trip','viagem']];   // Metas e Ideias voltam quando existirem
+var NAV=[['Home','home','home'],['Tarefas','tasks','tarefas'],['Treino','train','treino'],['Wealth','wealth','wealth',1],['Agenda','cal','agenda'],['Viagem','trip','viagem']];
+/* aba E-mails retirada em 13/11: os e-mails que pedem resposta ou decisão viram sugestões no Tarefas */
+if(location.hash==='#emails')history.replaceState(null,'','#tarefas');   // Metas e Ideias voltam quando existirem
 /* Animação só quando dá para ver: aba visível, elemento exibido e dentro da tela. Fora disso, confere de novo a cada 0,5 s. */
 var VISTO=new WeakMap(),IOB=window.IntersectionObserver?new IntersectionObserver(function(es){es.forEach(function(e){VISTO.set(e.target,e.isIntersecting)})}):null;
 function observar(el){if(IOB&&el)IOB.observe(el)}
@@ -841,7 +843,7 @@ function renderHero(){
   var att=D.federacao.filter(function(f){return f.saude!=='🟢'}).length;
   var open=D.tarefas.filter(function(t){return !t.feito&&t.col!=='depois'}).length;
   var ocS=Object.keys(D.eventos).filter(function(k){return k>=D.hoje&&k<=D.fimSemana&&D.eventos[k].some(function(e){return e[2]==='b'})}).length;
-  $('sub').textContent=(att?att+(att>1?' sistemas pedem':' sistema pede')+' atenção':'Todos os sistemas em órbita')+' · '+open+' tarefa'+(open===1?'':'s')+' nesta semana'+(D.emails&&D.emails.configurado&&!D.emails.carregando?' · '+D.emails.itens.length+' e-mails pedem resposta':'')+' · '+ocS+(ocS===1?' dia ocupado':' dias ocupados')+' até domingo';
+  $('sub').textContent=(att?att+(att>1?' sistemas pedem':' sistema pede')+' atenção':'Todos os sistemas em órbita')+' · '+open+' tarefa'+(open===1?'':'s')+' nesta semana'+' · '+ocS+(ocS===1?' dia ocupado':' dias ocupados')+' até domingo';
   var top=D.tarefas.filter(function(t){return !t.feito&&t.col==='hoje'})[0];
   var esp=D.federacao.filter(function(f){return f.esperando})[0];
   var va=(D.viagem_alertas||[]).filter(function(a){return a.urgente})[0];
@@ -1226,10 +1228,12 @@ function renderTasksMini(){
 function refreshMesa(){return Promise.all([fetch('/api/mesa',{cache:'no-store'}).then(function(r){return r.json()}),load()]).then(function(a){M=a[0];if(document.body.classList.contains('mesa'))renderMesa()})}
 
 function hojeK(){return (D&&D.hoje)||key(new Date())}
+/* decisão esperando você: 'aberta' ou, desde 11/11, 'aguardando' sem escolha */
+function decAberta(d){return (d.status==='aberta'||d.status==='aguardando')&&!d.escolha}
 function bindPlano(root){[].forEach.call(root.querySelectorAll('[data-pf]'),function(b){b.onclick=function(){b.disabled=true;post('/api/mesa/responder',{tipo:'plano',id:b.dataset.pf,acao:'feito'}).then(function(){toast('Marcado como feito. O Wealth Office confere no razão às 20h47.');refreshMesa()}).catch(function(e){toast(e.message);b.disabled=false})}})}
 function renderSideDec(){
   if(!M||!M.disponivel)return;
-  var R=M.respostas||{},ab=M.decisoes.filter(function(d){return d.status==='aberta'}),body=$('sdBody');
+  var R=M.respostas||{},ab=M.decisoes.filter(decAberta),body=$('sdBody');
   var pend=ab.filter(function(d){return !R['decisao:'+d.id]}).length;
   $('sdPs').textContent=ab.length?pend+' esperando você':'nada aberto';
   if(ab.length){body.innerHTML=ab.map(function(d){return decCard(d,R)}).join('');bindDec(body);return}
@@ -1239,7 +1243,7 @@ function renderSideDec(){
 function renderMesa(){
   renderSideDec();
   if(!M||!M.disponivel){$('mBody').innerHTML='<div class="empty">Mesa indisponível.</div>';return}
-  var R=M.respostas||{}, ab=M.decisoes.filter(function(d){return d.status==='aberta'}), la=M.lancamentos.filter(function(l){return l.status==='aguardando'});
+  var R=M.respostas||{}, ab=M.decisoes.filter(decAberta), la=M.lancamentos.filter(function(l){return l.status==='aguardando'});
   var feitos=M.plano.filter(function(p){return p.status==='feito'}).length;
   var upAp=M.atualizacoes.filter(function(u){return u.aprovar&&!(u.aprovacao&&u.aprovacao.status)&&!R['atualizacao:'+u.id]}).length;
   var tabs=[['decisoes','Decisões',ab.length],['lancamentos','Lançamentos',la.length],['plano','Plano',M.plano.length-feitos],['atualizacoes','Atualizações',upAp]];
@@ -1249,7 +1253,7 @@ function renderMesa(){
   if(MS.tab==='decisoes'){
     $('mTitle').textContent='Decisões';$('mPs').textContent=ab.length?ab.length+' abertas':'Nenhuma decisão aberta agora';
     h=ab.length?ab.map(function(d){return decCard(d,R)}).join('<div style="height:12px"></div>'):'<div class="empty" style="font-size:14px">Nada para decidir. Quando o CIO abrir uma pendência, ela aparece aqui e na Home.</div>';
-    var reg=M.decisoes.filter(function(d){return d.status!=='aberta'}).sort(function(a,b){return (b.registrada_em||'').localeCompare(a.registrada_em||'')});
+    var reg=M.decisoes.filter(function(d){return !decAberta(d)}).sort(function(a,b){return (b.registrada_em||'').localeCompare(a.registrada_em||'')});
     h+='<details><summary>Histórico · '+reg.length+' decisões registradas</summary><div class="hist">'+reg.map(function(d){var o=(d.opcoes||[]).filter(function(x){return x.id===d.escolha})[0];return '<div class="hrow"><span class="chip ok">'+esc(d.escolha||'—')+'</span><span class="t" title="'+esc(o?o.texto:'')+'">'+esc(d.titulo||d.ref)+(o?' · <span style="color:var(--mut2)">'+esc(o.texto)+'</span>':'')+'</span><small>'+fdate(d.registrada_em)+'</small></div>'}).join('')+'</div></details>';
     B.innerHTML=h;bindDec(B);return;
   }
@@ -1266,11 +1270,14 @@ function renderMesa(){
     return;
   }
   if(MS.tab==='plano'){
-    var P=M.plano.slice().sort(function(a,b){return (a.inicio||'9999').localeCompare(b.inicio||'9999')}), tot=P.length;
-    var agora=P.filter(function(p){return p.status!=='feito'})[0];
+    /* próximos passos primeiro (do mais perto ao mais longe); o que já foi feito vai para baixo, do mais recente ao mais antigo */
+    var asc=function(a,b){return (a.inicio||'9999').localeCompare(b.inicio||'9999')};
+    var Pp=M.plano.filter(function(p){return p.status!=='feito'}).sort(asc),Pf=M.plano.filter(function(p){return p.status==='feito'}).sort(asc).reverse();
+    var P=Pp.concat(Pf), tot=P.length;
+    var agora=Pp[0];
     $('mTitle').textContent='Plano 2026–2028';$('mPs').textContent=feitos+' de '+tot+' passos feitos';
-    h='<div class="prog" aria-hidden="true"><i style="width:'+Math.round(100*feitos/tot)+'%"></i></div><div class="tl">'+P.map(function(p){var cls=p.status==='feito'?'feito':(p===agora?'agora':'');
-      return '<div class="step '+cls+'"><div class="dt">'+(p.inicio?fdate(p.inicio)+(p.fim&&p.fim!==p.inicio?' – '+fdate(p.fim):''):'sem data')+'</div><div class="nd"></div><div style="min-width:0"><div class="ac">'+esc(p.acao||'')+'</div><div class="ob">'+esc([p.condicao,p.obs].filter(Boolean).join(' · '))+'</div></div><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;align-items:center">'+(R['plano:'+p.id]?'<span class="chip wait">feito · registro 20h47</span>':(p.status!=='feito'&&p.quem==='voce'&&p.inicio&&p.inicio<=hojeK()?'<button class="btn g" type="button" style="height:30px;padding:0 12px;font-size:12px" data-pf="'+esc(p.id)+'">Feito</button>':''))+'<span class="chip '+(p.status==='feito'?'ok':'mut')+'">'+(p.status==='feito'?'feito':(p.quem==='voce'?'você':'sistema'))+'</span>'+(p.valor_estimado?'<span class="chip mut">~R$ '+Number(p.valor_estimado).toLocaleString('pt-BR')+'</span>':'')+'</div></div>'}).join('')+'</div>';
+    h='<div class="prog" aria-hidden="true"><i style="width:'+Math.round(100*feitos/tot)+'%"></i></div><div class="tl">'+(Pp.length?'<div class="kick" style="margin:2px 0 10px">Próximos passos · '+Pp.length+'</div>':'')+P.map(function(p){var cls=p.status==='feito'?'feito':(p===agora?'agora':'');
+      return (p===Pf[0]?'<div class="kick" style="margin:18px 0 10px">Já feitos · '+Pf.length+' (do mais recente ao mais antigo)</div>':'')+'<div class="step '+cls+'"><div class="dt">'+(p.inicio?fdate(p.inicio)+(p.fim&&p.fim!==p.inicio?' – '+fdate(p.fim):''):'sem data')+'</div><div class="nd"></div><div style="min-width:0"><div class="ac">'+esc(p.acao||'')+'</div><div class="ob">'+esc([p.condicao,p.obs].filter(Boolean).join(' · '))+'</div></div><div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;align-items:center">'+(R['plano:'+p.id]?'<span class="chip wait">feito · registro 20h47</span>':(p.status!=='feito'&&p.quem==='voce'&&p.inicio&&p.inicio<=hojeK()?'<button class="btn g" type="button" style="height:30px;padding:0 12px;font-size:12px" data-pf="'+esc(p.id)+'">Feito</button>':''))+'<span class="chip '+(p.status==='feito'?'ok':'mut')+'">'+(p.status==='feito'?'feito':(p.quem==='voce'?'você':'sistema'))+'</span>'+(p.valor_estimado?'<span class="chip mut">~R$ '+Number(p.valor_estimado).toLocaleString('pt-BR')+'</span>':'')+'</div></div>'}).join('')+'</div>';
     B.innerHTML=h;bindPlano(B);return;
   }
   var U=M.atualizacoes.slice().sort(function(a,b){return (a.n||0)-(b.n||0)||a.id.localeCompare(b.id)});
@@ -1401,12 +1408,12 @@ function renderWealth(){
   $('wSub').textContent='Data-base '+(W.data_base||'')+' · '+(W.fonte_cotacoes||'')+(W.atualizando?' · atualizando…':'');
   var LL=W.liquidez_livre;
   $('wTop').innerHTML=
-    (LL?'<div class="kp glass" style="grid-column:1/-1;border:1px solid var(--cy)"><div class="kick" style="font-size:11.5px">Cofrinho Investimentos livre · já deduzido o piso de liquidez</div><div class="kb" style="font-size:2.1em;color:'+(LL.livre<0?'var(--pk2)':'var(--cy)')+'">'+brl(LL.livre)+'</div><div class="ks">Cofrinho '+brl(LL.cofrinho_investimentos)+' − '+brl(LL.parte_do_piso)+' que completam o piso de '+brl(LL.piso)+' (reserva estrita '+brl(LL.reserva_estrita)+' + caixa '+brl(LL.caixa)+' cobrem o resto) · liquidez total '+brl(LL.liquidez)+'</div></div>':'')+
     kpi('Patrimônio',brl(W.total),hist.length>1?'desde '+fdate(hist[0][0])+': '+brl(W.total-hist[0][1]):'' ,'<div style="margin-top:8px">'+spark(hist,220,46)+'</div>')+
     kpi('Renda passiva líquida',brl(W.renda_mensal_liq)+'<small>/mês</small>','meta '+brl(W.meta_renda)+' · '+pct(metaR,0),barra(metaR))+
     kpi('Meta de patrimônio',pct(metaP,0),brl(W.total)+' de '+brl(W.meta_patrimonio),barra(metaP))+
     kpi('Reserva',pct(W.reserva&&W.reserva.pct,0),brl(W.reserva&&W.reserva.valor)+' · alvo '+brl(W.reserva&&W.reserva.alvo),barra(W.reserva&&W.reserva.pct))+
     kpi('Caixa',brl(W.caixa),'')+
+    (LL?kpi('Cofrinho livre',brl(LL.livre),'acima do piso de liquidez de '+brl(LL.piso,0)+' · liquidez total '+brl(LL.liquidez,0)):'')+
     (function(sw){if(!sw||!sw.itens||!sw.itens.length)return '';var f=sw.itens.some(function(x){return x.estado==='falha'});
       return '<div class="wsaude '+(f?'falha':'atencao')+'"><div class="wsh"><i></i><b>Saúde das automações do Wealth: '+(f?'falha':'atenção')+'</b><span class="ks">Health Check de '+esc(sw.atualizado)+'</span></div>'+
         sw.itens.map(function(x){return '<div class="wsi"><span>'+(x.estado==='falha'?'🔴':'🟡')+' '+esc(x.nome)+'</span><span class="ks">'+esc(x.evidencia)+'</span></div>'}).join('')+'</div>'})(W.saude_wealth);
@@ -1487,6 +1494,9 @@ function renderWealth(){
     h+='<h3 class="wh">Decisões</h3>'+tbl([['Data',function(r){return fdate(r.data)}],['Decisão',function(r){return esc(r.tipo_txt||r.tipo)+' '+esc(r.ativo)+'<div class="ks">contra '+esc(r.alternativa||'')+(r.nota?' · '+esc(r.nota):'')+'</div>'}],['Escolha',function(r){return pct(r.escolha_pct)},1],['Alternativa',function(r){return pct(r.alt_pct)},1],['Diferença',function(r){return '<span style="color:'+sgn(r.pp)+'">'+num(r.pp,2)+' p.p.</span>'},1],['R$',function(r){return '<span style="color:'+sgn(r.reais)+'">'+brl(r.reais)+'</span>'},1]],(PL.decisoes||[]).slice().sort(function(a,b){return (b.data||'').localeCompare(a.data||'')}));
   }
   if(T==='radar'){
+    var MR=W.mudancas_recomendacao||[];
+    h+='<h3 class="wh" style="margin-top:0">Mudanças de recomendação dos bancos</h3>'+(MR.length?tbl([['Data',function(r){return fdate(r.data)}],['Ativo',function(r){return '<b style="font-weight:500">'+esc(r.ticker)+'</b>'+(r.carteira?' <span class="chip ok" style="font-size:12px;padding:3px 6px">na carteira</span>':'')}],['Banco',function(r){return esc(r.banco)}],['Mudança',function(r){return esc(r.mudanca)}],['Alvo',function(r){return esc(r.alvo)},1],['30 dias',function(r){return esc(r.d30)+(r.vs_cdi?'<div class="ks">vs CDI '+esc(r.vs_cdi)+'</div>':'')},1]],MR):'<p class="ks">Nenhuma mudança registrada ainda. A rotina de notícias do Wealth anota aqui quando um banco muda a recomendação ou o preço-alvo de uma ação brasileira; se for ativo da sua carteira, chega um push no mesmo dia. Registro não é ordem.</p>');
+    h+='<h3 class="wh">Radar de oportunidades</h3>';
     var RD=W.radar||{};h+='<p class="ks" style="margin:0">Triagem de '+fdate(RD.data)+' · '+(RD.triagem||0)+' ativos avaliados. Radar não é recomendação: entrada só pelo Fluxo 1.</p><p class="ks" style="margin:4px 0 0">Preço = da última triagem. Teto pela régua = preço em que o DY dos últimos 12 meses chega a 9,5% (a régua do Radar, sem contar crescimento do provento). Verde: o preço está abaixo do teto. É referência, não valor justo: o teto oficial de entrada só sai do Fluxo 1, e nenhum candidato tem Fluxo 1 hoje. DY com alerta de extraordinário infla o teto.</p>';
     h+=tbl([['Ativo',function(r){return '<b style="font-weight:500">'+esc(r.ticker)+'</b><div class="ks">'+esc(r.setor||'')+'</div>'}],['DY',function(r){return pct(r.dy)},1],['P/L',function(r){return num(r.pl,1)},1],['P/VP',function(r){return num(r.pvp,2)},1],['ROE',function(r){return pct(r.roe)},1],['Preço',function(r){return r.preco!=null?brl(r.preco)+'<div class="ks">'+(r.preco_data?fdate(r.preco_data):'')+'</div>':'—'},1],['Teto pela régua',function(r){return r.teto_regua!=null?'<span style="color:'+(r.preco<=r.teto_regua?'#7fe9df':'#ffb3c7')+'">'+brl(r.teto_regua)+'</span>':'—'},1],['Alerta',function(r){return '<span class="ks">'+esc(r.alerta||'')+'</span>'}]],RD.top||[]);
   }

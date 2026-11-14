@@ -114,7 +114,12 @@ def decisoes_abertas(vault):
     e = estado(vault)
     if not e.get('disponivel'):
         return []
-    return [d for d in e['decisoes'] if d.get('status') == 'aberta']
+    return [d for d in e['decisoes'] if aberta(d)]
+
+
+def aberta(d):
+    """Decisão esperando você: o Wealth usa 'aberta' e, desde 11/11, também 'aguardando' (sem escolha registrada)."""
+    return d.get('status') in ('aberta', 'aguardando') and not d.get('escolha')
 
 
 def responder(vault, corpo):

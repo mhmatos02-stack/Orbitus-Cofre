@@ -9,7 +9,7 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Instalar Dataview, Tasks e Homepage no Orbitus — Orbitus · configuração 📅 2026-10-30 #pessoal ✅ 2026-10-30
 - [x] Mandar extratos do mês para a pasta Entrada — conta, fatura, Tesouro, B3 · até dia 5 📅 2026-11-03 #financas #aguardando ✅ 2026-11-02
 - [x] Escolher o caminho do Plano 2026–2028 — depois do Copom 📅 2026-11-05 #financas ✅ 2026-11-05
-- [ ] Decidir a trilha de aporte (Goals v3) — contrato termina em dezembro 📅 2026-11-16 #financas
+- [x] Decidir a trilha de aporte (Goals v3) — contrato termina em dezembro 📅 2026-11-16 #financas ✅ 2026-11-13
 - [x] Montar o plano de treino até dezembro — Orbitus · próximo módulo #pessoal ✅ 2026-10-30
 - [x] Cancelar o ClickUp 🔽 #pessoal ✅ 2026-10-30
 - [x] Preparar a mala para o Hotel Tivoli (saída de casa às 13:30) 📅 2026-10-31 ⏰ 12:30 #pessoal #fazendo ➕ 2026-10-31 ✅ 2026-10-31
@@ -22,7 +22,9 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Corrigir o registro de sábado com kcal explícitas (picanha, wagyu, linguiça, nhoque, sobremesa) — sugerido por Mesa da Saúde · Nutricionista 📅 2026-11-02 #saude #aguardando ➕ 2026-11-02 ✅ 2026-11-02
 - [x] Comprar bananas, mamão e ovos para a semana — sugerido por Mesa da Saúde · Nutricionista 📅 2026-11-02 #saude ➕ 2026-11-02 ✅ 2026-11-02
 - [x] Medir a cintura em casa, em jejum, na altura do umbigo, 3 vezes, e anotar a média — sugerido por Mesa da Saúde · Personal trainer 📅 2026-11-08 #saude ➕ 2026-11-02 ✅ 2026-11-09
-- [ ] Rosuvastatina 🔁 every day 📅 2026-11-12 ⏰ 20:00 #saude ➕ 2026-11-12
+- [ ] Rosuvastatina 🔁 every day 📅 2026-11-14 ⏰ 20:00 #saude ➕ 2026-11-13
+- [x] Rosuvastatina 🔁 every day 📅 2026-11-13 ⏰ 20:00 #saude ➕ 2026-11-13 ✅ 2026-11-13
+- [x] Rosuvastatina 🔁 every day 📅 2026-11-12 ⏰ 20:00 #saude ➕ 2026-11-12 ✅ 2026-11-13
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-11 ⏰ 20:00 #saude ➕ 2026-11-10 ✅ 2026-11-12
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-10 ⏰ 20:00 #saude ➕ 2026-11-09 ✅ 2026-11-10
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-09 ⏰ 20:00 #saude ➕ 2026-11-09 ✅ 2026-11-09
@@ -39,6 +41,10 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Fazer o treino de Pernas · variação (remarcado de sexta) 📅 2026-11-07 ➕ 2026-11-06 ✅ 2026-11-09
 - [x] Churrasco Família Moliterno das 12:00 às 17:00 📅 2026-11-07 ⏰ 12:00 ➕ 2026-11-06 ✅ 2026-11-07
 - [ ] Churrasco na Porta do Sol com Guilherme e família, das 12:00 às 16:00 📅 2026-11-21 ⏰ 12:00 ➕ 2026-11-09
+- [x] Responder na Mesa: Doação de R$ 96 mil: escolha o caminho (recomendado: A) — Mesa do Wealth · decisão · sem resposta até 14/11 vale B (só o calendário) ⏫ 📅 2026-11-14 #financas ➕ 2026-11-13 ✅ 2026-11-13
+- [x] Decidir a Regra da Janela de Evento (romper a isenção de R$ 20 mil em Copom, Fed e eleições) — Wealth · seu pedido de 12/11 · rito com Mesa até 18/11 · sem resposta, não vigora 🔼 📅 2026-11-19 #financas ➕ 2026-11-13 ✅ 2026-11-13
+- [ ] Responder na Mesa: Parcela tática para surfar mudanças de recomendação? — Mesa do Wealth · decisão · seu pedido de 12/11 📅 2026-11-22 #financas ➕ 2026-11-13
+- [ ] Churrasco G8 📅 2026-11-14 ⏰ 12:15 #pessoal ➕ 2026-11-13
 
 ## Migradas do Lembretes
 

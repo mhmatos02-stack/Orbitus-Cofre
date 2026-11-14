@@ -133,6 +133,21 @@ def ciclo(montar_dia):
                         enviar('⚠️ Wealth · ' + r.get('nome', ''), r.get('texto', '')[:180], 'wealth-' + r.get('id', ''), '/')
                     except Exception as e:
                         ULTIMO['erro'] = str(e)[:160]
+                # banco mudou a recomendação de um ativo da carteira hoje (pedido de 12/11): um aviso por mudança
+                try:
+                    import recomendacoes
+                    _V = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                    for r in recomendacoes.ler(_V, dias=1):
+                        if r['data'] != hoje or not r['carteira']:
+                            continue
+                        chave = hoje + '|r|' + r['ticker'] + '|' + r['banco']
+                        if chave in env:
+                            continue
+                        env[chave] = hoje
+                        mudou = True
+                        enviar('🏦 %s · %s' % (r['ticker'], r['banco']), ('%s · alvo %s' % (r['mudanca'], r['alvo'])).strip(' ·')[:160], 'rec-' + r['ticker'], '/#wealth')
+                except Exception as e:
+                    ULTIMO['erro'] = 'recomendações: ' + str(e)[:140]
                 for x in dia['itens']:
                     h = x.get('hora') or ''
                     if not h or x.get('feito') or not (lim <= h <= hm):

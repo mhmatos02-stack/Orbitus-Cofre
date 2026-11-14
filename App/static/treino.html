@@ -1664,13 +1664,16 @@ ${table}
 
 Refeição: ${txt}`;
   try{
-    const res=estimarLocal(txt);if(res.nao.length)setTimeout(()=>toast('Não reconheci: '+esc(res.nao.join(', '))+'. Adicione pela lista ou em "Item que não está na lista"'),2600);
+    toast('Estimando a refeição…');
+    let res=null,viaIA=false;
+    try{const j=await apiPost('/api/treino/estimar',{texto:txt});if(j&&Array.isArray(j.itens)&&j.itens.length){res={itens:j.itens,nao:[]};viaIA=true}}catch(_){}
+    if(!res){res=estimarLocal(txt);if(res.nao.length)setTimeout(()=>toast('Não reconheci: '+esc(res.nao.join(', '))+'. Adicione pela lista ou em "Item que não está na lista"'),2600)}
     const its=Array.isArray(res&&res.itens)?res.itens:[];
     if(!its.length)throw {code:'empty'};
     mutate(k,d=>{let rec=d.meals[slot];if(!rec||rec===true)rec={c:1,items:[]};rec.items=rec.items||[];rec.txt=txt;
       its.forEach(it=>{const q=+it.q;if(it.food&&FOODS[it.food]&&q>0)rec.items.push({f:it.food,q:Math.round(q*10)/10});else rec.items.push({n:String(it.nome||'Item').slice(0,60),k:Math.round(+it.kcal||0),p:Math.round(+it.proteina_g||0)})});
       d.meals[slot]=rec});
-    toast('Estimado pela tabela. Confira as quantidades');
+    toast(viaIA?'Estimado. Confira as quantidades':'Estimado pela tabela. Confira as quantidades');
   }catch(e){
     if(e&&e.code==='not_granted'){S.sample=null}
     toast('Não reconheci nenhum alimento. Use a lista ou escreva, por exemplo, "120 g de frango, 4 colheres de arroz"');

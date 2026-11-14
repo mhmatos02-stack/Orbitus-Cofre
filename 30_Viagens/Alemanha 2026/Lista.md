@@ -19,7 +19,7 @@ Migrada do Lembretes em 2026-10-30 (o item "Presentes" foi separado em um por pe
 - [ ] Levar garrafa de água
 - [ ] Imprimir passagens de retorno e reserva do hotel 📅 2026-12-27
 - [ ] Creme dental Marvis 📅 2026-12-30
-- [ ] Levar Ecobag 📅 2026-11-20
+- [x] Levar Ecobag 📅 2026-11-20 ✅ 2026-11-13
 
 ## Comprinhas
 
