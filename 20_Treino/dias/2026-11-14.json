@@ -1,0 +1,56 @@
+{
+ "date": "2026-11-14",
+ "weight": null,
+ "waist": null,
+ "steps": null,
+ "sleep": null,
+ "water": 10,
+ "meals": {
+  "cafe": true,
+  "almoco": {
+   "c": 1,
+   "items": [
+    {
+     "n": "Picanha grelhada (200 g)",
+     "k": 580,
+     "p": 50
+    },
+    {
+     "n": "Fraldinha grelhada (200 g)",
+     "k": 500,
+     "p": 52
+    },
+    {
+     "f": "arroz",
+     "q": 200
+    }
+   ],
+   "txt": "400g de picanha e fraldinha, 200g de arroz branco"
+  },
+  "lanche": true,
+  "jantar": {
+   "c": 1,
+   "items": [
+    {
+     "f": "whey",
+     "q": 1
+    }
+   ],
+   "txt": "Whey"
+  }
+ },
+ "extras": [],
+ "habits": {},
+ "workout": {
+  "letter": null,
+  "sets": {},
+  "done": false,
+  "warm": false,
+  "remo": true,
+  "remoOn": true,
+  "cond": "remo",
+  "yoga": true,
+  "rec": "ioga"
+ },
+ "updated": 1794699903280
+}

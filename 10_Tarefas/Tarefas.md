@@ -22,7 +22,8 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Corrigir o registro de sábado com kcal explícitas (picanha, wagyu, linguiça, nhoque, sobremesa) — sugerido por Mesa da Saúde · Nutricionista 📅 2026-11-02 #saude #aguardando ➕ 2026-11-02 ✅ 2026-11-02
 - [x] Comprar bananas, mamão e ovos para a semana — sugerido por Mesa da Saúde · Nutricionista 📅 2026-11-02 #saude ➕ 2026-11-02 ✅ 2026-11-02
 - [x] Medir a cintura em casa, em jejum, na altura do umbigo, 3 vezes, e anotar a média — sugerido por Mesa da Saúde · Personal trainer 📅 2026-11-08 #saude ➕ 2026-11-02 ✅ 2026-11-09
-- [ ] Rosuvastatina 🔁 every day 📅 2026-11-14 ⏰ 20:00 #saude ➕ 2026-11-13
+- [ ] Rosuvastatina 🔁 every day 📅 2026-11-15 ⏰ 20:00 #saude ➕ 2026-11-14
+- [x] Rosuvastatina 🔁 every day 📅 2026-11-14 ⏰ 20:00 #saude ➕ 2026-11-13 ✅ 2026-11-14
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-13 ⏰ 20:00 #saude ➕ 2026-11-13 ✅ 2026-11-13
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-12 ⏰ 20:00 #saude ➕ 2026-11-12 ✅ 2026-11-13
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-11 ⏰ 20:00 #saude ➕ 2026-11-10 ✅ 2026-11-12
@@ -44,7 +45,7 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Responder na Mesa: Doação de R$ 96 mil: escolha o caminho (recomendado: A) — Mesa do Wealth · decisão · sem resposta até 14/11 vale B (só o calendário) ⏫ 📅 2026-11-14 #financas ➕ 2026-11-13 ✅ 2026-11-13
 - [x] Decidir a Regra da Janela de Evento (romper a isenção de R$ 20 mil em Copom, Fed e eleições) — Wealth · seu pedido de 12/11 · rito com Mesa até 18/11 · sem resposta, não vigora 🔼 📅 2026-11-19 #financas ➕ 2026-11-13 ✅ 2026-11-13
 - [ ] Responder na Mesa: Parcela tática para surfar mudanças de recomendação? — Mesa do Wealth · decisão · seu pedido de 12/11 📅 2026-11-22 #financas ➕ 2026-11-13
-- [ ] Churrasco G8 📅 2026-11-14 ⏰ 12:15 #pessoal ➕ 2026-11-13
+- [x] Churrasco G8 📅 2026-11-14 ⏰ 12:15 #pessoal ➕ 2026-11-13 ✅ 2026-11-14
 
 ## Migradas do Lembretes
 
