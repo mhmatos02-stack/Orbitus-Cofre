@@ -721,8 +721,8 @@ body.privado #kDecL .x{filter:blur(6px);user-select:none;transition:filter .2s} 
       <canvas id="tOrb" aria-hidden="true"></canvas>
       <div class="htop">
         <div>
-          <div class="kick">Treino · Shape Dezembro</div>
-          <h1 style="font-size:52px" id="tTit">Treino</h1>
+          <div class="kick">Saúde · Shape Dezembro</div>
+          <h1 style="font-size:52px" id="tTit">Saúde</h1>
           <p class="sub" id="tSub">Carregando…</p>
         </div>
       </div>
@@ -807,8 +807,8 @@ var DS=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
 function pd(s){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
 function key(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 
-var ICON={mesa:'M3 10h18M5 10v9M19 10v9M8 6h8l3 4H5z',home:'M3 11.5L12 4l9 7.5M5.5 9.8V20h13V9.8',tasks:'M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2',train:'M3 9v6M6 7v10M18 7v10M21 9v6M6 12h12',wealth:'M5 19V12M10 19V8M15 19v-5M20 19V5',cal:'M4 7h16v13H4zM4 11h16M8 4v4M16 4v4',mail:'M3.5 6.5h17v11h-17zM4 7l8 6 8-6',goals:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',trip:'M2.5 15l19-6.5-3-2-6 1.5-5-4h-2l3 5.2-4 1-2-1.5H1.5l1 6.3z',ideas:'M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z'};
-var NAV=[['Home','home','home'],['Tarefas','tasks','tarefas'],['Treino','train','treino'],['Wealth','wealth','wealth',1],['Agenda','cal','agenda'],['Viagem','trip','viagem']];
+var ICON={heart:'M12 20s-7-4.4-9-8.6C1.6 8 3.5 5 6.6 5c2 0 3.4 1.1 4.4 2.6C12 6.1 13.4 5 15.4 5c3.1 0 5 3 3.6 6.4C19 15.6 12 20 12 20z',mesa:'M3 10h18M5 10v9M19 10v9M8 6h8l3 4H5z',home:'M3 11.5L12 4l9 7.5M5.5 9.8V20h13V9.8',tasks:'M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2',train:'M3 9v6M6 7v10M18 7v10M21 9v6M6 12h12',wealth:'M5 19V12M10 19V8M15 19v-5M20 19V5',cal:'M4 7h16v13H4zM4 11h16M8 4v4M16 4v4',mail:'M3.5 6.5h17v11h-17zM4 7l8 6 8-6',goals:'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z',trip:'M2.5 15l19-6.5-3-2-6 1.5-5-4h-2l3 5.2-4 1-2-1.5H1.5l1 6.3z',ideas:'M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z'};
+var NAV=[['Home','home','home'],['Tarefas','tasks','tarefas'],['Saúde','heart','treino'],['Wealth','wealth','wealth',1],['Agenda','cal','agenda'],['Viagem','trip','viagem']];
 /* aba E-mails retirada em 13/11: os e-mails que pedem resposta ou decisão viram sugestões no Tarefas */
 if(location.hash==='#emails')history.replaceState(null,'','#tarefas');   // Metas e Ideias voltam quando existirem
 /* Animação só quando dá para ver: aba visível, elemento exibido e dentro da tela. Fora disso, confere de novo a cada 0,5 s. */
@@ -1919,7 +1919,7 @@ function abrirTreino(){var f=$('trFrame');if(!f.getAttribute('src'))f.setAttribu
 function nf(v,d){return v==null?'—':Number(v).toLocaleString('pt-BR',{minimumFractionDigits:d||0,maximumFractionDigits:d||0})}
 function renderTreinoHero(){var R=TR||(D&&D.treino_resumo)||{};if(!R.data&&!R.semana)return;
   var d12=R.d12!=null?R.d12:Math.round((pd('2026-12-12')-pd(hojeK()))/864e5);
-  $('tTit').innerHTML=R.sessao_nome?'Hoje: <span>'+esc(R.sessao_nome)+'</span>':'Treino';
+  $('tTit').innerHTML=R.sessao_nome?'Hoje: <span>'+esc(R.sessao_nome)+'</span>':'Saúde';
   var cin=R.cintura!=null?R.cintura:R.cintura_base;
   $('tSub').textContent='Cintura '+nf(cin,1)+' cm → meta '+nf(R.cintura_meta||87.5,1)+' cm até Praia do Forte'+(R.cintura==null?' (medida inicial; meça no domingo)':'');
   $('tKps').innerHTML=[[d12>0?d12:'—','dias para 12/12'],[(R.treinos_semana||0)+'/'+(R.treinos_alvo||6),'treinos na semana'],[(R.pontos==null?'—':R.pontos)+'/5','pontos hoje'],[nf(R.proteina)+' g','proteína hoje'],[R.sequencia||0,'dias de sequência']].map(function(k){return '<span class="glass"><b>'+k[0]+'</b>'+k[1]+'</span>'}).join('');

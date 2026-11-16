@@ -549,7 +549,7 @@ def sugestoes(vault, d, mesa_saude=None):
     # Mesa da Saúde: tarefas propostas no parecer (ou os ajustes, se o parecer não trouxer tarefas)
     par = (mesa_saude or {}).get('ultimo_parecer') or {}
     for aid, o in (par.get('agentes') or {}).items():
-        nome = {'personal': 'Personal trainer', 'nutricionista': 'Nutricionista', 'nutri': 'Nutricionista'}.get(aid, aid)
+        nome = {'personal': 'Personal trainer', 'nutricionista': 'Nutricionista', 'nutri': 'Nutricionista', 'sono': 'Sono e recuperação', 'fisio': 'Mobilidade e dores'}.get(aid, aid)
         itens = o.get('tarefas') or []
         for it in itens[:4]:
             if isinstance(it, dict):

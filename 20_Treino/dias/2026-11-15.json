@@ -1,0 +1,26 @@
+{
+ "date": "2026-11-15",
+ "weight": null,
+ "waist": null,
+ "steps": null,
+ "sleep": null,
+ "water": 10,
+ "meals": {
+  "lanche": true,
+  "cafe": true,
+  "almoco": true,
+  "jantar": true
+ },
+ "extras": [],
+ "habits": {
+  "jantar16": true
+ },
+ "workout": {
+  "letter": null,
+  "sets": {},
+  "done": false,
+  "warm": false,
+  "remo": false
+ },
+ "updated": 1794776395509
+}

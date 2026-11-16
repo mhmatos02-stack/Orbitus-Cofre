@@ -285,6 +285,7 @@ body.timing #toast{bottom:calc(env(safe-area-inset-bottom,0px) + 118px)}
 .pchat .pc-q{align-self:flex-end;max-width:85%;background:var(--accent-soft);color:var(--ink);border-radius:12px 12px 4px 12px;padding:7px 10px;font-size:13.5px}
 .pchat .pc-a{align-self:flex-start;max-width:92%;background:var(--surface-2);border-radius:12px 12px 12px 4px;padding:8px 11px;font-size:14px;line-height:1.45;white-space:pre-wrap}
 .pchat .pc-in{display:flex;gap:8px;flex-wrap:nowrap;margin-top:8px}.pchat .pc-in .inp{flex:1;min-width:0;font-size:16px}
+.ativ .ativ-row{padding:8px 0;border-top:1px solid rgba(127,127,127,.18)}.ativ .ativ-row:first-child{border-top:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
@@ -400,20 +401,23 @@ const EX={
 for(const k in EX) EX[k].id=k;
 
 const T_={
-  A:{title:'Peito + Costas',dur:'≈ 45 min',sub:'Supersets de antagonistas: faça o 1º, vá direto ao 2º e só descanse depois do par.',
-    items:[['sup_inc','A1',15],['rem_uni','A2',90],['sup_reto','B1',15],['rem_curv','B2',90],['cruc_inc','C1',15],['puxada_el','C2',60],['flexao','',60]]},
-  B1:{title:'Pernas',dur:'≈ 45 min',sub:'O treino mais pesado da semana. Descanse por completo entre as séries pesadas.',
-    items:[['goblet','',90],['stiff','',90],['bulgaro','',75],['elev_quadril','A1',15],['prancha','A2',60],['panturrilha','',45]]},
-  B2:{title:'Pernas · variação',dur:'≈ 45 min',sub:'Exercícios unilaterais para compensar o limite de 32 kg dos halteres.',
-    items:[['goblet','',90],['afundo_rev','',75],['stiff_uni','',75],['elev_quadril','A1',15],['prancha','A2',60],['panturrilha','',45]]},
-  C:{title:'Ombros + Braços',dur:'≈ 40 min',sub:'O dia mais leve. Técnica limpa e descanso curto.',
-    items:[['desenv','',90],['elev_lat','A1',15],['face_pull','A2',60],['cruc_inv','',60],['rosca','B1',15],['triceps_fr','B2',60],['martelo','C1',15],['mergulho','C2',60]]},
+  A:{title:'Peito + Costas',dur:'≈ 35 min',sub:'Cada série até a falha: pare na última repetição que sai com técnica limpa. Descanso de 2 min (até 3 se precisar). 4 exercícios × 3 séries.',
+    items:[['sup_inc','',120],['rem_uni','',120],['sup_reto','',120],['rem_curv','',120]]},
+  B1:{title:'Pernas',dur:'≈ 35 min',sub:'Cada série até a falha: pare na última repetição que sai com técnica limpa. Descanso de 2 min (até 3 se precisar). 4 exercícios × 3 séries. Nos exercícios livres (goblet e stiff), a falha é técnica: a coluna saiu do lugar, a série acabou.',
+    items:[['goblet','',120],['stiff','',120],['bulgaro','',120],['elev_quadril','',120]]},
+  B2:{title:'Pernas · variação',dur:'≈ 35 min',sub:'Cada série até a falha: pare na última repetição que sai com técnica limpa. Descanso de 2 min (até 3 se precisar). 4 exercícios × 3 séries. Unilaterais para compensar o limite de 32 kg dos halteres.',
+    items:[['goblet','',120],['afundo_rev','',120],['stiff_uni','',120],['elev_quadril','',120]]},
+  C:{title:'Ombros + Braços',dur:'≈ 35 min',sub:'Cada série até a falha: pare na última repetição que sai com técnica limpa. Descanso de 2 min (até 3 se precisar). 4 exercícios × 3 séries.',
+    items:[['desenv','',120],['elev_lat','',120],['rosca','',120],['triceps_fr','',120]]},
   V:{title:'Circuito de viagem',dur:'≈ 25 min',sub:'3 rodadas em circuito, sem pausa entre exercícios. Descanse 90 s ao fim de cada rodada. Meta: 3 vezes por semana.',
     items:[['v_bulgaro','1',0],['v_flexao','2',0],['v_remada','3',0],['v_afundo','4',0],['v_quadril','5',0],['v_prancha','6',90]]},
-  R:{title:'Corrida + ioga',dur:'≈ 50 min',sub:'Corrida leve de 30 a 40 min (dá para conversar) e 15 a 20 min de ioga para soltar quadril e posterior.',items:[]}
+  R:{title:'Fim de semana: atividade livre',dur:'sem musculação',sub:'Sábado e domingo sem halteres. Escolha uma ou duas atividades, marque como feita e anote o tempo.',items:[]}
 };
-const WEEK=['R','A','B1','C','A','B2','C'];
-const LETTER_LABEL={A:'A · Peito+Costas',B1:'B · Pernas',B2:'B · Pernas var.',C:'C · Ombros+Braços',V:'Viagem',R:'Domingo · Corrida + ioga'};
+/* faixas para treino até a falha com foco em definição (15/11/2026): compostos 8 a 12, isolados e pernas 10 a 15; sempre 3 séries */
+const FALHA={sup_inc:[8,12],rem_uni:[8,12],sup_reto:[8,12],rem_curv:[8,12],goblet:[10,15],stiff:[10,15],bulgaro:[8,12],afundo_rev:[8,12],stiff_uni:[8,12],elev_quadril:[10,15],desenv:[8,12],elev_lat:[12,15],rosca:[8,12],triceps_fr:[8,12]};
+for(const k in FALHA){EX[k].s=3;EX[k].lo=FALHA[k][0];EX[k].hi=FALHA[k][1]}
+const WEEK=['R','A','B1','C','A','B2','R'];
+const LETTER_LABEL={A:'A · Peito+Costas',B1:'B · Pernas',B2:'B · Pernas var.',C:'C · Ombros+Braços',V:'Viagem',R:'Fim de semana · atividade livre'};
 
 const MEALS=[
   {id:'cafe',n:'Café da manhã',d:'3 ovos inteiros + 2 claras · 1 fruta · café preto (ou 3 ovos + 170 g de iogurte grego)',p:35,k:420},
@@ -534,13 +538,14 @@ Object.assign(EX,{
 });
 for(const k in EX) EX[k].id=k;
 Object.assign(T_,{
-  GA:{title:'Peito + Costas · academia',dur:'≈ 50 min',sub:'Versão de academia completa. Supersets de antagonistas: faça o 1º, vá direto ao 2º e só descanse depois do par.',
-    items:[['g_supino','A1',15],['g_puxada','A2',120],['g_sup_inc','B1',15],['g_rem_baixa','B2',90],['g_crucifixo','C1',15],['face_pull','C2',60]]},
-  GB1:{title:'Pernas · academia',dur:'≈ 50 min',sub:'Com barra e máquinas dá para pôr mais carga que em casa. Descanse por completo entre as séries pesadas.',
-    items:[['g_agach','',120],['g_legpress','',90],['g_stiff','',90],['g_flexora','A1',15],['g_extensora','A2',60],['g_pant','',45],['prancha','',45]]},
-  GC:{title:'Ombros + Braços · academia',dur:'≈ 45 min',sub:'O dia mais leve. Polia deixa a tensão constante: técnica limpa e descanso curto.',
-    items:[['g_desenv','',90],['g_lat_cabo','A1',15],['g_facepull','A2',60],['cruc_inv','',60],['g_rosca_w','B1',15],['g_triceps_corda','B2',60],['martelo','C1',15],['g_paralela','C2',60]]}
+  GA:{title:'Peito + Costas · academia',dur:'≈ 35 min',sub:'Versão de academia. Cada série até a falha: pare na última repetição que sai com técnica limpa. Descanso de 2 min (até 3 se precisar). 4 exercícios × 3 séries.',
+    items:[['g_supino','',120],['g_puxada','',120],['g_sup_inc','',120],['g_rem_baixa','',120]]},
+  GB1:{title:'Pernas · academia',dur:'≈ 35 min',sub:'Versão de academia. Cada série até a falha: pare na última repetição que sai com técnica limpa. Descanso de 2 min (até 3 se precisar). 4 exercícios × 3 séries.',
+    items:[['g_agach','',120],['g_legpress','',120],['g_stiff','',120],['g_flexora','',120]]},
+  GC:{title:'Ombros + Braços · academia',dur:'≈ 35 min',sub:'Versão de academia. Cada série até a falha: pare na última repetição que sai com técnica limpa. Descanso de 2 min (até 3 se precisar). 4 exercícios × 3 séries.',
+    items:[['g_desenv','',120],['g_lat_cabo','',120],['g_rosca_w','',120],['g_triceps_corda','',120]]}
 });
+['g_supino','g_puxada','g_sup_inc','g_rem_baixa','g_agach','g_legpress','g_stiff','g_flexora','g_desenv','g_lat_cabo','g_rosca_w','g_triceps_corda'].forEach(k=>{if(EX[k])EX[k].s=3});
 T_.GB2=T_.GB1;
 Object.assign(LETTER_LABEL,{GA:'A · Peito+Costas · academia',GB1:'B · Pernas · academia',GB2:'B · Pernas · academia',GC:'C · Ombros+Braços · academia'});
 Object.assign(FIG,{g_supino:FIG.sup_reto,g_puxada:FIG.puxada_el,g_sup_inc:FIG.sup_inc,g_rem_baixa:FIG.v_remada,g_crucifixo:FIG.cruc_inc,g_agach:FIG.goblet,g_legpress:FIG.goblet,g_stiff:FIG.stiff,g_flexora:FIG.stiff_uni,g_extensora:FIG.goblet,g_pant:FIG.panturrilha,g_desenv:FIG.desenv,g_lat_cabo:FIG.elev_lat,g_facepull:FIG.face_pull,g_rosca_w:FIG.rosca,g_triceps_corda:FIG.triceps_fr,g_paralela:FIG.mergulho});
@@ -750,19 +755,20 @@ function syncPill(){
 /* ---------- derived ---------- */
 const stepsGoal=k=>k<PLAN.regEnd?8000:10000;
 const movSteps=d=>(d.steps||0)+100*(d.mov||0);
-const CYCLE=['A','B1','C','A','B2','C'],CYCLE_START='2026-10-26';
+const CYCLE=['A','B1','C','A','B2'],CYCLE_START='2026-10-26',NC=CYCLE.length;
 let _sk={};
-const isTrainDay=k=>(!inTrip(k)||isGym(k))&&dateOf(k).getDay()!==0;
+const fimDeSemana=k=>{const w=dateOf(k).getDay();return w===0||w===6};
+const isTrainDay=k=>(!inTrip(k)||isGym(k))&&!fimDeSemana(k);
 function nextIdx(k){const key='n'+k;if(key in _sk)return _sk[key];_sk[key]=0;const t=todayKey();let r=null;
   for(let p=addDays(k,-1),n=0;n<70&&p>=CYCLE_START;n++,p=addDays(p,-1)){const d=S.days[p];const L=d&&d.workout&&d.workout.letter;
     if(L&&!CYCLE.includes(L))continue;if(!L&&!isTrainDay(p))continue;
-    const done=p>=t?true:workoutOk(p);if(done){r=(cycIdx(p)+1)%6;break}}
-  if(r==null){const w=dateOf(k).getDay();r=w===0?0:w-1}
+    const done=p>=t?true:workoutOk(p);if(done){r=(cycIdx(p)+1)%NC;break}}
+  if(r==null){const w=dateOf(k).getDay();r=w===0||w===6?0:w-1}
   return _sk[key]=r}
 function cycIdx(k){const key='c'+k;if(key in _sk)return _sk[key];const nx=nextIdx(k);const d=S.days[k];const L=d&&d.workout&&d.workout.letter;let r=nx;
-  if(L){if(!CYCLE.includes(L))r=(nx+5)%6;else for(let j=0;j<6;j++){const i=(nx+j)%6;if(CYCLE[i]===L){r=i;break}}}
+  if(L){if(!CYCLE.includes(L))r=(nx+NC-1)%NC;else for(let j=0;j<NC;j++){const i=(nx+j)%NC;if(CYCLE[i]===L){r=i;break}}}
   return _sk[key]=r}
-function autoSession(k){if(inTrip(k)&&!isGym(k))return 'V';if(dateOf(k).getDay()===0)return 'R';return CYCLE[nextIdx(k)]}
+function autoSession(k){if(inTrip(k)&&!isGym(k))return 'V';if(fimDeSemana(k))return 'R';return CYCLE[nextIdx(k)]}
 function sessionKey(k){const d=getDay(k);const L=d.workout&&d.workout.letter?d.workout.letter:autoSession(k);return isGym(k)&&GYMMAP[L]?GYMMAP[L]:L}
 function nutrition(d){let p=0,kc=0,doce=0,doceExtra=0,fora=0;
   MEALS.forEach(m=>{const v=d.meals&&d.meals[m.id];if(!v)return;if(v===true){p+=m.p;kc+=m.k}else{const r=mealNutr(v);p+=r.p;kc+=r.k}});p=Math.round(p);kc=Math.round(kc);
@@ -771,11 +777,11 @@ function nutrition(d){let p=0,kc=0,doce=0,doceExtra=0,fora=0;
   return {p,kc,doce,doceExtra,fora,logged}}
 function sessionTotals(k){const sk=sessionKey(k);const t=T_[sk];const d=getDay(k);let total=0,done=0;
   t.items.forEach(([id])=>{total+=EX[id].s;const s=(d.workout.sets||{})[id]||[];done+=s.filter(r=>r&&r.done).length});return {total,done}}
-function workoutOk(k){const d=getDay(k);const sk=sessionKey(k);if(sk==='R')return !!(d.workout.corrida||d.workout.yoga)||k>todayKey()||k<PLAN.start;if(d.workout.done)return true;const t=sessionTotals(k);return t.total>0&&t.done>=t.total}
-function hasData(d){return d&&(d.weight!=null||d.steps!=null||d.waist!=null||Object.values(d.meals||{}).some(Boolean)||(d.extras||[]).length||d.workout.done||d.workout.remo||d.workout.yoga||d.workout.corrida||d.workout.pilates||d.workout.warm||Object.keys(d.workout.sets||{}).length||Object.values(d.habits||{}).some(Boolean)||d.water>0)}
+function workoutOk(k){const d=getDay(k);const sk=sessionKey(k);if(sk==='R')return ativFeitas(d).length>0||!!(d.workout.corrida||d.workout.yoga||d.workout.pilates)||k>todayKey()||k<PLAN.start;if(d.workout.done)return true;const t=sessionTotals(k);return t.total>0&&t.done>=t.total}
+function hasData(d){return d&&(d.weight!=null||d.steps!=null||d.waist!=null||Object.values(d.meals||{}).some(Boolean)||(d.extras||[]).length||d.workout.done||ativFeitas(d).length||d.workout.remo||d.workout.yoga||d.workout.corrida||d.workout.pilates||d.workout.warm||Object.keys(d.workout.sets||{}).length||Object.values(d.habits||{}).some(Boolean)||d.water>0)}
 function checks(k){const d=getDay(k);const n=nutrition(d);
   return [
-    {id:'treino',label:'Treino',ok:workoutOk(k),info:sessionKey(k)==='R'?(getDay(k).workout.corrida?'Corrida feita':'Corrida 30 a 40 min')+(getDay(k).workout.yoga?' · ioga feita':' · ioga 20 min'):(()=>{const t=sessionTotals(k);return `${t.done}/${t.total} séries · ${T_[sessionKey(k)].title}`})()},
+    {id:'treino',label:'Treino',ok:workoutOk(k),info:sessionKey(k)==='R'?(ativFeitas(getDay(k)).length?ativFeitas(getDay(k)).map(a=>a.n+(a.min?' '+a.min+' min':'')).join(' · '):'Fim de semana: escolha uma atividade (ioga, pilates, corrida, HIIT, natação)'):(()=>{const t=sessionTotals(k);return `${t.done}/${t.total} séries · ${T_[sessionKey(k)].title}`})()},
     {id:'prot',label:'Proteína ≥ 130 g',ok:n.p>=PLAN.proteinOk,info:`${n.p} g de ${PLAN.protein} g`},
     {id:'kcal',label:'Calorias dentro da meta',ok:n.logged&&n.kc<=PLAN.kcalCap,info:n.logged?`${f0(n.kc)} de ${f0(PLAN.kcal)} kcal`:'Registre as refeições'},
     {id:'passos',label:`Movimento ≥ ${f0(stepsGoal(k))} passos`,ok:movSteps(d)>=stepsGoal(k),info:d.steps!=null||d.mov?`${f0(d.steps||0)} passos${d.mov?` + ${d.mov} min de remo leve = ${f0(movSteps(d))}`:''}`:'Passos no fim do dia; remo leve pós-refeição soma 100 por minuto'},
@@ -828,7 +834,7 @@ function renderTop(){
   else count=`<b>MANTER</b><span>${inTrip(t)?'Modo viagem':'Pós 12/12'}</span>`;
   const tabs=[['hoje','Hoje'],['mesa','Mesa da Saúde'],['treino','Treino'],['comida','Alimentação'],['compras','Compras'],['medidas','Medidas'],['jornada','Jornada'],['plano','Plano']];
   document.getElementById('top').innerHTML=`<div class="wrap">
-    <div class="top-row"><div class="brand"><div class="eyebrow">Shape Dezembro · 27/10 a 11/12</div><h1>Treino</h1></div><div class="count">${count}</div></div>
+    <div class="top-row"><div class="brand"><div class="eyebrow">Shape Dezembro · 27/10 a 11/12</div><h1>Saúde ♥</h1></div><div class="count">${count}</div></div>
     ${lvlStrip()}
     <div class="datebar">
       <button class="iconbtn" data-act="day" data-n="-1" aria-label="Dia anterior">‹</button>
@@ -898,7 +904,7 @@ function mesaHoje(k){const P=(S.mesa&&S.mesa.pareceres)||[];const p=P.find(x=>x.
   /* acabamento Lente 01: o parecer vira uma ação por linha, Personal e Nutricionista lado a lado */
   const passos=t=>String(t).replace(/\)\s*,\s+(?=[^\d\s])/g,')\u0001').replace(/\s+·\s+(?=[A-Za-zÀ-ú ]{2,16}:)/g,'\u0001').split(/\u0001|;\s+|(?<=\.)\s+(?=[A-ZÀ-Ú0-9])/).map(x=>x.trim().replace(/\.$/,'')).filter(Boolean).map(x=>x.charAt(0).toUpperCase()+x.slice(1));
   const col=(nm,t)=>t?`<div class="mh-col"><div class="mh-nm">${nm}</div><ul>${passos(t).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:'';
-  const L=col('Personal',A.personal&&A.personal.amanha)+col('Nutricionista',A.nutri&&A.nutri.amanha);
+  const NOMES=[['personal','Personal'],['nutri','Nutricionista'],['sono','Sono'],['fisio','Mobilidade']];const L=NOMES.map(([id,nm])=>col(nm,A[id]&&(A[id].amanha||A[id].resumo))).join('');
   return L?`<div class="note remind mesa-hoje"><div class="mh-grid">${L}</div><button class="toggle" data-act="tab" data-tab="mesa">Mesa da Saúde</button></div>`:''}
 function viewHoje(){
   const k=S.sel,d=getDay(k),cs=checks(k),sc=cs.filter(c=>c.ok).length,sk=sessionKey(k);
@@ -946,7 +952,7 @@ function viewHoje(){
   <section class="card">
     <div class="block"><div><div class="eyebrow">Treino do dia</div><h2>${T_[sk].title}</h2><div class="small muted">${T_[sk].dur}${sk==='C'&&dateOf(k).getDay()===6?' + remo intervalado':''}${sk!=='R'&&isPilatesDay(k)?' + pilates 20 min':''}</div></div>
     ${sk!=='R'?`<button class="btn" data-act="tab" data-tab="treino">Abrir treino</button>`:''}</div>
-    ${sk==='R'?recButtons(d):`<div class="block"><span class="small">+ Ioga 20 min${dateOf(k).getDay()===6?' (sábado)':' (opcional)'}</span><button class="toggle ${d.workout.yoga?'on':''}" data-act="yoga">${d.workout.yoga?'Ioga feita':'Marcar ioga'}</button></div>`}${sk!=='R'&&isPilatesDay(k)?`<div class="block"><span class="small">+ Pilates 20 min depois do treino</span><button class="toggle ${d.workout.pilates?'on':''}" data-act="pilates">${d.workout.pilates?'Feito':'Marcar feito'}</button></div>`:''}
+    ${sk==='R'?ativBlock(k,d,true):`<div class="block"><span class="small">+ Ioga 20 min${dateOf(k).getDay()===6?' (sábado)':' (opcional)'}</span><button class="toggle ${d.workout.yoga?'on':''}" data-act="yoga">${d.workout.yoga?'Ioga feita':'Marcar ioga'}</button></div>`}${sk!=='R'&&isPilatesDay(k)?`<div class="block"><span class="small">+ Pilates 20 min depois do treino</span><button class="toggle ${d.workout.pilates?'on':''}" data-act="pilates">${d.workout.pilates?'Feito':'Marcar feito'}</button></div>`:''}
   </section>
 
   ${reviewHTML(k)}
@@ -957,7 +963,7 @@ function viewHoje(){
 function checkAction(c,k,d){
   if(c.id==='passos')return `<div class="row" style="gap:6px;flex-wrap:nowrap"><input class="inp" id="h-steps" style="width:100px" inputmode="numeric" data-f="steps" value="${d.steps??''}" placeholder="passos"><input class="inp" id="h-mov" style="width:84px" inputmode="numeric" data-f="mov" value="${d.mov??''}" placeholder="min" title="minutos de remo leve"></div>`;
   if(c.id==='doce')return `<button class="toggle ${(d.habits||{}).jantar16?'on':''}" data-act="habit" data-h="jantar16">Jantar decidido</button>`;
-  if(c.id==='treino'&&sessionKey(k)==='R')return `<button class="toggle ${d.workout.corrida?'on':''}" data-act="corrida">Corrida</button>`;
+  if(c.id==='treino'&&sessionKey(k)==='R')return `<button class="toggle" data-act="tab" data-tab="treino">Abrir</button>`;
   if(c.id==='treino'&&sessionKey(k)!=='R')return `<button class="toggle" data-act="tab" data-tab="treino">Abrir</button>`;
   if(c.id==='prot'||c.id==='kcal')return `<button class="toggle" data-act="tab" data-tab="comida">Registrar</button>`;
   return '';
@@ -1003,8 +1009,7 @@ function viewTreino(){
   </section>`;
   html+=personalCard(k);
   if(sk==='R'){
-    html+=`<section class="card"><h3>Domingo: corrida + ioga</h3><ul class="rules small"><li><b>Corrida 30 a 40 min</b>, ritmo leve: dá para falar frases inteiras. ${isGym(k)?'Na esteira da academia, 1% de inclinação.':'Esteira do condomínio ou rua.'} Comece com 30 min e suba 5 min por semana se estiver fácil.</li><li><b>Ioga 15 a 20 min</b> no Fitness+ logo depois, focada em quadril e posterior.</li><li>Sem força e sem HIIT: amanhã é peito e costas.</li></ul>
-      ${recButtons(d)}</section>`;
+    html+=`<section class="card"><h3>Fim de semana sem musculação</h3><div class="small muted">Escolha uma ou duas. Toque em "Fiz" e anote quantos minutos fez. Vale o que você realmente fizer.</div>${ativBlock(k,d,false)}</section>`;
     return html;
   }
   html+=`<section class="card"><div class="block"><div><b>Aquecimento</b><div class="small muted">5 min de remo leve + 1 série leve do 1º exercício</div></div>
@@ -1043,8 +1048,21 @@ function remoBlock(d){
 }
 function hiitWeek(k){const m=mondayOf(k);let n=0;for(let i=0;i<7;i++){const d=S.days[addDays(m,i)];if(d&&d.workout&&d.workout.remo&&d.workout.cond==='hiit')n++}return n}
 const REC=[['ioga','Ioga no Fitness+'],['pilates','Pilates no Fitness+'],['caminhada','Caminhada longa']];
+/* fim de semana sem musculação: atividades livres, cada uma com "feito" e o tempo (15/11/2026) */
+const ATIV=[
+  ['ioga','Ioga','20 a 30 min no Fitness+, foco em quadril e posterior',20],
+  ['pilates','Pilates','20 a 30 min, core e mobilidade',20],
+  ['corrida','Corrida','30 a 40 min leve, dá para conversar',35],
+  ['hiit','HIIT','até 20 min (Fitness+ ou remo intervalado); não na véspera de pernas',20],
+  ['natacao','Natação','30 a 45 min, ritmo confortável',30],
+  ['caminhada','Caminhada','45 a 60 min, ritmo firme',45]];
+function ativFeitas(d){const A=(d.workout&&d.workout.ativ)||{};return ATIV.filter(a=>A[a[0]]&&A[a[0]].feito).map(a=>({id:a[0],n:a[1],min:A[a[0]].min||null}))}
+function ativBlock(k,d,compacto){const A=d.workout.ativ||{};
+  return `<div class="ativ">${ATIV.map(([id,n,dica,sug])=>{const x=A[id]||{};return `<div class="block ativ-row"><div style="min-width:0"><b>${n}</b>${compacto?'':`<div class="small muted">${esc(dica)}</div>`}</div>
+    <div class="row" style="gap:6px;flex-wrap:nowrap"><label class="pin"><input inputmode="numeric" data-ativmin="${id}" value="${x.min??''}" placeholder="${sug}" aria-label="Minutos de ${n}"><span>min</span></label>
+    <button class="toggle ${x.feito?'on':''}" data-act="ativ" data-a="${id}">${x.feito?'Feito':'Fiz'}</button></div></div>`}).join('')}</div>`}
 function recButtons(d){return `<div class="row"><button class="toggle ${d.workout.corrida?'on':''}" data-act="corrida">Corrida feita</button><button class="toggle ${d.workout.yoga?'on':''}" data-act="rec" data-r="ioga">Ioga feita</button></div>`}
-const isPilatesDay=k=>dateOf(k).getDay()===3&&!inTrip(k);
+const isPilatesDay=k=>false;   /* desde 15/11 o pilates é atividade do fim de semana */
 function pilatesBlock(d){return `<section class="card"><div class="block"><div><div class="eyebrow">Quarta · depois do C</div><b>Pilates 20 min (Fitness+)</b><div class="small muted">Core e mobilidade. Aula curta de nível iniciante ou intermediário.</div></div><button class="toggle ${d.workout.pilates?'on':''}" data-act="pilates">${d.workout.pilates?'Feito':'Marcar feito'}</button></div></section>`}
 function exCard([id,tag,rest],k,d){
   const ex=EX[id];const sets=(d.workout.sets||{})[id]||[];const sg=suggest(ex,k);
@@ -1229,14 +1247,15 @@ function viewPlano(){
     </div></section>
   <section class="card"><h2>Semana de treino</h2>
     <div class="tablewrap"><table><thead><tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr></thead>
-    <tbody><tr><td style="text-align:left">A<br><span class="small muted">Peito+Costas</span></td><td style="text-align:left">B<br><span class="small muted">Pernas</span></td><td style="text-align:left">C<br><span class="small muted">Ombros+Braços<br>+ pilates 20 min</span></td><td style="text-align:left">A</td><td style="text-align:left">B<br><span class="small muted">variação</span></td><td style="text-align:left">C<br><span class="small muted">+ remo</span></td><td style="text-align:left">Corrida<br><span class="small muted">30–40 min<br>+ ioga 20 min</span></td></tr></tbody></table></div>
+    <tbody><tr><td style="text-align:left">A<br><span class="small muted">Peito+Costas</span></td><td style="text-align:left">B<br><span class="small muted">Pernas</span></td><td style="text-align:left">C<br><span class="small muted">Ombros+Braços</span></td><td style="text-align:left">A</td><td style="text-align:left">B<br><span class="small muted">variação</span></td><td style="text-align:left">Livre<br><span class="small muted">ioga, pilates, corrida, HIIT, natação</span></td><td style="text-align:left">Livre<br><span class="small muted">idem</span></td></tr></tbody></table></div>
     <ul class="rules small">
-      <li><b>Intensidade:</b> termine cada série com 1–2 reps sobrando.</li>
+      <li><b>Formato:</b> 4 exercícios × 3 séries, 30 a 40 min no máximo. Musculação de segunda a sexta (semana de 4 dias: pule a sexta); fim de semana sem halteres.</li>
+      <li><b>Intensidade:</b> toda série até a falha, com técnica limpa. Nos exercícios livres a falha é técnica: perdeu a postura, a série acabou.</li>
+      <li><b>Descanso:</b> 2 min entre séries, até 3 se precisar. O cronômetro já vem com 2 min.</li>
       <li><b>Progressão dupla:</b> bateu o topo das reps em todas as séries, suba a carga na próxima sessão. O app calcula isso para você.</li>
-      <li><b>Faltou um dia?</b> O painel segue a sequência A, B, C: o próximo treino continua de onde você parou, sem pular letra. Domingo é corrida + ioga, sem halteres; se quiser treinar força no domingo, escolha a letra no topo do treino.</li>
-      <li>Cardio: remo intervalado no sábado e corrida leve no domingo. Fora isso, movimento ao longo do dia: passos ou remo leve depois das refeições.</li>
-      <li><b>Fitness+:</b> o HIIT (até 20 min) pode substituir o remo de sábado, no máximo 2 vezes por semana e nunca na véspera de pernas. Pilates entra na quarta, depois do C; ioga no domingo, depois da corrida. Nenhuma aula substitui os passos nem o treino com halteres.</li>
-      <li><b>Apple Watch:</b> copie os passos do app Atividade para o painel no fim do dia.</li>
+      <li><b>Definição vem da comida e dos passos:</b> o treino segura o músculo enquanto o déficit tira a gordura. Proteína ≥ 130 g todo dia.</li>
+      <li><b>Faltou um dia?</b> O painel segue a sequência A, B, C, A, B: o próximo treino continua de onde você parou.</li>
+      <li><b>Fim de semana:</b> marque a atividade feita e o tempo. HIIT no máximo 2 vezes por semana, nunca na véspera de pernas.</li>
       <li><b>Exercícios com tempo:</b> use o botão ▶ da série. O cronômetro conta 5 s de preparo, marca a série ao terminar e já inicia o descanso.</li>
     </ul></section>
   <section class="card"><h2>Checkpoints</h2>
@@ -1250,14 +1269,14 @@ function viewPlano(){
 
 /* ---------- gamification ---------- */
 const LEVELS=[[0,'Recruta'],[300,'Aquecido'],[800,'No ritmo'],[1500,'Constante'],[2400,'Disciplinado'],[3500,'Máquina'],[4800,'Pronto pro embarque'],[6500,'Lenda de dezembro']];
-const XP_RULES=[['Treino concluído (vale o treino mínimo)',30],['Corrida no domingo',20],['Ioga (qualquer dia)',15],['Pilates na quarta',10],['Remo intervalado ou HIIT (HIIT pontua até 2 por semana)',10],['Recorde de carga (até 3 por dia)',10],['Proteína ≥ 130 g',15],['Calorias entre 1.650 e 1.950 kcal',15],['Passos na meta',15],['Bônus de 12 mil passos',5],['Zero doce fora do plano (dia registrado)',10],['Jantar decidido até 16h',5],['Água: 10 copos',5],['Pesagem registrada',5],['Cintura medida',10],['Sono ≥ 7 h',5],['Dia perfeito (5/5)',20],['Desafio da semana cumprido',100]];
+const XP_RULES=[['Treino concluído (vale o treino mínimo)',30],['Atividade do fim de semana (até 2 por dia)',15],['Ioga (qualquer dia)',15],['Pilates na quarta',10],['Remo intervalado ou HIIT (HIIT pontua até 2 por semana)',10],['Recorde de carga (até 3 por dia)',10],['Proteína ≥ 130 g',15],['Calorias entre 1.650 e 1.950 kcal',15],['Passos na meta',15],['Bônus de 12 mil passos',5],['Zero doce fora do plano (dia registrado)',10],['Jantar decidido até 16h',5],['Água: 10 copos',5],['Pesagem registrada',5],['Cintura medida',10],['Sono ≥ 7 h',5],['Dia perfeito (5/5)',20],['Desafio da semana cumprido',100]];
 function dayPRs(k){const d=S.days[k];if(!d||!d.workout)return [];const out=[];const sets=d.workout.sets||{};
   for(const id in sets){const ex=EX[id];if(!ex||ex.kg==null)continue;const done=(sets[id]||[]).filter(r=>r&&r.done&&num(r.kg)!=null);if(!done.length)continue;
     const L=lastSets(id,k);if(!L)continue;const prev=L.sets.map(r=>num(r.kg)||0).reduce((a,b)=>Math.max(a,b),0);const cur=done.map(r=>num(r.kg)).reduce((a,b)=>Math.max(a,b),0);if(prev>0&&cur>prev)out.push({id,kg:cur,prev})}
   return out}
 function dayXP(k){const d=S.days[k];if(!hasData(d))return {total:0,items:[]};
   const it=[];const add=(l,x)=>{if(x>0)it.push([l,x])};const n=nutrition(d);const sk=sessionKey(k);
-  if(sk==='R'){if(d.workout.corrida)add('Corrida',20);if(d.workout.yoga)add('Ioga',15)}else{if(workoutOk(k))add('Treino',30);if(d.workout.yoga)add('Ioga',15)}
+  if(sk==='R'){const fe=ativFeitas(d);fe.slice(0,2).forEach(a=>add(a.n,a.id==='corrida'||a.id==='natacao'?20:15));if(!fe.length){if(d.workout.corrida)add('Corrida',20);if(d.workout.yoga)add('Ioga',15)}}else{if(workoutOk(k))add('Treino',30);if(d.workout.yoga)add('Ioga',15)}
   if(d.workout.pilates)add('Pilates',10);
   if(d.workout.remo&&!(d.workout.cond==='hiit'&&hiitWeek(k)>2))add(d.workout.cond==='hiit'?'HIIT':'Remo',10);
   const prs=dayPRs(k);if(prs.length)add(prs.length>1?`${prs.length} recordes`:'Recorde',Math.min(30,prs.length*10));
@@ -1279,7 +1298,7 @@ const CHALLENGES=[
   {n:'Pé na estrada',d:'Bata a meta de movimento em 5 dias',goal:5,f:ks=>ks.filter(k=>movSteps(getDay(k))>=stepsGoal(k)).length},
   {n:'Semana sem açúcar extra',d:'7 dias registrados sem doce fora do plano',goal:7,f:ks=>ks.filter(k=>{const n=nutrition(getDay(k));return n.logged&&n.doceExtra===0}).length,fail:ks=>ks.some(k=>nutrition(getDay(k)).doceExtra>0)},
   {n:'Movimento em casa',d:'Faça 10+ min de remo leve depois das refeições em 5 dias',goal:5,f:ks=>ks.filter(k=>(getDay(k).mov||0)>=10).length},
-  {n:'Reta final',d:'Conclua os 6 treinos da semana',goal:6,f:ks=>ks.filter(k=>sessionKey(k)!=='R'&&hasData(S.days[k])&&workoutOk(k)).length},
+  {n:'Reta final',d:'Conclua os 5 treinos da semana',goal:5,f:ks=>ks.filter(k=>sessionKey(k)!=='R'&&hasData(S.days[k])&&workoutOk(k)).length},
   {n:'Pronto pro embarque',d:'4 dias com 4+ pontos antes de viajar',goal:4,f:ks=>ks.filter(k=>k<PLAN.trip&&(score(k)||0)>=4).length}
 ];
 function challengeState(i){const c=CHALLENGES[i];const k0=addDays(PLAN.gridStart,i*7);const ks=Array.from({length:7},(_,j)=>addDays(k0,j));const t=todayKey();
@@ -1748,14 +1767,19 @@ function allocLots(id){const it=S.pantry.items[id];if(!it||!it.lots)return [];le
 function pSet(id,q){const t=todayKey();const it=S.pantry.items[id]||{};it.base=Math.max(0,q);it.at=t;it.c0=consumed(id,t,t);it.lots=q>0?[{q,d:t}]:[];S.pantry.items[id]=it}
 function pBuy(id,q){const t=todayKey();const cur=stock(id);const keep=allocLots(id).map(l=>({q:l.q,d:l.d}));const it=S.pantry.items[id]||{};
   it.base=cur+q;it.at=t;it.c0=consumed(id,t,t);it.lots=[...keep,{q,d:t}];it.bought=t;S.pantry.items[id]=it}
+/* comeu o que estava para passar do ponto: sai do estoque sem contar como desperdício */
+function pConsume(id,lotIdx){const it=S.pantry.items[id];const al=allocLots(id);const l=al.find(x=>x.i===lotIdx);if(!l)return;const t=todayKey();const cur=stock(id);
+  const keep=al.filter(x=>x.i!==lotIdx).map(x=>({q:x.q,d:x.d}));it.base=Math.max(0,cur-l.q);it.at=t;it.c0=consumed(id,t,t);it.lots=keep}
 function pDiscard(id,lotIdx){const it=S.pantry.items[id];const al=allocLots(id);const l=al.find(x=>x.i===lotIdx);if(!l)return;const t=todayKey();const cur=stock(id);
   S.pantry.waste.push({id,q:l.q,d:t});const keep=al.filter(x=>x.i!==lotIdx).map(x=>({q:x.q,d:x.d}));it.base=Math.max(0,cur-l.q);it.at=t;it.c0=consumed(id,t,t);it.lots=keep}
 function roundBuy(I,q){if(q<=0)return 0;if(I.pack)return Math.ceil(q/I.pack)*I.pack;const st=I.step||1;return Math.ceil(q/st-0.001)*st}
 function fmtQty(I,q){if(I.packLbl){const n=Math.round(q/I.pack);return `${n} ${I.packLbl}${n>1?'s':''}`}if(I.u==='g')return q>=1000?`${f1(q/1000).replace(',0','')} kg`:`${Math.round(q)} g`;if(I.u==='ml')return `${Math.round(q)} ml`;
   const n=Math.round(q*10)/10;const word={un:n===1?'unidade':'unidades',pote:n===1?'pote':'potes',maço:n===1?'maço':'maços'}[I.u];return `${String(n).replace('.',',')} ${word}`}
 function fmtStock(I,q){if(I.u==='g'&&q<1000)return `${Math.round(q)} g`;if(I.u==='un'||I.u==='pote'||I.u==='maço'){const n=Math.round(q*10)/10;return `${String(n).replace('.',',')} ${I.u==='un'?'un':I.u}`}return fmtQty(I,q)}
+function feriasAtiva(t){const F=S.pantry.ferias;t=t||todayKey();return !!(F&&F.ate&&t>=(F.de||t)&&t<=F.ate)}
 function shoppingList(){
   const H=S.pantry.horizon,t=todayKey(),out=[];let repo=null;
+  if(feriasAtiva(t))return {items:[],repo:null,ferias:true};
   for(const id in ITEMS){const I=ITEMS[id];const st=stock(id);
     let days=H,trunc=false;
     if(I.long)days=Math.max(H,14);
@@ -1788,11 +1812,16 @@ function viewCompras(){
   const byCat=c=>list.items.filter(x=>x.I.c===c);
   let h='';
   if(!tracked)h+=`<div class="note"><b>Primeira vez:</b> o painel ainda não sabe o que você tem em casa. Ajuste o estoque na lista "Despensa" lá embaixo, ou faça a compra e toque em "Comprei tudo". A partir daí, ele desconta o que você marca como comido.</div>`;
-  if(al.gone.length)h+=`<div class="note bad"><b>Provavelmente passou do ponto:</b> ${al.gone.map(g=>`${esc(g.I.n)} (comprado ${fmtShort(g.l.d)}) <button class="linkbtn" data-act="pdiscard" data-id="${g.id}" data-i="${g.l.i}">Joguei fora</button> <button class="linkbtn" data-act="pok" data-id="${g.id}">Ainda está bom</button>`).join(' · ')}</div>`;
-  if(al.use.length)h+=`<div class="note amber"><b>Use primeiro:</b> ${al.use.map(u=>`${esc(u.I.n)} (${u.left<=0?'hoje':'até amanhã'})`).join(', ')}. O cardápio de hoje já usa parte disso.</div>`;
+  if(al.gone.length)h+=`<div class="note bad"><b>Provavelmente passou do ponto:</b> ${al.gone.map(g=>`${esc(g.I.n)} (comprado ${fmtShort(g.l.d)}) <button class="linkbtn" data-act="pconsume" data-id="${g.id}" data-i="${g.l.i}">Consumido</button> <button class="linkbtn" data-act="pdiscard" data-id="${g.id}" data-i="${g.l.i}">Joguei fora</button> <button class="linkbtn" data-act="pok" data-id="${g.id}">Ainda está bom</button>`).join(' · ')}</div>`;
+  if(al.use.length)h+=`<div class="note amber"><b>Use primeiro:</b> ${al.use.map(u=>`${esc(u.I.n)} (${u.left<=0?'hoje':'até amanhã'}) <button class="linkbtn" data-act="pconsume" data-id="${u.id}" data-i="${u.l.i}">Consumido</button>`).join(', ')}. O cardápio de hoje já usa parte disso.</div>`;
   if(al.freeze.length)h+=`<div class="note"><b>Congele hoje:</b> ${esc(al.freeze.join(', '))}, em porções de 200 g. Deixe na geladeira só o que vai usar até amanhã.</div>`;
-  if(tripSoon)h+=`<div class="note amber"><b>Viagem em ${diffDays(t,PLAN.trip)} dias:</b> a lista já conta só até 11/12. Não estoque frescos.</div>`;
-  h+=`<section class="card">
+  if(tripSoon&&!list.ferias)h+=`<div class="note amber"><b>Viagem em ${diffDays(t,PLAN.trip)} dias:</b> a lista já conta só até 11/12. Não estoque frescos.</div>`;
+  const F=P.ferias||{};
+  h+=list.ferias?`<section class="card"><div class="block"><div><div class="eyebrow">Modo férias · até ${fmtShort(F.ate)}</div><h2>Sem compras grandes</h2></div><button class="toggle on" data-act="pferias">Desligar</button></div>
+      <div class="small">${F.nota?esc(F.nota)+' ':''}A lista de compras fica parada até ${fmtDate(F.ate)}. Só reponha o pontual que acabar (fruta, ovo, verdura) e use o que já está em casa: a despensa e os alertas de validade continuam valendo.</div></section>`
+    :`<section class="card"><div class="block"><div><div class="eyebrow">Compras pausadas</div><b>Modo férias</b><div class="small muted">Para períodos sem compra grande: marmitas prontas, viagem chegando.</div></div>
+      <div class="row" style="gap:6px;flex-wrap:nowrap"><label class="pin"><input type="date" id="pferias-ate" value="${addDays(PLAN.trip,-1)}" aria-label="Até quando"></label><button class="toggle" data-act="pferias">Ligar</button></div></div></section>`;
+  if(!list.ferias)h+=`<section class="card">
     <div class="block"><div><div class="eyebrow">Gerada pelo seu cardápio e pelo estoque estimado</div><h2>Lista de compras</h2></div>
       <span class="pill acc">${list.items.length} itens</span></div>
     <div class="grid2">
@@ -1915,6 +1944,10 @@ document.addEventListener('click',e=>{
       try{navigator.clipboard.writeText(txt).then(()=>toast('Lista copiada. Cole no Lembretes'),fallback)}catch(e){fallback()}break}
     case 'pzero':{const id=b.dataset.id;_cc=null;pmutate(()=>pSet(id,0));break}
     case 'pdiscard':{const id=b.dataset.id,i=+b.dataset.i;_cc=null;pmutate(()=>pDiscard(id,i));break}
+    case 'pconsume':{const id=b.dataset.id,i=+b.dataset.i;_cc=null;pmutate(()=>pConsume(id,i));toast('Marcado como consumido');break}
+    case 'pferias':{if(feriasAtiva()){pmutate(P=>{P.ferias=null})}else{const el=document.getElementById('pferias-ate');const ate=el&&el.value||addDays(PLAN.trip,-1);pmutate(P=>{P.ferias={de:todayKey(),ate,nota:''}})}break}
+    case 'ativ':{const a=b.dataset.a;mutate(k,d=>{d.workout.ativ=d.workout.ativ||{};const x=d.workout.ativ[a]||{};x.feito=!x.feito;if(x.feito&&!x.min){const def=ATIV.find(z=>z[0]===a);x.min=def?def[3]:null}d.workout.ativ[a]=x;
+      if(a==='ioga'){d.workout.yoga=x.feito;d.workout.rec=x.feito?'ioga':null}if(a==='corrida')d.workout.corrida=x.feito;if(a==='pilates')d.workout.pilates=x.feito});break}
     case 'pok':{const id=b.dataset.id;const I=ITEMS[id];_cc=null;pmutate(P=>{const it=P.items[id];if(it&&it.lots)it.lots.forEach(l=>{if(I.life-diffDays(l.d,todayKey())<0)l.d=addDays(todayKey(),-(I.life-1))})});break}
     case 'menushift':mutate(k,d=>{d.menuShift=((d.menuShift||0)+1)%14});break;
     case 'focus':{const el=document.getElementById(b.dataset.id);if(el){el.focus();el.scrollIntoView({block:'center'})}break}
@@ -1926,6 +1959,8 @@ document.addEventListener('click',e=>{
   }
 });
 document.addEventListener('change',e=>{
+  if(e.target&&e.target.dataset&&e.target.dataset.ativmin){const a=e.target.dataset.ativmin,v=num(e.target.value);mutate(S.sel,d=>{d.workout.ativ=d.workout.ativ||{};const x=d.workout.ativ[a]||{};x.min=v&&v>0?Math.round(v):null;if(x.min)x.feito=true;d.workout.ativ[a]=x;
+    if(a==='ioga'){d.workout.yoga=x.feito;d.workout.rec=x.feito?'ioga':null}if(a==='corrida')d.workout.corrida=!!x.feito;if(a==='pilates')d.workout.pilates=!!x.feito});return}
   const el=e.target;const k=S.sel;
   if(el.dataset.mi){const sl=el.dataset.mi,i=+el.dataset.i;const v=num(el.value);mutate(k,d=>{const it=d.meals[sl]&&d.meals[sl].items[i];if(it)it.q=v!=null&&v>0?v:0});return}
   if(el.dataset.pf){const id=el.dataset.pf;const v=num(el.value);_cc=null;pmutate(()=>pSet(id,v||0));return}

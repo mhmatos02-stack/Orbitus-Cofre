@@ -12,8 +12,10 @@ Agentes que acompanham treino, alimentação e corpo do Marcio. Fonte de dados: 
 ```json
 {"data":"AAAA-MM-DD","gerado_em":"AAAA-MM-DDTHH:MM","agentes":{
   "personal":{"resumo":"...","bem":["..."],"ajustes":["..."],"amanha":"...","alerta":"","tarefas":[{"titulo":"...","data":"AAAA-MM-DD","porque":"..."}]},
-  "nutri":{"resumo":"...","bem":["..."],"ajustes":["..."],"trocas":[{"de":"...","por":"...","porque":"..."}],"amanha":"...","alerta":"","tarefas":[{"titulo":"...","data":"AAAA-MM-DD","porque":"..."}]}},
- "respostas":[{"id":"<id da pergunta>","agente":"personal|nutri","texto":"..."}],
+  "nutri":{"resumo":"...","bem":["..."],"ajustes":["..."],"trocas":[{"de":"...","por":"...","porque":"..."}],"amanha":"...","alerta":"","tarefas":[{"titulo":"...","data":"AAAA-MM-DD","porque":"..."}]},
+  "sono":{"resumo":"...","bem":["..."],"ajustes":["..."],"amanha":"...","alerta":"","tarefas":[]},
+  "fisio":{"resumo":"...","bem":["..."],"ajustes":["..."],"amanha":"...","alerta":"","tarefas":[]}},
+ "respostas":[{"id":"<id da pergunta>","agente":"personal|nutri|sono|fisio","texto":"..."}],
  "semana":"(só aos domingos) leitura da semana: cintura, peso, aderência, decisão da regra de ajuste"}
 ```
 
