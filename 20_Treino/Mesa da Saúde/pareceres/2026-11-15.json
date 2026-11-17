@@ -1,0 +1,116 @@
+{
+ "data": "2026-11-15",
+ "gerado_em": "2026-11-16T08:40",
+ "agentes": {
+  "personal": {
+   "resumo": "Semana de 09 a 13/11 com 5 sessões de força em 5 dias úteis (C, A, B, C, A), todas completas e com aquecimento; sábado teve ioga e remo, domingo ficou sem nada registrado. Pelo programa novo de 15/11 o fim de semana é livre, então o B2 não foi perdido: ele abre a semana hoje, e as faixas mudaram para 8 a 12 nos compostos e 10 a 15 em pernas, com 3 séries.",
+   "bem": [
+    "Treino A subiu nas quatro frentes de 10 para 13/11: supino inclinado 26 kg de 10, 8, 8, 8 para 4 × 10; remada unilateral 26 kg de 4 × 8 para 4 × 10; supino reto de 24 para 26 kg em 3 × 10; remada curvada de 16 para 18 kg",
+    "Goblet fechou 4 × 10 com 32 kg em 11/11 e a rosca foi de 3 × 10 para 3 × 12 com 10 kg em 12/11",
+    "Desenvolvimento voltou para a faixa: de 4 × 5 com 20 kg em 09/11 para 4 × 10 com 18 kg em 12/11, exatamente o ajuste combinado"
+   ],
+   "ajustes": [
+    "Com a faixa nova de 8 a 12, os 10 repetições de 13/11 não são mais o topo: a próxima A (terça, 17/11) fica em 26 kg no supino inclinado e no reto buscando 3 × 12, e só sobe para 28 kg quando fechar as 3 séries com 12. Isso substitui o pedido de 28 kg do parecer de 13/11",
+    "O pedido de domingo (cintura ao acordar, corrida ou caminhada de 30 a 40 min, passos) não aparece no registro: 15/11 está com treino, passos, peso e cintura em branco. Atividade de fim de semana só conta se for lançada com minutos em workout.ativ",
+    "Remo leve depois das refeições somou 35 min em 7 dias (20 em 09/11 e 15 em 11/11) e passos seguem sem registro desde 06/11. Pela decisão da semana, a meta passa a ser 20 min por dia, lançados em mov, de preferência logo depois do jantar"
+   ],
+   "amanha": "Segunda, 16/11, em casa: B · Pernas variação, 4 exercícios × 3 séries até a falha técnica, descanso de 2 min. Goblet 32 kg com 3 s de descida buscando 3 × 12; afundo reverso 14 kg buscando 3 × 10 por perna (último foi 6, 10, 8 em 30/10); stiff unilateral 20 kg buscando 3 × 10 por perna (último 3 × 8); elevação de quadril 22 kg buscando 3 × 12. Terça A, quarta B1, quinta C, sexta A.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Agendar a atividade livre de sábado, 21/11, às 9h (corrida leve ou caminhada de 40 min)",
+     "data": "2026-11-21",
+     "porque": "dois fins de semana seguidos com atividade fraca ou sem registro; com hora marcada ela acontece antes do almoço"
+    },
+    {
+     "titulo": "Criar alarme diário às 20h30: remo leve 20 min",
+     "data": "2026-11-16",
+     "porque": "é a decisão da regra de ajuste desta semana (+2.000 passos por dia) e o remo saiu em só 2 de 7 dias"
+    }
+   ]
+  },
+  "nutri": {
+   "resumo": "Pelo registro, os dias úteis ficaram entre 1.000 e 1.350 kcal, mas o número é falso para baixo: massa, molho pesto, cream cheese e queijo entraram como texto sem item ou com valores baixos, e o domingo teve as 4 refeições marcadas sem nenhum item. Com a cintura parada em 90 cm há duas semanas, o problema não é comer demais nem de menos com certeza: é não saber quanto se come.",
+   "bem": [
+    "Água em 10 copos ou mais nos 7 dias, com 14 em 10/11",
+    "Nenhum doce ou extra fora do plano de 09 a 15/11",
+    "Café de 12/11 com 2 pães, 120 g de frango e mussarela deu cerca de 68 g de proteína numa refeição, e o almoço de tilápia com legumes de 11/11 foi o prato mais próximo do plano na semana"
+   ],
+   "ajustes": [
+    "Jantar de massa em 4 de 5 dias úteis (09, 11, 12 e 13/11), dois deles sem nenhuma carne (macarrão com pesto e cream cheese, ravioli de queijo com 13 g de proteína). Não é para tirar a massa: é para pesar 150 g cozida e pôr 120 g de frango junto, sempre",
+    "Lance as gramas da massa como item, não só no texto: 200 g de macarrão com pesto e cream cheese passa de 500 kcal, e o registro contou 316. Sem isso a regra de ajuste decide no escuro",
+    "Domingo inteiro marcado sem itens: o Orbitus preenche o padrão do plano (1.700 kcal e 148 g) e a semana parece melhor do que foi. Se não der para detalhar, lance pelo menos os favoritos Pão com ovos ou Pão com frango desfiado"
+   ],
+   "trocas": [
+    {
+     "de": "200 g de macarrão com pesto e cream cheese (12/11, cerca de 520 kcal e 15 g)",
+     "por": "150 g de macarrão com molho de tomate e 120 g de frango desfiado",
+     "porque": "cerca de 480 kcal e 46 g: menos caloria e o triplo de proteína"
+    },
+    {
+     "de": "Cheeseburger no almoço (13/11, lançado com 300 kcal e 15 g, real perto de 500)",
+     "por": "Sanduíche de pão francês com 120 g de frango grelhado, alface e tomate",
+     "porque": "cerca de 360 kcal e 42 g, e no delivery é o mesmo pedido em versão grelhada"
+    },
+    {
+     "de": "200 g de ravioli de queijo com legumes (13/11, cerca de 390 kcal e 17 g)",
+     "por": "150 g de ravioli com 2 ovos cozidos ou 100 g de frango e os mesmos legumes",
+     "porque": "cerca de 450 kcal e 35 a 45 g, sem mudar o prato que você gosta"
+    }
+   ],
+   "amanha": "Café: 2 pães franceses com 3 ovos mexidos (cerca de 490 kcal e 27 g) · Almoço: 150 g de frango grelhado, 4 colheres de arroz, 1 concha de feijão e salada (cerca de 475 kcal e 55 g) · Lanche depois do treino de pernas: 1 dose de whey com 200 ml de leite desnatado e 1 banana (cerca de 280 kcal e 32 g) · Jantar: 150 g de macarrão com molho de tomate, 120 g de frango desfiado e 150 g de legumes (cerca de 530 kcal e 49 g) · Doce: 1, cerca de 150 kcal. Total cerca de 1.925 kcal e 165 g de proteína.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Pesar a massa cozida do jantar uma vez nesta semana para calibrar o olho (150 g)",
+     "data": "2026-11-17",
+     "porque": "o jantar de massa é o item que mais erra no registro"
+    }
+   ]
+  },
+  "sono": {
+   "resumo": "Nenhuma noite de sono registrada desde 27/10: o campo sleep está vazio em todos os dias, então não há média nem pior noite para avaliar. Com força até a falha cinco dias seguidos, sem o dado não dá para saber se a cintura parada tem a ver com recuperação e fome.",
+   "bem": [
+    "Cargas subindo de 10 para 13/11 sem queda entre séries, o que não sugere cansaço acumulado na semana",
+    "Nenhum doce à noite fora do plano em 7 dias, um sinal indireto de que a fome noturna está controlada"
+   ],
+   "ajustes": [
+    "Lance as horas dormidas todo dia ao acordar, junto com a água: basta um número, como 6,5",
+    "Horário fixo: deitar às 23h e celular fora do quarto às 22h30, inclusive no fim de semana",
+    "Semana de descarga de 30/11 a 04/12, depois de 5 semanas até a falha desde 26/10: mesmas séries, cargas 20% menores, parando 2 repetições antes da falha. Assim você chega à viagem de 12/12 recuperado"
+   ],
+   "amanha": "Hoje à noite: celular carregando fora do quarto às 22h30 e deitar às 23h; amanhã cedo, lance as horas dormidas.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Pôr o carregador do celular fora do quarto",
+     "data": "2026-11-16",
+     "porque": "tela longe 30 min antes de dormir é o hábito mais barato para ganhar sono"
+    }
+   ]
+  },
+  "fisio": {
+   "resumo": "Nenhum relato de dor ou desconforto nas conversas desde 09/11, e o supino inclinado passou de 22 para 26 kg sem queixa no ombro direito. Hoje tem goblet, afundo e stiff unilateral até a falha, o dia de maior risco para lombar e joelho.",
+   "bem": [
+    "Aquecimento marcado nas 5 sessões de força da semana",
+    "Ioga no sábado, 14/11, logo depois de uma semana de cinco dias de força"
+   ],
+   "ajustes": [
+    "Com o corte para 4 exercícios, saíram face pull e puxada com elástico, que protegiam o ombro de quem trabalha sentado. Faça 2 × 15 de face pull com elástico nas pausas do trabalho; não conta como treino",
+    "No goblet e no stiff unilateral, a série acaba quando a lombar arredonda ou o quadril gira, mesmo que ainda saiam repetições",
+    "Pausa a cada 50 min sentado: 10 agachamentos sem peso e 10 rotações de tronco em pé"
+   ],
+   "amanha": "Antes do B2 de hoje, 8 min: 2 × 10 de balanço de perna à frente e ao lado, 2 × 30 s de alongamento do flexor do quadril em cada perna (afundo com joelho no chão), 2 × 10 de bom dia sem peso e 1 série leve de goblet com 12 kg.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Deixar o elástico do face pull na mesa de trabalho",
+     "data": "2026-11-16",
+     "porque": "o exercício saiu do treino A/C e a pausa só acontece se o elástico estiver à mão"
+    }
+   ]
+  }
+ },
+ "respostas": [],
+ "semana": "Semana de 09 a 15/11. Cintura: não houve medida no domingo, 15/11, nem no domingo anterior; a última é 90 cm em 10/11, contra 89,8 cm em 01/11 e a base de 92 cm, ou seja, parada há duas semanas. Faltam 2,5 cm em 27 dias para a meta de 87,5 cm em 12/12, cerca de 0,7 cm por semana. Peso: 69,3 kg em 10/11, 69,0 em 01/11 e 69,1 em 28/10, estável (o registro não mostra a queda de 71 kg citada antes). Treinos: 5 de 5 sessões de força completas; sábado ioga, domingo sem atividade lançada. Aderência: água 7 de 7 dias, doce fora do plano 0, refeições com itens em 4 de 7 dias, jantar decidido até 16h em 4 de 7, remo leve 35 min na semana, passos sem registro desde 06/11. Decisão da regra: somar 2.000 passos por dia, na prática 20 min de remo leve ou caminhada lançados em mov, sem cortar calorias, porque o registro dos dias úteis já fica abaixo de 1.650 kcal e cortar 150 kcal do jantar furaria o piso. Para a decisão do próximo domingo valer, meça cintura e peso hoje ao acordar e de novo no domingo, 22/11, antes do café."
+}
