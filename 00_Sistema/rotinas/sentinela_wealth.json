@@ -1,7 +1,7 @@
 {
   "rotina": "sentinela_wealth",
-  "quando": "2026-11-16T22:37",
+  "quando": "2026-11-17T22:38",
   "status": "ok",
-  "detalhe": "Rodada da noite: health check (ressalva ATENCAO, 2 avisos), news radar, dashboard e mesa caixa ok.",
+  "detalhe": "Rodada da noite: health check (ressalva ATENCAO, 2 avisos), news radar, dashboard e mesa caixa (20:49) ok.",
   "retentativas": {}
 }

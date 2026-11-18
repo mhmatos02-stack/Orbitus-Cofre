@@ -2521,3 +2521,35 @@
 {"x": 0.889, "y": 919, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#mTabs>button", "morto": false, "em": "2026-11-16T09:43:36", "aba": "mesa"}
 {"ev": "tempo", "aba": "mesa", "seg": 45, "em": "2026-11-16T09:43:50"}
 {"ev": "tempo", "aba": "mesa", "seg": 796, "em": "2026-11-16T10:43:15"}
+{"ev": "aba", "aba": "home", "em": "2026-11-17T12:09:16"}
+{"x": 0.019, "y": 278, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "nav#nav>button.nb", "morto": false, "em": "2026-11-17T12:10:16", "aba": "home"}
+{"ev": "tempo", "aba": "home", "seg": 78, "em": "2026-11-17T12:10:16"}
+{"ev": "aba", "aba": "treino", "em": "2026-11-17T12:10:16"}
+{"x": 0.792, "y": 174, "vw": 1726, "vh": 573, "ev": "clique", "alvo": "div#view>div.reminders>div.note>button.toggle", "morto": false, "em": "2026-11-17T12:10:33", "aba": "treino"}
+{"x": 0.025, "y": 345, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "nav#nav>button.nb>svg", "morto": false, "em": "2026-11-17T12:19:40", "aba": "treino"}
+{"ev": "tempo", "aba": "treino", "seg": 573, "em": "2026-11-17T12:19:40"}
+{"ev": "aba", "aba": "wealth", "em": "2026-11-17T12:19:40"}
+{"ev": "tempo", "aba": "wealth", "seg": 3, "em": "2026-11-17T12:19:40"}
+{"ev": "aba", "aba": "wealth", "em": "2026-11-17T12:20:10"}
+{"x": 0.903, "y": 64, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "button#wOlho", "morto": false, "em": "2026-11-17T12:20:10", "aba": "wealth"}
+{"x": 0.032, "y": 1338, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "nav#nav>button.nb>svg", "morto": false, "em": "2026-11-17T12:24:40", "aba": "wealth"}
+{"x": 0.93, "y": 403, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-17T12:25:10", "aba": "home"}
+{"x": 0.93, "y": 403, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-17T12:25:10", "aba": "home"}
+{"x": 0.93, "y": 403, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-17T12:25:10", "aba": "home"}
+{"x": 0.93, "y": 403, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-17T12:25:10", "aba": "home"}
+{"x": 0.93, "y": 403, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-17T12:25:10", "aba": "home"}
+{"x": 0.93, "y": 403, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-17T12:25:10", "aba": "home"}
+{"x": 0.839, "y": 453, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "ol#selE>li.di>button.chk", "morto": false, "em": "2026-11-17T12:25:10", "aba": "home"}
+{"x": 0.835, "y": 491, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "ol#selE>li.di>button.chk", "morto": false, "em": "2026-11-17T12:25:10", "aba": "home"}
+{"x": 0.833, "y": 523, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "ol#selE>li.di>button.chk", "morto": false, "em": "2026-11-17T12:25:10", "aba": "home"}
+{"x": 0.028, "y": 344, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "nav#nav>button.nb>svg", "morto": false, "em": "2026-11-17T12:25:40", "aba": "home"}
+{"x": 0.942, "y": 75, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "section.panel>div.ph>div>a.btn", "morto": false, "em": "2026-11-17T12:25:40", "aba": "wealth"}
+{"ev": "tempo", "aba": "wealth", "seg": 359, "em": "2026-11-17T12:25:40"}
+{"ev": "aba", "aba": "mesa", "em": "2026-11-17T12:25:40"}
+{"x": 0.031, "y": 459, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "nav#nav>button.nb", "morto": false, "em": "2026-11-17T12:30:40", "aba": "mesa"}
+{"ev": "tempo", "aba": "mesa", "seg": 278, "em": "2026-11-17T12:30:40"}
+{"ev": "aba", "aba": "viagem", "em": "2026-11-17T12:30:40"}
+{"x": 0.197, "y": 51, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#vgTrips>button", "morto": false, "em": "2026-11-17T12:31:10", "aba": "viagem"}
+{"x": 0.961, "y": 210, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#vgVista>button", "morto": false, "em": "2026-11-17T12:31:10", "aba": "viagem"}
+{"ev": "tempo", "aba": "viagem", "seg": 4644, "em": "2026-11-17T13:47:41"}
+{"ev": "tempo", "aba": "viagem", "seg": 2678, "em": "2026-11-17T16:45:14"}

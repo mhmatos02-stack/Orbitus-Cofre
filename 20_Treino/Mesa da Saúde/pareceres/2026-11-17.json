@@ -1,0 +1,100 @@
+{
+ "data": "2026-11-17",
+ "gerado_em": "2026-11-17T21:49",
+ "agentes": {
+  "personal": {
+   "resumo": "Segunda e terça da semana nova passaram sem nenhuma série lançada, e domingo também ficou sem atividade: são 3 dias seguidos zerados depois de 5 dias úteis completos. Nos últimos 7 dias foram 3 sessões de força (B 11/11, C 12/11, A 13/11) e pernas estão há 6 dias sem treino, a 25 dias da meta de 87,5 cm.",
+   "bem": [
+    "A semana anterior fechou 5 de 5 sessões com aquecimento, e o A de 13/11 subiu nas quatro frentes (supino inclinado e remada unilateral 26 kg em 4 × 10, supino reto 26 kg em 3 × 10, remada curvada 18 kg)",
+    "Goblet com 32 kg em 4 × 10 em 11/11, a carga máxima dos halteres, todas as séries feitas",
+    "Ioga e remo de condicionamento no sábado, 14/11"
+   ],
+   "ajustes": [
+    "O treino às 7h sugerido ontem não aconteceu, e o problema agora é de início, não de programa. Amanhã a regra é uma só: o B2 sai antes do almoço; se o dia apertar, vira treino mínimo (goblet e elevação de quadril, 3 séries cada, 15 min), nunca zero",
+    "A semana fica com 3 sessões (quarta B2, quinta A, sexta C), abaixo do mínimo de 4. Não junte dois treinos no mesmo dia para compensar: aceite os 3 e garanta a atividade livre de sábado, 21/11, com minutos lançados em workout.ativ",
+    "Remo leve depois do jantar: a meta de 20 min por dia em mov saiu em 0 na segunda e na terça. Amanhã comece com 10 min logo depois do jantar; 10 lançados valem mais que 20 planejados"
+   ],
+   "amanha": "Quarta, 18/11, em casa: B2 Pernas variação, 4 exercícios × 3 séries até a falha técnica, descanso de 2 min. Goblet 32 kg com 3 s de descida buscando 3 × 12; afundo reverso 14 kg buscando 3 × 10 por perna; stiff unilateral 20 kg buscando 3 × 10 por perna (último 3 × 8); elevação de quadril 22 kg buscando 3 × 12. Quinta A com supino inclinado 26 kg buscando 3 × 12; sexta C com desenvolvimento 18 kg buscando 3 × 12.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Separar hoje à noite a roupa de treino e deixar os halteres montados em 32 kg para o goblet",
+     "data": "2026-11-17",
+     "porque": "3 dias seguidos sem treino; tirar o atrito da manhã aumenta a chance de o B2 começar"
+    }
+   ]
+  },
+  "nutri": {
+   "resumo": "Pelo terceiro dia seguido não existe conta de comida: domingo com as 4 refeições marcadas sem itens, segunda e terça sem nenhuma refeição lançada, e o resumo de hoje mostra 0 kcal e 0 g de proteína. A água também caiu de 10 copos por dia (11 a 15/11) para 2 na segunda e 6 hoje.",
+   "bem": [
+    "Água em 10 copos de 11 a 15/11, cinco dias seguidos na meta",
+    "Nenhum doce ou extra fora do plano em 7 dias",
+    "Sábado, 14/11, teve cerca de 131 g de proteína só no que foi lançado (picanha, fraldinha e whey), e 11/11 teve o almoço mais limpo da semana: 300 g de tilápia com 250 g de legumes, cerca de 450 kcal e 80 g"
+   ],
+   "ajustes": [
+    "Lance amanhã pelo menos o café e o jantar, nem que seja pelo favorito com um toque. Sem registro até domingo, 22/11, a regra de ajuste decide no escuro de novo, como aconteceu na semana passada",
+    "Água: 2 copos ao acordar e 1 garrafa de 500 ml reabastecida no almoço e às 16h dão 6 copos antes do fim da tarde; faltaram 4 hoje",
+    "Jantar com proteína sempre: nos últimos jantares lançados, 2 de 3 foram massa com 12 a 13 g de proteína. Com 600 g de frango desfiado pronto na geladeira, a massa ganha 120 g de frango sem esforço"
+   ],
+   "trocas": [
+    {
+     "de": "Dia sem nenhuma refeição lançada",
+     "por": "Favorito Pão com ovos no café (1 pão, 3 ovos e 2 claras)",
+     "porque": "cerca de 380 kcal e 30 g, lançado com um toque e já garante a primeira conta do dia"
+    },
+    {
+     "de": "Rondelli de presunto e queijo com molho ao sugo (11/11, 300 g, cerca de 390 kcal e 55 g lançados)",
+     "por": "150 g de macarrão com molho de tomate e 120 g de frango desfiado",
+     "porque": "cerca de 480 kcal e 46 g, com o valor real conhecido; massa recheada pronta varia muito de rótulo e costuma vir com mais queijo do que parece"
+    }
+   ],
+   "amanha": "Café: 1 pão francês, omelete de 3 ovos e 2 claras, 1 maçã (cerca de 455 kcal e 30 g) · Almoço: 150 g de patinho grelhado, 4 colheres de arroz, 1 concha de feijão e salada de folhas (cerca de 555 kcal e 56 g) · Lanche depois do treino de pernas: 1 dose de whey com água e 1 banana (cerca de 210 kcal e 25 g) · Jantar: 150 g de macarrão cozido com molho de tomate, 120 g de frango desfiado e 150 g de legumes (cerca de 530 kcal e 50 g) · Doce: 1, cerca de 150 kcal. Total cerca de 1.900 kcal e 161 g de proteína.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Cozinhar e desfiar 600 g de peito de frango e guardar em 5 potes de 120 g",
+     "data": "2026-11-18",
+     "porque": "cobre o jantar com proteína de quarta a domingo, inclusive quando a vontade for massa"
+    }
+   ]
+  },
+  "sono": {
+   "resumo": "Ainda não há nenhuma noite de sono lançada: sleep vazio nos 7 dias, sem média e sem pior noite. Os 3 dias seguidos sem treino e sem registro podem ser só agenda, mas são exatamente o tipo de sinal que pede o dado de sono para separar falta de tempo de cansaço.",
+   "bem": [
+    "Nenhum doce à noite fora do plano em 7 dias",
+    "Nas sessões de 11 a 13/11, nenhuma carga caiu entre séries, sem sinal de fadiga acumulada antes da pausa"
+   ],
+   "ajustes": [
+    "O pedido de lançar as horas ao acordar foi feito em 15 e 16/11 e não aparece no registro. Ligar o lançamento a um alarme resolve melhor que lembrar: o alarme toca, você lança um número e desliga",
+    "Se a pausa destes 3 dias foi por cansaço ou noites curtas, diga na Mesa: o treino de amanhã vira a versão mínima sem culpa",
+    "Semana de descarga continua marcada de 30/11 a 04/12, 8 dias antes da viagem"
+   ],
+   "amanha": "Esta noite: celular carregando fora do quarto e luz apagada até 23h; amanhã, ao primeiro alarme, lance as horas dormidas antes de qualquer outro app.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Criar alarme diário às 7h05 com o nome Sono: quantas horas?",
+     "data": "2026-11-18",
+     "porque": "dois pedidos seguidos para lançar o sono não viraram registro; um gatilho fixo transforma em hábito"
+    }
+   ]
+  },
+  "fisio": {
+   "resumo": "Nenhum relato de dor ou desconforto nas conversas nem nas notas desde 09/11. Amanhã pernas voltam depois de 7 dias sem treino, com goblet, afundo e stiff unilateral até a falha: maior risco de dor muscular forte nos dias seguintes e de perder a postura na lombar.",
+   "bem": [
+    "Aquecimento marcado nas 3 sessões de força dos últimos 7 dias",
+    "Ioga no sábado, 14/11"
+   ],
+   "ajustes": [
+    "Na volta das pernas, a primeira série de cada exercício para 2 repetições antes da falha; as duas seguintes vão até a falha técnica. Isso reduz a dor muscular que poderia atrapalhar o A de quinta",
+    "No stiff unilateral, a série acaba quando o quadril gira ou a lombar arredonda, mesmo com repetições sobrando",
+    "Pausa a cada 50 min sentado: 10 agachamentos sem peso e 2 × 15 de face pull com elástico"
+   ],
+   "amanha": "Antes do B2, 8 min: 2 × 30 s de 90/90 de quadril por lado, 10 gato e camelo, 2 × 6 de agachamento lateral sem peso por lado, 15 pontes de glúteo sem peso e 1 série leve de goblet com 12 kg.",
+   "alerta": "",
+   "tarefas": []
+  }
+ },
+ "respostas": [],
+ "semana": ""
+}

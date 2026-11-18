@@ -1,6 +1,6 @@
 {
  "rotina": "backup",
- "quando": "2026-11-16T07:49",
- "status": "falha",
- "detalhe": "1 commit(s) não enviados ao GitHub: fatal: unable to access 'https://github.com/mhmatos02-stack/Orbitus-Cofre.git/': Could not resolve host: github.com"
+ "quando": "2026-11-16T23:17",
+ "status": "ok",
+ "detalhe": "cofre salvo no GitHub (e611f5e)"
 }

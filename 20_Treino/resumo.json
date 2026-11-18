@@ -1,8 +1,8 @@
 {
- "data": "2026-11-16",
- "d12": 26,
- "sessao": "B2",
- "sessao_nome": "Pernas · variação",
+ "data": "2026-11-17",
+ "d12": 25,
+ "sessao": "A",
+ "sessao_nome": "Peito + Costas",
  "treino_ok": false,
  "peso": 69.3,
  "peso_media7": null,
@@ -19,14 +19,14 @@
  "proteina_meta": 140,
  "kcal": 0,
  "kcal_meta": 1850,
- "agua": 2,
+ "agua": 6,
  "agua_meta": 10,
  "treinos_semana": 0,
  "treinos_alvo": 6,
- "pontos": 0,
+ "pontos": null,
  "sequencia": 0,
- "xp": 1520,
- "nivel": 4,
- "nivel_nome": "Constante",
- "calculado_em": "2026-11-16T15:33"
+ "xp": 1490,
+ "nivel": 3,
+ "nivel_nome": "No ritmo",
+ "calculado_em": "2026-11-17T23:17"
 }
