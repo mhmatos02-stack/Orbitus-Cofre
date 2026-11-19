@@ -22,7 +22,8 @@ Data: `📅 AAAA-MM-DD` · prioridade: 🔺 máxima · ⏫ alta · 🔼 média �
 - [x] Corrigir o registro de sábado com kcal explícitas (picanha, wagyu, linguiça, nhoque, sobremesa) — sugerido por Mesa da Saúde · Nutricionista 📅 2026-11-02 #saude #aguardando ➕ 2026-11-02 ✅ 2026-11-02
 - [x] Comprar bananas, mamão e ovos para a semana — sugerido por Mesa da Saúde · Nutricionista 📅 2026-11-02 #saude ➕ 2026-11-02 ✅ 2026-11-02
 - [x] Medir a cintura em casa, em jejum, na altura do umbigo, 3 vezes, e anotar a média — sugerido por Mesa da Saúde · Personal trainer 📅 2026-11-08 #saude ➕ 2026-11-02 ✅ 2026-11-09
-- [ ] Rosuvastatina 🔁 every day 📅 2026-11-17 ⏰ 20:00 #saude ➕ 2026-11-17
+- [ ] Rosuvastatina 🔁 every day 📅 2026-11-18 ⏰ 20:00 #saude ➕ 2026-11-18
+- [x] Rosuvastatina 🔁 every day 📅 2026-11-17 ⏰ 20:00 #saude ➕ 2026-11-17 ✅ 2026-11-18
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-16 ⏰ 20:00 #saude ➕ 2026-11-16 ✅ 2026-11-17
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-15 ⏰ 20:00 #saude ➕ 2026-11-14 ✅ 2026-11-16
 - [x] Rosuvastatina 🔁 every day 📅 2026-11-14 ⏰ 20:00 #saude ➕ 2026-11-13 ✅ 2026-11-14
