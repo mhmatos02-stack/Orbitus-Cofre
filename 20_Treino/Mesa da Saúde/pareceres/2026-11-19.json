@@ -1,0 +1,94 @@
+{
+ "data": "2026-11-19",
+ "gerado_em": "2026-11-19T21:50",
+ "agentes": {
+  "personal": {
+   "resumo": "Quinta, 19/11, o treino foi marcado como feito (B2 Pernas variação no resumo) e encerrou 5 dias seguidos sem musculação, desde o A de 13/11. Mas nenhuma série foi lançada e o aquecimento não foi marcado, então não dá para saber se saiu o B2 inteiro ou o mínimo, nem com que carga; a semana fecha com no máximo 2 de 4 sessões.",
+   "bem": [
+    "Voltou a treinar no dia em que a régua estava no mínimo, depois de 5 dias parado: era o passo que faltava",
+    "Pernas voltaram depois de 8 dias (último B em 11/11)",
+    "Água em 10 copos no mesmo dia do treino"
+   ],
+   "ajustes": [
+    "Treino marcado sem séries não alimenta a progressão dupla: na próxima vez que o goblet aparecer, ninguém sabe se você fez 32 kg × 12 ou × 8. Amanhã lance pelo menos carga e repetições da última série de cada exercício, 4 números no total",
+    "Remada curvada em 13/11 foi 10, 12, 12 com 18 kg: se amanhã fechar 3 × 12, a próxima A sobe para 20 kg. Supino inclinado e remada unilateral seguem em 26 kg até baterem 3 × 12",
+    "O que destravou hoje foi a régua baixa; mantenha a regra até o fim do ano: todo dia útil começa com o primeiro exercício, e só depois você decide se faz o treino inteiro"
+   ],
+   "amanha": "Sexta, 20/11, em casa: A Peito + Costas, 4 exercícios × 3 séries até a falha técnica, descanso de 2 min. Supino inclinado 26 kg buscando 3 × 12; remada unilateral 26 kg buscando 3 × 12 por lado; supino reto 26 kg buscando 3 × 10; remada curvada 18 kg buscando 3 × 12. Sábado, 21/11: atividade livre de 40 min lançada em workout.ativ.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Bloquear na agenda 40 min de treino de segunda a sexta da próxima semana, no mesmo horário",
+     "data": "2026-11-22",
+     "porque": "a semana de 16 a 19/11 perdeu 4 dias por falta de início; horário marcado tira a decisão do dia"
+    }
+   ]
+  },
+  "nutri": {
+   "resumo": "Quinto dia seguido sem nenhuma refeição com itens: 15/11 com as refeições só marcadas e 16 a 19/11 vazios, inclusive hoje, dia de treino de pernas. A água voltou a 10 copos hoje, depois de 2, 6 e 7 de segunda a quarta.",
+   "bem": [
+    "Água de volta na meta: 10 copos hoje",
+    "Nenhum doce ou extra fora do plano em 7 dias",
+    "O café de 13/11, omelete de 4 ovos com meia maçã, deu cerca de 315 kcal e 24 g de proteína, um bom começo de dia"
+   ],
+   "ajustes": [
+    "Se o problema de registro é o trabalho de montar item por item, use o texto: escreva \"150 g frango, 4 colheres de arroz, 1 concha de feijão\" e o Orbitus estima sozinho. Uma frase por refeição basta até domingo",
+    "Domingo, 22/11, a regra de ajuste decide com cintura, peso e a comida da semana. Faltam 3 dias: com café e jantar lançados de sexta a domingo, já existe base para escolher entre manter, somar passos ou cortar o jantar",
+    "Dia de treino A amanhã: 25 a 30 g de proteína até 1 h depois do treino; hoje, depois das pernas, não há sinal de que isso aconteceu"
+   ],
+   "trocas": [
+    {
+     "de": "Café sem registro, comido de pé",
+     "por": "1 iogurte proteico, 1 banana e 2 colheres de aveia",
+     "porque": "cerca de 290 kcal e 19 g, pronto em 1 minuto e lançado em 3 toques"
+    },
+    {
+     "de": "Doce da noite sem plano",
+     "por": "1 iogurte proteico com 100 g de morango",
+     "porque": "cerca de 150 kcal e 16 g de proteína; conta como o doce do dia e ajuda a fechar os 140 g"
+    }
+   ],
+   "amanha": "Café: favorito Pão com ovos (1 pão, 3 ovos e 2 claras) e 1 laranja (cerca de 445 kcal e 31 g) · Almoço: 150 g de patinho grelhado, 5 colheres de arroz, 1 concha de feijão e salada de folhas (cerca de 580 kcal e 57 g) · Lanche depois do treino A: 1 iogurte proteico, 1 banana e 2 colheres de aveia (cerca de 285 kcal e 19 g) · Jantar: 130 g de salmão, 150 g de mandioquinha e 150 g de legumes (cerca de 445 kcal e 33 g) · Doce: 1 iogurte proteico com 100 g de morango (cerca de 150 kcal e 16 g). Total cerca de 1.905 kcal e 155 g de proteína.",
+   "alerta": "",
+   "tarefas": [
+    {
+     "titulo": "Comprar 4 iogurtes proteicos e 1 bandeja de morango",
+     "data": "2026-11-20",
+     "porque": "cobrem o lanche depois do treino e o doce do dia com proteína até domingo"
+    }
+   ]
+  },
+  "sono": {
+   "resumo": "Oito dias sem nenhuma hora de sono lançada, então não há média nem pior noite. O treino voltou hoje, o que afasta a hipótese de cansaço acumulado, mas sem o dado esta cadeira não tem como confirmar.",
+   "bem": [
+    "Nenhum doce à noite fora do plano em 7 dias",
+    "Voltou a treinar depois de 5 dias, sem sinal registrado de fadiga"
+   ],
+   "ajustes": [
+    "Três pareceres pediram o lançamento do sono e nenhum virou registro. Se você não quer medir sono agora, diga na Mesa e o pedido sai dos pareceres; se quer, lance só um número por dia, como 6,5",
+    "Fim de semana costuma empurrar o horário de dormir: na sexta e no sábado, acorde no máximo 1 h depois do horário da semana para a segunda do C não começar cansada",
+    "A decisão sobre a descarga de 30/11 a 04/12 continua para o parecer de domingo, 29/11, conforme os treinos da próxima semana"
+   ],
+   "amanha": "Esta noite, depois de um treino de pernas: banho morno, celular fora do quarto e luz apagada até 23h.",
+   "alerta": "",
+   "tarefas": []
+  },
+  "fisio": {
+   "resumo": "Nenhum relato de dor nas conversas (última em 13/11) nem nas notas. Pernas voltaram hoje depois de 8 dias e sem aquecimento marcado, então dor muscular nas coxas e no posterior entre sexta e sábado é provável.",
+   "bem": [
+    "Pernas voltaram depois de 8 dias sem treino",
+    "Ioga em 14/11, a única atividade de mobilidade da semana"
+   ],
+   "ajustes": [
+    "Dor muscular amanhã é esperada; 10 min de remo leve ou caminhada no fim do dia ajudam mais que ficar parado. Pontada, dor no joelho ou na lombar não é dor muscular: pare e procure um profissional",
+    "Na remada curvada de amanhã, o posterior dolorido dificulta manter a lombar neutra. Se ao inclinar o tronco a lombar arredondar, troque por remada com o peito apoiado no banco inclinado, com a mesma carga, só nesta semana",
+    "Marque o aquecimento no Orbitus: em 19/11 ele ficou desmarcado e é o primeiro item que cai quando o treino é feito com pressa"
+   ],
+   "amanha": "Antes do A, 7 min: 2 × 10 de rotação torácica em quatro apoios por lado, 2 × 15 de face pull com elástico, 2 × 10 de deslizamento de braços na parede, 10 flexões inclinadas na mesa e 1 série leve de supino inclinado com 12 kg.",
+   "alerta": "",
+   "tarefas": []
+  }
+ },
+ "respostas": [],
+ "semana": ""
+}

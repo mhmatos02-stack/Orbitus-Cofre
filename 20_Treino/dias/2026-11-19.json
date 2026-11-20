@@ -1,0 +1,19 @@
+{
+ "date": "2026-11-19",
+ "weight": null,
+ "waist": null,
+ "steps": null,
+ "sleep": null,
+ "water": 10,
+ "meals": {},
+ "extras": [],
+ "habits": {},
+ "workout": {
+  "letter": null,
+  "sets": {},
+  "done": true,
+  "warm": false,
+  "remo": false
+ },
+ "updated": 1795119071800
+}

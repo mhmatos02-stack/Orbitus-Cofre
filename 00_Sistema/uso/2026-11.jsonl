@@ -2628,3 +2628,36 @@
 {"x": 0.958, "y": 203, "vw": 1920, "vh": 958, "ev": "clique", "alvo": "div#vgVista>button", "morto": false, "em": "2026-11-18T18:19:33", "aba": "viagem"}
 {"ev": "tempo", "aba": "viagem", "seg": 314, "em": "2026-11-18T18:24:16"}
 {"ev": "tempo", "aba": "viagem", "seg": 7, "em": "2026-11-18T18:34:19"}
+{"ev": "aba", "aba": "home", "em": "2026-11-19T17:11:33"}
+{"x": 0.925, "y": 392, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.925, "y": 392, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.925, "y": 392, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.925, "y": 392, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.925, "y": 392, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.925, "y": 392, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.925, "y": 392, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.925, "y": 392, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.925, "y": 392, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.925, "y": 392, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#dAgua>div.dab>button.dbtn", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.835, "y": 434, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "ol#selE>li.di>button.chk", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.836, "y": 438, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "ol#selE>li.di>button.chk", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.836, "y": 424, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "ol#selE>li.di>button.chk", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.833, "y": 443, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "ol#selE>li.di", "morto": true, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.834, "y": 430, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "ol#selE>li.di>button.chk", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"x": 0.031, "y": 199, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "nav#nav>button.nb>svg", "morto": false, "em": "2026-11-19T17:11:33", "aba": "home"}
+{"ev": "tempo", "aba": "home", "seg": 15, "em": "2026-11-19T17:11:33"}
+{"ev": "aba", "aba": "tarefas", "em": "2026-11-19T17:11:33"}
+{"x": 0.448, "y": 413, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div>div.col>ul.tasks>li.task", "morto": true, "em": "2026-11-19T17:11:33", "aba": "tarefas"}
+{"x": 0.448, "y": 413, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div>div.col>ul.tasks>li.task", "morto": true, "em": "2026-11-19T17:11:33", "aba": "tarefas"}
+{"x": 0.017, "y": 345, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "nav#nav>button.nb", "morto": false, "em": "2026-11-19T17:11:33", "aba": "tarefas"}
+{"ev": "tempo", "aba": "tarefas", "seg": 6, "em": "2026-11-19T17:11:33"}
+{"ev": "aba", "aba": "wealth", "em": "2026-11-19T17:11:33"}
+{"x": 0.953, "y": 66, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "section.panel>div.ph>div>a.btn", "morto": false, "em": "2026-11-19T17:11:33", "aba": "wealth"}
+{"ev": "tempo", "aba": "wealth", "seg": 1, "em": "2026-11-19T17:11:33"}
+{"ev": "aba", "aba": "mesa", "em": "2026-11-19T17:11:33"}
+{"x": 0.828, "y": 921, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#mTabs>button", "morto": false, "em": "2026-11-19T17:17:03", "aba": "mesa"}
+{"x": 0.302, "y": 1152, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "article.dec>div.fields>label>input", "morto": false, "em": "2026-11-19T17:18:03", "aba": "mesa"}
+{"x": 0.117, "y": 1270, "vw": 1850, "vh": 823, "ev": "clique", "alvo": "div#mBody>article.dec>div.acts>button.btn", "morto": false, "em": "2026-11-19T17:18:03", "aba": "mesa"}
+{"ev": "tempo", "aba": "mesa", "seg": 731, "em": "2026-11-19T17:23:36"}
+{"ev": "aba", "aba": "home", "em": "2026-11-19T19:20:06"}
+{"ev": "tempo", "aba": "home", "seg": 3, "em": "2026-11-19T19:20:06"}

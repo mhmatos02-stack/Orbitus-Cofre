@@ -1,9 +1,9 @@
 {
- "data": "2026-11-18",
- "d12": 24,
+ "data": "2026-11-19",
+ "d12": 23,
  "sessao": "B2",
  "sessao_nome": "Pernas · variação",
- "treino_ok": false,
+ "treino_ok": true,
  "peso": 69.3,
  "peso_media7": null,
  "peso_base": 71,
@@ -19,14 +19,14 @@
  "proteina_meta": 140,
  "kcal": 0,
  "kcal_meta": 1850,
- "agua": 7,
+ "agua": 10,
  "agua_meta": 10,
- "treinos_semana": 0,
+ "treinos_semana": 1,
  "treinos_alvo": 6,
  "pontos": null,
  "sequencia": 0,
  "xp": 1490,
  "nivel": 3,
  "nivel_nome": "No ritmo",
- "calculado_em": "2026-11-18T18:34"
+ "calculado_em": "2026-11-19T19:20"
 }
